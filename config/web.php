@@ -27,7 +27,7 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-		'cookieValidationKey' => 'LKZsPszlOvdL4hV2PN40bZAx1D_cMbc5',
+		'cookieValidationKey' => env('VD_KEY', ''),
 		'baseUrl' => '', //убрать frontend/web
 		'class' => 'klisl\languages\Request',
         ],

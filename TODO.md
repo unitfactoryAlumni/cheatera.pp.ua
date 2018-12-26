@@ -1,6 +1,5 @@
 # Roadmap 
 
-- create test db
 - add 42 Oauth2
 - add SummaryController
 	- actionStudents

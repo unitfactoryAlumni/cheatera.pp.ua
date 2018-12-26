@@ -18,7 +18,8 @@
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "klisl/yii2-languages": "^2.4"
+        "klisl/yii2-languages": "^2.4",
+        "vlucas/phpdotenv": "^2.5"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
