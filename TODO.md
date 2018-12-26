@@ -1,0 +1,32 @@
+# Roadmap 
+
+- create test db
+- add 42 Oauth2
+- add SummaryController
+	- actionStudents
+		- real top //??
+	- actionPool
+	- ajax sort etc
+- add XloginController
+	- actionShow
+- add ProjectController
+	- actionStudent
+	- actionPool
+	- actionView
+		- add bonus reference
+		- add giude reference
+		- add links reference
+	- actionViewWithSubProject //??
+- add CheatController
+	- actionStudent
+	- actionPool
+- add CalculatorController
+	- actionView
+- add FriendController
+	- actionView
+- add LocationController
+	- actionClusterView
+	- actionXloginView
+- add JobController
+	- actionView
+	- actionAdd
