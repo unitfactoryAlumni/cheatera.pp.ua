@@ -39,6 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
     <?php ActiveForm::end(); ?>
+<!--    --><?//= yii\authclient\widgets\AuthChoice::widget([
+//        'baseAuthUrl' => ['site/auth'],
+//        'popupMode' => false,
+//    ]) ?>
+    <p><a href="/auth?authclient=auth42">Auth</a></p>
 
     <div class="col-lg-offset-1" style="color:#999;">
         You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>

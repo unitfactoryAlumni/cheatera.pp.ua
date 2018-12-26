@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\AuthHandler;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -44,6 +45,10 @@ class SiteController extends Controller
     public function actions()
     {
         return [
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'onAuthSuccess'],
+            ],
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
@@ -54,6 +59,11 @@ class SiteController extends Controller
         ];
     }
 
+    public function onAuthSuccess($client)
+    {
+        return "404";
+        (new AuthHandler($client))->handle();
+    }
     /**
      * Displays homepage.
      *
