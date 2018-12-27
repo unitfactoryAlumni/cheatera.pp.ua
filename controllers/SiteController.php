@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
-use app\helpers\AuthHandler;
+use app\models\User;
+use yii\authclient\ClientInterface as ClientInterfaceAlias;
+
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
@@ -48,8 +50,6 @@ class SiteController extends Controller
         return [
             'auth' => [
                 'class' => 'yii\authclient\AuthAction',
-                'successCallback' => [$this, 'onAuthSuccess'],
-                'successUrl' => Url::to(['site/contact']),
             ],
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -61,16 +61,16 @@ class SiteController extends Controller
         ];
     }
 
-    public function onAuthSuccess($client)
-    {
-        return $this->render('contact');
-//        return "404";
-//        (new AuthHandler($client))->handle();
-    }
-
-
+    /**
+     * Page after 42 auth.
+     * @return string
+     */
     public function actionQq()
     {
+        // TODO: Need add info from DB
+        // TODO: Need add validations for correct 42 authorisation
+        $user = new User;
+        Yii::$app->user->login($user);
         return $this->render('index');
     }
     /**

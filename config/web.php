@@ -19,6 +19,7 @@ $config = [
             'languages' => [
                 'Русский' => 'ru',
                 'Українська' => 'ua',
+                'English' => 'en',
             ],
             'default_language' => 'ru', //основной язык (по-умолчанию)
             'show_default' => false, //true - показывать в URL основной язык, false - нет
@@ -83,7 +84,7 @@ $config = [
             'languages' => 'languages/default/index', //для модуля мультиязычности
             //далее создаем обычные правила
             '/' => 'site/index',
-            '<action:(qq|auth|contact|login|logout|language|about|signup)>' => 'site/<action>',
+            '<action:(captcha|qq|auth|contact|login|logout|language|about|signup)>' => 'site/<action>',
         ],
     ],
         /*
