@@ -26,6 +26,7 @@ class Auth42 extends OAuth2
     {
         return $this->api('userinfo', 'GET');
     }
+
     public function buildAuthUrl(array $params = [])
     {
         $defaultParams = [
@@ -44,5 +45,49 @@ class Auth42 extends OAuth2
         }
 
         return $this->composeUrl($this->authUrl, array_merge($defaultParams, $params));
+    }
+
+    public function fetchClientAuthCode(OAuthToken $token = null, $params = [])
+    {
+        if ($token === null) {
+            $token = $this->getAccessToken();
+        }
+
+        $params = array_merge([
+            'access_token' => $token->getToken(),
+            'redirect_uri' => env('42_API_RU', ''),
+        ], $params);
+
+        $request = $this->createRequest()
+            ->setMethod('POST')
+            ->setUrl($this->clientAuthCodeUrl)
+            ->setData($params);
+
+        $this->applyClientCredentialsToRequest($request);
+
+        $response = $this->sendRequest($request);
+
+        return $response['code'];
+    }
+
+    public function fetchClientAccessToken($authCode, array $params = [])
+    {
+        $params = array_merge([
+            'code' => $authCode,
+            'redirect_uri' => env('42_API_RU', ''),
+            'client_id' => $this->clientId,
+        ], $params);
+
+        $request = $this->createRequest()
+            ->setMethod('POST')
+            ->setUrl($this->tokenUrl)
+            ->setData($params);
+
+        $response = $this->sendRequest($request);
+
+        $token = $this->createToken(['params' => $response]);
+        $this->setAccessToken($token);
+
+        return $token;
     }
 }

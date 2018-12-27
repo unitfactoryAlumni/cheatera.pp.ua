@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\helpers\AuthHandler;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -48,6 +49,7 @@ class SiteController extends Controller
             'auth' => [
                 'class' => 'yii\authclient\AuthAction',
                 'successCallback' => [$this, 'onAuthSuccess'],
+                'successUrl' => Url::to(['site/contact']),
             ],
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -61,8 +63,15 @@ class SiteController extends Controller
 
     public function onAuthSuccess($client)
     {
-        return "404";
-        (new AuthHandler($client))->handle();
+        return $this->render('contact');
+//        return "404";
+//        (new AuthHandler($client))->handle();
+    }
+
+
+    public function actionQq()
+    {
+        return $this->render('index');
     }
     /**
      * Displays homepage.

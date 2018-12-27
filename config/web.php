@@ -83,7 +83,7 @@ $config = [
             'languages' => 'languages/default/index', //для модуля мультиязычности
             //далее создаем обычные правила
             '/' => 'site/index',
-            '<action:(auth|contact|login|logout|language|about|signup)>' => 'site/<action>',
+            '<action:(qq|auth|contact|login|logout|language|about|signup)>' => 'site/<action>',
         ],
     ],
         /*
