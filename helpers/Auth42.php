@@ -70,19 +70,38 @@ class Auth42 extends OAuth2
         return $response['code'];
     }
 
-    public function fetchClientAccessToken($authCode, array $params = [])
+
+
+    public function fetchMe($params)
+    {
+        $request = $this->createRequest()
+            ->setMethod('GET')
+            ->setUrl('https://api.intra.42.fr/v2/me')
+            ->setHeaders($params);
+//        $this->applyClientCredentialsToRequest($request);
+//                echo '<pre>'; print_r($request);echo '</pre>';die;
+
+        $response = $this->sendRequest($request);
+
+        return $response;
+    }
+
+    public function fetchClientAccessToken($authCode, $state, array $params = [])
     {
         $params = array_merge([
             'code' => $authCode,
             'redirect_uri' => env('42_API_RU', ''),
-            'client_id' => $this->clientId,
+            'client_id' => env('42_API_CI', ''),
+            'client_secret' => env('42_API_CS', ''),
+            'grant_type' => 'authorization_code',
+            'state' => $state,
         ], $params);
 
         $request = $this->createRequest()
             ->setMethod('POST')
             ->setUrl($this->tokenUrl)
             ->setData($params);
-
+//        echo '<pre>'; print_r($request);echo '</pre>';// die;
         $response = $this->sendRequest($request);
 
         $token = $this->createToken(['params' => $response]);

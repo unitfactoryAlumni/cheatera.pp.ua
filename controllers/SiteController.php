@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\Auth42;
 use app\models\User;
 use yii\authclient\ClientInterface as ClientInterfaceAlias;
 
@@ -69,9 +70,16 @@ class SiteController extends Controller
     {
         // TODO: Need add info from DB
         // TODO: Need add validations for correct 42 authorisation
-        $user = new User;
-        Yii::$app->user->login($user);
-        return $this->render('index');
+//        $user = new User;
+//        Yii::$app->user->login($user);
+        $api = new Auth42;
+        $request = Yii::$app->request->get();
+        $token = $api->fetchClientAccessToken($request['code'], $request['state']);
+        $token = $token->getToken();
+//        print_r($token);//die;
+        $o = $api->fetchMe(["Authorization: Bearer $token"]);
+//        print_r($response);
+        return $this->render('welcome', compact('o'));
     }
     /**
      * Displays homepage.

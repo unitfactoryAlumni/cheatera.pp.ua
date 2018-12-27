@@ -61,11 +61,6 @@ $config = [
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
             'clients' => [
-                'facebook' => [
-                    'class' => 'yii\authclient\clients\Facebook',
-                    'clientId' => '2048245215254577',
-                    'clientSecret' => '6ce95a04d68a16cf2587c46b9f00e114',
-                ],
                 'auth42' => [
                     'class' => 'app\helpers\Auth42',
                     'clientId' => env('42_API_CI', ''),
