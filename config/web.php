@@ -80,6 +80,7 @@ $config = [
             //далее создаем обычные правила
             '/' => 'site/index',
             '<action:(captcha|welcome|login|auth|contact|logout|language|about)>' => 'site/<action>',
+            'show/<action>' => 'show/<action>',
         ],
     ],
         /*

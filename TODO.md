@@ -5,7 +5,8 @@
     - add birthday
     - add job experience
         - add table companies
-- add SummaryController
+- add AccessController (main) //done
+- add ShowController
 	- actionStudents
 		- real top //??
 	- actionPool
