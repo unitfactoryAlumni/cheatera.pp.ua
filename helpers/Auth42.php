@@ -78,9 +78,6 @@ class Auth42 extends OAuth2
             ->setMethod('GET')
             ->setUrl('https://api.intra.42.fr/v2/me')
             ->setHeaders($params);
-//        $this->applyClientCredentialsToRequest($request);
-//                echo '<pre>'; print_r($request);echo '</pre>';die;
-
         $response = $this->sendRequest($request);
 
         return $response;
@@ -101,7 +98,6 @@ class Auth42 extends OAuth2
             ->setMethod('POST')
             ->setUrl($this->tokenUrl)
             ->setData($params);
-//        echo '<pre>'; print_r($request);echo '</pre>';// die;
         $response = $this->sendRequest($request);
 
         $token = $this->createToken(['params' => $response]);

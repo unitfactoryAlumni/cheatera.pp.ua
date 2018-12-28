@@ -66,20 +66,23 @@ class SiteController extends Controller
      * Page after 42 auth.
      * @return string
      */
-    public function actionQq()
+    public function actionWelcome()
     {
         // TODO: Need add info from DB
-        // TODO: Need add validations for correct 42 authorisation
-//        $user = new User;
-//        Yii::$app->user->login($user);
+        $user = new User;
         $api = new Auth42;
         $request = Yii::$app->request->get();
         $token = $api->fetchClientAccessToken($request['code'], $request['state']);
         $token = $token->getToken();
-//        print_r($token);//die;
-        $o = $api->fetchMe(["Authorization: Bearer $token"]);
-//        print_r($response);
-        return $this->render('welcome', compact('o'));
+        $answer = $api->fetchMe(["Authorization: Bearer $token"]);
+        $userX = $user->findByUsername($answer['login']);
+        if (!isset($userX)) {
+            $userX = new User;
+            $userX->newUser($answer);
+        }
+        Yii::$app->user->login($userX);
+        $userX->generateAuthKey();
+        return Yii::$app->response->redirect('/', 301)->send();
     }
     /**
      * Displays homepage.
@@ -98,10 +101,11 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+//        return Yii::$app->response->redirect('/auth?authclient=auth42', 301)->send();
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();

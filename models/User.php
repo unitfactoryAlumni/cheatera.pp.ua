@@ -35,7 +35,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findByUsername($xlogin)
     {
-        return static::findOne(['xlogin' => $xlogin]);
+        return static::findOne(['username' => $xlogin]);
     }
 
     /**
@@ -51,7 +51,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return $this->auth_key;
     }
 
     /**
@@ -59,7 +59,18 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return $this->auth_key === $authKey;
     }
 
+    public function generateAuthKey()
+    {
+        $this->auth_key = \Yii::$app->security->generateRandomString();
+        $this->save();
+    }
+
+    public function newUser($answer)
+    {
+        $this->username = $answer['login'];
+        $this->save();
+    }
 }

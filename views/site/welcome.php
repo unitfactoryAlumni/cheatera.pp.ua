@@ -22,7 +22,7 @@ $this->title = 'My Yii Application';
                 <h2>$response</h2>
                 <pre>
                     <?=
-                    print_r($o); ?>
+                    var_dump($userX); ?>
                 </pre>
             </div>
         </div>
