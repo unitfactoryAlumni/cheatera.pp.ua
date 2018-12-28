@@ -13,7 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+    <p>Please press button to login</p>
+    <p><a class='btn btn-lg btn-warning' href="/auth?authclient=auth42">Auth with 42</a></p>
+    <p>ore fill out the following fields:</p>
 
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
@@ -39,11 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
     <?php ActiveForm::end(); ?>
-<!--    --><?//= yii\authclient\widgets\AuthChoice::widget([
-//        'baseAuthUrl' => ['site/auth'],
-//        'popupMode' => false,
-//    ]) ?>
-    <p><a href="/auth?authclient=auth42">Auth</a></p>
+
 
     <div class="col-lg-offset-1" style="color:#999;">
         You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>

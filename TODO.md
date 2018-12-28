@@ -1,6 +1,10 @@
 # Roadmap 
 
-- add 42 Oauth2
+- add 42 Oauth2 //done
+- add user table //done
+    - add birthday
+    - add job experience
+        - add table companies
 - add SummaryController
 	- actionStudents
 		- real top //??
