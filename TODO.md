@@ -5,7 +5,7 @@
     - add birthday
     - add job experience
         - add table companies
-- add AccessController (main) //done
+- add CommonController (main with set meta and access rule) //done
 - add ShowController
 	- actionStudents
 		- real top //??

@@ -12,7 +12,7 @@ namespace app\controllers;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 
-class AccessController extends Controller
+class CommonController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,5 +30,15 @@ class AccessController extends Controller
                 ]
             ],
         ];
+    }
+
+    /**
+     * @param null $title
+     * @param null $description
+     * @param null $h1
+     */
+    protected function setMeta($title = null, $description = null) {
+        $this->view->title = $title;
+        $this->view->registerMetaTag(['name' => 'description', 'content' => "$description"]);
     }
 }
