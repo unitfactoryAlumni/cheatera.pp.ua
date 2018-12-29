@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
+    <a href="https://cheatera.pp.ua" target="_blank">
         <img src="https://cheatera.pp.ua/icon_uf.png" height="100px">
     </a>
     <h1 align="center">Cheatera Project</h1>
