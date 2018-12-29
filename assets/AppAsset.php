@@ -27,5 +27,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'fedemotta\datatables\DataTablesAsset',
     ];
 }

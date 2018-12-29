@@ -1,27 +1,61 @@
 <?php
 
+use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\widgets\Pjax;
 /* @var $this yii\web\View */
+/* @var $searchModel app\controllers\ShowSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'My Yii Application';
+$this->title = 'Shows';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-index">
+<div class="show-index">
 
-    <div class="body-content">
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php Pjax::begin(); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <h2>show/index</h2>
+    <p>
+<!--        <?//= Html::a('Create Show', ['create'], ['class' => 'btn btn-success']) ?>-->
+    </p>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-                <pre>
-                    <?= print_r($students)?>
-                </pre>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'login',
+            [
+                'attribute' => 'image_url',
+                'format' => 'html',
+                'label' => 'Photo',
+                'value' => function ($data) {
+                    return Html::img($data['image_url'],
+                        ['width' => '60px']);
+                },
+            ],
+            'email:email',
+            'phone',
+            'correction_point',
+            'displayname',
+            //'last_name',
+            'location',
+            'pool_month',
+            'pool_year',
+            //'staff',
+//            'url:ntext',
+            'wallet',
+            'howach',
+            //'kick',
+            'lastloc',
+            //'needupd',
+            'hours',
+            'lasthours',
+            //'visible',
 
-            </div>
-        </div>
-
-    </div>
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+    <?php Pjax::end(); ?>
 </div>

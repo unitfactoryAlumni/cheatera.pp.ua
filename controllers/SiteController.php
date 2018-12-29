@@ -10,6 +10,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -65,6 +66,7 @@ class SiteController extends Controller
     /**
      * Page after 42 auth.
      * @return string
+     * @throws HttpException
      */
     public function actionWelcome()
     {
@@ -72,6 +74,9 @@ class SiteController extends Controller
         $user = new User;
         $api = new Auth42;
         $request = Yii::$app->request->get();
+        if (!isset($request['code'])) {
+            throw new HttpException(500 ,'Sorry, try again later');
+        }
         $token = $api->fetchClientAccessToken($request['code'], $request['state']);
         $token = $token->getToken();
         $answer = $api->fetchMe(["Authorization: Bearer $token"]);

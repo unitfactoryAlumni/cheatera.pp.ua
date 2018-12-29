@@ -1,73 +1,127 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: omentes
- * Date: 12/28/18
- * Time: 11:17 AM
- */
 
 namespace app\controllers;
 
-
+use Yii;
 use app\models\Show;
+use app\controllers\ShowSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
-class ShowController extends CommonController
+/**
+ * ShowController implements the CRUD actions for Show model.
+ */
+class ShowController extends Controller
 {
-    /*
-     * Need translate this sucks to yii2 methods
-     *
-     *    $course = '42';
-     *    if ($_GET['course'] == 'pool') {
-     *      $course = 'Piscine C';
-     *    }
-     *    $bas = 0;
-     *    $bastardswitch = "";//"and xlogins.kick=\"1\"";
-     *    if ($_GET['course'] == 'pool') {
-     *      $sql = $conn->query("SELECT `year`,`month`,`id` FROM `pools` ORDER BY `id` DESC LIMIT 0, 1");
-     *      $data_array = array();
-     *      $row = mysqli_fetch_assoc($sql);
-     *      $data_array['year'] = $row['year'];
-     *      $data_array['month'] = $row['month'];
-     *      $bas = 1;
-     *      $bastardswitch = "and xlogins.pool_year=\"" . $data_array['year'] . "\" and xlogins.pool_month=\"" . $data_array['month'] . "\"";
-     *    }
-     *    // SELECT xlogins.correction_point, xlogins.displayname, xlogins.correction_point, xlogins.image_url, xlogins.login, xlogins.phone, xlogins.pool_month, xlogins.pool_year, xlogins.wallet, xlogins.howach, xlogins.hours, xlogins.location, xlogins.lastloc, cursus_users.level FROM xlogins INNER JOIN cursus_users ON xlogins.xid = cursus_users.xid WHERE cursus_users.name="42" and xlogins.pool_month="july" and xlogins.pool_year="2018" ORDER BY cursus_users.level DESC, xlogins.login ASC
-     *    // SELECT `xlogin`, COUNT(xlogin) FROM `friends` GROUP BY `xlogin` HAVING COUNT(*)>0 ORDER BY `COUNT(xlogin)` DESC
-     *    $sql = "
-     *    SELECT
-     *      xlogins.correction_point,
-     *      xlogins.displayname,
-     *      xlogins.correction_point,
-     *      xlogins.image_url,
-     *      xlogins.login,
-     *      xlogins.phone,
-     *      xlogins.pool_month,
-     *      xlogins.pool_year,
-     *      xlogins.wallet,
-     *      xlogins.howach,
-     *      xlogins.hours,
-     *      xlogins.location,
-     *      xlogins.lastloc,
-     *      cursus_users.level
-     *    FROM
-     *      xlogins
-     *    INNER JOIN cursus_users ON xlogins.xid = cursus_users.xid
-     *    WHERE xlogins.visible=\"1\" and cursus_users.name=\"" . $course . "\" " . $bastardswitch ."
-     *    ORDER BY cursus_users.level DESC, xlogins.login ASC;";
-     *    $result = $conn->query($sql);
-     *
+    /**
+     * {@inheritdoc}
      */
-
-    public function actionStudents()
+    public function behaviors()
     {
-        $students = Show::find()->where(['needupd' => 1])->all();
-        $this->setMeta('Students', 'students stat page');
-        return $this->render('index', compact('students'));
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
     }
 
-    public function actionPools()
+    /**
+     * Lists all Show models.
+     * @return mixed
+     */
+    public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new ShowSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
+    /**
+     * Displays a single Show model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Creates a new Show model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new Show();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing Show model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing Show model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the Show model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Show the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Show::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
 }

@@ -6,13 +6,12 @@
     - add job experience
         - add table companies
 - add CommonController (main with set meta and access rule) //done
-- add ShowController
-	- actionStudents
+- add ShowController //done
+	- actionStudents 
 		- real top //??
-	- actionPool
+	- actionPools
+	- actionLogin
 	- ajax sort etc
-- add XloginController
-	- actionShow
 - add ProjectController
 	- actionStudent
 	- actionPool

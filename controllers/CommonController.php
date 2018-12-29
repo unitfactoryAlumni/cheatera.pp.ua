@@ -35,7 +35,6 @@ class CommonController extends Controller
     /**
      * @param null $title
      * @param null $description
-     * @param null $h1
      */
     protected function setMeta($title = null, $description = null) {
         $this->view->title = $title;

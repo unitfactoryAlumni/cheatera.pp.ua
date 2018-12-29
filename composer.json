@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "klisl/yii2-languages": "^2.4",
         "vlucas/phpdotenv": "^2.5",
-        "yiisoft/yii2-authclient": "^2.1"
+        "yiisoft/yii2-authclient": "^2.1",
+        "fedemotta/yii2-widget-datatables": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
