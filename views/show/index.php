@@ -19,43 +19,41 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
 <!--        <?//= Html::a('Create Show', ['create'], ['class' => 'btn btn-success']) ?>-->
     </p>
-
+    <div style="white-space: nowrap;font-size: smaller;">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'login',
-            [
-                'attribute' => 'image_url',
-                'format' => 'html',
-                'label' => 'Photo',
-                'value' => function ($data) {
-                    return Html::img($data['image_url'],
-                        ['width' => '60px']);
-                },
-            ],
-            'email:email',
+            'displayname',
+//            [
+//                'attribute' => 'image_url',
+//                'format' => 'html',
+//                'label' => 'Photo',
+//                'value' => function ($data) {
+//                    return Html::img($data['image_url'],
+//                        ['width' => '60px']);
+//                },
+//            ],
             'phone',
             'correction_point',
-            'displayname',
             //'last_name',
-            'location',
-            'pool_month',
             'pool_year',
+            'pool_month',
+            'location',
+            'lastloc',
             //'staff',
 //            'url:ntext',
             'wallet',
             'howach',
             //'kick',
-            'lastloc',
             //'needupd',
             'hours',
-            'lasthours',
             //'visible',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]); ?></div>
     <?php Pjax::end(); ?>
 </div>
