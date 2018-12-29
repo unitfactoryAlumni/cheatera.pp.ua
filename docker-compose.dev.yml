@@ -1,0 +1,18 @@
+version: '2'
+services:
+  php:
+    build: .
+    environment:
+      - GITHUB_API_TOKEN
+    volumes:
+      - ./composer.json:/app/composer.json
+      - ./composer.lock:/app/composer.lock
+      - ./vendor:/app/vendor
+      - ./config:/app/config
+      - ./web:/app/web
+      - ./tests:/app/tests
+      - ./codeception.yml:/app/codeception.yml
+      # composer-cache on host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache
+    ports:
+      - 8888:80
