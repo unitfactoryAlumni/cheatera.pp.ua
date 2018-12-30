@@ -5,7 +5,9 @@
     - add birthday
     - add job experience
         - add table companies
+        
 - add CommonController (main with set meta and access rule) //done
+
 - add ShowController //done
 	- actionStudents  //done
 		- real top //??
@@ -22,16 +24,25 @@
 		- add giude reference
 		- add links reference
 	- actionViewWithSubProject //??
+
 - add CheatController
 	- actionStudent
 	- actionPool
+
 - add CalculatorController
 	- actionView
+
 - add FriendController
 	- actionView
+
 - add LocationController
 	- actionClusterView
 	- actionXloginView
+
 - add JobController
 	- actionView
 	- actionAdd
+
+- add GithubController
+    - actionShowStatistics
+    - actionGetStatistics
