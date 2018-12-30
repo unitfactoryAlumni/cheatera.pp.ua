@@ -51,7 +51,7 @@ class Show extends \yii\db\ActiveRecord
             [['image_url', 'url'], 'string'],
             [['kick', 'lastloc'], 'required'],
             [['lastloc'], 'safe'],
-            [['hours', 'lasthours'], 'number'],
+            [['hours', 'lasthours', 'level'], 'number'],
             [['displayname', 'email', 'first_name', 'last_name', 'location', 'login', 'phone', 'pool_month', 'staff'], 'string', 'max' => 255],
         ];
     }
@@ -84,6 +84,7 @@ class Show extends \yii\db\ActiveRecord
             'needupd' => 'Needupd',
             'hours' => 'Hours',
             'visible' => 'Visible',
+            'cursus_users.level' => 'level'
         ];
     }
 }

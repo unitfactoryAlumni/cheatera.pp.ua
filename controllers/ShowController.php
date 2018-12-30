@@ -44,7 +44,25 @@ class ShowController extends CommonController
         ]);
     }
 
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModelLogin($id),
+        ]);
+    }
 
+    protected function findModelLogin($id)
+    {
+        if (($model = Show::find()
+                ->join('INNER JOIN', 'cursus_users', 'cursus_users.xlogin = xlogins.login')
+                ->where(['login' => $id, 'cursus_users.cursus_id' => 1])
+                ->limit(1)
+                ->one()) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
     /**
      * Finds the Show model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

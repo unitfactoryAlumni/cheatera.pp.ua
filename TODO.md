@@ -7,11 +7,13 @@
         - add table companies
 - add CommonController (main with set meta and access rule) //done
 - add ShowController //done
-	- actionStudents 
+	- actionStudents  //done
 		- real top //??
-	- actionPools
-	- actionLogin
-	- ajax sort etc
+	- actionPools //done
+	- actionLogin //done
+	- ajax sort etc //done
+	- need debug and join cursus_users table (create class etc)
+	
 - add ProjectController
 	- actionStudent
 	- actionPool

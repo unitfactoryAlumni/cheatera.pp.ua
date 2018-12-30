@@ -39,8 +39,9 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => Yii::$app->getRequest()->getUserIP()],
-            ['label' => '42', 'url' => ['/show/index']],
+            ['label' => '42', 'url' => ['/show/students']],
             ['label' => 'Gii', 'url' => ['/gii']],
+            ['label' => 'Debug', 'url' => ['/debug']],
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],

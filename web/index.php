@@ -11,6 +11,7 @@ $dotenv->load();
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', getenv('YII_DEBUG'));
 defined('YII_ENV') or define('YII_ENV', getenv('YII_ENV'));
+defined('YII_ENV_DEV') or define('YII_ENV_DEV', getenv('YII_ENV_DEV'));
 
 require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 

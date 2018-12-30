@@ -80,7 +80,8 @@ $config = [
             //далее создаем обычные правила
             '/' => 'site/index',
             '<action:(captcha|welcome|login|auth|contact|logout|language|about)>' => 'site/<action>',
-            'show/<action>' => 'show/<action>',
+            'students/<id:\w+>' => 'show/view',
+            'students' => 'show/students',
             'calculator' => 'calc/index'
         ],
     ],
@@ -94,7 +95,7 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['*', '127.0.0.1', '::1 '],
+        'allowedIPs' => ['*', '127.0.0.1', '::1'],
     ];
 
     $config['bootstrap'][] = 'gii';
