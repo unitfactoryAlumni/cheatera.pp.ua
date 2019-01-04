@@ -51,7 +51,7 @@ class Show extends \yii\db\ActiveRecord
             [['image_url', 'url'], 'string'],
             [['kick', 'lastloc'], 'required'],
             [['lastloc'], 'safe'],
-            [['hours', 'lasthours', 'level'], 'number'],
+            [['hours', 'lasthours'], 'number'],
             [['displayname', 'email', 'first_name', 'last_name', 'location', 'login', 'phone', 'pool_month', 'staff'], 'string', 'max' => 255],
         ];
     }

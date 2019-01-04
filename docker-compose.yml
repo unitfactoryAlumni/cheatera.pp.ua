@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   php:
     image: yiisoftware/yii2-php:7.1-apache
@@ -7,3 +7,28 @@ services:
       - ./:/app:delegated
     ports:
       - '8888:80'
+    links:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    container_name: 'yii2-mysql'
+    restart: 'always'
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: yii2
+      MYSQL_DATABASE: yii2
+      MYSQL_USER: yii2
+      MYSQL_PASSWORD: yii2
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: 'yii2-phpmyadmin'
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - '8080:80'
+    volumes:
+      - /sessions
