@@ -71,9 +71,3 @@ RUN  composer install
 
 # Finally copy the working dir to the image's web root
 COPY . /var/www/html
-
-# The following directories are .dockerignored to not pollute the docker images
-# with local logs and published assets from development. So we need to create
-# empty dirs and set right permissions inside the container.
-RUN mkdir runtime web/assets
-RUN chown www-data:www-data runtime web/assets

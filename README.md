@@ -34,7 +34,9 @@ INSTALLATION
 
 ### Install  (UNIT Factory)
 
-Copy .env from Intra Forum https://forum.intra.42.fr/topics/19926/messages
+Install docker https://forum.intra.42.fr/topics/19933/messages/last
+
+    cp .env.example .env
 
 Register new 42 API app and fill Oauth42 in .env
 
@@ -42,18 +44,22 @@ Register new 42 API app and fill Oauth42 in .env
     
 You can then access the application through the following URL:
 
-    http://127.0.0.1:8888
+    http://192.168.99.100:8888
 
-Fixing fatal error "file not exist":
+If after installation you see fatal error `require()`:
 
-	docker-compose exec php bash
-
+	docker-compose exec web bash
+    chown www-data:www-data runtime web/assets
 	composer update
 
+Now need prepare your db
+    
+    http://192.168.99.100:8080
 
-**NOTES:** 
-- Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))
-- The default configuration uses a host-volume in your home directory `.docker-composer` for composer caches
+Login with user `yii2` and pass `yii2`, select `yii2` and import sql file (write @apakhomo in Slack, or @omentes in Telegram)
+    
+**TEST AUTH:** 
+- Press 'Login' at nav bar
 
 
 TESTING
