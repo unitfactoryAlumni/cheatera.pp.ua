@@ -34,3 +34,7 @@ tests/_support/_generated
 
 # environment
 .env
+
+#yii2 dir
+web/assets
+runtime/
