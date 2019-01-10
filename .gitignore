@@ -38,3 +38,6 @@ tests/_support/_generated
 #yii2 dir
 /web/assets
 /runtime/*
+
+#sql dump
+schema.sql

@@ -52,11 +52,14 @@ If after installation you see fatal error `require()`:
     chown www-data:www-data runtime web/assets
 	composer update
 
-Now need prepare your db
+Automation import DB from file (write @apakhomo in Slack, or @omentes in Telegram) 
+Put file schema.sql on project dir.
+
+PhpMyAdmin
     
     http://192.168.99.100:8080
 
-Login with user `yii2` and pass `yii2`, select `yii2` and import sql file (write @apakhomo in Slack, or @omentes in Telegram)
+Login with user `yii2` and pass `yii2`, select `yii2`
     
 **TEST AUTH:** 
 - Press 'Login' at nav bar
