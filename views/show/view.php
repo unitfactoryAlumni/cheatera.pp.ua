@@ -32,7 +32,6 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             'displayname',
             'email:email',
             'first_name',
-            'xid',
             'image_url:ntext',
             'last_name',
             'location',

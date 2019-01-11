@@ -73,7 +73,7 @@ class Show extends \yii\db\ActiveRecord
             'location' => 'Host',
             'login' => 'Login',
             'phone' => 'Phone',
-            'pool_month' => 'Pool Month',
+            'pool_month' => Yii::t('app', 'Pool Month'),
             'pool_year' => 'Pool Year',
             'staff' => 'Staff',
             'url' => 'Url',
