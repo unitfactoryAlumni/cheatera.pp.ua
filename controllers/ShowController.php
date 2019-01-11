@@ -32,6 +32,7 @@ class ShowController extends CommonController
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'pageName' => 'students',
         ]);
     }
 
@@ -53,6 +54,7 @@ class ShowController extends CommonController
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'pageName' => 'pools',
         ]);
     }
 

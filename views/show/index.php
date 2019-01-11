@@ -20,19 +20,28 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel'  => $searchModel,
+        'tableOptions' => [
+            'class' => 'table table-striped table-bordered'
+        ],
         'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
             'login',
-            'displayname',
             [
-                'attribute' => 'image_url',
-                'format'    => 'html',
-                'label'     => 'Photo',
-                'value'     => function ($data) {
-                    return Html::img($data['image_url'],
-                        ['width' => '60px']);
-                },
+                'label' => 'Name',
+                'format' => 'raw',
+                'value'  => function ($data) use ($pageName) {
+                        return Html::a(Html::encode($data['displayname']),"$pageName/" . $data['login']);
+                    },
             ],
+//            [
+//                'attribute' => 'image_url',
+//                'format'    => 'html',
+//                'label'     => 'Photo',
+//                'value'     => function ($data) {
+//                    return Html::img($data['image_url'],
+//                        ['width' => '60px']);
+//                },
+//            ],
             'phone',
             'correction_point',
             'pool_year',
@@ -43,8 +52,6 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             'wallet',
             'howach',
             'hours',
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?></div>
     <?php Pjax::end(); ?>
