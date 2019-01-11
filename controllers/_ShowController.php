@@ -10,7 +10,7 @@ namespace app\controllers;
 
 use app\models\Show;
 
-class ShowController extends CommonController
+class _ShowController extends CommonController
 {
     /*
      * Need translate this sucks to yii2 methods

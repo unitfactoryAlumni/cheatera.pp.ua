@@ -35,10 +35,10 @@ class ShowSearch extends Show
      * Creates data provider instance with search query applied
      *
      * @param array $params
-     *
+     * @param string $course
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $course)
     {
         $query = Show::find();
 

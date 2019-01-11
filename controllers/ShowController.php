@@ -5,7 +5,6 @@ namespace app\controllers;
 use Yii;
 use app\models\Show;
 use app\controllers\ShowSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -14,14 +13,17 @@ use yii\filters\VerbFilter;
  */
 class ShowController extends CommonController
 {
+    protected $course;
     /**
      * Lists all Students.
      * @return mixed
      */
     public function actionStudents()
     {
+        $this->setMeta('Students UNIT Factory', 'All student members UNIT Factory');
+        $this->course = '42';
         $searchModel = new ShowSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->course);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -35,8 +37,11 @@ class ShowController extends CommonController
      */
     public function actionPools()
     {
+        $this->setMeta('Pools UNIT Factory', 'All pool members UNIT Factory');
+        $this->course = 'Piscine C';
+
         $searchModel = new ShowSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->course);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -44,8 +49,18 @@ class ShowController extends CommonController
         ]);
     }
 
-    public function actionView($id)
+    public function actionStudentsView($id)
     {
+        $this->setMeta("$id :: student UNIT Factory", "Full information about $id from UNIT Factory");
+
+        return $this->render('view', [
+            'model' => $this->findModelLogin($id),
+        ]);
+    }
+    public function actionPoolsView($id)
+    {
+        $this->setMeta("$id :: student UNIT Factory", "Full information about $id from UNIT Factory");
+
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
         ]);

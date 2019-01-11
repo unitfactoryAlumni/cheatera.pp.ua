@@ -5,9 +5,10 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name'=>'cheatera.pp.ua',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'sourceLanguage' => 'ru', // использовать в качестве ключей переводов
+    'sourceLanguage' => 'en', // использовать в качестве ключей переводов
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -18,10 +19,10 @@ $config = [
         //Языки используемые в приложении
             'languages' => [
                 'Русский' => 'ru',
-                'Українська' => 'ua',
+                'Українська' => 'uk',
                 'English' => 'en',
             ],
-            'default_language' => 'ru', //основной язык (по-умолчанию)
+            'default_language' => 'en', //основной язык (по-умолчанию)
             'show_default' => false, //true - показывать в URL основной язык, false - нет
         ],
     ],
@@ -80,8 +81,10 @@ $config = [
             //далее создаем обычные правила
             '/' => 'site/index',
             '<action:(captcha|welcome|login|auth|contact|logout|language|about)>' => 'site/<action>',
-            'students/<id:\w+>' => 'show/view',
+            'students/<id:\w+>' => 'show/students-view',
+            'pools/<id:\w+>' => 'show/pools-view',
             'students' => 'show/students',
+            'pools' => 'show/pools',
             'calculator' => 'calc/index'
         ],
     ],
