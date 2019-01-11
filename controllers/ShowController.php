@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Show;
 use app\controllers\ShowSearch;
+use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -55,6 +56,10 @@ class ShowController extends CommonController
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
+            'breadcrumbs' => [
+                'name' => Yii::t('app', 'Students'),
+                'url' => 'show/students'
+            ],
         ]);
     }
     public function actionPoolsView($id)
@@ -63,6 +68,10 @@ class ShowController extends CommonController
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
+            'breadcrumbs' => [
+                'name' => Yii::t('app', 'Pools'),
+                'url' => 'show/pools'
+            ],
         ]);
     }
 

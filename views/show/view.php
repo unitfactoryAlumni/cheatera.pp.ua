@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Show */
 
-$this->params['breadcrumbs'][] = ['label' => 'Shows', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = strtok($this->title, " ");
 \yii\web\YiiAsset::register($this);
 ?>

@@ -7,8 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\controllers\ShowSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Shows';
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = strtok($this->title, " ");
 ?>
 <div class="show-index">
 
