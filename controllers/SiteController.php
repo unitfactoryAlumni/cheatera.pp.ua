@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\Auth42;
+use app\models\Log;
 use app\models\User;
 use yii\authclient\ClientInterface as ClientInterfaceAlias;
 
@@ -73,6 +74,7 @@ class SiteController extends Controller
         // TODO: Need add info from DB
         $user = new User;
         $api = new Auth42;
+        $log = new Log;
         $request = Yii::$app->request->get();
         if (!isset($request['code'])) {
             throw new HttpException(500 ,'Sorry, try again later');
@@ -85,6 +87,11 @@ class SiteController extends Controller
             $userX = new User;
             $userX->newUser($answer);
         }
+        $log->xlogin = $answer['login'];
+        $log->agent = Yii::$app->request->headers["user-agent"];
+        $log->ip = Yii::$app->request->userIP;
+        $log->auth_date = new \yii\db\Expression('NOW()');
+        $log->save();
         Yii::$app->user->login($userX);
         $userX->generateAuthKey();
         return Yii::$app->response->redirect('/', 301)->send();
