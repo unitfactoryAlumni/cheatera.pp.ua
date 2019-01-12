@@ -35,6 +35,8 @@ class Show extends \yii\db\ActiveRecord
 {
     public $level;
 
+    public $link;
+
     /**
      * {@inheritdoc}
      */
@@ -50,7 +52,7 @@ class Show extends \yii\db\ActiveRecord
     {
         return [
             [['correction_point', 'xid', 'pool_year', 'wallet', 'howach', 'kick', 'needupd', 'visible'], 'integer'],
-            [['image_url', 'url'], 'string'],
+            [['image_url', 'url', 'link'], 'string'],
             [['kick', 'lastloc'], 'required'],
             [['lastloc'], 'safe'],
             [['hours', 'lasthours'], 'number'],
@@ -75,8 +77,8 @@ class Show extends \yii\db\ActiveRecord
             'location' => 'Host',
             'login' => 'Login',
             'phone' => 'Phone',
-            'pool_month' => Yii::t('app', 'Pool Month'),
-            'pool_year' => 'Pool Year',
+            'pool_month' => Yii::t('app', 'Month'),
+            'pool_year' => 'Year',
             'staff' => 'Staff',
             'url' => 'Url',
             'wallet' => 'Wallet',
@@ -87,6 +89,7 @@ class Show extends \yii\db\ActiveRecord
             'hours' => 'Hours',
             'visible' => 'Visible',
             'level' => 'lvl',
+            'link' => ''
         ];
     }
 }

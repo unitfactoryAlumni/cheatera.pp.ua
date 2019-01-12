@@ -25,5 +25,5 @@ return [
     // views/show/view.php
 
     // models/Show.php
-    'Pool Month' => 'Месяц бассейна',
+    'Month' => '',
 ];

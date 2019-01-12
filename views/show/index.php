@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\ShowSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -26,22 +27,38 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             /*font-size: smaller;*/
         }
     </style>
+    <?php $tmp = Yii::$app->session->get('username') ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel'  => $searchModel,
         'tableOptions' => [
-            'class' => 'table table-striped table-bordered'
+            'class' => 'table table-striped table-bordered table-responsive'
+//            'class' =>'table table-striped table-bordered table-responsive'
         ],
-        'columns'      => [
+        'rowOptions'=>function($data) use ($tmp) {
+            if($data['login'] == $tmp){
+                return ['class' => 'danger'];
+            }
+        },
+        'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'login',
             [
-                'label' => 'Name',
+                'label' => '',
                 'format' => 'raw',
+                'attribute' => '',
                 'value'  => function ($data) use ($pageName) {
-                        return Html::a(Html::encode($data['displayname']),"$pageName/" . $data['login']);
-                    },
+                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),"$pageName/" . $data['login']);
+                },
             ],
+            'displayname',
+//            [
+//                'label' => 'Name',
+//                'format' => 'raw',
+//                'value'  => function ($data) use ($pageName) {
+//                        return Html::a(Html::encode($data['displayname']),"$pageName/" . $data['login']);
+//                    },
+//            ],
 //            [
 //                'attribute' => 'image_url',
 //                'format'    => 'html',

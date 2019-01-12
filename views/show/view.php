@@ -14,17 +14,6 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
 
     <h1><?= Html::encode(strtok($this->title, " ")) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -49,6 +38,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             'hours',
             'lasthours',
             'visible',
+//            'cursus_users.level'
         ],
     ]) ?>
 

@@ -25,8 +25,23 @@ $config = [
             'default_language' => 'en', //основной язык (по-умолчанию)
             'show_default' => false, //true - показывать в URL основной язык, false - нет
         ],
+       'gridview' => [
+           'class' => '\kartik\grid\Module'
+           // введите необязательные параметры модуля ниже - только если вам нужно
+           // использовать ваше собственное действие по загрузке экспорта или пользовательский перевод
+           // источник сообщения
+           // 'downloadAction' => 'gridview / export / download',
+           // 'i18n' => []
+       ]
     ],
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'kartik\form\ActiveFormAsset' => [
+                    'bsDependencyEnabled' => false // do not load bootstrap assets for a specific asset bundle
+                ],
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
 		'cookieValidationKey' => env('VD_KEY', ''),

@@ -87,6 +87,7 @@ class SiteController extends Controller
         }
         Yii::$app->user->login($userX);
         $userX->generateAuthKey();
+        Yii::$app->session->set('username', $answer['login']);
         return Yii::$app->response->redirect('/', 301)->send();
     }
     /**

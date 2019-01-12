@@ -52,7 +52,7 @@ class ShowSearch extends Show
                 'visible' => 1,
                 'cursus_users.name' => $course,
                 ])
-            ->orderBy('cursus_users.level DESC');
+            ->orderBy('cursus_users.level DESC, xlogins.login ASC');
         ;
 
         // add conditions that should always apply here
