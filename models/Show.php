@@ -33,6 +33,8 @@ use Yii;
  */
 class Show extends \yii\db\ActiveRecord
 {
+    public $level;
+
     /**
      * {@inheritdoc}
      */
@@ -84,6 +86,7 @@ class Show extends \yii\db\ActiveRecord
             'needupd' => 'Needupd',
             'hours' => 'Hours',
             'visible' => 'Visible',
+            'level' => 'lvl',
         ];
     }
 }

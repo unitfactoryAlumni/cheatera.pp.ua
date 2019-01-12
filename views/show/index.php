@@ -16,7 +16,16 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
 
     <p>
     </p>
-    <div style="white-space: nowrap;font-size: smaller;">
+    <style>
+        .filters .form-control {
+            max-height: 25px;
+        }
+
+        .table {
+            white-space: nowrap;
+            /*font-size: smaller;*/
+        }
+    </style>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel'  => $searchModel,
@@ -43,6 +52,11 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
 //                },
 //            ],
             'phone',
+            [
+                'attribute'=>'level',
+                'value'=>'level',
+                //'contentOptions'=>['style'=>'width: 120px;']
+            ],
             'correction_point',
             'pool_year',
             'pool_month',
@@ -53,6 +67,6 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             'howach',
             'hours',
         ],
-    ]); ?></div>
+    ]); ?>
     <?php Pjax::end(); ?>
 </div>
