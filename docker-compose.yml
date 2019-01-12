@@ -26,7 +26,7 @@ services:
       MYSQL_USER: yii2
       MYSQL_PASSWORD: yii2
     volumes:
-     - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+     - ./config/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
