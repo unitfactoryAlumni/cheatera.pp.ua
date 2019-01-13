@@ -22,8 +22,6 @@
         "vlucas/phpdotenv": "^2.5",
         "yiisoft/yii2-authclient": "^2.1",
         "fedemotta/yii2-widget-datatables": "*",
-        "kartik-v/yii2-widget-select2": "@dev",
-        "kartik-v/yii2-grid": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

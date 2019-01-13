@@ -33,7 +33,6 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
         'filterModel'  => $searchModel,
         'tableOptions' => [
             'class' => 'table table-striped table-bordered table-responsive'
-//            'class' =>'table table-striped table-bordered table-responsive'
         ],
         'rowOptions'=>function($data) use ($tmp) {
             if($data['login'] == $tmp){
@@ -52,21 +51,13 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                 },
             ],
             'displayname',
+            // need for hover images
 //            [
 //                'label' => 'Name',
 //                'format' => 'raw',
 //                'value'  => function ($data) use ($pageName) {
 //                        return Html::a(Html::encode($data['displayname']),"$pageName/" . $data['login']);
 //                    },
-//            ],
-//            [
-//                'attribute' => 'image_url',
-//                'format'    => 'html',
-//                'label'     => 'Photo',
-//                'value'     => function ($data) {
-//                    return Html::img($data['image_url'],
-//                        ['width' => '60px']);
-//                },
 //            ],
             'phone',
             [
