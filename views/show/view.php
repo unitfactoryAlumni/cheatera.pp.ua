@@ -14,29 +14,19 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
 
     <h1><?= Html::encode(strtok($this->title, " ")) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'correction_point',
-            'displayname',
-            'email:email',
-            'first_name',
-            'image_url:ntext',
-            'last_name',
-            'location',
             'login',
+            'level',
+            'displayname',
             'phone',
+            'email:email',
+            'correction_point',
+            'first_name',
+            'last_name',
+            'image_url:ntext',
+            'location',
             'pool_month',
             'pool_year',
             'staff',

@@ -20,10 +20,6 @@ return [
     '{0} :: pool member UNIT Factory' => '',
     'Full information about {0} from UNIT Factory' => '',
 
-    // views/show/index.php
-
-    // views/show/view.php
-
     // models/Show.php
-    'Pool Month' => 'Месяц бассейна',
+    'Month' => 'Месяц',
 ];

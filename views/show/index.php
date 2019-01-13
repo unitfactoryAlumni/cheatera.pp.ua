@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\ShowSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -16,33 +17,54 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
 
     <p>
     </p>
-    <div style="white-space: nowrap;font-size: smaller;">
+    <style>
+        .filters .form-control {
+            max-height: 25px;
+        }
+
+        .table {
+            white-space: nowrap;
+            /*font-size: smaller;*/
+        }
+    </style>
+    <?php $tmp = Yii::$app->session->get('username') ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel'  => $searchModel,
         'tableOptions' => [
-            'class' => 'table table-striped table-bordered'
+            'class' => 'table table-striped table-bordered table-responsive'
         ],
-        'columns'      => [
+        'rowOptions'=>function($data) use ($tmp) {
+            if($data['login'] == $tmp){
+                return ['class' => 'danger'];
+            }
+        },
+        'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'login',
             [
-                'label' => 'Name',
+                'label' => '',
                 'format' => 'raw',
+                'attribute' => '',
                 'value'  => function ($data) use ($pageName) {
-                        return Html::a(Html::encode($data['displayname']),"$pageName/" . $data['login']);
-                    },
+                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),"$pageName/" . $data['login']);
+                },
             ],
+            'displayname',
+            // need for hover images
 //            [
-//                'attribute' => 'image_url',
-//                'format'    => 'html',
-//                'label'     => 'Photo',
-//                'value'     => function ($data) {
-//                    return Html::img($data['image_url'],
-//                        ['width' => '60px']);
-//                },
+//                'label' => 'Name',
+//                'format' => 'raw',
+//                'value'  => function ($data) use ($pageName) {
+//                        return Html::a(Html::encode($data['displayname']),"$pageName/" . $data['login']);
+//                    },
 //            ],
             'phone',
+            [
+                'attribute'=>'level',
+                'value'=>'level',
+                //'contentOptions'=>['style'=>'width: 120px;']
+            ],
             'correction_point',
             'pool_year',
             'pool_month',
@@ -53,6 +75,6 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             'howach',
             'hours',
         ],
-    ]); ?></div>
+    ]); ?>
     <?php Pjax::end(); ?>
 </div>

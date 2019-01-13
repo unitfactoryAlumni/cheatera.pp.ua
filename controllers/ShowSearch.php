@@ -8,6 +8,7 @@ use app\models\Show;
 
 /**
  * ShowSearch represents the model behind the search form of `app\models\Show`.
+ * @property mixed level
  */
 class ShowSearch extends Show
 {
@@ -17,8 +18,8 @@ class ShowSearch extends Show
     public function rules()
     {
         return [
-            [['id', 'correction_point', 'xid', 'pool_year', 'wallet', 'howach', 'kick', 'needupd', 'visible'], 'integer'],
-            [['displayname', 'email', 'first_name', 'last_name', 'location', 'login', 'phone', 'pool_month', 'staff', 'url', 'lastloc'], 'safe'],
+            [['id', 'xid', 'pool_year', 'kick', 'needupd', 'visible'], 'integer'],
+            [['displayname', 'email', 'location', 'login', 'phone', 'pool_month', 'lastloc'], 'safe'],
         ];
     }
 
@@ -40,19 +41,32 @@ class ShowSearch extends Show
      */
     public function search($params, $course)
     {
-        $query = Show::find();
+
+        $query = Show::find()
+            ->select([
+                'xlogins.*',
+                'cursus_users.level'
+            ])
+            ->innerJoin('cursus_users','cursus_users.xlogin = xlogins.login')
+            ->where([
+                'visible' => 1,
+                'cursus_users.name' => $course,
+                ])
+            ->orderBy('cursus_users.level DESC, xlogins.login ASC');
+        ;
 
         // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        $dataProvider->sort->attributes['level'] = [
+            'asc' => ['cursus_users.level' => SORT_ASC],
+            'desc' => ['cursus_users.level' => SORT_DESC],];
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+//            $query->where('0=1');
             return $dataProvider;
         }
 
@@ -66,8 +80,8 @@ class ShowSearch extends Show
             'howach' => $this->howach,
             'kick' => $this->kick,
             'lastloc' => $this->lastloc,
-            'needupd' => $this->needupd,
             'visible' => $this->visible,
+            'cursus_users.level' => $this->level
         ]);
 
         $query->andFilterWhere(['like', 'displayname', $this->displayname])
@@ -78,7 +92,8 @@ class ShowSearch extends Show
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'pool_month', $this->pool_month])
             ->andFilterWhere(['like', 'staff', $this->staff])
-            ->andFilterWhere(['like', 'url', $this->url]);
+            ->andFilterWhere(['like', 'url', $this->url])
+            ->andFilterWhere(['like', 'correction_point', $this->correction_point]);
 
         return $dataProvider;
     }

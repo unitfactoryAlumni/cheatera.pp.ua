@@ -15,6 +15,8 @@ use yii\filters\VerbFilter;
 class ShowController extends CommonController
 {
     protected $course;
+
+    public $level;
     /**
      * Lists all Students.
      * @return mixed
@@ -64,6 +66,7 @@ class ShowController extends CommonController
             Yii::t('app', '{0} :: student member UNIT Factory', $id),
             Yii::t('app','Full information about {0} from UNIT Factory', $id)
         );
+        $this->course = '42';
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -79,6 +82,7 @@ class ShowController extends CommonController
             Yii::t('app', '{0} :: pool member UNIT Factory', $id),
             Yii::t('app', 'Full information about {0} from UNIT Factory', $id)
         );
+        $this->course = 'Piscine C';
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -92,8 +96,12 @@ class ShowController extends CommonController
     protected function findModelLogin($id)
     {
         if (($model = Show::find()
-                ->join('INNER JOIN', 'cursus_users', 'cursus_users.xlogin = xlogins.login')
-                ->where(['login' => $id, 'cursus_users.cursus_id' => 1])
+                ->select([
+                    'xlogins.*',
+                    'cursus_users.level'
+                ])
+                ->innerJoin('cursus_users','cursus_users.xlogin = xlogins.login')
+                ->where(['login' => $id, 'cursus_users.name' => $this->course])
                 ->limit(1)
                 ->one()) !== null) {
             return $model;
