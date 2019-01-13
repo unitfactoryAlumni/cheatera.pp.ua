@@ -53,7 +53,7 @@ class ProjectsController extends CommonController
             Yii::t('app','Full information about pools projects from UNIT Factory')
         );
 
-        $searchModel = new ProjectsSearch();
+        $searchModel = new ProjectsPoolsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

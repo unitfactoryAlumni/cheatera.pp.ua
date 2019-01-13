@@ -28,7 +28,7 @@ return [
     'Full information about students projects from UNIT Factory' => '',
     'Pools projects UNIT Factory' => '',
     'Full information about pools projects from UNIT Factory' => '',
-    '{0} :: students project UNIT Factory' => '', 
+    '{0} :: students project UNIT Factory' => '',
 
     // models/Projects
     'project' => '',
