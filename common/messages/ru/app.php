@@ -22,4 +22,15 @@ return [
 
     // models/Show.php
     'Month' => 'Месяц',
+
+    // models/Projects
+    'project' => '',
+    'final mark (AVG)' => '',
+    'validated' => '',
+    'finished' => '',
+    'failed' => '',
+    'wait correction' => '',
+    'in progress' => '',
+    'search group' => '',
+    'created' => '',
 ];

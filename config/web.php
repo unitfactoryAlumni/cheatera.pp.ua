@@ -81,11 +81,13 @@ $config = [
             //далее создаем обычные правила
             '/' => 'site/index',
             '<action:(captcha|welcome|login|auth|contact|logout|language|about)>' => 'site/<action>',
+            'students/projects' => 'projects/index',
+            'pools/projects' => 'projects/index',
             'students/<id:\w+>' => 'show/students-view',
             'pools/<id:\w+>' => 'show/pools-view',
             'students' => 'show/students',
             'pools' => 'show/pools',
-            'calculator' => 'calc/index'
+
         ],
     ],
     ],
