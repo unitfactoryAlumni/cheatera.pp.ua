@@ -76,6 +76,12 @@ class ShowController extends CommonController
             ],
         ]);
     }
+
+    /**
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionPoolsView($id)
     {
         $this->setMeta(
@@ -93,6 +99,11 @@ class ShowController extends CommonController
         ]);
     }
 
+    /**
+     * @param $id
+     * @return array|\yii\db\ActiveRecord|null
+     * @throws NotFoundHttpException
+     */
     protected function findModelLogin($id)
     {
         if (($model = Show::find()

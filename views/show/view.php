@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Show */
+/* @var array $breadcrumbs */
 
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = strtok($this->title, " ");

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ProjectsAll;
 use Yii;
 use app\models\Projects;
 use app\controllers\ProjectsSearch;
@@ -12,116 +13,119 @@ use yii\filters\VerbFilter;
 /**
  * ProjectsController implements the CRUD actions for Projects model.
  */
-class ProjectsController extends Controller
+class ProjectsController extends CommonController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+    protected $course;
 
     /**
      * Lists all Projects models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionStudents()
     {
+        $this->setMeta(
+            Yii::t('app', 'Students projects UNIT Factory'),
+            Yii::t('app','Full information about students projects from UNIT Factory')
+        );
+
         $searchModel = new ProjectsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'breadcrumbs' => [
+                'name' => Yii::t('app', 'Students'),
+                'url' => 'show/students'
+            ],
         ]);
     }
 
     /**
-     * Displays a single Projects model.
+     * Lists all Projects models.
+     * @return mixed
+     */
+    public function actionPools()
+    {
+        $this->setMeta(
+            Yii::t('app', 'Pools projects UNIT Factory'),
+            Yii::t('app','Full information about pools projects from UNIT Factory')
+        );
+
+        $searchModel = new ProjectsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'breadcrumbs' => [
+                'name' => Yii::t('app', 'Pools'),
+                'url' => 'show/pools'
+            ],
+        ]);
+    }
+
+    /**
+     * Displays a single students Projects model.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionStudentsView($id)
     {
+        $this->setMeta(
+            Yii::t('app', '{0} :: students project UNIT Factory', $id),
+            Yii::t('app','Full information about {0} from UNIT Factory', $id)
+        );
+        $this->course = 1;
+
+        $searchModel = new ProjectsAllSearch($this->course, $id);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'breadcrumbs' => [
+                '0' => [
+                    'name' => Yii::t('app', 'Students'),
+                    'url' => 'show/students',
+                ],
+                '1' => [
+                    'name' => Yii::t('app', 'Students Projects'),
+                    'url' => 'projects/students',
+                ],
+            ],
         ]);
     }
 
     /**
-     * Creates a new Projects model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Displays a single Project models.
+     * @param integer $id
      * @return mixed
      */
-    public function actionCreate()
+    public function actionPoolsView($id)
     {
-        $model = new Projects();
+        $this->setMeta(
+            Yii::t('app', '{0} :: pools project UNIT Factory', $id),
+            Yii::t('app', 'Full information about {0} from UNIT Factory', $id)
+        );
+        $this->course = 4;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        $searchModel = new ProjectsAllSearch($this->course, $id);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('create', [
-            'model' => $model,
+        return $this->render('view', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'breadcrumbs' => [
+                '0' => [
+                    'name' => Yii::t('app', 'Pools Projects'),
+                    'url' => 'projects/pools',
+                ],
+                '1' => [
+                    'name' => Yii::t('app', 'Pools Projects'),
+                    'url' => 'projects/pools',
+                ],
+            ],
         ]);
-    }
-
-    /**
-     * Updates an existing Projects model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Projects model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Projects model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Projects the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Projects::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 }

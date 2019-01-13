@@ -6,8 +6,10 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\ProjectsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var array $breadcrumbs */
 
-$this->title = Yii::t('app', 'Projects');
+//$this->title = Yii::t('app', 'Projects');
+$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="projects-index">

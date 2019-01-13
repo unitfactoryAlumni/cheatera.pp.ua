@@ -1,47 +1,52 @@
 <?php
 
+use yii\grid\GridView;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Projects */
+/* @var array $breadcrumbs */
+/* @var $searchModel app\controllers\ProjectsAllSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Projects'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['0']['name'], 'url' => [$breadcrumbs['0']['url']]];
+$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['1']['name'], 'url' => [$breadcrumbs['1']['url']]];
+$this->params['breadcrumbs'][] = strtok($this->title, ' ');
 ?>
 <div class="projects-view">
+    <h1><?= Html::encode(strtok($this->title, ' ')) ?></h1>
+    <?php Pjax::begin(); ?>
+    <style>
+        .filters .form-control {
+            max-height: 25px;
+        }
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            'slug:ntext',
-            'avgFinalMark',
-            'validated',
-            'finished',
-            'failed',
-            'wfc',
-            'inprogress',
-            'sag',
-            'cg',
-            'course',
+        .table {
+            white-space: nowrap;
+            /*font-size: smaller;*/
+        }
+    </style>
+    <?php $tmp = Yii::$app->session->get('username') ?>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel'  => $searchModel,
+        'tableOptions' => [
+            'class' => 'table table-striped table-bordered table-responsive'
         ],
-    ]) ?>
+        'rowOptions'=>function($data) use ($tmp) {
+            if($data['xlogin'] == $tmp){
+                return ['class' => 'danger'];
+            }
+        },
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
+            'xlogin',
+            'final_mark',
+            'occurrence',
+            'status',
+            'validated',
+        ],
+    ]); ?>
+    <?php Pjax::end(); ?>
 </div>

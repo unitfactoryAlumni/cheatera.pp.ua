@@ -22,6 +22,8 @@ use Yii;
  */
 class Projects extends \yii\db\ActiveRecord
 {
+    protected $course;
+
     /**
      * {@inheritdoc}
      */
