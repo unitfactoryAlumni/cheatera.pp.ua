@@ -47,6 +47,9 @@
     - actionShowStatistics
     - actionGetStatistics
     
+- add tests
+    - acceptance
+    - unit
     
 ## Message from Slack (c) apakhomo
 
