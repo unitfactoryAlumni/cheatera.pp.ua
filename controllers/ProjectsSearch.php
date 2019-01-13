@@ -45,6 +45,9 @@ class ProjectsSearch extends Projects
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 50,
+            ],
             'sort'=> ['defaultOrder' => ['name' => SORT_ASC]]
 
         ]);

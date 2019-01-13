@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
             /*font-size: smaller;*/
         }
     </style>
-<?php  $pagename = 'students'; //hardcode for test ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -42,8 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => '',
                 'format' => 'raw',
                 'attribute' => '',
-                'value'  => function ($data) use ($pageName) {
-                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),"$pageName/" . $data['slug']);
+                'value'  => function ($data) use ($subPage) {
+                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),"$subPage/" . $data['slug']);
                 },
             ],
             'avgFinalMark',

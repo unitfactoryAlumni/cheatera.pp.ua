@@ -61,11 +61,13 @@ class ProjectsAllSearch extends ProjectsAll
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 50,
+            ],
             'sort'=> ['defaultOrder' => [
                 'final_mark' => SORT_DESC,
-                'xlogin' => SORT_ASC
-            ]]
-
+                'xlogin' => SORT_ASC,
+            ]],
         ]);
 
         $this->load($params);

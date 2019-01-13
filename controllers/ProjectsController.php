@@ -38,6 +38,7 @@ class ProjectsController extends CommonController
                 'name' => Yii::t('app', 'Students'),
                 'url' => 'show/students'
             ],
+            'subPage' => '/students/projects'
         ]);
     }
 
@@ -62,6 +63,7 @@ class ProjectsController extends CommonController
                 'name' => Yii::t('app', 'Pools'),
                 'url' => 'show/pools'
             ],
+            'subPage' => '/pools/projects'
         ]);
     }
 
