@@ -15,6 +15,8 @@ use yii\filters\VerbFilter;
 class ShowController extends CommonController
 {
     protected $course;
+
+    public $level;
     /**
      * Lists all Students.
      * @return mixed
@@ -94,7 +96,11 @@ class ShowController extends CommonController
     protected function findModelLogin($id)
     {
         if (($model = Show::find()
-                ->join('INNER JOIN', 'cursus_users', 'cursus_users.xlogin = xlogins.login')
+                ->select([
+                    'xlogins.*',
+                    'cursus_users.level'
+                ])
+                ->innerJoin('cursus_users','cursus_users.xlogin = xlogins.login')
                 ->where(['login' => $id, 'cursus_users.name' => $this->course])
                 ->limit(1)
                 ->one()) !== null) {

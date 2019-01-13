@@ -17,15 +17,16 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'correction_point',
-            'displayname',
-            'email:email',
-            'first_name',
-            'image_url:ntext',
-            'last_name',
-            'location',
             'login',
+            'level',
+            'displayname',
             'phone',
+            'email:email',
+            'correction_point',
+            'first_name',
+            'last_name',
+            'image_url:ntext',
+            'location',
             'pool_month',
             'pool_year',
             'staff',
@@ -38,7 +39,6 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             'hours',
             'lasthours',
             'visible',
-//            'cursus_users.level'
         ],
     ]) ?>
 
