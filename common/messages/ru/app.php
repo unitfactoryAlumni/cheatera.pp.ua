@@ -23,6 +23,13 @@ return [
     // models/Show.php
     'Month' => 'Месяц',
 
+    // Project Controllers
+    'Students projects UNIT Factory' => '',
+    'Full information about students projects from UNIT Factory' => '',
+    'Pools projects UNIT Factory' => '',
+    'Full information about pools projects from UNIT Factory' => '',
+    '{0} :: students project UNIT Factory' => '', 
+
     // models/Projects
     'project' => '',
     'final mark (AVG)' => '',
@@ -33,4 +40,11 @@ return [
     'in progress' => '',
     'search group' => '',
     'created' => '',
+
+    //models/ProjectsAll
+    'Xlogin' =>  '',
+    'Final Mark' => '',
+    'Retry' => '',
+    'Status' => '',
+    'Validated' => '',
 ];
