@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Show;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\ProjectsAll;
@@ -11,7 +12,20 @@ use app\models\ProjectsAll;
  */
 class ProjectsPoolsSearch extends ProjectsAll
 {
+    /**
+     * SELECT pu.*
+    34 FROM
+    35         projects_users as pu,
+    36     (
+    37         SELECT * FROM xlogins
+    38                 WHERE xlogins.pool_year = \"" . $data_array['year'] .
+     * "\" and xlogins.pool_month=\"" . $data_array['month'] . "\" ORDER BY xlogins    .login ASC
+    39     ) as xl
+    40 WHERE pu.xlogin = xl.login and pu.cursus_ids=\"4\"
+    41 ORDER BY pu.name ASC, pu.xlogin ASC
+    42   ;";
 
+     */
     /**
      * {@inheritdoc}
      */
@@ -41,9 +55,11 @@ class ProjectsPoolsSearch extends ProjectsAll
      */
     public function search($params)
     {
+        $subquery = Show::find()->select('login');
         $query = ProjectsAll::find()
             ->where([
                 'cursus_ids' => 4,
+                'xlogin' => $subquery,
             ]);
 
         // add conditions that should always apply here

@@ -23,6 +23,14 @@ use Yii;
  */
 class ProjectsAll extends \yii\db\ActiveRecord
 {
+    public $avgFinalMark;
+    public $validated;
+    public $finished;
+    public $failed;
+    public $wfc;
+    public $inprogress;
+    public $sag;
+    public $cg;
     /**
      * {@inheritdoc}
      */
@@ -63,6 +71,13 @@ class ProjectsAll extends \yii\db\ActiveRecord
             'slug' => Yii::t('app', 'Slug'),
             'status' => Yii::t('app', 'Status'),
             'validated' => Yii::t('app', 'Validated'),
+            'avgFinalMark' => Yii::t('app', 'final mark (AVG)'),
+            'finished' => Yii::t('app', 'finished'),
+            'failed' => Yii::t('app', 'failed'),
+            'wfc' => Yii::t('app', 'wait correction'),
+            'inprogress' => Yii::t('app', 'in progress'),
+            'sag' => Yii::t('app', 'search group'),
+            'cg' => Yii::t('app', 'created'),
         ];
     }
 }
