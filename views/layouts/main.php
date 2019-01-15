@@ -38,20 +38,48 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => Yii::$app->getRequest()->getUserIP()],
-            ['label' => Yii::t('app', 'Students'), 'url' => ['/students']],
-            ['label' => 'Gii', 'url' => ['/gii']],
-            ['label' => 'Debug', 'url' => ['/debug']],
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            [
+                    'label' => Yii::$app->getRequest()->getUserIP(),
+                    'items' => [
+                        ['label' => 'Debug', 'url' => ['/debug']],
+                        '<li class="divider"></li>',
+                        ['label' => 'Gii Model', 'url' => ['/gii/model']],
+                        ['label' => 'Gii CRUD', 'url' => ['/gii/crud']],
+                        ['label' => 'Gii Controller', 'url' => ['/gii/controller']],
+                    ],
+            ],
+            [
+                    'label' => Yii::t('app', 'Students'),
+                    'items' => [
+                        ['label' => Yii::t('app', 'Members'), 'url' => ['/students']],
+                        ['label' => Yii::t('app', 'Projects'), 'url' => ['/students/projects']],
+                        ['label' => Yii::t('app', 'Cheating'), 'url' => ['/students/cheating']],
+                    ],
+            ],
+            [
+                    'label' => Yii::t('app', 'Pools'),
+                    'items' => [
+                        ['label' => Yii::t('app', 'Members'), 'url' => ['/pools']],
+                        ['label' => Yii::t('app', 'Projects'), 'url' => ['/pools/projects']],
+                        ['label' => Yii::t('app', 'Cheating'), 'url' => ['/pools/cheating']],
+                    ],
+            ],
+//            ['label' => 'Home', 'url' => ['/site/index']],
+//            ['label' => 'About', 'url' => ['/site/about']],
+//            ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/auth?authclient=auth42']]
+                [
+                        'label' => Yii::t('app', 'Sign In'),
+                        'items' => [
+                            ['label' => Yii::t('app', 'with 42'), 'url' => ['/auth?authclient=auth42']],
+                            ['label' => Yii::t('app', 'with pass'), 'url' => ['/login']],
+                    ],
+                ]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    Yii::t('app', 'Logout (') . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()

@@ -10,6 +10,12 @@ return [
     // common
     'Students' => 'Студенты',
     'Pools' => 'Бассейны',
+    'Logout (' => '',
+    'with 42' => '',
+    'with pass' => '',
+    'Members' => '',
+    'Projects' => '',
+    'Cheating' => '',
 
     // Show Controller
     'Students UNIT Factory' => 'Студенты UNIT Factory',
