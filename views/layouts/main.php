@@ -51,17 +51,17 @@ AppAsset::register($this);
             [
                     'label' => Yii::t('app', 'Students'),
                     'items' => [
-                        ['label' => 'Members', 'url' => ['/students']],
-                        ['label' => 'Projects', 'url' => ['/students/projects']],
-                        ['label' => 'Cheating', 'url' => ['/students/cheating']],
+                        ['label' => Yii::t('app', 'Members'), 'url' => ['/students']],
+                        ['label' => Yii::t('app', 'Projects'), 'url' => ['/students/projects']],
+                        ['label' => Yii::t('app', 'Cheating'), 'url' => ['/students/cheating']],
                     ],
             ],
             [
                     'label' => Yii::t('app', 'Pools'),
                     'items' => [
-                        ['label' => 'Members', 'url' => ['/pools']],
-                        ['label' => 'Projects', 'url' => ['/pools/projects']],
-                        ['label' => 'Cheating', 'url' => ['/pools/cheating']],
+                        ['label' => Yii::t('app', 'Members'), 'url' => ['/pools']],
+                        ['label' => Yii::t('app', 'Projects'), 'url' => ['/pools/projects']],
+                        ['label' => Yii::t('app', 'Cheating'), 'url' => ['/pools/cheating']],
                     ],
             ],
 //            ['label' => 'Home', 'url' => ['/site/index']],
@@ -69,17 +69,17 @@ AppAsset::register($this);
 //            ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
                 [
-                        'label' => 'Sign In',
+                        'label' => Yii::t('app', 'Sign In'),
                         'items' => [
-                            ['label' => 'with 42', 'url' => ['/auth?authclient=auth42']],
-                            ['label' => 'with pass', 'url' => ['/login']],
+                            ['label' => Yii::t('app', 'with 42'), 'url' => ['/auth?authclient=auth42']],
+                            ['label' => Yii::t('app', 'with pass'), 'url' => ['/login']],
                     ],
                 ]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    Yii::t('app', 'Logout (') . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
