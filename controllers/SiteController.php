@@ -17,7 +17,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
-class SiteController extends Controller
+class SiteController extends CommonController
 {
     /**
      * {@inheritdoc}
@@ -104,6 +104,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $title = Yii::t('app', 'Cheatera from UNIT Factory');
+        $description = Yii::t('app','Cheatera - private social network for students from UNIT Factory');
+        $this->setMeta($title, $description);
         return $this->render('index');
     }
 
