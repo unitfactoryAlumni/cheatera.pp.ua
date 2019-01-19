@@ -62,10 +62,9 @@ class ShowController extends CommonController
 
     public function actionStudentsView($id)
     {
-        $this->setMeta(
-            Yii::t('app', '{0} :: student member UNIT Factory', $id),
-            Yii::t('app','Full information about {0} from UNIT Factory', $id)
-        );
+        $title = Yii::t('app', '{0} :: student member UNIT Factory', $id);
+        $description = Yii::t('app','Full information about {0} from UNIT Factory', $id);
+        $this->setMeta($title, $description);
         $this->course = '42';
 
         return $this->render('view', [
