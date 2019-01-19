@@ -28,4 +28,19 @@ return [
 
     // models/Show.php
     'Month' => 'Месяц',
+
+    // models/Achievements.php
+    'Xlogin' => '',
+    'Description' => '',
+    'Kind' => 'Grade',
+    'Name' => '',
+    'Nbr Of Success' => '',
+    'Tier' => '',
+
+    // models/PoolsList.php
+    'Year' => '',
+    'Month' => '',
+    'Begin At' => '',
+    'End At' => '',
+
 ];
