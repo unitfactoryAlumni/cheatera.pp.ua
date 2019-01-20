@@ -4,7 +4,7 @@
 - add user table //done
     - add birthday
     - add job experience
-        - add table companies
+        - add table companies //??
         
 - add CommonController (main with set meta and access rule) //done
 
@@ -17,9 +17,9 @@
 	- need debug and join cursus_users table (create class etc) //done
 	
 - add ProjectController
-	- actionStudent
-	- actionPool
-	- actionView
+	- actionStudent //done
+	- actionPool //done
+	- actionView //done, but need calculate results
 		- add bonus reference
 		- add giude reference
 		- add links reference
@@ -29,8 +29,8 @@
 	- actionStudent
 	- actionPool
 
-- add CalculatorController
-	- actionView
+- add CalculatorController //in progress
+	- actionView //in progress
 
 - add FriendController
 	- actionView
@@ -88,4 +88,3 @@
 - мерджим в мастер
 
 Для всех, кто хочет принимать участие, создам чат в телеграме, напишите в личку, скину ссылку на инвайт.
-
