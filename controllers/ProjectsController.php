@@ -23,10 +23,9 @@ class ProjectsController extends CommonController
      */
     public function actionStudents()
     {
-        $this->setMeta(
-            Yii::t('app', 'Students projects UNIT Factory'),
-            Yii::t('app','Full information about students projects from UNIT Factory')
-        );
+        $title = Yii::t('app', 'Students projects UNIT Factory');
+        $description = Yii::t('app','Full information about students projects from UNIT Factory');
+        $this->setMeta($title, $description);
 
         $searchModel = new ProjectsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -48,10 +47,9 @@ class ProjectsController extends CommonController
      */
     public function actionPools()
     {
-        $this->setMeta(
-            Yii::t('app', 'Pools projects UNIT Factory'),
-            Yii::t('app','Full information about pools projects from UNIT Factory')
-        );
+        $title = Yii::t('app', 'Pools projects UNIT Factory');
+        $description = Yii::t('app','Full information about pools projects from UNIT Factory');
+        $this->setMeta($title, $description);
 
         $searchModel = new ProjectsPoolsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -74,10 +72,9 @@ class ProjectsController extends CommonController
      */
     public function actionStudentsView($id)
     {
-        $this->setMeta(
-            Yii::t('app', '{0} :: students project UNIT Factory', $id),
-            Yii::t('app','Full information about {0} from UNIT Factory', $id)
-        );
+        $title = Yii::t('app', '{0} :: students project UNIT Factory', $id);
+        $description = Yii::t('app','Full information about {0} from UNIT Factory', $id);
+        $this->setMeta($title, $description);
         $this->course = 1;
 
         $searchModel = new ProjectsAllSearch($this->course, $id);
@@ -106,10 +103,9 @@ class ProjectsController extends CommonController
      */
     public function actionPoolsView($id)
     {
-        $this->setMeta(
-            Yii::t('app', '{0} :: pools project UNIT Factory', $id),
-            Yii::t('app', 'Full information about {0} from UNIT Factory', $id)
-        );
+        $title = Yii::t('app', '{0} :: pools project UNIT Factory', $id);
+        $description = Yii::t('app','Full information about {0} from UNIT Factory', $id);
+        $this->setMeta($title, $description);
         $this->course = 4;
 
         $searchModel = new ProjectsAllSearch($this->course, $id);

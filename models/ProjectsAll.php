@@ -24,7 +24,6 @@ use Yii;
 class ProjectsAll extends \yii\db\ActiveRecord
 {
     public $avgFinalMark;
-    public $validated;
     public $finished;
     public $failed;
     public $wfc;
