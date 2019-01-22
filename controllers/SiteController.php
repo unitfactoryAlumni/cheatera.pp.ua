@@ -71,7 +71,6 @@ class SiteController extends CommonController
      */
     public function actionWelcome()
     {
-        // TODO: Need add info from DB
         $user = new User;
         $api = new Auth42;
         $log = new Log;

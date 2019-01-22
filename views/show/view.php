@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Show */
@@ -45,6 +44,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             <div class="card" style="width: 100%;">
                 <div class="card-body">
                     <h5 class="card-title">Навыки</h5>
+<!--                    @TODO need create user skills method-->
                     <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="11.57" >
                         <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:55.095238095238%">Algorithms &amp; AI</div>
                     </div>
@@ -96,6 +96,9 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
         <div class="col-lg-9 mx-auto">
             <div class="card" style="width: 100%;">
                 <div class="card-body">
+
+                    <!--                    @TODO need create user projects methods-->
+
                     <h5 class="card-title">Projects (validated)</h5>
                     <div style="max-width: 100%; overflow: auto;">
                         <table class="table ">
@@ -1039,6 +1042,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             <hr>
             <div class="card" style="width: 100%;">
                 <div class="card-body">
+                    <!--                    @TODO need create user time in clusters method-->
                     <h5 class="card-title">Time at cluster</h5>
                     <canvas id="timer" width="770" height="385" style="display: block; width: 770px; height: 385px;"></canvas>
                 </div>
