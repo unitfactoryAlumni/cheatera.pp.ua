@@ -149,3 +149,48 @@ a.desc:after {
 .h5, h5 {
     font-size: 2.25rem;
 }
+
+/* Progress bar */
+.progress-bar-success {
+    background-color: #008200;
+}
+
+.progress-bar-info {
+    background-color: #0066cc;
+}
+
+.progress-bar-warning {
+    background-color: #ff5300;
+}
+
+.progress-bar-danger {
+    background-color: #ff003b;
+}
+
+.bg-success {
+    background-color: #008200;
+}
+
+.bg-info {
+    background-color: #0066cc;
+}
+
+.bg-warning {
+    background-color: #ff5300;
+}
+
+.bg-danger {
+    background-color: #ff003b;
+}
+
+.progress {
+    background-color: #636363;
+    margin-bottom: 10px;
+}
+.my-shadow {
+    margin-bottom: 5px;
+}
+
+.mini {
+    white-space: nowrap;
+}

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\SkillsHelper;
 use Yii;
 use app\models\Show;
 use app\controllers\ShowSearch;
@@ -65,6 +66,7 @@ class ShowController extends CommonController
         $description = Yii::t('app','Full information about {0} from UNIT Factory', $id);
         $this->setMeta($title, $description);
         $this->course = '42';
+        $skills = SkillsHelper::getSkills($id, 1);
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -72,6 +74,7 @@ class ShowController extends CommonController
                 'name' => Yii::t('app', 'Students'),
                 'url' => 'show/students'
             ],
+            'skills' => $skills
         ]);
     }
     public function actionPoolsView($id)

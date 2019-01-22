@@ -36,6 +36,7 @@ class Show extends \yii\db\ActiveRecord
     public $level;
 
     public $grade;
+    public $cursus_id;
 
     public $link;
 

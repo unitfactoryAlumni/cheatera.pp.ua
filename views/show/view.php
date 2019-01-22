@@ -1,5 +1,7 @@
 <?php
 
+use app\helpers\SkillsHelper;
+use app\helpers\ViewHelper;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -13,9 +15,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
 <div class="container xlogin">
     <div class="row"> <div class="col-lg-12 mx-auto">
             <div class="progress my-shadow" style="margin: 0.75rem auto ;">
-<!--                @TODO Add width relations level -->
-<!--                @TODO Add color relations level -->
-                <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 67%"><?= $model['level'] ?></div>
+                <div class="progress-bar progress-bar-<?= ViewHelper::getLevelColorClass($model['level'])?> progress-bar-striped active" role="progressbar" style="width: <?= ViewHelper::getProgress($model['level'])?>%"><?= $model['level'] ?></div>
             </div>
         </div>
         <div class="col-lg-3 mx-auto">
@@ -36,60 +36,20 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                     <p class="card-text"><b>Host:</b> <?= $model['location']?></p>
                     <p class="card-text"><b>Last login:</b> <?= $model['lastloc']?></p>
                     <p class="card-text"><b>Hours at cluster:</b> <?= $model['hours']?></p>
-                    <a href="//profile.intra.42.fr/users/<?= $model['login']?>" target="_blank" class="btn btn-warning">Intra</a>
+                    <a href="//profile.intra.42.fr/users/<?= $model['login']?>" target="_blank" class="btn btn-warning bg-warning">Intra</a>
 <!--                @TODO Added switch profile buttons -->
-                    <a href="/pools/<?= $model['login'] ?>" class="btn btn-success">Pool Profile</a>
+                    <a href="/pools/<?= $model['login'] ?>" class="btn btn-success bg-success">Pool Profile</a>
                 </div>
             </div>
             <div class="card" style="width: 100%;">
                 <div class="card-body">
                     <h5 class="card-title">Навыки</h5>
 <!--                    @TODO need create user skills method-->
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="11.57" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:55.095238095238%">Algorithms &amp; AI</div>
+                        <?php foreach ($skills as $skill) { ?>
+                    <div class="progress" data-placement="left" data-toggle="tooltip" title="" >
+                        <div class="progress-bar mini progress-bar-<?= ViewHelper::getLevelColorClass($skill['skills_level'])?> progress-bar-striped active" role="progressbar" style="width:<?= ViewHelper::getProgress($skill['skills_level'])?>%"><?= $skill['skills_name'] ?></div>
                     </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="8.52" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:40.571428571429%">Web</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="6.87" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:32.714285714286%">Group &amp; interpersonal</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="6.71" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:31.952380952381%">Rigor</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="6.57" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:31.285714285714%">Unix</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="5.55" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:26.428571428571%">Adaptation &amp; creativity</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="5.21" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:24.809523809524%">DB &amp; Data</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="4.72" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:22.47619047619%">Imperative programming</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="4.56" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:21.714285714286%">Network &amp; system administration</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="3.8" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:18.095238095238%">Security</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="3.13" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:14.904761904762%">Object-oriented programming</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="2.42" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:11.52380952381%">Technology integration</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="1.28" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:6.0952380952381%">Graphics</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="1.19" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:5.6666666666667%">Organization</div>
-                    </div>
-                    <div class="progress" style="background-color: #717070;margin: 8px 0px ;"  data-placement="left"   data-toggle="tooltip" title="0.53" >
-                        <div class="progress-bar progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width:2.5238095238095%">Company experience</div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
