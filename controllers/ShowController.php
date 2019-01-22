@@ -16,7 +16,6 @@ class ShowController extends CommonController
 {
     protected $course;
 
-    public $level;
     /**
      * Lists all Students.
      * @return mixed
@@ -97,7 +96,7 @@ class ShowController extends CommonController
         if (($model = Show::find()
                 ->select([
                     'xlogins.*',
-                    'cursus_users.level'
+                    'cursus_users.*'
                 ])
                 ->innerJoin('cursus_users','cursus_users.xlogin = xlogins.login')
                 ->where(['login' => $id, 'cursus_users.name' => $this->course])

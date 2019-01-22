@@ -35,6 +35,8 @@ class Show extends \yii\db\ActiveRecord
 {
     public $level;
 
+    public $grade;
+
     public $link;
 
     /**
@@ -89,7 +91,8 @@ class Show extends \yii\db\ActiveRecord
             'hours' => 'Hours',
             'visible' => 'Visible',
             'level' => 'lvl',
-            'link' => ''
+            'link' => '',
+            'grade' => 'grade'
         ];
     }
 }
