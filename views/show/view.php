@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
 <!--                    @TODO need create user skills method-->
                         <?php foreach ($skills as $skill) { ?>
                     <div class="progress" data-placement="left" data-toggle="tooltip" title="" >
-                        <div class="progress-bar mini progress-bar-<?= ViewHelper::getLevelColorClass($skill['skills_level'])?> progress-bar-striped active" role="progressbar" style="width:<?= ViewHelper::getProgress($skill['skills_level'])?>%"><?= $skill['skills_name'] ?></div>
+                        <div class="progress-bar mini progress-bar-<?= ViewHelper::getLevelColorClass($skill['skills_level'])?> progress-bar-striped active" role="progressbar" style="width:<?= ViewHelper::getProgress($skill['skills_level'])?>%"><p><?= $skill['skills_name'] ?></p></div>
                     </div>
                     <?php } ?>
                 </div>

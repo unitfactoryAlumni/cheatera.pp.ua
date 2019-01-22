@@ -191,6 +191,7 @@ a.desc:after {
     margin-bottom: 5px;
 }
 
+.progress p { text-align: left;}
 .mini {
     white-space: nowrap;
 }
