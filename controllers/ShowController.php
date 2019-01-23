@@ -84,6 +84,7 @@ class ShowController extends CommonController
             Yii::t('app', 'Full information about {0} from UNIT Factory', $id)
         );
         $this->course = 'Piscine C';
+        $skills = SkillsHelper::getSkills($id, 4);
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -91,6 +92,7 @@ class ShowController extends CommonController
                 'name' => Yii::t('app', 'Pools'),
                 'url' => 'show/pools'
             ],
+            'skills' => $skills
         ]);
     }
 
