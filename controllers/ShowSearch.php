@@ -51,17 +51,20 @@ class ShowSearch extends Show
             ->where([
                 'visible' => 1,
                 'cursus_users.name' => $course,
-                ])
-            ->orderBy('cursus_users.level DESC, xlogins.login ASC');
-        ;
+                ]);
 
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-        $dataProvider->sort->attributes['level'] = [
-            'asc' => ['cursus_users.level' => SORT_ASC],
-            'desc' => ['cursus_users.level' => SORT_DESC],];
+
+        // Added sort for column from inner join table
+        $dataProvider->sort->attributes += [
+            'level' => [
+                'asc' => ['cursus_users.level' => SORT_ASC],
+                'desc' => ['cursus_users.level' => SORT_DESC]
+            ]
+        ];
         $this->load($params);
 
         if (!$this->validate()) {
@@ -70,29 +73,13 @@ class ShowSearch extends Show
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'correction_point' => $this->correction_point,
-            'xid' => $this->xid,
-            'pool_year' => $this->pool_year,
-            'wallet' => $this->wallet,
-            'howach' => $this->howach,
-            'kick' => $this->kick,
-            'lastloc' => $this->lastloc,
-            'visible' => $this->visible,
-            'cursus_users.level' => $this->level
-        ]);
-
+        // grid filtering conditions [search input]
         $query->andFilterWhere(['like', 'displayname', $this->displayname])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'first_name', $this->first_name])
-            ->andFilterWhere(['like', 'last_name', $this->last_name])
             ->andFilterWhere(['like', 'login', $this->login])
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'pool_month', $this->pool_month])
-            ->andFilterWhere(['like', 'staff', $this->staff])
-            ->andFilterWhere(['like', 'url', $this->url])
+            ->andFilterWhere(['like', 'cursus_users.level', $this->level])
             ->andFilterWhere(['like', 'correction_point', $this->correction_point]);
 
         return $dataProvider;

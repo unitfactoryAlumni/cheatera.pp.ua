@@ -28,6 +28,19 @@ return [
 
     // models/Show.php
     'Month' => 'Месяц',
+    'CP' => '',
+    'Name' => '',
+    'Email' => '',
+    'Host' => '',
+    'Login' => '',
+    'Phone' => '',
+    'Year' => '',
+    'Wallet' => '',
+    'Achiv' => '',
+    'Last login' => '',
+    'Hours' => '',
+    'Level' => '',
+    'grade' => '',
 
     // Project Controllers
     'Students projects UNIT Factory' => '',
