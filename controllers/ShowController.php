@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\SkillsHelper;
 use Yii;
 use app\models\Show;
 use app\controllers\ShowSearch;
@@ -16,7 +17,6 @@ class ShowController extends CommonController
 {
     protected $course;
 
-    public $level;
     /**
      * Lists all Students.
      * @return mixed
@@ -66,6 +66,7 @@ class ShowController extends CommonController
         $description = Yii::t('app','Full information about {0} from UNIT Factory', $id);
         $this->setMeta($title, $description);
         $this->course = '42';
+        $skills = SkillsHelper::getSkills($id, 1);
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -73,6 +74,7 @@ class ShowController extends CommonController
                 'name' => Yii::t('app', 'Students'),
                 'url' => 'show/students'
             ],
+            'skills' => $skills
         ]);
     }
     public function actionPoolsView($id)
@@ -82,6 +84,7 @@ class ShowController extends CommonController
             Yii::t('app', 'Full information about {0} from UNIT Factory', $id)
         );
         $this->course = 'Piscine C';
+        $skills = SkillsHelper::getSkills($id, 4);
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -89,6 +92,7 @@ class ShowController extends CommonController
                 'name' => Yii::t('app', 'Pools'),
                 'url' => 'show/pools'
             ],
+            'skills' => $skills
         ]);
     }
 
@@ -97,7 +101,7 @@ class ShowController extends CommonController
         if (($model = Show::find()
                 ->select([
                     'xlogins.*',
-                    'cursus_users.level'
+                    'cursus_users.*'
                 ])
                 ->innerJoin('cursus_users','cursus_users.xlogin = xlogins.login')
                 ->where(['login' => $id, 'cursus_users.name' => $this->course])
