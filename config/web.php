@@ -81,6 +81,8 @@ $config = [
             //далее создаем обычные правила
             '/' => 'site/index',
             '<action:(captcha|welcome|login|auth|contact|logout|language|about)>' => 'site/<action>',
+            'students/cheating' => 'minus42/students',
+            'pools/cheating' => 'minus42/pools',
             'students/<id:\w+>' => 'show/students-view',
             'pools/<id:\w+>' => 'show/pools-view',
             'students' => 'show/students',
