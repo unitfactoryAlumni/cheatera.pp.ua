@@ -38,16 +38,14 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                     <p class="card-text"><b>Last login:</b> <?= $model['lastloc']?></p>
                     <p class="card-text"><b>Hours at cluster:</b> <?= $model['hours']?></p>
                     <a href="//profile.intra.42.fr/users/<?= $model['login']?>" target="_blank" class="btn btn-warning bg-warning">Intra</a>
-<!--                @TODO Added switch profile buttons -->
-                    <a href="/pools/<?= $model['login'] ?>" class="btn btn-success bg-success">Pool Profile</a>
+                    <a href="/<?= $switch ?>/<?= $model['login'] ?>" class="btn btn-success bg-success"><?= ucfirst(substr_replace($switch, "", -1)) ?> Profile</a>
                 </div>
             </div>
             <div class="card" style="width: 100%;">
                 <div class="card-body">
                     <h5 class="card-title">Навыки</h5>
-<!--                    @TODO need create user skills method-->
                         <?php foreach ($skills as $skill) { ?>
-                    <div class="progress" data-placement="left" data-toggle="tooltip" title="" >
+                    <div class="progress" data-placement="left" data-toggle="tooltip" title="<?= $skill['skills_level'] ?>">
                         <div class="progress-bar mini progress-bar-<?= ViewHelper::getLevelColorClass($skill['skills_level'])?> progress-bar-striped active" role="progressbar" style="width:<?= ViewHelper::getProgress($skill['skills_level'])?>%"><p><?= $skill['skills_name'] ?></p></div>
                     </div>
                     <?php } ?>

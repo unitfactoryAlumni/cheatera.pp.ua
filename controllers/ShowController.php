@@ -72,15 +72,15 @@ class ShowController extends CommonController
                 'name' => Yii::t('app', 'Students'),
                 'url' => 'show/students'
             ],
-            'skills' => $skills
+            'skills' => $skills,
+            'switch' => 'pools',
         ]);
     }
     public function actionPoolsView($id)
     {
-        $this->setMeta(
-            Yii::t('app', '{0} :: pool member UNIT Factory', $id),
-            Yii::t('app', 'Full information about {0} from UNIT Factory', $id)
-        );
+        $title = Yii::t('app', '{0} :: pool member UNIT Factory', $id);
+        $description = Yii::t('app','Full information about {0} from UNIT Factory', $id);
+        $this->setMeta($title, $description);
         $this->course = 'Piscine C';
         $skills = SkillsHelper::getSkills($id, 4);
 
@@ -90,7 +90,8 @@ class ShowController extends CommonController
                 'name' => Yii::t('app', 'Pools'),
                 'url' => 'show/pools'
             ],
-            'skills' => $skills
+            'skills' => $skills,
+            'switch' => 'students',
         ]);
     }
 
