@@ -8,6 +8,7 @@ use yii\widgets\Pjax;
 /* @var array $breadcrumbs */
 /* @var $searchModel app\controllers\ProjectsAllSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var string $pageName */
 
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['0']['name'], 'url' => [$breadcrumbs['0']['url']]];
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['1']['name'], 'url' => [$breadcrumbs['1']['url']]];
@@ -27,7 +28,8 @@ $this->params['breadcrumbs'][] = strtok($this->title, ' ');
         }
     </style>
     <?php $tmp = Yii::$app->session->get('username') ?>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel'  => $searchModel,
         'tableOptions' => [
@@ -42,10 +44,20 @@ $this->params['breadcrumbs'][] = strtok($this->title, ' ');
             ['class' => 'yii\grid\SerialColumn'],
 
             'xlogin',
+            [
+                'label' => '',
+                'format' => 'raw',
+                'attribute' => '',
+                'value'  => function ($data) use ($pageName) {
+                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),"/$pageName/" . $data['xlogin']);
+                },
+            ],
             'final_mark',
             'occurrence',
             'status',
             'validated',
+            'location',
+            'lastloc',
         ],
     ]); ?>
     <?php Pjax::end(); ?>

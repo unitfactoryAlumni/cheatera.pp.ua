@@ -20,6 +20,8 @@ use Yii;
  * @property string $slug
  * @property string $status
  * @property string $validated
+ * @property string $lastloc
+ * @property string $location
  */
 class ProjectsAll extends \yii\db\ActiveRecord
 {
@@ -30,6 +32,10 @@ class ProjectsAll extends \yii\db\ActiveRecord
     public $inprogress;
     public $sag;
     public $cg;
+
+    public $location;
+
+    public $lastloc;
     /**
      * {@inheritdoc}
      */

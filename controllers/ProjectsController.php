@@ -93,6 +93,7 @@ class ProjectsController extends CommonController
                     'url' => 'projects/students',
                 ],
             ],
+            'pageName' => 'students',
         ]);
     }
 
@@ -124,6 +125,7 @@ class ProjectsController extends CommonController
                     'url' => 'projects/pools',
                 ],
             ],
+            'pageName' => 'pools',
         ]);
     }
 }

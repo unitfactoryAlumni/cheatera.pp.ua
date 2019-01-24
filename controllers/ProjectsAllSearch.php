@@ -52,6 +52,11 @@ class ProjectsAllSearch extends ProjectsAll
     public function search($params)
     {
         $query = ProjectsAll::find()
+            ->select([
+                'projects_users.*',
+                'xlogins.*',
+            ])
+            ->innerJoin('xlogins','projects_users.xlogin = xlogins.login')
             ->where([
                 'cursus_ids' => $this->course,
                 'slug' => $this->projectSlug
@@ -70,6 +75,15 @@ class ProjectsAllSearch extends ProjectsAll
             ]],
         ]);
 
+
+        $dataProvider->sort->attributes['location'] = [
+            'asc' => ['xlogins.location' => SORT_ASC],
+            'desc' => ['xlogins.location' => SORT_DESC],];
+
+        $dataProvider->sort->attributes['lastloc'] = [
+            'asc' => ['xlogins.lastloc' => SORT_ASC],
+            'desc' => ['xlogins.lastloc' => SORT_DESC],];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -87,7 +101,7 @@ class ProjectsAllSearch extends ProjectsAll
             'puid' => $this->puid,
             'occurrence' => $this->occurrence,
             'project_id' => $this->project_id,
-            'parent_id' => $this->parent_id,
+            'parent_id' => $this->parent_id
         ]);
 
         $query->andFilterWhere(['like', 'xlogin', $this->xlogin])
