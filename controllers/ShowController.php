@@ -23,10 +23,9 @@ class ShowController extends CommonController
      */
     public function actionStudents()
     {
-        $this->setMeta(
-            Yii::t('app', 'Students UNIT Factory'),
-            Yii::t('app', 'All student members UNIT Factory')
-        );
+        $title = Yii::t('app', 'Students UNIT Factory');
+        $description = Yii::t('app','All student members UNIT Factory');
+        $this->setMeta($title, $description);
         $this->course = '42';
         $searchModel = new ShowSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->course);
@@ -44,10 +43,9 @@ class ShowController extends CommonController
      */
     public function actionPools()
     {
-        $this->setMeta(
-            Yii::t('app', 'Pools UNIT Factory'),
-            Yii::t('app', 'All pool members UNIT Factory')
-        );
+        $title = Yii::t('app', 'Pools UNIT Factory');
+        $description = Yii::t('app','All pool members UNIT Factory');
+        $this->setMeta($title, $description);
         $this->course = 'Piscine C';
 
         $searchModel = new ShowSearch();
@@ -77,12 +75,6 @@ class ShowController extends CommonController
             'skills' => $skills
         ]);
     }
-
-    /**
-     * @param $id
-     * @return string
-     * @throws NotFoundHttpException
-     */
     public function actionPoolsView($id)
     {
         $this->setMeta(
