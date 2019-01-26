@@ -5,10 +5,7 @@ namespace app\controllers;
 use app\helpers\SkillsHelper;
 use Yii;
 use app\models\Show;
-use app\controllers\ShowSearch;
-use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ShowController implements the CRUD actions for Show model.
@@ -58,6 +55,11 @@ class ShowController extends CommonController
         ]);
     }
 
+    /**
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionStudentsView($id)
     {
         $title = Yii::t('app', '{0} :: student member UNIT Factory', $id);
@@ -76,6 +78,12 @@ class ShowController extends CommonController
             'switch' => 'pools',
         ]);
     }
+
+    /**
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionPoolsView($id)
     {
         $title = Yii::t('app', '{0} :: pool member UNIT Factory', $id);
