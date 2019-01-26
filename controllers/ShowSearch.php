@@ -19,7 +19,7 @@ class ShowSearch extends Show
     {
         return [
             [['id', 'xid', 'pool_year', 'kick', 'needupd', 'visible'], 'integer'],
-            [['displayname', 'email', 'location', 'login', 'phone', 'pool_month', 'lastloc'], 'safe'],
+            [['displayname', 'location', 'login', 'phone', 'pool_month', 'pool_year', 'lastloc'], 'safe'],
         ];
     }
 
@@ -45,26 +45,30 @@ class ShowSearch extends Show
         $query = Show::find()
             ->select([
                 'xlogins.*',
-                'cursus_users.level'
+                'cursus_users.*'
             ])
             ->innerJoin('cursus_users','cursus_users.xlogin = xlogins.login')
             ->where([
-                'visible' => 1,
+                'xlogins.visible' => 1,
                 'cursus_users.name' => $course,
                 ]);
 
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+
+            'sort' => [
+                'defaultOrder' => [
+                    'level' => SORT_DESC],
+                'attributes' => [
+                    'level' => [
+                        'asc' => ['level' => SORT_ASC],
+                        'desc' => ['level' => SORT_DESC]
+                    ],
+                ]
+            ]
         ]);
 
-        // Added sort for column from inner join table
-        $dataProvider->sort->attributes += [
-            'level' => [
-                'asc' => ['cursus_users.level' => SORT_ASC],
-                'desc' => ['cursus_users.level' => SORT_DESC]
-            ]
-        ];
         $this->load($params);
 
         if (!$this->validate()) {
@@ -73,13 +77,16 @@ class ShowSearch extends Show
             return $dataProvider;
         }
 
-        // grid filtering conditions [search input]
+        // grid filtering conditions
+
+
         $query->andFilterWhere(['like', 'displayname', $this->displayname])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'login', $this->login])
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'pool_month', $this->pool_month])
-            ->andFilterWhere(['like', 'cursus_users.level', $this->level])
+            ->andFilterWhere(['like', 'pool_year', $this->pool_year])
+            ->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'correction_point', $this->correction_point]);
 
         return $dataProvider;
