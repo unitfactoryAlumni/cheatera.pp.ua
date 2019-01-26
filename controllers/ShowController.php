@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\SkillsHelper;
+use app\helpers\ProjectsHelper;
 use Yii;
 use app\models\Show;
 use yii\web\NotFoundHttpException;
@@ -67,7 +68,7 @@ class ShowController extends CommonController
         $this->setMeta($title, $description);
         $this->course = '42';
         $skills = SkillsHelper::getSkills($id, 1);
-
+        $projects = (new ProjectsHelper)->getProjectsByLogin($id, 1);
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
             'breadcrumbs' => [
@@ -76,6 +77,7 @@ class ShowController extends CommonController
             ],
             'skills' => $skills,
             'switch' => 'pools',
+            '$projects' => $projects
         ]);
     }
 

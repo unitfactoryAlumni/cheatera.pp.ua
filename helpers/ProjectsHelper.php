@@ -9,10 +9,15 @@
 namespace app\helpers;
 
 
+use app\models\ProjectsAll;
+
 class ProjectsHelper
 {
-    public function getProjectsByLogin($login)
+    public function getProjectsByLogin($login, $cursusID)
     {
-//        @TODO add realization after merge with projects branch
-     }
+        $models = new ProjectsAll();
+        $let = $models::find()
+            ->where(['projects_users.xlogin' => 'apakhomo', 'projects_users.cursus_ids' => 1]);
+        return $let;
+    }
 }

@@ -54,957 +54,960 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
         <div class="col-lg-9 mx-auto">
             <div class="card" style="width: 100%;">
                 <div class="card-body">
-
-                    <!--                    @TODO need create user projects methods-->
-
-                    <h5 class="card-title">Projects (validated)</h5>
-                    <div style="max-width: 100%; overflow: auto;">
-                        <table class="table ">
-                            <thead>
-                            <tr>
-                                <th scope="col">name</th>
-                                <th scope="col">final mark</th>
-                                <th scope="col">Retry</th>
-                                <th scope="col">status</th>
-                            </tr>
-                            </thead>
-                            <tbody id="alldata">
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_ssl_des/">ft_ssl_des</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>2</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_ssl_md5/">ft_ssl_md5</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>2</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/kift/">KIFT</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/curriculum-vitae/">Curriculum Vitae</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>2</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/docker-1/">docker-1</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>2</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/42-formation-pole-emploi-42-commandements/">42 Commandements</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/piscine-reloaded/">Piscine Reloaded</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>8</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/cloud-1/">cloud-1</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/init/">init</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/fillit/">Fillit</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/camagru/">Camagru</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:64.8%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/piscine-php/">Piscine PHP</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>81</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/lem_in/">Lem_in</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:97.6%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/filler/">Filler</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>122</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/corewar/">Corewar</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:63.2%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/c-exam-alone-in-the-dark-beginner/">C Exam Alone In The Dark - Beginner</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>79</td>
-                                <td>7</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:75.2%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_printf/">ft_printf</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>94</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/fdf/">FdF</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/get_next_line/">Get_Next_Line</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/libft/">Libft</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>4</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:66.4%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/piscine-cpp/">Piscine CPP</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>83</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/matcha/">Matcha</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:97.6%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/hypertube/">Hypertube</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>122</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr><td colspan="5"><h5 class="card-title">Projects (failed)</h5></td></tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/first-internship/">First Internship</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-
-                            <tr><td colspan="5"><h5 class="card-title">Piscine CPP</h5></td></tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Exam01</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Day 08</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:40%">
-                                            <span style="color:black; text-align:left;">Day 07</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>50</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:48%">
-                                            <span style="color:black; text-align:left;">Day 05</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>60</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Exam00</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Day 04</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="color:black; text-align:left;">Day 03</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:56%">
-                                            <span style="color:black; text-align:left;">Day 02</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>70</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:56%">
-                                            <span style="color:black; text-align:left;">Day 01</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>70</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:58.4%">
-                                            <span style="color:black; text-align:left;">Day 00</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>73</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:96.8%">
-                                            <span style="color:black; text-align:left;">Rush00</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>121</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Rush01</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:52.8%">
-                                            <span style="color:black; text-align:left;">Day 06</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>66</td>
-                                <td>1</td>
-                                <td>finished</td>
-                            </tr>
-
-                            <tr><td colspan="5"><h5 class="card-title">Piscine PHP</h5></td></tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Rush01</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:95.2%">
-                                            <span style="color:black; text-align:left;">Rush00</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>119</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="color:black; text-align:left;">Day 09</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Day 08</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="color:black; text-align:left;">Day 07</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Day 06</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:88%">
-                                            <span style="color:black; text-align:left;">Day 05</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>110</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="color:black; text-align:left;">Day 04</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="color:black; text-align:left;">Day 03</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:48%">
-                                            <span style="color:black; text-align:left;">Day 02</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>60</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:69.6%">
-                                            <span style="color:black; text-align:left;">Day 01</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>87</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:72%">
-                                            <span style="color:black; text-align:left;">Day 00</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>90</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-
-                            <tr><td colspan="5"><h5 class="card-title">Rushes</h5></td></tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Frozen</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Carnifex (LISP)</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:96.8%">
-                                            <span style="color:black; text-align:left;">Mexican Standoff</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>121</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Hotrace</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="color:black; text-align:left;">wong_kar_wai</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="color:black; text-align:left;">LLDB</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">
-                                            <span style="color:black; text-align:left;">AlCu</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>125</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:84%">
-                                            <span style="color:black; text-align:left;">Rage Against The aPi</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>105</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-
-                            <tr><td colspan="5"><h5 class="card-title">First Internship</h5></td></tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">
-                                            <span style="color:black; text-align:left;">Contract Upload</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>100</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:60%">
-                                            <span style="color:black; text-align:left;">Duration</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>75</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Company mid evaluation</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Company final evaluation</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="color:black; text-align:left;">Peer Video</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>finished</td>
-                            </tr>
-                            <tr><td colspan="5"><h5 class="card-title">Projects (in progress)</h5></td></tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_sommelier/">ft_sommelier</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>in_progress</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_ssl_rsa/">ft_ssl_rsa</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>in_progress</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/avaj-launcher/">avaj-launcher</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>in_progress</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/roger-skyline-2/">roger-skyline-2</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>in_progress</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_hangouts/">ft_hangouts</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>in_progress</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/swifty-companion/">Swifty Companion</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>in_progress</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/first-internship/">First Internship</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>in_progress</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/push_swap/">Push_swap</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>in_progress</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/fract-ol/">Fract'ol</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>in_progress</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_ls/">ft_ls</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>in_progress</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/abstract-vm/">Abstract VM</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>in_progress</td>
-                            </tr>
-                            <tr><td colspan="5"><h5 class="card-title">Projects (searching a group)</h5></td></tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ccmn/">CCMN</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>searching_a_group</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/reverse-game-of-life/">Reverse Game of Life</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>searching_a_group</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">
-                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/mod1/">mod1</a></span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>searching_a_group</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                    <pre>
+                        <?php var_dump($projects) ?>
+                    </pre>
+<!---->
+<!--                                   @TODO need create user projects methods -->
+<!---->
+<!--                    <h5 class="card-title">Projects (validated)</h5>-->
+<!--                    <div style="max-width: 100%; overflow: auto;">-->
+<!--                        <table class="table ">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th scope="col">name</th>-->
+<!--                                <th scope="col">final mark</th>-->
+<!--                                <th scope="col">Retry</th>-->
+<!--                                <th scope="col">status</th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody id="alldata">-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_ssl_des/">ft_ssl_des</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>2</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_ssl_md5/">ft_ssl_md5</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>2</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/kift/">KIFT</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/curriculum-vitae/">Curriculum Vitae</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>2</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/docker-1/">docker-1</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>2</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/42-formation-pole-emploi-42-commandements/">42 Commandements</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/piscine-reloaded/">Piscine Reloaded</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>8</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/cloud-1/">cloud-1</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/init/">init</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/fillit/">Fillit</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/camagru/">Camagru</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:64.8%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/piscine-php/">Piscine PHP</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>81</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/lem_in/">Lem_in</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:97.6%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/filler/">Filler</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>122</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/corewar/">Corewar</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:63.2%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/c-exam-alone-in-the-dark-beginner/">C Exam Alone In The Dark - Beginner</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>79</td>-->
+<!--                                <td>7</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:75.2%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_printf/">ft_printf</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>94</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/fdf/">FdF</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/get_next_line/">Get_Next_Line</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/libft/">Libft</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>4</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:66.4%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/piscine-cpp/">Piscine CPP</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>83</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/matcha/">Matcha</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:97.6%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/hypertube/">Hypertube</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>122</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr><td colspan="5"><h5 class="card-title">Projects (failed)</h5></td></tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/first-internship/">First Internship</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!---->
+<!--                            <tr><td colspan="5"><h5 class="card-title">Piscine CPP</h5></td></tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Exam01</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 08</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:40%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 07</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>50</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:48%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 05</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>60</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Exam00</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 04</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 03</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:56%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 02</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>70</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:56%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 01</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>70</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:58.4%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 00</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>73</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:96.8%">-->
+<!--                                            <span style="color:black; text-align:left;">Rush00</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>121</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Rush01</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:52.8%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 06</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>66</td>-->
+<!--                                <td>1</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!---->
+<!--                            <tr><td colspan="5"><h5 class="card-title">Piscine PHP</h5></td></tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Rush01</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:95.2%">-->
+<!--                                            <span style="color:black; text-align:left;">Rush00</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>119</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 09</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 08</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 07</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 06</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:88%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 05</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>110</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 04</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 03</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:48%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 02</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>60</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:69.6%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 01</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>87</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:72%">-->
+<!--                                            <span style="color:black; text-align:left;">Day 00</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>90</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!---->
+<!--                            <tr><td colspan="5"><h5 class="card-title">Rushes</h5></td></tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Frozen</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Carnifex (LISP)</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:96.8%">-->
+<!--                                            <span style="color:black; text-align:left;">Mexican Standoff</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>121</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Hotrace</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="color:black; text-align:left;">wong_kar_wai</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="color:black; text-align:left;">LLDB</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:100%">-->
+<!--                                            <span style="color:black; text-align:left;">AlCu</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>125</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:84%">-->
+<!--                                            <span style="color:black; text-align:left;">Rage Against The aPi</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>105</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!---->
+<!--                            <tr><td colspan="5"><h5 class="card-title">First Internship</h5></td></tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:80%">-->
+<!--                                            <span style="color:black; text-align:left;">Contract Upload</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>100</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-success" role="progressbar" style="width:60%">-->
+<!--                                            <span style="color:black; text-align:left;">Duration</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>75</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Company mid evaluation</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Company final evaluation</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="color:black; text-align:left;">Peer Video</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>finished</td>-->
+<!--                            </tr>-->
+<!--                            <tr><td colspan="5"><h5 class="card-title">Projects (in progress)</h5></td></tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_sommelier/">ft_sommelier</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>in_progress</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_ssl_rsa/">ft_ssl_rsa</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>in_progress</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/avaj-launcher/">avaj-launcher</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>in_progress</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/roger-skyline-2/">roger-skyline-2</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>in_progress</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_hangouts/">ft_hangouts</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>in_progress</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/swifty-companion/">Swifty Companion</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>in_progress</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/first-internship/">First Internship</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>in_progress</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/push_swap/">Push_swap</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>in_progress</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/fract-ol/">Fract'ol</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>in_progress</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ft_ls/">ft_ls</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>in_progress</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/abstract-vm/">Abstract VM</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>in_progress</td>-->
+<!--                            </tr>-->
+<!--                            <tr><td colspan="5"><h5 class="card-title">Projects (searching a group)</h5></td></tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/ccmn/">CCMN</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>searching_a_group</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/reverse-game-of-life/">Reverse Game of Life</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>searching_a_group</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="progress my-shadow">-->
+<!--                                        <div class="progress-bar bg-warning" role="progressbar" style="width:0%">-->
+<!--                                            <span style="text-align:left;"><a style="color:black; " href="/students/projects/mod1/">mod1</a></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>0</td>-->
+<!--                                <td>searching_a_group</td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
             <hr>
-            <div class="card" style="width: 100%;">
-                <div class="card-body">
-                    <!--                    @TODO need create user time in clusters method-->
-                    <h5 class="card-title">Time at cluster</h5>
-                    <canvas id="timer" width="770" height="385" style="display: block; width: 770px; height: 385px;"></canvas>
-                </div>
-            </div>
+<!--            <div class="card" style="width: 100%;">-->
+<!--                <div class="card-body">-->
+<!--                                    @TODO need create user time in clusters method -->
+<!--                    <h5 class="card-title">Time at cluster</h5>-->
+<!--                    <canvas id="timer" width="770" height="385" style="display: block; width: 770px; height: 385px;"></canvas>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
         <div class="col-lg-12 mx-auto">
         </div>
