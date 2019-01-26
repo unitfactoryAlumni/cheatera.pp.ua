@@ -19,7 +19,8 @@ class ShowSearch extends Show
     {
         return [
             [['id', 'xid', 'pool_year', 'kick', 'needupd', 'visible'], 'integer'],
-            [['displayname', 'location', 'login', 'phone', 'pool_month', 'pool_year', 'lastloc'], 'safe'],
+            [['lasthours'], 'number'],
+            [['displayname', 'location', 'login', 'phone', 'pool_month', 'pool_year', 'location', 'lastloc'], 'safe'],
         ];
     }
 
@@ -28,7 +29,6 @@ class ShowSearch extends Show
      */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
@@ -56,17 +56,7 @@ class ShowSearch extends Show
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-
-            'sort' => [
-                'defaultOrder' => [
-                    'level' => SORT_DESC],
-                'attributes' => [
-                    'level' => [
-                        'asc' => ['level' => SORT_ASC],
-                        'desc' => ['level' => SORT_DESC]
-                    ],
-                ]
-            ]
+            'sort' => $this->getSort()
         ]);
 
         $this->load($params);
@@ -77,18 +67,74 @@ class ShowSearch extends Show
             return $dataProvider;
         }
 
-        // grid filtering conditions
-
-
+        // for sort
         $query->andFilterWhere(['like', 'displayname', $this->displayname])
-            ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'login', $this->login])
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'pool_month', $this->pool_month])
             ->andFilterWhere(['like', 'pool_year', $this->pool_year])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'correction_point', $this->correction_point]);
-
+            ->andFilterWhere(['like', 'location', $this->location])
+            ->andFilterWhere(['like', 'lastloc', $this->lastloc]);
         return $dataProvider;
     }
+
+    private function getSort()
+    {
+        return [
+            'defaultOrder' => [
+                'level' => SORT_DESC,
+            ],
+            'attributes' => [
+                'login' => [
+                    'asc' => ['login' => SORT_ASC],
+                    'desc' => ['login' => SORT_DESC],
+                ],
+                'displayname' => [
+                    'asc' => ['displayname' => SORT_ASC],
+                    'desc' => ['displayname' => SORT_DESC],
+                ],
+                'phone' => [
+                    'asc' => ['phone' => SORT_ASC],
+                    'desc' => ['phone' => SORT_DESC],
+                ],
+                'level' => [
+                    'asc' => ['level' => SORT_ASC],
+                    'desc' => ['level' => SORT_DESC],
+                ],
+                'correction_point' => [
+                    'asc' => ['correction_point' => SORT_ASC],
+                    'desc' => ['correction_point' => SORT_DESC],
+                ],
+                'pool_year' => [
+                    'asc' => ['pool_year' => SORT_ASC],
+                    'desc' => ['pool_year' => SORT_DESC],
+                ],
+                'pool_month' => [
+                    'asc' => ['pool_month' => SORT_ASC],
+                    'desc' => ['pool_month' => SORT_DESC],
+                ],
+                'location' => [
+                    'asc' => ['location' => SORT_ASC],
+                    'desc' => ['location' => SORT_DESC],
+                ],
+                'lastloc' => [
+                    'asc' => ['lastloc' => SORT_ASC],
+                    'desc' => ['lastloc' => SORT_DESC],
+                ],
+                'wallet' => [
+                    'asc' => ['wallet' => SORT_ASC],
+                    'desc' => ['wallet' => SORT_DESC],
+                ],
+                'howach' => [
+                    'asc' => ['howach' => SORT_ASC],
+                    'desc' => ['howach' => SORT_DESC],
+                ],
+                'hours' => [
+                    'asc' => ['hours' => SORT_ASC],
+                    'desc' => ['hours' => SORT_DESC],
+                ]
+            ]
+        ];
+    }
+
 }

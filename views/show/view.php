@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
 \yii\web\YiiAsset::register($this);
 ?>
 
-<div class="container xlogin">
     <div class="row"> <div class="col-lg-12 mx-auto">
             <div class="progress my-shadow" style="margin: 0.75rem auto ;">
                 <div class="progress-bar progress-bar-<?= ViewHelper::getLevelColorClass($model['level'])?> progress-bar-striped active" role="progressbar" style="width: <?= ViewHelper::getProgress($model['level'])?>%"><?= $model['level'] ?></div>
@@ -1010,4 +1009,3 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
         <div class="col-lg-12 mx-auto">
         </div>
     </div>
-</div>
