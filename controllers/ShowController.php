@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\SkillsHelper;
-use app\helpers\ProjectsHelper;
+use app\models\ProjectsAll;
 use Yii;
 use app\models\Show;
 use yii\web\NotFoundHttpException;
@@ -68,7 +68,7 @@ class ShowController extends CommonController
         $this->setMeta($title, $description);
         $this->course = '42';
         $skills = SkillsHelper::getSkills($id, 1);
-        $projects = (new ProjectsHelper)->getProjectsByLogin($id, 1);
+        $projects = $this->findProjectsLoginModel($id, 1);
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
             'breadcrumbs' => [
@@ -77,7 +77,7 @@ class ShowController extends CommonController
             ],
             'skills' => $skills,
             'switch' => 'pools',
-            '$projects' => $projects
+            'projects' => $projects
         ]);
     }
 
@@ -93,6 +93,7 @@ class ShowController extends CommonController
         $this->setMeta($title, $description);
         $this->course = 'Piscine C';
         $skills = SkillsHelper::getSkills($id, 4);
+        $projects = $this->findProjectsLoginModel($id, 4);
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -102,6 +103,7 @@ class ShowController extends CommonController
             ],
             'skills' => $skills,
             'switch' => 'students',
+            'projects' => $projects
         ]);
     }
 
@@ -130,15 +132,17 @@ class ShowController extends CommonController
      * Finds the Show model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Show the loaded model
+     * @return array|\yii\db\ActiveRecord[]
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findProjectsLoginModel($id, $course)
     {
-        if (($model = Show::findOne($id)) !== null) {
+        if (($model = ProjectsAll::find()
+                ->where(['xlogin' => $id, 'cursus_ids' => $course])
+                ->all()) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
