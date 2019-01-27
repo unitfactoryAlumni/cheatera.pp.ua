@@ -41,16 +41,16 @@ class ViewHelper
      * @param $course
      * @return float|int
      */
-    public static function getProgressProjectColor($mark, $course)
+    public static function getProgressProjectColor($mark, $course, $status)
     {
         $min = ($course == 1) ? 49 : 24;
         if ($mark == 0) {
-            return 'warning';
+            return $status === 'finished' ? 'danger' : 'warning';
         }
         if ($mark > $min) {
             return 'success';
         }
-        return 'danger';
+        return $status === 'finished' ? 'danger' : 'warning';
     }
 
     /**
