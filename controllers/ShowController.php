@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\helpers\SkillsHelper;
 use app\models\ProjectsAll;
+use app\models\ProjectsLogin;
 use Yii;
 use app\models\Show;
 use yii\web\NotFoundHttpException;
@@ -77,7 +78,9 @@ class ShowController extends CommonController
             ],
             'skills' => $skills,
             'switch' => 'pools',
-            'projects' => $projects
+            'urlHelperForProjects' => '/students/projects/',
+            'projects' => $projects['common'],
+            'parents' => $projects['parents']
         ]);
     }
 
@@ -103,7 +106,9 @@ class ShowController extends CommonController
             ],
             'skills' => $skills,
             'switch' => 'students',
-            'projects' => $projects
+            'urlHelperForProjects' => '/pools/projects/',
+            'projects' => $projects['common'],
+            'parents' => $projects['parents']
         ]);
     }
 
@@ -137,12 +142,41 @@ class ShowController extends CommonController
      */
     protected function findProjectsLoginModel($id, $course)
     {
-        if (($model = ProjectsAll::find()
+        if (($model = ProjectsLogin::find()
                 ->where(['xlogin' => $id, 'cursus_ids' => $course])
+                ->orderBy('puid asc, final_mark desc')
                 ->all()) !== null) {
-            return $model;
+            return $this->sortedProjects($model);
         }
 
-            throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    private function sortedProjects(array $models)
+    {
+        $result = [];
+        $copyModels = $models;
+        foreach ($models as $model) {
+            if ($model->parent_id === 0) {
+                $result[] = $model;
+            } else {
+                $result['withParent'][$this->getProjectNameByID($model->parent_id, $copyModels)][] = $model;
+            }
+        }
+        $parents = $result['withParent'];
+        unset($result['withParent']);
+        return ['common' => $result, 'parents' => $parents];
+    }
+
+    private function getProjectNameByID($parent, array $models)
+    {
+        foreach ($models as $model) {
+            if ($parent == $model->project_id) {
+                return $model->name;
+            }
+        }
+        return 'no name';
+    }
+
+
 }
