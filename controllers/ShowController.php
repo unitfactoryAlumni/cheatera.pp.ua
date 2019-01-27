@@ -80,7 +80,8 @@ class ShowController extends CommonController
             'switch' => 'pools',
             'urlHelperForProjects' => '/students/projects/',
             'projects' => $projects['common'],
-            'parents' => $projects['parents']
+            'parents' => $projects['parents'],
+            'course' => 1,
         ]);
     }
 
@@ -108,7 +109,8 @@ class ShowController extends CommonController
             'switch' => 'students',
             'urlHelperForProjects' => '/pools/projects/',
             'projects' => $projects['common'],
-            'parents' => $projects['parents']
+            'parents' => $projects['parents'],
+            'course' => 4,
         ]);
     }
 

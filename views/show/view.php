@@ -66,11 +66,12 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                             </tr>
                             </thead>
                             <tbody id="alldata">
+
                     <?php if (isset($projects)) { foreach ($projects as $item) { ?>
                             <tr>
                                 <td>
                                     <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:<?= ViewHelper::getProgressProject($item->final_mark)?>%">
+                                        <div class="progress-bar progress-bar-<?= ViewHelper::getProgressProjectColor($item->final_mark, $course)?>" role="progressbar" style="width:<?= ViewHelper::getProgressProject($item->final_mark, $course)?>%">
                                             <span style="text-align:left;"><a style="color:black; " href="<?= $urlHelperForProjects ?><?= $item->slug ?>"><?= $item->name ?></a></span>
                                         </div>
                                     </div>
@@ -85,7 +86,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                             <tr>
                                 <td>
                                     <div class="progress my-shadow">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:<?= ViewHelper::getProgressProject($item->final_mark)?>%">
+                                        <div class="progress-bar progress-bar-<?= ViewHelper::getProgressProjectColor($item->final_mark, $course)?>" role="progressbar" style="width:<?= ViewHelper::getProgressProject($item->final_mark, $course)?>%">
                                             <span style="text-align:left;"><a style="color:black; " href="<?= $urlHelperForProjects ?><?= $item->slug ?>"><?= $item->name ?></a></span>
                                         </div>
                                     </div>

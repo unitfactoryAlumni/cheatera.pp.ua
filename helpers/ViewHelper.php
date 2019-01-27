@@ -26,11 +26,31 @@ class ViewHelper
      * Project progress in percent
      *
      * @param $mark
+     * @param $course
      * @return float|int
      */
-    public static function getProgressProject($mark)
+    public static function getProgressProject($mark, $course)
     {
-        return $mark > 49 ? $mark/(125/100) : 100;
+        return $mark > (($course == 1) ? 49 : 24) ? $mark/(125/100) : 100;
+    }
+
+    /**
+     * Project progress in color
+     *
+     * @param $mark
+     * @param $course
+     * @return float|int
+     */
+    public static function getProgressProjectColor($mark, $course)
+    {
+        $min = ($course == 1) ? 49 : 24;
+        if ($mark == 0) {
+            return 'warning';
+        }
+        if ($mark > $min) {
+            return 'success';
+        }
+        return 'danger';
     }
 
     /**
