@@ -23,6 +23,17 @@ class ViewHelper
     }
 
     /**
+     * Project progress in percent
+     *
+     * @param $mark
+     * @return float|int
+     */
+    public static function getProgressProject($mark)
+    {
+        return $mark > 49 ? $mark/(125/100) : 100;
+    }
+
+    /**
      * Get class by level
      *
      * @param $level

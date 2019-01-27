@@ -20,10 +20,17 @@ return [
     '{0} :: pool member UNIT Factory' => '',
     'Full information about {0} from UNIT Factory' => '',
 
-    // views/show/index.php
-
-    // views/show/view.php
-
     // models/Show.php
-    'Month' => '',
+    'Month' => 'Месяц',
+
+    // models/Projects
+    'project' => '',
+    'final mark (AVG)' => '',
+    'validated' => '',
+    'finished' => '',
+    'failed' => '',
+    'wait correction' => '',
+    'in progress' => '',
+    'search group' => '',
+    'created' => '',
 ];

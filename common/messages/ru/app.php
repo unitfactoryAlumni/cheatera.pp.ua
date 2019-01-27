@@ -28,6 +28,44 @@ return [
 
     // models/Show.php
     'Month' => 'Месяц',
+    'CP' => '',
+    'Name' => '',
+    'Email' => '',
+    'Host' => '',
+    'Login' => '',
+    'Phone' => '',
+    'Year' => '',
+    'Wallet' => '',
+    'Achiv' => '',
+    'Last login' => '',
+    'Hours' => '',
+    'Level' => '',
+    'grade' => '',
+
+    // Project Controllers
+    'Students projects UNIT Factory' => '',
+    'Full information about students projects from UNIT Factory' => '',
+    'Pools projects UNIT Factory' => '',
+    'Full information about pools projects from UNIT Factory' => '',
+    '{0} :: students project UNIT Factory' => '',
+
+    // models/Projects
+    'project' => '',
+    'final mark (AVG)' => '',
+    'validated' => '',
+    'finished' => '',
+    'failed' => '',
+    'wait correction' => '',
+    'in progress' => '',
+    'search group' => '',
+    'created' => '',
+
+    //models/ProjectsAll
+    'Xlogin' =>  '',
+    'Final Mark' => '',
+    'Retry' => '',
+    'Status' => '',
+    'Validated' => '',
 
     // models/Achievements.php
     'Xlogin' => '',

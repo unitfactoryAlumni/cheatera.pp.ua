@@ -36,6 +36,7 @@ class Show extends \yii\db\ActiveRecord
     public $level;
 
     public $grade;
+
     public $cursus_id;
 
     public $link;
@@ -69,31 +70,31 @@ class Show extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'correction_point' => 'CP',
-            'displayname' => 'Name',
-            'email' => 'Email',
-            'first_name' => 'First Name',
-            'xid' => 'Xid',
-            'image_url' => '',
-            'last_name' => 'Last Name',
-            'location' => 'Host',
-            'login' => 'Login',
-            'phone' => 'Phone',
             'pool_month' => Yii::t('app', 'Month'),
-            'pool_year' => 'Year',
-            'staff' => 'Staff',
-            'url' => 'Url',
-            'wallet' => 'Wallet',
-            'howach' => 'Achiv',
-            'kick' => 'Kick',
-            'lastloc' => 'Last login',
-            'needupd' => 'Needupd',
-            'hours' => 'Hours',
-            'visible' => 'Visible',
-            'level' => 'lvl',
-            'link' => '',
-            'grade' => 'grade'
+            'id' => Yii::t('app', 'ID'),
+            'correction_point' => Yii::t('app', 'CP'),
+            'displayname' => Yii::t('app', 'Name'),
+            'email' => Yii::t('app', 'Email'),
+            'first_name' => Yii::t('app', 'First Name'),
+            'xid' => Yii::t('app', 'Xid'),
+            'image_url' => Yii::t('app', ''),
+            'last_name' => Yii::t('app', 'Last Name'),
+            'location' => Yii::t('app', 'Host'),
+            'login' => Yii::t('app', 'Login'),
+            'phone' => Yii::t('app', 'Phone'),
+            'pool_year' => Yii::t('app', 'Year'),
+            'staff' => Yii::t('app', 'Staff'),
+            'url' => Yii::t('app', 'Url'),
+            'wallet' => Yii::t('app', 'Wallet'),
+            'howach' => Yii::t('app', 'Achiv'),
+            'kick' => Yii::t('app', 'Kick'),
+            'lastloc' => Yii::t('app', 'Last login'),
+            'needupd' => Yii::t('app', 'Needupd'),
+            'hours' => Yii::t('app', 'Hours'),
+            'visible' => Yii::t('app', 'Visible'),
+            'level' => Yii::t('app', 'Level'),
+            'link' => Yii::t('app', ''),
+            'grade' => Yii::t('app', 'grade')
         ];
     }
 }
