@@ -29,6 +29,11 @@ REQUIREMENTS
 The minimum requirement by this project template that your Web server supports PHP 7.2.0.
 
 
+DEVELOP TEAM CHAT
+-----------------
+
+Please write in telegram @omentes for add you to develop chat
+
 INSTALLATION
 ------------
 
