@@ -3,12 +3,11 @@
 namespace app\controllers;
 
 use app\helpers\SkillsHelper;
+use app\models\ProjectsAll;
+use app\models\ProjectsLogin;
 use Yii;
 use app\models\Show;
-use app\controllers\ShowSearch;
-use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ShowController implements the CRUD actions for Show model.
@@ -23,10 +22,9 @@ class ShowController extends CommonController
      */
     public function actionStudents()
     {
-        $this->setMeta(
-            Yii::t('app', 'Students UNIT Factory'),
-            Yii::t('app', 'All student members UNIT Factory')
-        );
+        $title = Yii::t('app', 'Students UNIT Factory');
+        $description = Yii::t('app','All student members UNIT Factory');
+        $this->setMeta($title, $description);
         $this->course = '42';
         $searchModel = new ShowSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->course);
@@ -44,10 +42,9 @@ class ShowController extends CommonController
      */
     public function actionPools()
     {
-        $this->setMeta(
-            Yii::t('app', 'Pools UNIT Factory'),
-            Yii::t('app', 'All pool members UNIT Factory')
-        );
+        $title = Yii::t('app', 'Pools UNIT Factory');
+        $description = Yii::t('app','All pool members UNIT Factory');
+        $this->setMeta($title, $description);
         $this->course = 'Piscine C';
 
         $searchModel = new ShowSearch();
@@ -60,6 +57,11 @@ class ShowController extends CommonController
         ]);
     }
 
+    /**
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionStudentsView($id)
     {
         $title = Yii::t('app', '{0} :: student member UNIT Factory', $id);
@@ -67,24 +69,34 @@ class ShowController extends CommonController
         $this->setMeta($title, $description);
         $this->course = '42';
         $skills = SkillsHelper::getSkills($id, 1);
-
+        $projects = $this->findProjectsLoginModel($id, 1);
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Students'),
                 'url' => 'show/students'
             ],
-            'skills' => $skills
+            'skills' => $skills,
+            'switch' => 'pools',
+            'urlHelperForProjects' => '/students/projects/',
+            'projects' => $projects['common'],
+            'parents' => $projects['parents']
         ]);
     }
+
+    /**
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionPoolsView($id)
     {
-        $this->setMeta(
-            Yii::t('app', '{0} :: pool member UNIT Factory', $id),
-            Yii::t('app', 'Full information about {0} from UNIT Factory', $id)
-        );
+        $title = Yii::t('app', '{0} :: pool member UNIT Factory', $id);
+        $description = Yii::t('app','Full information about {0} from UNIT Factory', $id);
+        $this->setMeta($title, $description);
         $this->course = 'Piscine C';
         $skills = SkillsHelper::getSkills($id, 4);
+        $projects = $this->findProjectsLoginModel($id, 4);
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -92,10 +104,19 @@ class ShowController extends CommonController
                 'name' => Yii::t('app', 'Pools'),
                 'url' => 'show/pools'
             ],
-            'skills' => $skills
+            'skills' => $skills,
+            'switch' => 'students',
+            'urlHelperForProjects' => '/pools/projects/',
+            'projects' => $projects['common'],
+            'parents' => $projects['parents']
         ]);
     }
 
+    /**
+     * @param $id
+     * @return array|\yii\db\ActiveRecord|null
+     * @throws NotFoundHttpException
+     */
     protected function findModelLogin($id)
     {
         if (($model = Show::find()
@@ -116,15 +137,46 @@ class ShowController extends CommonController
      * Finds the Show model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Show the loaded model
+     * @return array|\yii\db\ActiveRecord[]
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findProjectsLoginModel($id, $course)
     {
-        if (($model = Show::findOne($id)) !== null) {
-            return $model;
+        if (($model = ProjectsLogin::find()
+                ->where(['xlogin' => $id, 'cursus_ids' => $course])
+                ->orderBy('puid asc, final_mark desc')
+                ->all()) !== null) {
+            return $this->sortedProjects($model);
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    private function sortedProjects(array $models)
+    {
+        $result = [];
+        $copyModels = $models;
+        foreach ($models as $model) {
+            if ($model->parent_id === 0) {
+                $result[] = $model;
+            } else {
+                $result['withParent'][$this->getProjectNameByID($model->parent_id, $copyModels)][] = $model;
+            }
+        }
+        $parents = $result['withParent'];
+        unset($result['withParent']);
+        return ['common' => $result, 'parents' => $parents];
+    }
+
+    private function getProjectNameByID($parent, array $models)
+    {
+        foreach ($models as $model) {
+            if ($parent == $model->project_id) {
+                return $model->name;
+            }
+        }
+        return 'no name';
+    }
+
+
 }
