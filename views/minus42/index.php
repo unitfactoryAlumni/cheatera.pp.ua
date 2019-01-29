@@ -19,12 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'xlogin',
-            'puid',
-            'updated_at',
-
+            'name',
         ],
     ]); ?>
     <?php Pjax::end(); ?>

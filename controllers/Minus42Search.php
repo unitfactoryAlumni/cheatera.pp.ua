@@ -2,23 +2,35 @@
 
 namespace app\controllers;
 
+use app\models\ProjectsAll;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Minus42;
 
 /**
  * Minus42Search represents the model behind the search form of `app\models\Minus42`.
  */
-class Minus42Search extends Minus42
+class Minus42Search extends ProjectsAll
 {
+    protected $course;
+
+    /**
+     * Minus42Search constructor.
+     * @param $searchCourse
+     */
+    public function __construct($searchCourse)
+    {
+        $this->course = $searchCourse;
+        parent::__construct();
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'puid'], 'integer'],
-            [['xlogin', 'updated_at'], 'safe'],
+            [['id', 'current_team_id', 'cursus_ids', 'final_mark', 'puid', 'occurrence', 'project_id', 'parent_id'], 'integer'],
+            [['xlogin', 'name', 'slug', 'status', 'validated'], 'safe'],
         ];
     }
 
@@ -40,7 +52,15 @@ class Minus42Search extends Minus42
      */
     public function search($params)
     {
-        $query = Minus42::find();
+        $query = ProjectsAll::find()
+            ->select([
+                'projects_users.*',
+            ])
+            ->where([
+                'cursus_ids' => $this->course,
+            ])
+            ->andWhere('final_mark < 0')
+        ;
 
         // add conditions that should always apply here
 
@@ -60,7 +80,7 @@ class Minus42Search extends Minus42
         $query->andFilterWhere([
             'id' => $this->id,
             'puid' => $this->puid,
-            'updated_at' => $this->updated_at,
+            'name' => $this->name,
         ]);
 
         $query->andFilterWhere(['like', 'xlogin', $this->xlogin]);

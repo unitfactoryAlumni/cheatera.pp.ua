@@ -22,7 +22,7 @@ class Minus42Controller extends CommonController
         $title = Yii::t('app', 'Cheating students members at UNIT Factory');
         $description = Yii::t('app','Full information about cheating from student members at UNIT Factory');
         $this->setMeta($title, $description);
-        $searchModel = new Minus42Search();
+        $searchModel = new Minus42Search(1);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -44,7 +44,7 @@ class Minus42Controller extends CommonController
         $title = Yii::t('app', 'Cheating pools members at UNIT Factory');
         $description = Yii::t('app','Full information about cheating from pool members at UNIT Factory');
         $this->setMeta($title, $description);
-        $searchModel = new Minus42Search();
+        $searchModel = new Minus42Search(4);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
