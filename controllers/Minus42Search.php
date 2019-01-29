@@ -55,10 +55,9 @@ class Minus42Search extends ProjectsAll
         $query = ProjectsAll::find()
             ->select([
                 'projects_users.*',
+                'xlogins.*',
             ])
-            ->where([
-                'cursus_ids' => $this->course,
-            ])
+            ->innerJoin('xlogins','projects_users.xlogin = xlogins.login')
             ->andWhere('final_mark < 0')
         ;
 
@@ -66,6 +65,7 @@ class Minus42Search extends ProjectsAll
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => $this->getSort(),
         ]);
 
         $this->load($params);
@@ -87,4 +87,51 @@ class Minus42Search extends ProjectsAll
 
         return $dataProvider;
     }
+
+
+    private function getSort()
+    {
+        return [
+            'defaultOrder' => ['puid' => SORT_DESC],
+            'attributes' => [
+                'name' => [
+                    'asc' => ['name' => SORT_ASC],
+                    'desc' => ['name' => SORT_DESC],
+                ],
+                'puid' => [
+                    'asc' => ['puid' => SORT_ASC],
+                    'desc' => ['puid' => SORT_DESC],
+                ],
+                'displayname' => [
+                    'asc' => ['displayname' => SORT_ASC],
+                    'desc' => ['displayname' => SORT_DESC],
+                ],
+                'level' => [
+                    'asc' => ['level' => SORT_ASC],
+                    'desc' => ['level' => SORT_DESC],
+                ],
+                'pool_year' => [
+                    'asc' => ['pool_year' => SORT_ASC],
+                    'desc' => ['pool_year' => SORT_DESC],
+                ],
+                'pool_month' => [
+                    'asc' => ['pool_month' => SORT_ASC],
+                    'desc' => ['pool_month' => SORT_DESC],
+                ],
+                'location' => [
+                    'asc' => ['location' => SORT_ASC],
+                    'desc' => ['location' => SORT_DESC],
+                ],
+                'lastloc' => [
+                    'asc' => ['lastloc' => SORT_ASC],
+                    'desc' => ['lastloc' => SORT_DESC],
+                ],
+                'final_mark' => [
+                    'asc' => ['final_mark' => SORT_ASC],
+                    'desc' => ['final_mark' => SORT_DESC],
+                ]
+            ]
+        ];
+    }
+
 }

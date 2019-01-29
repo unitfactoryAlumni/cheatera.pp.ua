@@ -8,6 +8,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 
+$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="minus42-index">
@@ -20,7 +21,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'xlogin',
+            [
+                'label' => 'to user',
+                'format' => 'raw',
+                'attribute' => '',
+                'value'  => function ($data) use ($subPage) {
+                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),"/$subPage/" . $data['xlogin']);
+                },
+            ],
             'name',
+            [
+                'label' => 'to project',
+                'format' => 'raw',
+                'attribute' => '',
+                'value'  => function ($data) use ($subPage) {
+                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),"/$subPage/projects/" . $data['slug']);
+                },
+            ],
+            'final_mark',
+            'pool_year',
+            'pool_month',
         ],
     ]); ?>
     <?php Pjax::end(); ?>

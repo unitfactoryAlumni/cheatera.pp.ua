@@ -28,6 +28,7 @@ class Minus42Controller extends CommonController
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'subPage' => 'students',
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Students'),
                 'url' => 'show/students'
@@ -50,6 +51,11 @@ class Minus42Controller extends CommonController
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'subPage' => 'pools',
+            'breadcrumbs' => [
+                'name' => Yii::t('app', 'Pools'),
+                'url' => 'show/pools'
+            ],
         ]);
     }
 }
