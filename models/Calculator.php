@@ -60,11 +60,35 @@ class Calculator extends Model
     ];
     private $_post;
 
+    public $lvlstart;
+    public $tier;
+    public $finalmark;
 
-    public function __constructor($post)
+
+    /**
+     * @return array the validation rules.
+     */
+    public function rules()
     {
-        $_post = $post;
+        return [
+            [['lvlstart', 'tier', 'finalmark'], 'required'],
+            ['lvlstart', 'number', 'min' => 0, 'max' => 42],
+            ['finalmark', 'number', 'min' => 0, 'max' => 125]
+        ];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'lvlstart' => '',
+            'tier' => '',
+            'finalmark' => '',
+        ];
+    }
+
 
     /**
     * Do all magic ie counts the particular lvl up value from parameters.
@@ -83,12 +107,12 @@ class Calculator extends Model
         // $tier_exps["6"] = $tier_exps["0"] * 42.5;
         // $tier_exps["7"] = $tier_exps["0"] * 60;
 
-        return 13;
+        return $this->finalmark = 13;
 
         if ($this->_post['lvlstart'] < 30)
         {
-            $lvlstart = (int)$this->_post['lvlstart'];
-            $per = $this->_post['lvlstart'] - $lvlstart;
+            // $lvlstart = (int)$this->_post['lvlstart'];
+            $per = $lvlstart - $lvlstart;
             $result = $this->_expr_per_tier[$this->_post['tier']] * $this->_post['finalmark']
             + $this->_expr_per_lvl[$lvlstart] + (($this->_expr_per_lvl[$lvlstart + 1]
             - $this->_expr_per_lvl[$lvlstart]) * $per);
@@ -103,34 +127,5 @@ class Calculator extends Model
         $ts = (($result - $this->_expr_per_lvl[$i]) / $ts ) / 100;
         $ts += $i;
         return $ts;
-    }
-
-
-    public $lvlstart;
-    public $tier;
-    public $finalmark;
-
-    /**
-     * @return array the validation rules.
-     */
-    public function rules()
-    {
-        return [
-            [['lvlstart', 'tier', 'finalmark'], 'required'],
-            ['lvlstart', 'integer', 'min' => 0, 'max' => 42],
-            ['finalmark', 'integer', 'min' => 0, 'max' => 125]
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'lvlstart' => '',
-            'tier' => '',
-            'finalmark' => '',
-        ];
     }
 }

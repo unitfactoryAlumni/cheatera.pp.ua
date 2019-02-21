@@ -89,7 +89,7 @@ $config = [
                 'pools/<id:\w+>' => 'show/pools-view',
                 'students' => 'show/students',
                 'pools' => 'show/pools',
-                'calculator' => 'calculator',
+                'calc' => 'calculator',
             ],
         ],
     ],
