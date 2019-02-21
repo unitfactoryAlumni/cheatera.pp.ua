@@ -65,6 +65,7 @@ AppAsset::register($this);
                         ['label' => Yii::t('app', 'Cheating'), 'url' => ['/pools/cheating']],
                     ],
             ],
+           ['label' => 'Calculator', 'url' => ['/calculator']],
 //            ['label' => 'Home', 'url' => ['/site/index']],
 //            ['label' => 'About', 'url' => ['/site/about']],
 //            ['label' => 'Contact', 'url' => ['/site/contact']],
