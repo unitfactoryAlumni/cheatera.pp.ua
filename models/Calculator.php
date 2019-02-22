@@ -2,19 +2,18 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 
 /**
- * Calculator is the model behind the expr calculator controller.
+ * Calculator is the model behind the Calculator controller.
  *
- * @property Post $_post array copy
- * @property Coefs $_expr_per_lvl read-only array with coeficents to each level point earnings
+ * @property array $_expr_per_lvl read-only array with coeficents to each level point earnings
+ * @property array $_expr_per_tier read-only array with coeficents to each level of complexity
  */
 
 class Calculator extends Model
 {
-    private $_expr_per_lvl = [
+    static private $_expr_per_lvl = [
         0,
         1000,
         2136.3636363636365,
@@ -48,7 +47,7 @@ class Calculator extends Model
         332152.19170968,
         -1
     ];
-    private $_expr_per_tier = [
+    static private $_expr_per_tier = [
         2.2,
         8.8330,
         20.02,
@@ -58,12 +57,17 @@ class Calculator extends Model
         93.50,
         132
     ];
-    private $_post;
 
+    public $result;
     public $lvlstart;
     public $tier;
     public $finalmark;
 
+
+    function __construct()
+    {
+        $this->result = 0;
+    }
 
     /**
      * @return array the validation rules.
@@ -72,7 +76,7 @@ class Calculator extends Model
     {
         return [
             [['lvlstart', 'tier', 'finalmark'], 'required'],
-            ['lvlstart', 'number', 'min' => 0, 'max' => 42],
+            ['lvlstart', 'number', 'min' => 0, 'max' => count(self::$_expr_per_lvl) - 2],
             ['finalmark', 'number', 'min' => 0, 'max' => 125]
         ];
     }
@@ -89,12 +93,10 @@ class Calculator extends Model
         ];
     }
 
-
     /**
     * Do all magic ie counts the particular lvl up value from parameters.
     *
-    * @param array $post the _POST array
-    * @return number lvl up value for given args
+    * @return float lvl up value for given args
     */
     public function getMark()
     {
@@ -107,25 +109,42 @@ class Calculator extends Model
         // $tier_exps["6"] = $tier_exps["0"] * 42.5;
         // $tier_exps["7"] = $tier_exps["0"] * 60;
 
-        return $this->finalmark = 13;
+        $multiplicator = $this->lvlstart;
+        $result = self::$_expr_per_tier[$this->tier] * $this->finalmark
+        + self::$_expr_per_lvl[$this->lvlstart] + ((self::$_expr_per_lvl[$this->lvlstart + 1]
+        - self::$_expr_per_lvl[$this->lvlstart]) * $multiplicator);
 
-        if ($this->_post['lvlstart'] < 30)
-        {
-            // $lvlstart = (int)$this->_post['lvlstart'];
-            $per = $lvlstart - $lvlstart;
-            $result = $this->_expr_per_tier[$this->_post['tier']] * $this->_post['finalmark']
-            + $this->_expr_per_lvl[$lvlstart] + (($this->_expr_per_lvl[$lvlstart + 1]
-            - $this->_expr_per_lvl[$lvlstart]) * $per);
-        }
         for ($i = 0; $i < 30; $i++) {
-            if ($this->_expr_per_lvl[$i] > $result) {
+            if (self::$_expr_per_lvl[$i] > $result) {
                 --$i;
                 break ;
             }
         }
-        $ts = ($this->_expr_per_lvl[$i + 1] - $this->_expr_per_lvl[$i]) / 100;
-        $ts = (($result - $this->_expr_per_lvl[$i]) / $ts ) / 100;
-        $ts += $i;
-        return $ts;
+
+        $ret = (self::$_expr_per_lvl[$i + 1] - self::$_expr_per_lvl[$i]) / 100;
+        $ret = (($result - self::$_expr_per_lvl[$i]) / $ret ) / 100;
+        $ret += $i;
+
+        return $this->result = $result;
+
+        // if ($this->_post['lvlstart'] < 30)
+        // {
+        //     $lvlstart = (int)$this->_post['lvlstart'];
+        //     $per = $this->_post['lvlstart'] - $lvlstart;
+        //     $result = $this->_expr_per_tier[$this->_post['tier']] * $this->_post['finalmark']
+        //     + $this->_expr_per_lvl[$lvlstart] + (($this->_expr_per_lvl[$lvlstart + 1]
+        //     - $this->_expr_per_lvl[$lvlstart]) * $per);
+        // }
+        // for ($i = 0; $i < 30; $i++) {
+        //     if ($this->_expr_per_lvl[$i] > $result) {
+        //         --$i;
+        //         break ;
+        //     }
+        // }
+        // $ts = ($this->_expr_per_lvl[$i + 1] - $this->_expr_per_lvl[$i]) / 100;
+        // $ts = (($result - $this->_expr_per_lvl[$i]) / $ts ) / 100;
+        // $ts += $i;
+        // return $ts;
+
     }
 }

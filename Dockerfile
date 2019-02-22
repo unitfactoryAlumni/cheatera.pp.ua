@@ -1,6 +1,5 @@
 FROM php:7.2-apache
 
-
 WORKDIR /var/www/html
 
 # Install required packages and PHP modules
@@ -16,7 +15,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 #RUN docker-php-ext-enable xdebug
 
 # Other PHP7 Extensions
-
 RUN apt-get -y install libmcrypt-dev
 
 RUN apt-get -y install libsqlite3-dev libsqlite3-0 mysql-client
@@ -45,21 +43,22 @@ RUN apt-get -y install wget
 
 # Install phpunit
 RUN wget https://phar.phpunit.de/phpunit-6.0.phar && \
-        chmod +x phpunit-6.0.phar && \
-        mv phpunit-6.0.phar /usr/local/bin/phpunit
+    chmod +x phpunit-6.0.phar && \
+    mv phpunit-6.0.phar /usr/local/bin/phpunit
 
 
 # Install codecept
 RUN wget http://codeception.com/codecept.phar && \
-        chmod +x codecept.phar && \
-        mv codecept.phar /usr/local/bin/codecept
+    chmod +x codecept.phar && \
+    mv codecept.phar /usr/local/bin/codecept
 
 RUN a2enmod rewrite
+
 #Update apache2.conf
 RUN sed -i 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/web#' /etc/apache2/apache2.conf
 
-    # Fix write permissions with shared folders
-    RUN  usermod -u 1000 www-data
+# Fix write permissions with shared folders
+RUN usermod -u 1000 www-data
 
 # We first install any composer packages outside of the web root to prevent them
 # from being overwritten by the COPY below. If the composer.lock file here didn't
@@ -67,7 +66,7 @@ RUN sed -i 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/web#' /etc/a
 COPY composer.json /var/www/html/
 COPY composer.lock /var/www/html/
 RUN composer self-update
-RUN  composer install 
+RUN composer install 
 
 # Finally copy the working dir to the image's web root
 COPY . /var/www/html
