@@ -5,6 +5,7 @@
 /* @var $model app\models\Calculator */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
 ?>
@@ -54,7 +55,7 @@ use yii\bootstrap\ActiveForm;
     <?php ActiveForm::end(); ?>
 
     <div style="color:#999">
-        Расчеты любезно предоставлены <?= Html::a('vpaladii', 'https://profile.intra.42.fr/users/vpaladii') ?>
+        Расчеты любезно предоставлены <?= Html::a('vpaladii', Url::toRoute('students/vpaladii', true)) ?>
         Погрешности от <code>0.01</code> до <code>0.2</code> (magic Intra, magic!)
     </div>
 </div>
