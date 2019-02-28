@@ -39,6 +39,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+            ['label' => 'Add issue', 'url' => ['https://github.com/omentes/cheatera.pp.ua/issues/new/choose']],
             [
                     'label' => Yii::$app->getRequest()->getUserIP(),
                     'items' => [
