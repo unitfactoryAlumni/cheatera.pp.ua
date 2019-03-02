@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, ' ');
                 'format' => 'raw',
                 'attribute' => '',
                 'value'  => function ($data) use ($pageName) {
-                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),"/$pageName/" . $data['xlogin']);
+                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),'/'. Yii::$app->language . "/$pageName/" . $data['xlogin']);
                 },
             ],
             'final_mark',

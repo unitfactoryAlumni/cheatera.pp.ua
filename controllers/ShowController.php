@@ -165,7 +165,7 @@ class ShowController extends CommonController
                 $result['withParent'][$this->getProjectNameByID($model->parent_id, $copyModels)][] = $model;
             }
         }
-        $parents = $result['withParent'];
+        $parents = isset($result['withParent']) ? $result['withParent'] : [];
         unset($result['withParent']);
         return ['common' => $result, 'parents' => $parents];
     }
