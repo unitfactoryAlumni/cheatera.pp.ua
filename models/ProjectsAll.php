@@ -25,6 +25,9 @@ use Yii;
  */
 class ProjectsAll extends \yii\db\ActiveRecord
 {
+    public $pool_year;
+    public $pool_month;
+
     public $avgFinalMark;
     public $finished;
     public $failed;
