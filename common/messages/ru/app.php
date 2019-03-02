@@ -68,17 +68,55 @@ return [
     'Validated' => '',
 
     // models/Achievements.php
-    'Xlogin' => '',
     'Description' => '',
     'Kind' => 'Grade',
-    'Name' => '',
     'Nbr Of Success' => '',
     'Tier' => '',
 
     // models/PoolsList.php
-    'Year' => '',
-    'Month' => '',
     'Begin At' => '',
     'End At' => '',
 
+
+
+    // unsorted
+    /**
+     *  How to search? Use grep -rnw "keyword or any f'ck words" ./dir_for_search
+     */
+
+    'Cheating students members at UNIT Factory' => '',
+    'Full information about cheating from student members at UNIT Factory' => '',
+    'Cheating pools members at UNIT Factory' => '',
+    'Full information about cheating from pool members at UNIT Factory' => '',
+    'Students Projects' => '',
+    '{0} :: pools project UNIT Factory' => '',
+    'Pools Projects' => '',
+    'Cheatera from UNIT Factory' => '',
+    'Cheatera - private social network for students from UNIT Factory' => '',
+    'Sign In' => '',
+    'Aid' => '',
+    'Image' => '',
+    'Users Url' => '',
+    'Visible' => '',
+    'ID' => '',
+    'Puid' => '',
+    'Updated At' => '',
+    'Current Team ID' => '',
+    'Cursus Ids' => '',
+    'Project ID' => '',
+    'Parent ID' => '',
+    'Slug' => '',
+    'First Name' => '',
+    'Xid' => '',
+    '' => '',
+    'Last Name' => '',
+    'Staff' => '',
+    'Url' => '',
+    'Kick' => '',
+    'Needupd' => '',
+    'Cursus ID' => '',
+    'Skills ID' => '',
+    'Skills Level' => '',
+    'Skills Name' => '',
+    'Subject' => '',
 ];
