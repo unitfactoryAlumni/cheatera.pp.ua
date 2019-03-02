@@ -22,10 +22,11 @@ class Minus42Controller extends CommonController
         $title = Yii::t('app', 'Cheating students members at UNIT Factory');
         $description = Yii::t('app','Full information about cheating from student members at UNIT Factory');
         $this->setMeta($title, $description);
-        $searchModel = new Minus42Search(1);
+        $searchModel = new Minus42StudentsSearch();
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('indexStudents', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'subPage' => 'students',

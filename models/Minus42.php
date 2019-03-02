@@ -14,6 +14,11 @@ use Yii;
  */
 class Minus42 extends \yii\db\ActiveRecord
 {
+    public $pool_year;
+    public $pool_month;
+    public $name;
+    public $slug;
+
     /**
      * {@inheritdoc}
      */

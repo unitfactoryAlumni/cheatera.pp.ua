@@ -2,35 +2,23 @@
 
 namespace app\controllers;
 
-use app\models\ProjectsAll;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\models\Minus42;
 
 /**
- * Minus42Search represents the model behind the search form of `app\models\Minus42`.
+ * Minus42StudentsSearch represents the model behind the search form of `app\models\Minus42`.
  */
-class Minus42Search extends ProjectsAll
+class Minus42StudentsSearch extends Minus42
 {
-    protected $course;
-
-    /**
-     * Minus42Search constructor.
-     * @param $searchCourse
-     */
-    public function __construct($searchCourse)
-    {
-        $this->course = $searchCourse;
-        parent::__construct();
-    }
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'current_team_id', 'cursus_ids', 'final_mark', 'puid', 'occurrence', 'project_id', 'parent_id'], 'integer'],
-            [['xlogin', 'name', 'slug', 'status', 'validated', 'pool_year', 'pool_month'], 'safe'],
+            [['id', 'puid'], 'integer'],
+            [['xlogin', 'updated_at', 'pool_year', 'pool_month', 'name'], 'safe'],
         ];
     }
 
@@ -52,14 +40,16 @@ class Minus42Search extends ProjectsAll
      */
     public function search($params)
     {
-        $query = ProjectsAll::find()
+        $query = Minus42::find()
             ->select([
-                'projects_users.*',
+                'm42.*',
                 'xlogins.*',
+                'projects_users.name',
+                'projects_users.slug',
             ])
-            ->innerJoin('xlogins','projects_users.xlogin = xlogins.login')
-            ->andWhere('final_mark < 0')
-            ->andWhere("projects_users.cursus_ids = $this->course")
+            ->innerJoin('projects_users','projects_users.project_id = m42.puid')
+            ->innerJoin('xlogins','m42.xlogin = xlogins.login')
+            ->andWhere('m42.xlogin = projects_users.xlogin and projects_users.cursus_ids=1')
         ;
 
         // add conditions that should always apply here
@@ -81,38 +71,29 @@ class Minus42Search extends ProjectsAll
         $query->andFilterWhere([
             'id' => $this->id,
             'puid' => $this->puid,
-            'name' => $this->name,
-            'pool_year' => $this->pool_year,
+            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'xlogin', $this->xlogin])
-            ->andFilterWhere(['like', 'pool_year', $this->pool_year])
-            ->andFilterWhere(['like', 'pool_month', $this->pool_month]);
+         ->andFilterWhere(['like', 'name', $this->name])
+         ->andFilterWhere(['like', 'pool_year', $this->pool_year])
+         ->andFilterWhere(['like', 'pool_month', $this->pool_month]);
 
         return $dataProvider;
     }
 
-
     private function getSort()
     {
         return [
-            'defaultOrder' => ['puid' => SORT_DESC],
+            'defaultOrder' => ['updated_at' => SORT_DESC],
             'attributes' => [
-                'name' => [
-                    'asc' => ['name' => SORT_ASC],
-                    'desc' => ['name' => SORT_DESC],
+                'updated_at' => [
+                    'asc' => ['updated_at' => SORT_ASC],
+                    'desc' => ['updated_at' => SORT_DESC],
                 ],
-                'puid' => [
-                    'asc' => ['puid' => SORT_ASC],
-                    'desc' => ['puid' => SORT_DESC],
-                ],
-                'displayname' => [
-                    'asc' => ['displayname' => SORT_ASC],
-                    'desc' => ['displayname' => SORT_DESC],
-                ],
-                'level' => [
-                    'asc' => ['level' => SORT_ASC],
-                    'desc' => ['level' => SORT_DESC],
+                'xlogin' => [
+                    'asc' => ['xlogin' => SORT_ASC],
+                    'desc' => ['xlogin' => SORT_DESC],
                 ],
                 'pool_year' => [
                     'asc' => ['pool_year' => SORT_ASC],
@@ -130,12 +111,11 @@ class Minus42Search extends ProjectsAll
                     'asc' => ['lastloc' => SORT_ASC],
                     'desc' => ['lastloc' => SORT_DESC],
                 ],
-                'final_mark' => [
-                    'asc' => ['final_mark' => SORT_ASC],
-                    'desc' => ['final_mark' => SORT_DESC],
+                'name' => [
+                    'asc' => ['name' => SORT_ASC],
+                    'desc' => ['name' => SORT_DESC],
                 ]
             ]
         ];
     }
-
 }
