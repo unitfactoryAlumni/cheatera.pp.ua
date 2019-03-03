@@ -83,7 +83,7 @@ class Calculator extends Model
         return [
             [['lvlstart', 'tier', 'finalmark'], 'required'],
             ['lvlstart', 'number', 'min' => 0, 'max' => $this->lvl_max],
-            ['finalmark', 'number', 'min' => 0, 'max' => 125]
+            ['finalmark', 'number', 'min' => 50, 'max' => 125]
         ];
     }
 
@@ -119,7 +119,7 @@ class Calculator extends Model
         $fract_part = $this->lvlstart - $lvlstart_int;
         $eplvl = self::$_expr_per_lvl;
 
-        $expr_raising = self::$_expr_per_tier[$this->tier] * $this->finalmark
+        $expr_raising = self::$_expr_per_tier[$this->tier - 1] * $this->finalmark
         + $eplvl[$lvlstart_int]
         + ($eplvl[$lvlstart_int + 1] - $eplvl[$lvlstart_int]) * $fract_part;
 

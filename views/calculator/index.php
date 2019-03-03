@@ -8,6 +8,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
+use app\assets\AppAsset;
+AppAsset::register($this);
+
+$model->finalmark='125';
 ?>
 
 <div class="calculator-index">
@@ -47,8 +51,9 @@ use yii\bootstrap\ActiveForm;
 
         <div class="form-group">
             <div class="col-lg-12">
-                <?= Html::submitButton('Calculate', ['class' => 'btn btn-primary', 'name' => 'calculate-button']) ?>
-                <br /><h2>Result: <?= $model->result ? $model->result : '' ?></h2>
+                <?= Html::submitButton('Calculate', ['class' => 'btn btn-primary', 'name' => 'calculateButton']) ?>
+                <br /><h2>Result: <span id='fm'><?= $model->result ? $model->result : '' ?></span></h2>
+                <?= Html::submitButton('To Input', ['class' => 'btn btn-primary', 'name' => 'toInputButton']) ?>
             </div>
         </div>
 
