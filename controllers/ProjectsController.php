@@ -27,11 +27,11 @@ class ProjectsController extends CommonController
         $description = Yii::t('app','Full information about students projects from UNIT Factory');
         $this->setMeta($title, $description);
 
-        $searchModel = new ProjectsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new ProjectsAllFiltering(['course' => 1]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 1, 0);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'models' => $searchModel,
             'dataProvider' => $dataProvider,
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Students'),
@@ -40,6 +40,25 @@ class ProjectsController extends CommonController
             'subPage' => '/students/projects'
         ]);
     }
+//    public function actionStudents()
+//    {
+//        $title = Yii::t('app', 'Students projects UNIT Factory');
+//        $description = Yii::t('app','Full information about students projects from UNIT Factory');
+//        $this->setMeta($title, $description);
+//
+//        $searchModel = new ProjectsSearch();
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 1, 0);
+//
+//        return $this->render('index', [
+//            'searchModel' => $searchModel,
+//            'dataProvider' => $dataProvider,
+//            'breadcrumbs' => [
+//                'name' => Yii::t('app', 'Students'),
+//                'url' => 'show/students'
+//            ],
+//            'subPage' => '/students/projects'
+//        ]);
+//    }
 
     /**
      * Lists all Projects models.
@@ -51,8 +70,8 @@ class ProjectsController extends CommonController
         $description = Yii::t('app','Full information about pools projects from UNIT Factory');
         $this->setMeta($title, $description);
 
-        $searchModel = new ProjectsAllFilteringSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new ProjectsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 4, 0);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -72,8 +91,10 @@ class ProjectsController extends CommonController
      */
     public function actionStudentsView($id)
     {
-        $title = Yii::t('app', '{0} :: students project UNIT Factory', $id);
-        $description = Yii::t('app','Full information about {0} from UNIT Factory', $id);
+        $getName = Projects::find()->where("slug = '$id'")->one();
+        $project_name = $getName->name;
+        $title = Yii::t('app', '{0} :: students project UNIT Factory', $project_name);
+        $description = Yii::t('app','Full information about {0} from UNIT Factory', $project_name);
         $this->setMeta($title, $description);
         $this->course = 1;
 
@@ -104,8 +125,10 @@ class ProjectsController extends CommonController
      */
     public function actionPoolsView($id)
     {
-        $title = Yii::t('app', '{0} :: pools project UNIT Factory', $id);
-        $description = Yii::t('app','Full information about {0} from UNIT Factory', $id);
+        $getName = Projects::find()->where("slug = '$id'")->one();
+        $project_name = $getName->name;
+        $title = Yii::t('app', '{0} :: pools project UNIT Factory', $project_name);
+        $description = Yii::t('app','Full information about {0} from UNIT Factory', $project_name);
         $this->setMeta($title, $description);
         $this->course = 4;
 

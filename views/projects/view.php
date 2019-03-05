@@ -12,10 +12,10 @@ use yii\widgets\Pjax;
 
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['0']['name'], 'url' => [$breadcrumbs['0']['url']]];
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['1']['name'], 'url' => [$breadcrumbs['1']['url']]];
-$this->params['breadcrumbs'][] = strtok($this->title, ' ');
+$this->params['breadcrumbs'][] = strtok($this->title, '::');
 ?>
 <div class="projects-view">
-    <h1><?= Html::encode(strtok($this->title, ' ')) ?></h1>
+    <h1><?= Html::encode(strtok($this->title, '::')) ?></h1>
     <?php Pjax::begin(); ?>
     <style>
         .filters .form-control {

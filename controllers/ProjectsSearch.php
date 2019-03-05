@@ -35,11 +35,18 @@ class ProjectsSearch extends Projects
      *
      * @param array $params
      *
+     * @param $course
+     * @param $parent_id
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $course, $parent_id)
     {
-        $query = Projects::find();
+        $query = Projects::find()
+            ->where([
+                'course' => $course,
+                'parent_id' => $parent_id
+            ])
+        ;
 
         // add conditions that should always apply here
 

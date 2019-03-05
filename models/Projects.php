@@ -22,14 +22,14 @@ use Yii;
  */
 class Projects extends \yii\db\ActiveRecord
 {
-    protected $course;
+//    protected $course;
 
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'projects_cache';
+        return 'projects_cache_all';
     }
 
     /**
@@ -41,7 +41,7 @@ class Projects extends \yii\db\ActiveRecord
             [['name', 'slug', 'avgFinalMark', 'validated', 'finished', 'failed', 'wfc', 'inprogress', 'sag', 'cg'], 'required'],
             [['slug'], 'string'],
             [['avgFinalMark'], 'number'],
-            [['validated', 'finished', 'failed', 'wfc', 'inprogress', 'sag', 'cg'], 'integer'],
+            [['validated', 'finished', 'failed', 'wfc', 'inprogress', 'sag', 'cg', 'project_id', 'parent_id', 'course'], 'integer'],
             [['name', 'course'], 'string', 'max' => 255],
         ];
     }
