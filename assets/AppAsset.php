@@ -23,6 +23,8 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'https://code.jquery.com/jquery-3.3.1.min.js',
+        'js/calculator.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
