@@ -1,5 +1,6 @@
 # phpstorm project files
 .idea
+.vscode
 
 # netbeans project files
 nbproject
@@ -37,7 +38,12 @@ tests/_support/_generated
 
 #yii2 dir
 /web/assets
+assets
+!assets/AppAsset.php
 /runtime/*
 
 #sql dump
 schema.sql
+
+#tmps
+lags_example

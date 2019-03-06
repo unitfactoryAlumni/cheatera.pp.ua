@@ -68,14 +68,31 @@ return [
     'Validated' => '',
 
     // models/Achievements.php
+    'Xlogin' => '',
     'Description' => '',
     'Kind' => 'Grade',
+    'Name' => '',
     'Nbr Of Success' => '',
     'Tier' => '',
 
     // models/PoolsList.php
+    'Year' => '',
+    'Month' => '',
     'Begin At' => '',
     'End At' => '',
+
+    // views/layouts/main.php
+    'Caclculator' => '',
+    // controllers/CalculatorController.php
+    'Experience calculator' => '',
+    'Want to know your level after project evaluation -- use our Experience calculator!' => '',
+    // views/calculator/index.php
+    'To Input' => '',
+    'Enter level' => '',
+    'Select tier' => '',
+    'Enter mark' => '',
+    'Calculate' => '',
+    "Calculation kindly presented by {0}, errors in calculations may be from <code>0.01</code> till <code>0.2</code> (magic Intra, magic!)' => 'Расчеты любезно предоставлены {vpaladii}, погрешности от <code>0.01</code> до <code>0.2</code> (magic Intra, magic!)",
 
 
 
