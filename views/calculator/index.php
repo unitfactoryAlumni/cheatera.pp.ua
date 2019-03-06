@@ -11,9 +11,15 @@ use yii\bootstrap\ActiveForm;
 use app\assets\AppAsset;
 AppAsset::register($this);
 
-$model->finalmark='125';
+$cookies = Yii::$app->request->cookies;
+$level = $cookies->getValue('level');
+
+$model->lvlstart = $level;
+$model->finalmark = '125';
 
 ?>
+
+<script>console.log("<?= var_dump($cookies->get('level')) ?>")</script>
 
 <div class="calculator-index">
     <h1><?= Html::encode($this->title) ?></h1><br />

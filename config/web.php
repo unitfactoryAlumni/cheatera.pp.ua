@@ -29,9 +29,9 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-        'cookieValidationKey' => env('VD_KEY', ''),
-        'baseUrl' => '', //убрать frontend/web
-        'class' => 'klisl\languages\Request',
+            'cookieValidationKey' => env('VD_KEY', ''),
+            'baseUrl' => '', //убрать frontend/web
+            'class' => 'klisl\languages\Request',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
