@@ -12,6 +12,7 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 
 $model->finalmark='125';
+
 ?>
 
 <div class="calculator-index">
@@ -26,41 +27,41 @@ $model->finalmark='125';
         ],
     ]); ?>
 
-        <?= $form->field($model, 'lvlstart')
-            ->textInput(['autofocus' => true])
-            ->input('text', ['placeholder' => "Enter level"])
-        ?>
-        
-        <?= $form->field($model, 'tier')->dropDownList(
-            [
-                '1' => 'T0',
-                '2' => 'T1',
-                '3' => 'T2',
-                '4' => 'T3',
-                '5' => 'T4',
-                '6' => 'T5',
-                '7' => 'T6',
-                '8' => 'T7',
-            ],
-            ['prompt'=>'Select tier'])
-        ?>
-        
-        <?= $form->field($model, 'finalmark')
-            ->textInput()->input('text', ['placeholder' => "Enter mark"])
-        ?>
+    <?= $form->field($model, 'lvlstart')
+        ->textInput(['autofocus' => true])
+        ->input('text', ['placeholder' => Yii::t('app', "Enter level")])
+    ?>
+    
+    <?= $form->field($model, 'tier')->dropDownList(
+        [
+            '1' => 'T0',
+            '2' => 'T1',
+            '3' => 'T2',
+            '4' => 'T3',
+            '5' => 'T4',
+            '6' => 'T5',
+            '7' => 'T6',
+            '8' => 'T7',
+        ],
+        ['prompt' => Yii::t('app', 'Select tier')])
+    ?>
+    
+    <?= $form->field($model, 'finalmark')
+        ->textInput()->input('text', ['placeholder' => Yii::t('app', "Enter mark")])
+    ?>
 
-        <div class="form-group">
-            <div class="col-lg-12">
-                <?= Html::submitButton('Calculate', ['class' => 'btn btn-primary', 'name' => 'calculateButton']) ?>
-                <br /><h2>Result: <span id='fm'><?= $model->result ? $model->result : '' ?></span></h2>
-                <?= Html::submitButton('To Input', ['class' => 'btn btn-primary', 'name' => 'toInputButton']) ?>
-            </div>
+    <div class="form-group">
+        <div class="col-lg-12">
+            <?= Html::submitButton(Yii::t('app', 'Calculate'), ['class' => 'btn btn-primary', 'name' => 'calculateButton']) ?>
+            <br /><h2>Result: <span id='fm'><?= $model->result ? $model->result : '' ?></span></h2>
+            <?= Html::submitButton(Yii::t('app', 'To Input'), ['class' => 'btn btn-primary', 'name' => 'toInputButton']) ?>
         </div>
+    </div>
 
     <?php ActiveForm::end(); ?>
 
     <div style="color:#999">
-        Расчеты любезно предоставлены <?= Html::a('vpaladii', Url::toRoute('students/vpaladii', true)) ?>
-        Погрешности от <code>0.01</code> до <code>0.2</code> (magic Intra, magic!)
+        <?= Yii::t( 'app', 'Calculation kindly presented by {0}, errors in calculations may be from <code>0.01</code> till <code>0.2</code> (magic Intra, magic!)',
+        Html::a('vpaladii', Url::toRoute('students/vpaladii', true)) ) ?>
     </div>
 </div>

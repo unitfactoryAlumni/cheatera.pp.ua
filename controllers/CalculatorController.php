@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Calculator;
 
 /**
@@ -16,7 +17,9 @@ class CalculatorController extends CommonController
     */
     public function actionIndex()
     {
-        $this->view->title = 'Experience calculator';
+        $title = Yii::t('app', 'Experience calculator');
+        $description = Yii::t('app', 'Want to know your level after project evaluation -- use our Experience calculator!');
+        $this->setMeta($title, $description);
         $model = new Calculator();
 
         $request = \Yii::$app->request;
@@ -25,6 +28,13 @@ class CalculatorController extends CommonController
                 $model->getMark();
            }
         }
-        return $this->render('index', ['model' => $model]);
+
+        return $this->render('index', [
+            'model' => $model,
+            'breadcrumbs' => [
+                'name' => Yii::t('app', 'Caclculator'),
+                'url' => 'calculator'
+            ],
+        ]);
     }
 }

@@ -66,7 +66,7 @@ RUN usermod -u 1000 www-data
 COPY composer.json /var/www/html/
 COPY composer.lock /var/www/html/
 RUN composer self-update
-RUN composer install 
+RUN composer install
 
 # Finally copy the working dir to the image's web root
 COPY . /var/www/html

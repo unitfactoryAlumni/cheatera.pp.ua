@@ -44,3 +44,6 @@ assets
 
 #sql dump
 schema.sql
+
+#tmps
+lags_example
