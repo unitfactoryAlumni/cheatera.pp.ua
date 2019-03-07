@@ -13,6 +13,7 @@ class ProjectsFilterSearch extends ProjectsAll
 {
     public $parent = null;
     public $course = null;
+    public $childs = null;
 
     public function __construct(array $configs = [])
     {
@@ -22,6 +23,9 @@ class ProjectsFilterSearch extends ProjectsAll
             }
             if (key_exists('course', $configs)) {
                 $this->course = $configs['course'];
+            }
+            if (key_exists('id', $configs)) {
+                $this->childs = $configs['id'];
             }
         }
         parent::__construct($configs);
@@ -55,10 +59,18 @@ class ProjectsFilterSearch extends ProjectsAll
      */
     public function search($params)
     {
+        $where = [
+            'projects_users.cursus_ids' => $this->course,
+            'projects_users.parent_id' => $this->parent,
+            'xlogins.visible' => 1,
+        ];
+        if ($this->childs) {
+            $where = array_merge($where, ['projects_users.project_id' => $this->childs]);
+        }
         $query = ProjectsAll::find()
             ->select([
                 'projects_users.name',
-                "AVG(CASE WHEN projects_users.status='finished' THEN projects_users.final_mark ELSE 0 END) as final_mark",
+                "AVG(CASE WHEN projects_users.status='finished' THEN projects_users.final_mark ELSE 100 END) as final_mark",
                 "COUNT(CASE WHEN projects_users.status='finished' THEN 1 ELSE NULL END) as finished",
                 "COUNT(CASE WHEN projects_users.validated='True' THEN 1 ELSE NULL END) as validated",
                 "COUNT(CASE WHEN projects_users.validated='False' THEN 1 ELSE NULL END) as failed",
@@ -71,7 +83,7 @@ class ProjectsFilterSearch extends ProjectsAll
                 "xlogins.pool_month",
             ])
             ->innerJoin('xlogins', 'xlogins.login = projects_users.xlogin')
-            ->where(['projects_users.cursus_ids' => $this->course, 'projects_users.parent_id' => $this->parent])
+            ->where($where)
             ->addGroupBy('projects_users.name')
         ;
 
@@ -89,6 +101,9 @@ class ProjectsFilterSearch extends ProjectsAll
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => $this->getSort(),
+            'pagination' => [
+                'pageSize' => -1,
+            ],
         ]);
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
