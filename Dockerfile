@@ -13,10 +13,6 @@ RUN apt-get -y install --fix-missing apt-utils build-essential git curl libcurl3
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install xdebug
-#RUN pecl install xdebug-2.5.0
-#RUN docker-php-ext-enable xdebug
-
 # Install PHP7 Extensions
 RUN docker-php-ext-install pdo_mysql pdo_sqlite mysqli curl tokenizer json zip mbstring
 RUN docker-php-ext-install -j$(nproc) intl
@@ -50,14 +46,18 @@ RUN composer install
 
 # Copy the working dir to the image's web root
 COPY . /var/www/html
-RUN ln -s assets web/assets
+RUN ln -fs /var/www/html/assets /var/www/html/web/assets
+
+# Setup xdebug
+RUN yes | pecl install xdebug \
+    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
+# RUN docker-php-ext-enable xdebug
 
 # Setup database
-# MYSQL_HASH=$(docker ps | grep mysql | awk '{print $1}')
-# DB_USERNAME=$(grep "^DB_USERNAME=" .env | cut -d= -f2)
-# DB_PASSWORD=$(grep "^DB_PASSWORD=" .env | cut -d= -f2)
-# DB_NAME=$(grep "^DB_NAME=" .env | cut -d= -f2)
-COPY .env /var/www/html
-RUN eval .env
-RUN mysql -u$DB_USERNAME -p$DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS yii2"
-RUN mysql -u$DB_USERNAME -p$DB_PASSWORD $DB_NAME < schema.sql
+# RUN DB_USERNAME=$(grep "^DB_USERNAME=" .env | cut -d= -f2) \
+#     && DB_PASSWORD=$(grep "^DB_PASSWORD=" .env | cut -d= -f2) \
+#     && DB_NAME=$(grep "^DB_NAME=" .env | cut -d= -f2) \
+#     && mysql -u$DB_USERNAME -p$DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS yii2" \
+#     && RUN mysql -u$DB_USERNAME -p$DB_PASSWORD $DB_NAME < schema.sql
