@@ -16,6 +16,16 @@ use yii\filters\VerbFilter;
 class ProjectsController extends CommonController
 {
     protected $course;
+    /** 1. Написать метод проверки. Варианты
+     *           - есть дочки, рендерим ParentCase
+     *           - есть родитель, рендерим с крошками родителя
+     *           - нет дочек - рендерим как сейчас
+     *           - нет ничего - вернуть 404.
+     *     Все по максимуму разбить в разные методы и вынести. Крошки можно вынести в хелпер, пригодится
+     *     Также выносим в методы проверку дочка/родители и тд
+     *
+     *  2. Добавить функционал фильтрации как в таблице аггрегации в самом просмотре проекта
+     */
 
     /**
      * Lists all Projects models.
@@ -41,25 +51,6 @@ class ProjectsController extends CommonController
             'action' => 'students'
         ]);
     }
-//    public function actionStudents()
-//    {
-//        $title = Yii::t('app', 'Students projects UNIT Factory');
-//        $description = Yii::t('app','Full information about students projects from UNIT Factory');
-//        $this->setMeta($title, $description);
-//
-//        $searchModel = new ProjectsSearch();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 1, 0);
-//
-//        return $this->render('index', [
-//            'searchModel' => $searchModel,
-//            'dataProvider' => $dataProvider,
-//            'breadcrumbs' => [
-//                'name' => Yii::t('app', 'Students'),
-//                'url' => 'show/students'
-//            ],
-//            'subPage' => '/students/projects'
-//        ]);
-//    }
 
     /**
      * Lists all Projects models.
@@ -142,8 +133,8 @@ class ProjectsController extends CommonController
             'dataProvider' => $dataProvider,
             'breadcrumbs' => [
                 '0' => [
-                    'name' => Yii::t('app', 'Pools Projects'),
-                    'url' => 'projects/pools',
+                    'name' => Yii::t('app', 'Pools'),
+                    'url' => 'show/pools',
                 ],
                 '1' => [
                     'name' => Yii::t('app', 'Pools Projects'),

@@ -37,7 +37,9 @@ $this->params['breadcrumbs'][] = strtok($this->title, '::');
         ],
         'rowOptions'=>function($data) use ($tmp) {
             if($data['xlogin'] == $tmp){
-                return ['class' => 'danger'];
+                return ['class' => 'info'];
+            } else if ($data['lastloc'] == 0) {
+                return ['class' => 'success'];
             }
         },
         'columns' => [
