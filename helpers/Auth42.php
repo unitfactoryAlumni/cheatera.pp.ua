@@ -8,6 +8,7 @@
 
 namespace app\helpers;
 
+use Yii;
 use yii\authclient\OAuth2;
 
 class Auth42 extends OAuth2
@@ -70,8 +71,6 @@ class Auth42 extends OAuth2
         return $response['code'];
     }
 
-
-
     public function fetchMe($params)
     {
         $request = $this->createRequest()
@@ -79,6 +78,12 @@ class Auth42 extends OAuth2
             ->setUrl('https://api.intra.42.fr/v2/me')
             ->setHeaders($params);
         $response = $this->sendRequest($request);
+
+        $cookies = Yii::$app->response->cookies;
+        $cookies->add(new \yii\web\Cookie([
+            'name' => 'level',
+            'value' => $response['cursus_users'][0]['level'],
+        ]));
 
         return $response;
     }

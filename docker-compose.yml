@@ -14,7 +14,7 @@ services:
       ENABLE_ENV_FILE: 1
       ENABLE_LOCALCONF: 0
       API_TOKEN: "<YOUR GITHUB API TOKEN>"
-      XDEBUG_CONFIG: remote_host={{178.214.196.34}}
+      XDEBUG_CONFIG: remote_host={{YOUR_IP_ADDRESS}}
 
   mysql:
     image: mysql:5.7

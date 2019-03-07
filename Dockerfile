@@ -1,6 +1,5 @@
 FROM php:7.2-apache
 
-
 WORKDIR /var/www/html
 
 # Install required packages and PHP modules

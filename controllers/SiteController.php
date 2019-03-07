@@ -66,6 +66,7 @@ class SiteController extends CommonController
 
     /**
      * Page after 42 auth.
+     * 
      * @return string
      * @throws HttpException
      */
@@ -76,7 +77,7 @@ class SiteController extends CommonController
         $log = new Log;
         $request = Yii::$app->request->get();
         if (!isset($request['code'])) {
-            throw new HttpException(500 ,'Sorry, try again later');
+            throw new HttpException(500, 'Sorry, try again later');
         }
         $token = $api->fetchClientAccessToken($request['code'], $request['state']);
         $token = $token->getToken();
@@ -104,7 +105,7 @@ class SiteController extends CommonController
     public function actionIndex()
     {
         $title = Yii::t('app', 'Cheatera from UNIT Factory');
-        $description = Yii::t('app','Cheatera - private social network for students from UNIT Factory');
+        $description = Yii::t('app', 'Cheatera - private social network for students from UNIT Factory');
         $this->setMeta($title, $description);
         return $this->render('index');
     }
