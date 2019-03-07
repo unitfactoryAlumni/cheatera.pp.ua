@@ -92,7 +92,7 @@ return [
     'Select tier' => '',
     'Enter mark' => '',
     'Calculate' => '',
-    "Calculation kindly presented by {0}, errors in calculations may be from <code>0.01</code> till <code>0.2</code> (magic Intra, magic!)' => 'Расчеты любезно предоставлены {vpaladii}, погрешности от <code>0.01</code> до <code>0.2</code> (magic Intra, magic!)",
+    "Calculation kindly presented by {0}, errors in calculations may be from <code>0.01</code> till <code>0.2</code> (magic Intra, magic!)" => "Расчеты любезно предоставлены {0}, погрешности от <code>0.01</code> до <code>0.2</code> (magic Intra, magic!)",
 
 
 

@@ -1,23 +1,23 @@
 <?php
 
+use yii\bootstrap\Collapse;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-
 /* @var $this yii\web\View */
-/* @var $searchModel app\controllers\ProjectsSearch */
+/* @var $searchModel app\controllers\ProjectsFilterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var array $breadcrumbs */
 
 //$this->title = Yii::t('app', 'Projects');
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
-<div class="projects-index">
+<div class="projects-all-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
     <style>
         .filters .form-control {
             max-height: 25px;
@@ -28,12 +28,21 @@ $this->params['breadcrumbs'][] = $this->title;
             /*font-size: smaller;*/
         }
     </style>
+
+    <?php echo Collapse::widget([
+        'items' => [
+            [
+                'label' => Yii::t('app', 'Advanced Filter'),
+                'content' => $this->render('_search', ['model' => $searchModel, 'action' => $action]),
+                'contentOptions' => [],
+                'options' => []
+            ],
+        ]
+    ]); ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'tableOptions' => [
-            'class' => 'table table-striped table-bordered table-responsive'
-        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -46,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),'/'. Yii::$app->language . "$subPage/" . $data['slug']);
                 },
             ],
-            'avgFinalMark',
+            'final_mark',
             'validated',
             'finished',
             'failed',
