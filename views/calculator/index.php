@@ -13,7 +13,7 @@ AppAsset::register($this);
 
 $cookies = Yii::$app->request->cookies;
 $level = $cookies->getValue('level');
-
+$this->registerJsFile('js/calculator.js', ['depends' => [\yii\web\JqueryAsset::className()], 'position' => \yii\web\View::POS_END]);
 $model->lvlstart = $level;
 $model->finalmark = '125';
 

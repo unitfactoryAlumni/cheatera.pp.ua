@@ -29,7 +29,7 @@ class ProjectsAllSearch extends ProjectsAll
     {
         return [
             [['id', 'current_team_id', 'cursus_ids', 'final_mark', 'puid', 'occurrence', 'project_id', 'parent_id'], 'integer'],
-            [['xlogin', 'name', 'slug', 'status', 'validated'], 'safe'],
+            [['xlogin', 'name', 'slug', 'status', 'validated', 'pool_year', 'pool_month'], 'safe'],
         ];
     }
 
@@ -101,7 +101,9 @@ class ProjectsAllSearch extends ProjectsAll
             'puid' => $this->puid,
             'occurrence' => $this->occurrence,
             'project_id' => $this->project_id,
-            'parent_id' => $this->parent_id
+            'parent_id' => $this->parent_id,
+            'pool_year' => $this->pool_year,
+            'pool_month' => $this->pool_month,
         ]);
 
         $query->andFilterWhere(['like', 'xlogin', $this->xlogin])

@@ -14,6 +14,7 @@ Cheatera Yii 2
       config/             contains application configurations
       controllers/        contains Web controller classes
       mail/               contains view files for e-mails
+      common/messages     contains translations files
       models/             contains model classes
       runtime/            contains files generated during runtime
       tests/              contains various tests for the basic application

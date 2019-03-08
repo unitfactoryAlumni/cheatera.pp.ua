@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use app\helpers\SkillsHelper;
-use app\models\ProjectsAll;
 use app\models\ProjectsLogin;
 use Yii;
 use app\models\Show;
@@ -80,7 +79,8 @@ class ShowController extends CommonController
             'switch' => 'pools',
             'urlHelperForProjects' => '/students/projects/',
             'projects' => $projects['common'],
-            'parents' => $projects['parents']
+            'parents' => $projects['parents'],
+            'course' => 1,
         ]);
     }
 
@@ -108,7 +108,8 @@ class ShowController extends CommonController
             'switch' => 'students',
             'urlHelperForProjects' => '/pools/projects/',
             'projects' => $projects['common'],
-            'parents' => $projects['parents']
+            'parents' => $projects['parents'],
+            'course' => 4,
         ]);
     }
 
@@ -163,7 +164,7 @@ class ShowController extends CommonController
                 $result['withParent'][$this->getProjectNameByID($model->parent_id, $copyModels)][] = $model;
             }
         }
-        $parents = $result['withParent'];
+        $parents = isset($result['withParent']) ? $result['withParent'] : [];
         unset($result['withParent']);
         return ['common' => $result, 'parents' => $parents];
     }

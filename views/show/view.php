@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
         <div class="col-lg-9 mx-auto">
             <div class="card" style="width: 100%;">
                 <div class="card-body">
-                    <h5 class="card-title">Projects (finished)</h5>
+                    <h5 class="card-title">Projects</h5>
                     <div style="max-width: 100%; overflow: auto;">
                         <table class="table ">
                             <thead>
@@ -66,39 +66,40 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                             </tr>
                             </thead>
                             <tbody id="alldata">
-                    <?php if (isset($projects)) { foreach ($projects as $item) { ?>
+
+                            <?php if (isset($projects)) { foreach ($projects as $item) {
+                                if ($item->name === 'Rushes') { continue; } ?>
                             <tr>
                                 <td>
                                     <div class="progress my-shadow">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:<?= ViewHelper::getProgressProject($item->final_mark)?>%">
-                                            <span style="text-align:left;"><a style="color:black; " href="<?= $urlHelperForProjects ?><?= $item->slug ?>"><?= $item->name ?></a></span>
+                                        <div class="progress-bar progress-bar-<?= ViewHelper::getProgressProjectColor($item->final_mark, $course, $item->status)?>" role="progressbar" style="width:<?= ViewHelper::getProgressProject($item->final_mark, $course)?>%">
+                                            <p><a style="color:black; " href="<?= '/' . Yii::$app->language . $urlHelperForProjects ?><?= $item->slug ?>"><?= $item->name ?></a></p>
                                         </div>
                                     </div>
                                 </td>
                                 <td><?= $item->final_mark ?></td>
                                 <td><?= $item->occurrence ?></td>
-                                <td><?= $item->status ?></td>
+                                <td><?= str_replace('_', ' ', $item->status) ?></td>
                             </tr>
-                    <?php } } ?>
-                    <tr><td colspan="4"><h5 class="card-title">Projects (in_progress)</h5></td></tr>
-                        <?php if (isset($projects['in_progress'])) { foreach ($projects['in_progress'] as $item) { ?>
-                            <tr>
-                                <td>
-                                    <div class="progress my-shadow">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:<?= ViewHelper::getProgressProject($item->final_mark)?>%">
-                                            <span style="text-align:left;"><a style="color:black; " href="<?= $urlHelperForProjects ?><?= $item->slug ?>"><?= $item->name ?></a></span>
+                            <?php } } ?>
+
+
+                            <?php if (isset($parents)) { foreach ($parents as $parent => $value) { ?>
+                                <tr><td colspan="4"><h5 class="card-title"><?= $parent?></h5></td></tr>
+                            <?php if (isset($value)) { foreach ($value as $item) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="progress my-shadow">
+                                            <div class="progress-bar progress-bar-<?= ViewHelper::getProgressProjectColor($item->final_mark, $course, $item->status)?>" role="progressbar" style="width:<?= ViewHelper::getProgressProject($item->final_mark, $course)?>%">
+                                                <p><a style="color:black; " href="<?= '/' . Yii::$app->language . $urlHelperForProjects ?><?= $item->slug ?>"><?= $item->name ?></a></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td><?= $item->final_mark ?></td>
-                                <td><?= $item->occurrence ?></td>
-                                <td><?= $item->status ?></td>
-                            </tr>
-                        <?php } }?>
-
-
-
-
+                                    </td>
+                                    <td><?= $item->final_mark ?></td>
+                                    <td><?= $item->occurrence ?></td>
+                                    <td><?= str_replace('_', ' ', $item->status) ?></td>
+                                </tr>
+                            <?php } } } } ?>
 
                             </tbody>
                         </table>
