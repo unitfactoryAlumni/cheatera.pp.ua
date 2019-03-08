@@ -47,18 +47,10 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                 'format' => 'raw',
                 'attribute' => '',
                 'value'  => function ($data) use ($pageName) {
-                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),'/'. Yii::$app->language . "/$pageName/" . $data['login']);
+                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),'/'. Yii::$app->language . "/$pageName/" . $data['login'], ['data-pjax' => '0']);
                 },
             ],
             'displayname',
-            // need for hover images
-//            [
-//                'label' => 'Name',
-//                'format' => 'raw',
-//                'value'  => function ($data) use ($pageName) {
-//                        return Html::a(Html::encode($data['displayname']),'/'. Yii::$app->language . "/$pageName/" . $data['login']);
-//                    },
-//            ],
             'phone',
             [
                 'attribute'=>'level',
