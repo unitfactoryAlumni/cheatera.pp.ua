@@ -9,10 +9,11 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var array $breadcrumbs */
 /* @var $searchModel app\controllers\ProjectsAllSearch */
-/* @var $searchModel2 app\controllers\ProjectsFilterSearch */
+/* @var $searchModelSubProject app\controllers\ProjectsFilterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $dataProvider2 yii\data\ActiveDataProvider */
+/* @var $dataProviderSubProject yii\data\ActiveDataProvider */
 /* @var string $pageName */
+/* @var string $subPage */
 
 $this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['0']['name']), 'url' => [$breadcrumbs['0']['url']]];
 $this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['1']['name']), 'url' => [$breadcrumbs['1']['url']]];
@@ -24,7 +25,7 @@ $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
 
 <?php
 
-    $subProjects = $this->render('_sub', ['action' => $action, 'searchModel' => $searchModel2, 'dataProvider' => $dataProvider2, 'pageName' => $pageName]);
+    $subProjects = $this->render('_sub', ['action' => $action, 'searchModel' => $searchModelSubProject, 'dataProvider' => $dataProviderSubProject, 'pageName' => $pageName, 'subPage' => $subPage]);
     $marks = $this->render('_marks', ['action' => $action, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider, 'pageName' => $pageName]);
 
     $tmp = Yii::$app->session->get('username');

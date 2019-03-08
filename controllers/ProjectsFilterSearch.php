@@ -70,7 +70,7 @@ class ProjectsFilterSearch extends ProjectsAll
         $query = ProjectsAll::find()
             ->select([
                 'projects_users.name',
-                "AVG(CASE WHEN projects_users.status='finished' THEN projects_users.final_mark ELSE 100 END) as final_mark",
+                "AVG(CASE WHEN projects_users.status='finished' THEN projects_users.final_mark ELSE NULL END) as final_mark",
                 "COUNT(CASE WHEN projects_users.status='finished' THEN 1 ELSE NULL END) as finished",
                 "COUNT(CASE WHEN projects_users.validated='True' THEN 1 ELSE NULL END) as validated",
                 "COUNT(CASE WHEN projects_users.validated='False' THEN 1 ELSE NULL END) as failed",

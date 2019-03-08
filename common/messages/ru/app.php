@@ -106,7 +106,7 @@ return [
     'Cheating pools members at UNIT Factory' => '',
     'Full information about cheating from pool members at UNIT Factory' => '',
     'Students Projects' => '',
-    '{0} :: pools project UNIT Factory' => '',
+    '{0} :: {1} project UNIT Factory' => '',
     'Pools Projects' => '',
     'Cheatera from UNIT Factory' => '',
     'Cheatera - private social network for students from UNIT Factory' => '',

@@ -57,7 +57,7 @@ use yii\widgets\Pjax;
             'format' => 'raw',
             'attribute' => '',
             'value'  => function ($data) use ($pageName) {
-                return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),'/'. Yii::$app->language . "/$pageName/" . $data['xlogin']);
+                return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),'/'. Yii::$app->language . '/'. $pageName . '/'. $data['xlogin'], ['data-pjax' => '0']);
             },
         ],
         'final_mark',
