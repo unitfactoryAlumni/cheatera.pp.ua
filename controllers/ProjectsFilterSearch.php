@@ -111,6 +111,7 @@ class ProjectsFilterSearch extends ProjectsAll
             return $dataProvider;
         }
 
+        $query->andFilterWhere(['like', 'name', $this->name]);
         return $dataProvider;
     }
 
