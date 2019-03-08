@@ -80,9 +80,7 @@ AppAsset::register($this);
                             ],
                     ],
                     ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
-                    // ['label' => 'Home', 'url' => ['/site/index']],
-                    // ['label' => 'About', 'url' => ['/site/about']],
-                    // ['label' => 'Contact', 'url' => ['/site/contact']],
+                    ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
                     Yii::$app->user->isGuest ? (
                         [
                                 'label' => Yii::t('app', 'Sign In'),
