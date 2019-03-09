@@ -16,6 +16,9 @@ use yii\widgets\Pjax;
     <?php
 
     function countTime($countTime, $summa = null) {
+        if ($countTime = 0) {
+            $countTime = '0:0:0';
+        }
         if (!isset($summa)) {
             strtok($countTime, '.');
             $exp = explode(':', $countTime);
