@@ -5,12 +5,11 @@ namespace app\controllers;
 use Yii;
 use app\models\CorrectionLog;
 use app\controllers\CorrectionsSearch;
-use yii\web\Controller;
 
 /**
  * CorrectionLogController implements the CRUD actions for CorrectionLog model.
  */
-class CorrectionsController extends Controller
+class CorrectionsController extends CommonController
 {
     /**
      * Lists all CorrectionLog models.
