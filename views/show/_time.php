@@ -16,9 +16,6 @@ use yii\widgets\Pjax;
     <?php
 
     function countTime($countTime, $summa = null) {
-        if ($countTime = 0) {
-            $countTime = '0:0:0';
-        }
         if (!isset($summa)) {
             strtok($countTime, '.');
             $exp = explode(':', $countTime);
@@ -50,7 +47,7 @@ use yii\widgets\Pjax;
             if ($tempDate != $model->date) {
                 while ($count > 0 && $tempDate != $model->date) {
                     $tempDate = date('Y-m-d',strtotime($tempDate . "-1 days"));
-                    $shit[$tempDate] = 0;
+                    $shit[$tempDate] = '00.00';
                 }
             } else {
                 $tempDate = date('Y-m-d',strtotime($model->date));
@@ -60,8 +57,11 @@ use yii\widgets\Pjax;
         if (isset($shit[$model->date]) && $count > 0) {
             $shit[$model->date] = countTime($shit[$model->date], $model->how);
         } else {
-            $shit[$model->date] = $model->how != 0 ? countTime($model->how) : 0;
+            $shit[$model->date] = countTime($model->how);
         }
+        echo "<pre>";
+        var_export([$model->date => $model->how, $shit[$model->date]]);
+        echo "</pre>";
         $tempDate = date('Y-m-d',strtotime($model->date));
     }
     ;
