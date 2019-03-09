@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\widgets\Pjax;
 use dosamigos\chartjs\ChartJs;
 /* @var $this yii\web\View */

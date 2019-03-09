@@ -69,8 +69,13 @@ class ShowController extends CommonController
         $this->course = '42';
         $skills = SkillsHelper::getSkills($id, 1);
         $projects = $this->findProjectsLoginModel($id, 1);
+        $searchModelTime = new LocationsSearch($id);
+        $dataProviderTime = $searchModelTime->search(Yii::$app->request->queryParams);
+
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
+            'searchModelTime' => $searchModelTime,
+            'dataProviderTime' => $dataProviderTime,
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Students'),
                 'url' => 'show/students'
@@ -81,6 +86,7 @@ class ShowController extends CommonController
             'projects' => $projects['common'],
             'parents' => $projects['parents'],
             'course' => 1,
+            'action' => "/students/$id"
         ]);
     }
 

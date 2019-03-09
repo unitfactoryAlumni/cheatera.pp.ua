@@ -30,7 +30,7 @@ use app\helpers\ViewHelper;
                                 <td>
                                     <div class="progress my-shadow">
                                         <div class="progress-bar progress-bar-<?= ViewHelper::getProgressProjectColor($item->final_mark, $course, $item->status)?>" role="progressbar" style="width:<?= ViewHelper::getProgressProject($item->final_mark, $course)?>%">
-                                            <p><a style="color:black; " href="<?= '/' . Yii::$app->language . $urlHelperForProjects ?><?= $item->slug ?>"><?= $item->name ?></a></p>
+                                            <p><a style="color:white; " href="<?= '/' . Yii::$app->language . $urlHelperForProjects ?><?= $item->slug ?>"><?= $item->name ?></a></p>
                                         </div>
                                     </div>
                                 </td>
@@ -48,7 +48,7 @@ use app\helpers\ViewHelper;
                                     <td>
                                         <div class="progress my-shadow">
                                             <div class="progress-bar progress-bar-<?= ViewHelper::getProgressProjectColor($item->final_mark, $course, $item->status)?>" role="progressbar" style="width:<?= ViewHelper::getProgressProject($item->final_mark, $course)?>%">
-                                                <p><a style="color:black; " href="<?= '/' . Yii::$app->language . $urlHelperForProjects ?><?= $item->slug ?>"><?= $item->name ?></a></p>
+                                                <p><a style="color:white; " href="<?= '/' . Yii::$app->language . $urlHelperForProjects ?><?= $item->slug ?>"><?= $item->name ?></a></p>
                                             </div>
                                         </div>
                                     </td>

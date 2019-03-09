@@ -5,6 +5,12 @@ use app\helpers\ViewHelper;
 /* @var $this yii\web\View */
 /* @var $model app\models\Show */
 /* @var array $breadcrumbs */
+/* @var array $parents */
+/* @var int $course */
+/* @var string $urlHelperForProjects */
+/* @var string $action */
+/* @var $searchModelTime app\controllers\TimeSearch */
+/* @var $dataProviderTime yii\data\ActiveDataProvider */
 
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = strtok($this->title, " ");
@@ -30,7 +36,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                     <p class="card-text"><b>Wallet:</b> <?= $model['wallet']?></p>
                     <p class="card-text"><b>Grade:</b> <?= $model['grade']?></p>
                     <p class="card-text"><b>Correction Point:</b> <?= $model['correction_point']?></p>
-                    <p class="card-text"><b>Achivements:</b> <?= $model['howach']?></p>
+                    <p class="card-text"><b>Achievements:</b> <?= $model['howach']?></p>
                     <p class="card-text"><b>Host:</b> <?= $model['location']?></p>
                     <p class="card-text"><b>Last login:</b> <?= $model['lastloc']?></p>
                     <p class="card-text"><b>Hours at cluster:</b> <?= $model['hours']?></p>
@@ -58,7 +64,18 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                 'urlHelperForProjects' => $urlHelperForProjects,
                 'course' => $course,
                 'parents' => $parents,
+        ]);
+
+        $times = $this->render('_time', [
+                'model' => $model,
+                'switch' => $switch,
                 'projects' => $projects,
+                'urlHelperForProjects' => $urlHelperForProjects,
+                'course' => $course,
+                'parents' => $parents,
+                'searchModelTime' => $searchModelTime,
+                'dataProviderTime' => $dataProviderTime,
+                'action' => $action
         ]);
 
         $tmp = Yii::$app->session->get('username');
@@ -67,11 +84,11 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             [
                 'label'   => '<i class="glyphicon glyphicon-list"></i> ' . Yii::t('app', 'Projects'),
                 'content' => $projects,
-                'active'  => true
+                'active'  => true,
             ],
             [
                 'label'   => '<i class="glyphicon glyphicon-time"></i> ' . Yii::t('app', 'Time in cluster'),
-                'content' => '',
+                'content' => $times,
             ],
             [
                 'label'   => '<i class="glyphicon glyphicon-ok-circle"></i> ' . Yii::t('app', 'Corrections Log'),
