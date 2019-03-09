@@ -107,6 +107,8 @@ class ShowController extends CommonController
         $this->course = 'Piscine C';
         $skills = SkillsHelper::getSkills($id, 4);
         $projects = $this->findProjectsLoginModel($id, 4);
+        $searchModelCorrections = new CorrectSearch($id);
+        $dataProviderCorrections = $searchModelCorrections->search(Yii::$app->request->queryParams);
         $searchModelTime = new LocationsSearch($id);
         $dataProviderTime = $searchModelTime->search(Yii::$app->request->queryParams);
 
@@ -124,6 +126,9 @@ class ShowController extends CommonController
             'projects' => $projects['common'],
             'parents' => $projects['parents'],
             'course' => 4,
+            'action' => "/pools/$id",
+            'searchModelCorrections' => $searchModelCorrections,
+            'dataProviderCorrections' => $dataProviderCorrections,
         ]);
     }
 
