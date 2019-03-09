@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\LogTimeHelper;
 use yii\helpers\Html;
 use dosamigos\chartjs\ChartJs;
 use yii\widgets\Pjax;
@@ -15,29 +16,6 @@ use yii\widgets\Pjax;
     <?php echo $this->render('_search_time', ['model' => $searchModelTime, 'action' => $action]); ?>
     <?php
 
-    function countTime($countTime, $summa = null) {
-        if ($countTime = 0) {
-            $countTime = '0:0:0';
-        }
-        if (!isset($summa)) {
-            strtok($countTime, '.');
-            $exp = explode(':', $countTime);
-            $result = intval($exp[0]);
-            $result = $result . '.' . strtok((($exp[1]/60) * 100), '.');
-
-            return ($result);
-        }
-        strtok($countTime, '.');
-        strtok($summa, '.');
-        $exp = explode(':', $countTime);
-        $result = intval($exp[0]);
-        $result = $result . '.' . strtok((($exp[1]/60) * 100), '.');
-        $exp2 = explode(':', $summa);
-        $result += intval($exp2[0]);
-        $result = $result . '.' . strtok((($exp2[1]/60) * 100), '.');
-        return ($result);
-    }
-
     $labels = [];
     $data = [];
     $shit = [];
@@ -50,7 +28,7 @@ use yii\widgets\Pjax;
             if ($tempDate != $model->date) {
                 while ($count > 0 && $tempDate != $model->date) {
                     $tempDate = date('Y-m-d',strtotime($tempDate . "-1 days"));
-                    $shit[$tempDate] = 0;
+                    $shit[$tempDate] = '00.00';
                 }
             } else {
                 $tempDate = date('Y-m-d',strtotime($model->date));
@@ -58,9 +36,9 @@ use yii\widgets\Pjax;
             }
         }
         if (isset($shit[$model->date]) && $count > 0) {
-            $shit[$model->date] = countTime($shit[$model->date], $model->how);
+            $shit[$model->date] = LogTimeHelper::countTime($model->how, $shit[$model->date]);
         } else {
-            $shit[$model->date] = $model->how != 0 ? countTime($model->how) : 0;
+            $shit[$model->date] = LogTimeHelper::countTime($model->how);
         }
         $tempDate = date('Y-m-d',strtotime($model->date));
     }
@@ -69,17 +47,7 @@ use yii\widgets\Pjax;
         $labels = array_merge([$key], $labels);
         $data = array_merge([$value], $data);
     }
-    $fix = 0;
-    foreach ($data as &$key) {
-        if ($fix > 0) {
-            $key = $fix;
-            $fix = 0;
-        }
-        if ($key > 24) {
-            $fix = $key - 24;
-            $key -= 24;
-        }
-    }
+    LogTimeHelper::fix24($data);
 
     echo ChartJs::widget([
         'type' => 'line',
