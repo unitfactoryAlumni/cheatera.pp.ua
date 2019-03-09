@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\TimeInCluster;
-use app\controllers\TimeSearch;
+use app\models\Correct;
+use app\controllers\CorrectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TimeController implements the CRUD actions for TimeInCluster model.
+ * CorrectController implements the CRUD actions for Correct model.
  */
-class TimeController extends Controller
+class CorrectController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class TimeController extends Controller
     }
 
     /**
-     * Lists all TimeInCluster models.
+     * Lists all Correct models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TimeSearch();
+        $searchModel = new CorrectSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class TimeController extends Controller
     }
 
     /**
-     * Displays a single TimeInCluster model.
+     * Displays a single Correct model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class TimeController extends Controller
     }
 
     /**
-     * Creates a new TimeInCluster model.
+     * Creates a new Correct model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new TimeInCluster();
+        $model = new Correct();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class TimeController extends Controller
     }
 
     /**
-     * Updates an existing TimeInCluster model.
+     * Updates an existing Correct model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class TimeController extends Controller
     }
 
     /**
-     * Deletes an existing TimeInCluster model.
+     * Deletes an existing Correct model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class TimeController extends Controller
     }
 
     /**
-     * Finds the TimeInCluster model based on its primary key value.
+     * Finds the Correct model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return TimeInCluster the loaded model
+     * @return Correct the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = TimeInCluster::findOne($id)) !== null) {
+        if (($model = Correct::findOne($id)) !== null) {
             return $model;
         }
 

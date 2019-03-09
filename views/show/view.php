@@ -11,6 +11,8 @@ use app\helpers\ViewHelper;
 /* @var string $action */
 /* @var $searchModelTime app\controllers\TimeSearch */
 /* @var $dataProviderTime yii\data\ActiveDataProvider */
+/* @var $searchModelCorrections app\controllers\CorrectionsSearch */
+/* @var $dataProviderCorrections yii\data\ActiveDataProvider */
 
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = strtok($this->title, " ");
@@ -78,6 +80,18 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                 'action' => $action
         ]);
 
+        $corrections = $this->render('_correct', [
+                'model' => $model,
+                'switch' => $switch,
+                'projects' => $projects,
+                'urlHelperForProjects' => $urlHelperForProjects,
+                'course' => $course,
+                'parents' => $parents,
+                'searchModelCorrections' => $searchModelCorrections,
+                'dataProviderCorrections' => $dataProviderCorrections,
+                'action' => $action
+        ]);
+
         $tmp = Yii::$app->session->get('username');
 
         $items = [
@@ -92,7 +106,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             ],
             [
                 'label'   => '<i class="glyphicon glyphicon-ok-circle"></i> ' . Yii::t('app', 'Corrections Log'),
-                'content' => '',
+                'content' => $corrections,
             ],
             [
                 'label'   => '<i class="glyphicon glyphicon-gift"></i> ' . Yii::t('app', 'Achievements'),

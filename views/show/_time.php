@@ -10,6 +10,7 @@ use yii\widgets\Pjax;
 ?>
 <div class="time-in-cluster-index">
 
+    <h3><?= Yii::t('app', 'Time in cluster') ?></h3>
     <?php Pjax::begin(); ?>
     <?php echo $this->render('_search_time', ['model' => $searchModelTime, 'action' => $action]); ?>
     <?php

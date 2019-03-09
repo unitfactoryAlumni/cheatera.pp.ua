@@ -69,6 +69,8 @@ class ShowController extends CommonController
         $this->course = '42';
         $skills = SkillsHelper::getSkills($id, 1);
         $projects = $this->findProjectsLoginModel($id, 1);
+        $searchModelCorrections = new CorrectSearch($id);
+        $dataProviderCorrections = $searchModelCorrections->search(Yii::$app->request->queryParams);
         $searchModelTime = new LocationsSearch($id);
         $dataProviderTime = $searchModelTime->search(Yii::$app->request->queryParams);
 
@@ -76,6 +78,8 @@ class ShowController extends CommonController
             'model' => $this->findModelLogin($id),
             'searchModelTime' => $searchModelTime,
             'dataProviderTime' => $dataProviderTime,
+            'searchModelCorrections' => $searchModelCorrections,
+            'dataProviderCorrections' => $dataProviderCorrections,
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Students'),
                 'url' => 'show/students'
@@ -103,6 +107,8 @@ class ShowController extends CommonController
         $this->course = 'Piscine C';
         $skills = SkillsHelper::getSkills($id, 4);
         $projects = $this->findProjectsLoginModel($id, 4);
+        $searchModelTime = new LocationsSearch($id);
+        $dataProviderTime = $searchModelTime->search(Yii::$app->request->queryParams);
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -110,6 +116,8 @@ class ShowController extends CommonController
                 'name' => Yii::t('app', 'Pools'),
                 'url' => 'show/pools'
             ],
+            'searchModelTime' => $searchModelTime,
+            'dataProviderTime' => $dataProviderTime,
             'skills' => $skills,
             'switch' => 'students',
             'urlHelperForProjects' => '/pools/projects/',

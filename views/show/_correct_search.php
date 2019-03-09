@@ -9,16 +9,15 @@ use kartik\date\DatePicker;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="correction-log-search">
+<div class="correct-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
+        'action' => [$action],
         'method' => 'get',
         'options' => [
             'data-pjax' => 1
         ],
     ]); ?>
-
 
     <?= $form->field($model, 'dateStart')->widget(DatePicker::className(),[
         'type' => DatePicker::TYPE_INPUT,
