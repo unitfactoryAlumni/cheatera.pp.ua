@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\LogTimeHelper;
 use yii\helpers\Html;
 use dosamigos\chartjs\ChartJs;
 use yii\widgets\Pjax;
@@ -14,23 +15,6 @@ use yii\widgets\Pjax;
     <?php Pjax::begin(); ?>
     <?php echo $this->render('_search_time', ['model' => $searchModelTime, 'action' => $action]); ?>
     <?php
-
-    function countTime($countTime, $summa = null) {
-        if (!isset($summa)) {
-            strtok($countTime, '.');
-            $exp = explode(':', $countTime);
-            $result = intval($exp[0]);
-            $result = $result . '.' . strtok((($exp[1]/60) * 100), '.');
-
-            return ($result);
-        }
-        strtok($countTime, '.');
-        $summa = floatval("$summa");
-        $exp = explode(':', $countTime);
-        $result = intval($exp[0]);
-        $result = $result . '.' . strtok((($exp[1]/60) * 100), '.');
-        return (floatval($result) + floatval($summa));
-    }
 
     $labels = [];
     $data = [];
@@ -52,13 +36,10 @@ use yii\widgets\Pjax;
             }
         }
         if (isset($shit[$model->date]) && $count > 0) {
-            $shit[$model->date] = countTime($model->how, $shit[$model->date]);
+            $shit[$model->date] = LogTimeHelper::countTime($model->how, $shit[$model->date]);
         } else {
-            $shit[$model->date] = countTime($model->how);
+            $shit[$model->date] = LogTimeHelper::countTime($model->how);
         }
-        echo "<pre>";
-        var_export([$model->date => $model->how, $shit[$model->date]]);
-        echo "</pre>";
         $tempDate = date('Y-m-d',strtotime($model->date));
     }
     ;
@@ -66,17 +47,7 @@ use yii\widgets\Pjax;
         $labels = array_merge([$key], $labels);
         $data = array_merge([$value], $data);
     }
-    $fix = 0;
-    foreach ($data as &$key) {
-        if ($fix > 0) {
-            $key = $fix;
-            $fix = 0;
-        }
-        if ($key > 24) {
-            $fix = $key - 24;
-            $key -= 24;
-        }
-    }
+    LogTimeHelper::fix24($data);
 
     echo ChartJs::widget([
         'type' => 'line',
