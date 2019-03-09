@@ -92,6 +92,7 @@ $config = [
                 'students' => 'show/students',
                 'pools' => 'show/pools',
                 'calculator' => 'calculator',
+                'corrections' => 'corrections/index',
             ],
         ],
     ],

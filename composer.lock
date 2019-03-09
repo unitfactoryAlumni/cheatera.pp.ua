@@ -4,8 +4,66 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4168ab4a43b7a879288b7e41ef1d5899",
+    "content-hash": "dc9108baf0875a84bd39a85b77715d00",
     "packages": [
+        {
+            "name": "2amigos/yii2-chartjs-widget",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-chartjs-widget.git",
+                "reference": "a5246d9bb491ef4ff82915dccc6980ed17ed0873"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-chartjs-widget/zipball/a5246d9bb491ef4ff82915dccc6980ed17ed0873",
+                "reference": "a5246d9bb491ef4ff82915dccc6980ed17ed0873",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/chartjs": "~2.6",
+                "yiisoft/yii2": "~2.0.5"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\chartjs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ChartJs widget for Yii2.",
+            "homepage": "http://yiiwheels.com/extension/chartjs-widget",
+            "keywords": [
+                "2amigos",
+                "chartjs",
+                "extension",
+                "widget",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2017-07-26T09:24:16+00:00"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
@@ -21,6 +79,24 @@
             },
             "require": {
                 "bower-asset/jquery": ">=1.9.1,<4.0"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/chartjs",
+            "version": "v2.8.0-RC.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chartjs/Chart.js.git",
+                "reference": "ab8cfa00f23724cd8e18c312e6497db800c196fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chartjs/Chart.js/zipball/ab8cfa00f23724cd8e18c312e6497db800c196fd",
+                "reference": "ab8cfa00f23724cd8e18c312e6497db800c196fd"
             },
             "type": "bower-asset",
             "license": [
@@ -114,16 +190,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "3.2.1",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e"
+                "reference": "9e8ec3d10fad04748176144f108d7355662ae75e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/77d2a51d0520d2ee44173afdf4e40a9201f5964e",
-                "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e"
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/9e8ec3d10fad04748176144f108d7355662ae75e",
+                "reference": "9e8ec3d10fad04748176144f108d7355662ae75e"
             },
             "type": "bower-asset",
             "license": [
@@ -480,6 +556,60 @@
                 "tabs-x"
             ],
             "time": "2018-11-05T12:36:59+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-widget-datepicker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
+                "reference": "ac89cc2371afd1574eb064245758ccfb6b852dd0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/ac89cc2371afd1574eb064245758ccfb6b852dd0",
+                "reference": "ac89cc2371afd1574eb064245758ccfb6b852dd0",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": ">=2.0.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\date\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Enhanced Yii2 wrapper for the bootstrap datepicker plugin (sub repo split from yii2-widgets).",
+            "homepage": "https://github.com/kartik-v/yii2-widget-datepicker",
+            "keywords": [
+                "date",
+                "extension",
+                "form",
+                "jquery",
+                "picker",
+                "plugin",
+                "select2",
+                "widget",
+                "yii2"
+            ],
+            "time": "2018-11-05T12:32:36+00:00"
         },
         {
             "name": "klisl/yii2-languages",
@@ -1941,40 +2071,40 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "dev-master",
+            "version": "6.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "0317a769a81845c390e19684d9ba25d7f6aa4707"
+                "reference": "807e6013b00af69b6c5d9ceb4282d0393dbb9d8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/0317a769a81845c390e19684d9ba25d7f6aa4707",
-                "reference": "0317a769a81845c390e19684d9ba25d7f6aa4707",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/807e6013b00af69b6c5d9ceb4282d0393dbb9d8d",
+                "reference": "807e6013b00af69b6c5d9ceb4282d0393dbb9d8d",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-xmlwriter": "*",
-                "php": "^7.2",
-                "phpunit/php-file-iterator": "^2.0.2",
+                "php": "^7.1",
+                "phpunit/php-file-iterator": "^2.0",
                 "phpunit/php-text-template": "^1.2.1",
-                "phpunit/php-token-stream": "^3.0.1",
+                "phpunit/php-token-stream": "^3.0",
                 "sebastian/code-unit-reverse-lookup": "^1.0.1",
-                "sebastian/environment": "^4.1",
+                "sebastian/environment": "^3.1 || ^4.0",
                 "sebastian/version": "^2.0.1",
                 "theseer/tokenizer": "^1.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.0"
+                "phpunit/phpunit": "^7.0"
             },
             "suggest": {
-                "ext-xdebug": "^2.6.1"
+                "ext-xdebug": "^2.6.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "7.0-dev"
+                    "dev-master": "6.1-dev"
                 }
             },
             "autoload": {
@@ -2000,7 +2130,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-02-26T07:38:26+00:00"
+            "time": "2018-10-31T16:06:48+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3782,7 +3912,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "kartik-v/yii2-widget-datepicker": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

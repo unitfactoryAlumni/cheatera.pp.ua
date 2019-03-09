@@ -70,3 +70,5 @@ RUN composer install
 
 # Finally copy the working dir to the image's web root
 COPY . /var/www/html
+
+RUN echo 'memory_limit=512M' >>   /usr/local/etc/php/php.ini
