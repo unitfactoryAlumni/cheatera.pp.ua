@@ -60,7 +60,7 @@ use yii\widgets\Pjax;
         if (isset($shit[$model->date]) && $count > 0) {
             $shit[$model->date] = countTime($shit[$model->date], $model->how);
         } else {
-            $shit[$model->date] = countTime($model->how);
+            $shit[$model->date] = $model->how != 0 ? countTime($model->how) : 0;
         }
         $tempDate = date('Y-m-d',strtotime($model->date));
     }
