@@ -25,14 +25,11 @@ use yii\widgets\Pjax;
             return ($result);
         }
         strtok($countTime, '.');
-        strtok($summa, '.');
+        $summa = floatval("$summa");
         $exp = explode(':', $countTime);
         $result = intval($exp[0]);
         $result = $result . '.' . strtok((($exp[1]/60) * 100), '.');
-        $exp2 = explode(':', $summa);
-        $result += intval($exp2[0]);
-        $result = $result . '.' . strtok((($exp2[1]/60) * 100), '.');
-        return ($result);
+        return (floatval($result) + floatval($summa));
     }
 
     $labels = [];
@@ -55,7 +52,7 @@ use yii\widgets\Pjax;
             }
         }
         if (isset($shit[$model->date]) && $count > 0) {
-            $shit[$model->date] = countTime($shit[$model->date], $model->how);
+            $shit[$model->date] = countTime($model->how, $shit[$model->date]);
         } else {
             $shit[$model->date] = countTime($model->how);
         }
