@@ -22,6 +22,7 @@ use yii\widgets\Pjax;
     $tempDate = null;
     $count = count($dataProviderTime->models);
     $tempDate = date('Y-m-d', time());
+    $amount = 0;
     foreach ($dataProviderTime->models as $model) {
         if ($count > 0) {
             if ($tempDate != $model->date) {
@@ -45,6 +46,7 @@ use yii\widgets\Pjax;
     foreach ($shit as $key => $value) {
         $labels = array_merge([$key], $labels);
         $data = array_merge([$value], $data);
+        $amount += $value;
     }
     LogTimeHelper::fix24($data);
 
@@ -81,6 +83,7 @@ use yii\widgets\Pjax;
         ]
     ]);?>
 
+    <h4><?= Yii::t('app', 'Amount') . ': ' . $amount ?></h4>
     <?php Pjax::end(); ?>
 
 </div>

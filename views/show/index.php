@@ -8,6 +8,10 @@ use \app\helpers\ViewHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\ShowSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var array $breadcrumbs */
+/* @var array $months */
+/* @var array $years */
+/* @var array $action */
 
 $this->params['breadcrumbs'][] = strtok($this->title, " ");
 ?>
@@ -15,6 +19,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
+    <?php echo $this->render('_search', ['searchModel' => $searchModel, 'action' => $action, 'months' => $months, 'years' => $years]); ?>
     <?php $tmp = Yii::$app->session->get('username') ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
