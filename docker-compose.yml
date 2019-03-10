@@ -6,6 +6,7 @@ services:
       - '8888:80'
     expose:
       - "80"
+      - "9000"
     volumes:
       - ./:/var/www/html/
     links:
@@ -14,7 +15,8 @@ services:
       ENABLE_ENV_FILE: 1
       ENABLE_LOCALCONF: 0
       API_TOKEN: "<YOUR GITHUB API TOKEN>"
-      XDEBUG_CONFIG: remote_host={{YOUR_IP_ADDRESS}}
+      PHP_XDEBUG_ENABLED: 1
+      XDEBUG_CONFIG: remote_host=172.18.0.3
 
   mysql:
     image: mysql:5.7

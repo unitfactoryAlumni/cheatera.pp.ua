@@ -7,7 +7,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get -y install --fix-missing apt-utils build-essential git curl libcurl3 libcurl3-dev zip \
     libmcrypt-dev libsqlite3-dev libsqlite3-0 mysql-client zlib1g-dev libicu-dev sendmail libfreetype6-dev \
-    libjpeg62-turbo-dev libpng-dev wget 
+    libjpeg62-turbo-dev libpng-dev wget net-tools
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -45,18 +45,10 @@ RUN composer install
 
 # Copy the working dir to the image's web root
 COPY . /var/www/html
-RUN ln -fs /var/www/html/assets /var/www/html/web/assets
+RUN mkdir -p /var/www/html/web/assets
 
 # Setup xdebug
-RUN yes | pecl install xdebug \
-    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
-# RUN docker-php-ext-enable xdebug
-
-# Setup database
-# RUN DB_USERNAME=$(grep "^DB_USERNAME=" .env | cut -d= -f2) \
-#     && DB_PASSWORD=$(grep "^DB_PASSWORD=" .env | cut -d= -f2) \
-#     && DB_NAME=$(grep "^DB_NAME=" .env | cut -d= -f2) \
-#     && mysql -u$DB_USERNAME -p$DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS yii2" \
-#     && RUN mysql -u$DB_USERNAME -p$DB_PASSWORD $DB_NAME < schema.sql
+RUN yes | pecl install xdebug
+# Copy php.ini into image
+COPY php.ini.example /usr/local/etc/php/php.ini
+RUN echo "\nzend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" >> /usr/local/etc/php/php.ini
