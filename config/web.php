@@ -39,6 +39,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['/auth?authclient=auth42']
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -92,6 +93,7 @@ $config = [
                 'students' => 'show/students',
                 'pools' => 'show/pools',
                 'calculator' => 'calculator',
+                'corrections' => 'corrections/index',
             ],
         ],
     ],

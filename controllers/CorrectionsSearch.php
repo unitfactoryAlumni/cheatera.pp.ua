@@ -4,20 +4,23 @@ namespace app\controllers;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Projects;
+use app\models\CorrectionLog;
 
 /**
- * ProjectsSearch represents the model behind the search form of `app\models\Projects`.
+ * CorrectionLogSearch represents the model behind the search form of `app\models\CorrectionLog`.
  */
-class ProjectsSearch extends Projects
+class CorrectionsSearch extends CorrectionLog
 {
+    public $dateStart = null;
+    public $dateEnd = null;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['name'], 'safe'],
+            [['id', 'count'], 'integer'],
+            [['date', 'dateStart', 'dateEnd'], 'safe'],
         ];
     }
 
@@ -39,28 +42,41 @@ class ProjectsSearch extends Projects
      */
     public function search($params)
     {
-        $query = Projects::find();
+        $query = CorrectionLog::find();
 
         // add conditions that should always apply here
 
+        $this->load($params);
+
+        if (isset($this->dateStart) && isset($this->dateEnd)) {
+            $query = CorrectionLog::find()
+                ->where(['between', 'date', $this->dateStart, $this->dateEnd]);
+        }
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
-                'pageSize' => 50,
+            'sort' => [
+                'defaultOrder' => [
+                 'date' => SORT_DESC
+                ]
             ],
-            'sort'=> ['defaultOrder' => ['name' => SORT_ASC]]
-
+            'pagination' => [
+                'pageSize' => -1,
+            ],
         ]);
 
-        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-             $query->where('0=1');
+            // $query->where('0=1');
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'count' => $this->count,
+            'date' => $this->date,
+        ]);
 
         return $dataProvider;
     }

@@ -13,10 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please press button to login</p>
-    <p><a class='btn btn-lg btn-warning' href="/auth?authclient=auth42">Auth with 42</a></p>
-    <p>ore fill out the following fields:</p>
-
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',

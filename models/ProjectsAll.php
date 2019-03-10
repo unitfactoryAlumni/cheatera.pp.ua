@@ -26,9 +26,9 @@ use Yii;
 class ProjectsAll extends \yii\db\ActiveRecord
 {
     public $pool_year;
-    public $pool_month;
+    public $pool_month = '';
 
-    public $avgFinalMark;
+    public $fmark;
     public $finished;
     public $failed;
     public $wfc;
@@ -86,6 +86,7 @@ class ProjectsAll extends \yii\db\ActiveRecord
             'inprogress' => Yii::t('app', 'in progress'),
             'sag' => Yii::t('app', 'search group'),
             'cg' => Yii::t('app', 'created'),
+            'location' => Yii::t('app', 'Location'),
         ];
     }
 }

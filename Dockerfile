@@ -52,3 +52,4 @@ RUN yes | pecl install xdebug
 # Copy php.ini into image
 COPY php.ini.example /usr/local/etc/php/php.ini
 RUN echo "\nzend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" >> /usr/local/etc/php/php.ini
+RUN echo 'memory_limit=512M' >> /usr/local/etc/php/php.ini

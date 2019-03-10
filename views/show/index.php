@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use \app\helpers\ViewHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\ShowSearch */
@@ -26,7 +27,30 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
             white-space: nowrap;
             /*font-size: smaller;*/
         }
+
+        .table > tbody > tr.warning > td{
+            background-color:#ffa200!important;
+        }
+
+        .table > tbody > tr.success > td {
+            background-color: #c8ffbe!important;
+        }
+
     </style>
+    <script>
+        $(document).on({
+            mouseenter: function (e) {
+                //stuff to do on mouse enter
+                var test = e.target.getAttribute("name");
+                $("#ah-"+test).css("display", "block");
+            },
+            mouseleave: function (e) {
+                //stuff to do on mouse leave
+                var test = e.target.getAttribute("name");
+                $("#ah-"+test).css("display", "none");
+            }
+        }, "#ah");
+    </script>
     <?php $tmp = Yii::$app->session->get('username') ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -36,7 +60,9 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
         ],
         'rowOptions'=>function($data) use ($tmp) {
             if($data['login'] == $tmp){
-                return ['class' => 'danger'];
+                return ['class' => 'warning'];
+            } else if ($data['lastloc'] == 0) {
+                return ['class' => 'success'];
             }
         },
         'columns' => [
@@ -46,31 +72,33 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                 'label' => '',
                 'format' => 'raw',
                 'attribute' => '',
-                'value'  => function ($data) use ($pageName) {
-                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),"$pageName/" . $data['login']);
+                'contentOptions'=> ['style'=>'position: relative'],
+                'value'  => function($data) use ($pageName) {
+                    return ViewHelper::getLinkWithHover($data['login'], $pageName);
                 },
             ],
             'displayname',
-            // need for hover images
-//            [
-//                'label' => 'Name',
-//                'format' => 'raw',
-//                'value'  => function ($data) use ($pageName) {
-//                        return Html::a(Html::encode($data['displayname']),"$pageName/" . $data['login']);
-//                    },
-//            ],
             'phone',
             [
                 'attribute'=>'level',
                 'value'=>'level',
-                //'contentOptions'=>['style'=>'width: 120px;']
             ],
             'correction_point',
             'pool_year',
             'pool_month',
             'location',
-            'lastloc',
-//            'url:ntext',
+            [
+                'label' => Yii::t('app', 'lastloc'),
+                'attribute' => 'lastloc',
+                'format' => 'raw',
+                'value' => function($data) {
+                    if ($data['lastloc'] == 0) {
+
+                        return Yii::t('app', 'ONLINE');
+                    }
+                    return ViewHelper::getHumanTime($data['lastloc']);
+                },
+            ],
             'wallet',
             'howach',
             'hours',

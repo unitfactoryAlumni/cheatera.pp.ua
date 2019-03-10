@@ -25,6 +25,15 @@ AppAsset::register($this);
     <title>
         <?= Html::encode($this->title) ?>
     </title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122178531-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-122178531-1');
+    </script>
     <?php $this->head() ?>
 </head>
 
@@ -70,27 +79,37 @@ AppAsset::register($this);
                                 ['label' => Yii::t('app', 'Cheating'), 'url' => ['/pools/cheating']],
                             ],
                     ],
-                    ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
-                    // ['label' => 'Home', 'url' => ['/site/index']],
-                    // ['label' => 'About', 'url' => ['/site/about']],
-                    // ['label' => 'Contact', 'url' => ['/site/contact']],
+                    [
+                            'label' => Yii::t('app', 'Services'),
+                            'items' => [
+                                ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
+                                ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
+                            ]
+                    ],
                     Yii::$app->user->isGuest ? (
                         [
-                                'label' => Yii::t('app', 'Sign In'),
+                                'label' => Yii::t('app', 'Account'),
                                 'items' => [
                                     ['label' => Yii::t('app', 'with 42'), 'url' => ['/auth?authclient=auth42']],
                                     ['label' => Yii::t('app', 'with pass'), 'url' => ['/login']],
                             ],
                         ]
                     ) : (
-                        '<li>'
-                        . Html::beginForm(['/site/logout'], 'post')
-                        . Html::submitButton(
-                            Yii::t('app', 'Logout (') . Yii::$app->user->identity->username . ')',
-                            ['class' => 'btn btn-link logout']
-                        )
-                        . Html::endForm()
-                        . '</li>'
+                        [
+                                'label' => Yii::t('app', 'Account'),
+                                'items' => [
+                                    isset(Yii::$app->session['profile']) ? (
+                                            [
+                                                    'label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]
+                                            ]
+                                    ) : '<li class="divider"></li>',
+                                    [
+                                        'label' => Yii::t('app', 'Logout (') . Yii::$app->user->identity->username . ')',
+                                        'url' => ['/site/logout'],
+                                        'linkOptions' => ['data-method' => 'post']
+                                    ],
+                            ],
+                        ]
                     )
                 ],
             ]);

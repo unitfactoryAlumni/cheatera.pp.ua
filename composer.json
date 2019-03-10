@@ -18,7 +18,10 @@
         "klisl/yii2-languages": "^2.4",
         "vlucas/phpdotenv": "^2.5",
         "yiisoft/yii2-authclient": "^2.1",
-        "fedemotta/yii2-widget-datatables": "*"
+        "fedemotta/yii2-widget-datatables": "*",
+        "kartik-v/yii2-tabs-x": "*",
+        "2amigos/yii2-chartjs-widget": "~2.0",
+        "kartik-v/yii2-widget-datepicker": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

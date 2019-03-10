@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use app\helpers\SkillsHelper;
-use app\models\ProjectsAll;
 use app\models\ProjectsLogin;
 use Yii;
 use app\models\Show;
@@ -70,8 +69,17 @@ class ShowController extends CommonController
         $this->course = '42';
         $skills = SkillsHelper::getSkills($id, 1);
         $projects = $this->findProjectsLoginModel($id, 1);
+        $searchModelCorrections = new CorrectSearch($id);
+        $dataProviderCorrections = $searchModelCorrections->search(Yii::$app->request->queryParams);
+        $searchModelTime = new LocationsSearch($id);
+        $dataProviderTime = $searchModelTime->search(Yii::$app->request->queryParams);
+
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
+            'searchModelTime' => $searchModelTime,
+            'dataProviderTime' => $dataProviderTime,
+            'searchModelCorrections' => $searchModelCorrections,
+            'dataProviderCorrections' => $dataProviderCorrections,
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Students'),
                 'url' => 'show/students'
@@ -80,7 +88,9 @@ class ShowController extends CommonController
             'switch' => 'pools',
             'urlHelperForProjects' => '/students/projects/',
             'projects' => $projects['common'],
-            'parents' => $projects['parents']
+            'parents' => $projects['parents'],
+            'course' => 1,
+            'action' => "/students/$id"
         ]);
     }
 
@@ -97,6 +107,10 @@ class ShowController extends CommonController
         $this->course = 'Piscine C';
         $skills = SkillsHelper::getSkills($id, 4);
         $projects = $this->findProjectsLoginModel($id, 4);
+        $searchModelCorrections = new CorrectSearch($id);
+        $dataProviderCorrections = $searchModelCorrections->search(Yii::$app->request->queryParams);
+        $searchModelTime = new LocationsSearch($id);
+        $dataProviderTime = $searchModelTime->search(Yii::$app->request->queryParams);
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -104,11 +118,17 @@ class ShowController extends CommonController
                 'name' => Yii::t('app', 'Pools'),
                 'url' => 'show/pools'
             ],
+            'searchModelTime' => $searchModelTime,
+            'dataProviderTime' => $dataProviderTime,
             'skills' => $skills,
             'switch' => 'students',
             'urlHelperForProjects' => '/pools/projects/',
             'projects' => $projects['common'],
-            'parents' => $projects['parents']
+            'parents' => $projects['parents'],
+            'course' => 4,
+            'action' => "/pools/$id",
+            'searchModelCorrections' => $searchModelCorrections,
+            'dataProviderCorrections' => $dataProviderCorrections,
         ]);
     }
 
@@ -152,6 +172,10 @@ class ShowController extends CommonController
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    /**
+     * @param array $models
+     * @return array
+     */
     private function sortedProjects(array $models)
     {
         $result = [];
@@ -163,11 +187,16 @@ class ShowController extends CommonController
                 $result['withParent'][$this->getProjectNameByID($model->parent_id, $copyModels)][] = $model;
             }
         }
-        $parents = $result['withParent'];
+        $parents = isset($result['withParent']) ? $result['withParent'] : [];
         unset($result['withParent']);
         return ['common' => $result, 'parents' => $parents];
     }
 
+    /**
+     * @param $parent
+     * @param array $models
+     * @return string
+     */
     private function getProjectNameByID($parent, array $models)
     {
         foreach ($models as $model) {

@@ -67,6 +67,9 @@ class Minus42Search extends ProjectsAll
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => $this->getSort(),
+            'pagination' => [
+                'pageSize' => -1,
+            ],
         ]);
 
         $this->load($params);

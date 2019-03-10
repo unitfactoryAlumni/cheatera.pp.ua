@@ -4,11 +4,7 @@ namespace app\controllers;
 
 use app\models\ProjectsAll;
 use Yii;
-use app\models\Projects;
-use app\controllers\ProjectsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ProjectsController implements the CRUD actions for Projects model.
@@ -16,6 +12,8 @@ use yii\filters\VerbFilter;
 class ProjectsController extends CommonController
 {
     protected $course;
+    protected $getId;
+    protected $forParent;
 
     /**
      * Lists all Projects models.
@@ -27,7 +25,7 @@ class ProjectsController extends CommonController
         $description = Yii::t('app','Full information about students projects from UNIT Factory');
         $this->setMeta($title, $description);
 
-        $searchModel = new ProjectsSearch();
+        $searchModel = new ProjectsFilterSearch(['course' => '1', 'parent' => '0']);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -37,7 +35,8 @@ class ProjectsController extends CommonController
                 'name' => Yii::t('app', 'Students'),
                 'url' => 'show/students'
             ],
-            'subPage' => '/students/projects'
+            'subPage' => '/students/projects',
+            'action' => 'students'
         ]);
     }
 
@@ -51,7 +50,7 @@ class ProjectsController extends CommonController
         $description = Yii::t('app','Full information about pools projects from UNIT Factory');
         $this->setMeta($title, $description);
 
-        $searchModel = new ProjectsPoolsSearch();
+        $searchModel = new ProjectsFilterSearch(['course' => 4, 'parent' => 0]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -61,55 +60,75 @@ class ProjectsController extends CommonController
                 'name' => Yii::t('app', 'Pools'),
                 'url' => 'show/pools'
             ],
-            'subPage' => '/pools/projects'
+            'subPage' => '/pools/projects',
+            'action' => 'pools'
         ]);
     }
 
     /**
      * Displays a single students Projects model.
      * @param integer $id
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException
      */
     public function actionStudentsView($id)
     {
-        $title = Yii::t('app', '{0} :: students project UNIT Factory', $id);
-        $description = Yii::t('app','Full information about {0} from UNIT Factory', $id);
-        $this->setMeta($title, $description);
-        $this->course = 1;
-
-        $searchModel = new ProjectsAllSearch($this->course, $id);
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('view', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'breadcrumbs' => [
-                '0' => [
-                    'name' => Yii::t('app', 'Students'),
-                    'url' => 'show/students',
-                ],
-                '1' => [
-                    'name' => Yii::t('app', 'Students Projects'),
-                    'url' => 'projects/students',
-                ],
-            ],
-            'pageName' => 'students',
-        ]);
+        $type = self::checkParentAndChildProjects($id);
+        if (isset($type)) {
+            return $type > 0 ? self::renderSingleProjectChild($id, 'students', 1): self::renderParentProject($id, 'students', 1);
+        }
+        return self::renderSingleProject($id, 'students', 1);
     }
+
 
     /**
      * Displays a single Project models.
      * @param integer $id
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException
      */
     public function actionPoolsView($id)
     {
-        $title = Yii::t('app', '{0} :: pools project UNIT Factory', $id);
-        $description = Yii::t('app','Full information about {0} from UNIT Factory', $id);
-        $this->setMeta($title, $description);
-        $this->course = 4;
+        $type = self::checkParentAndChildProjects($id);
+        if (isset($type)) {
+            return $type > 0 ? self::renderSingleProjectChild($id, 'pools', 4) : self::renderParentProject($id, 'pools', 4);
+        }
+        return self::renderSingleProject($id, 'pools', 4);
+    }
 
-        $searchModel = new ProjectsAllSearch($this->course, $id);
+    /**
+     * @param $id
+     * @return int
+     * @throws NotFoundHttpException
+     */
+    private function checkParentAndChildProjects($id)
+    {
+        $model = ProjectsAll::find()->where("slug = '$id'")->one();
+        if ($model !== null) {
+            if (ProjectsAll::find()
+                    ->where(['parent_id' => $model->project_id])
+                    ->one() !== null) {
+                    return 0;
+            } else if ($model->parent_id !== 0) {
+                return 1;
+            }
+            return null;
+        }
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Method for render Single Project Page without child and parent
+     *
+     * @param $id
+     * @param $case
+     * @param $course
+     * @return string
+     */
+    private function renderSingleProject($id, $case, $course)
+    {
+        self::beforeRender($id, $case);
+        $searchModel = new ProjectsAllSearch($course, $id);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('view', [
@@ -117,15 +136,105 @@ class ProjectsController extends CommonController
             'dataProvider' => $dataProvider,
             'breadcrumbs' => [
                 '0' => [
-                    'name' => Yii::t('app', 'Pools Projects'),
-                    'url' => 'projects/pools',
+                    'name' => Yii::t('app', $case),
+                    'url' => "show/$case",
                 ],
                 '1' => [
-                    'name' => Yii::t('app', 'Pools Projects'),
-                    'url' => 'projects/pools',
+                    'name' => Yii::t('app', $case . ' Projects'),
+                    'url' => "projects/$case",
                 ],
             ],
-            'pageName' => 'pools',
+            'pageName' => $case,
+            'action' => "$case/projects/$id",
         ]);
+    }
+
+    /**
+     * @param $id
+     * @param $case
+     * @param $course
+     * @return string
+     */
+    private function renderSingleProjectChild($id, $case, $course)
+    {
+        self::beforeRender($id, $case, true);
+        $searchModel = new ProjectsAllSearch($course, $id);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('view', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'breadcrumbs' => [
+                '0' => [
+                    'name' => Yii::t('app', $case),
+                    'url' => "show/$case",
+                ],
+                '1' => [
+                    'name' => Yii::t('app', $case . ' Projects'),
+                    'url' => "projects/$case",
+                ],
+                '2' => [
+                    'name' => $this->forParent['name'],
+                    'url' => "/students/projects/" . $this->forParent['slug'],
+                ],
+            ],
+            'pageName' => $case,
+            'action' => "$case/projects/$id",
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @param $case
+     * @param $course
+     * @return string
+     */
+    private function renderParentProject($id, $case, $course)
+    {
+        self::beforeRender($id, $case);
+        $searchModel = new ProjectsAllSearch($course, $id);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModelSubProject = new ProjectsFilterSearch(['course' => $course, 'parent' => $this->getId]);
+        $dataProviderSubProject = $searchModelSubProject->search(Yii::$app->request->queryParams);
+
+        return $this->render('view_with_childs', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'searchModelSubProject' => $searchModelSubProject,
+            'dataProviderSubProject' => $dataProviderSubProject,
+            'breadcrumbs' => [
+                '0' => [
+                    'name' => Yii::t('app', $case),
+                    'url' => "show/$case",
+                ],
+                '1' => [
+                    'name' => Yii::t('app', $case . ' Projects'),
+//                    'url' => "projects/$case",
+                    'url' => "projects/$case",
+                ],
+            ],
+            'pageName' => $case,
+            'subPage' => "/$case/projects",
+            'action' => "$case/projects/$id"
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @param $case
+     * @param null $parent
+     */
+    private function beforeRender($id, $case, $parent = null)
+    {
+        $getName = ProjectsAll::find()->where("slug = '$id'")->one();
+        $this->getId = (ProjectsAll::find()->where("slug = '$id'")->one())->project_id;
+        $project_name = $getName->name;
+        $title = Yii::t('app', '{0} :: {1} project UNIT Factory', [$project_name, $case]);
+        $description = Yii::t('app','Full information about {0} from UNIT Factory', $project_name);
+        $this->setMeta($title, $description);
+        if (isset($parent)) {
+            $parentName = ProjectsAll::find()->where("project_id = '{$getName->parent_id}'")->one();
+            $this->forParent = ['slug' => $parentName->slug, 'name' => $parentName->name];
+        }
     }
 }

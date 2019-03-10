@@ -1,7 +1,9 @@
 <?php
 
+use app\helpers\ViewHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -10,12 +12,15 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var string $pageName */
 
-$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['0']['name'], 'url' => [$breadcrumbs['0']['url']]];
-$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['1']['name'], 'url' => [$breadcrumbs['1']['url']]];
-$this->params['breadcrumbs'][] = strtok($this->title, ' ');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', ucfirst($breadcrumbs['0']['name'])), 'url' => [$breadcrumbs['0']['url']]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', ucfirst($breadcrumbs['1']['name'])), 'url' => [$breadcrumbs['1']['url']]];
+if (isset($breadcrumbs['2'])) {
+    $this->params['breadcrumbs'][] = ['label' => Yii::t('app', ucfirst($breadcrumbs['2']['name'])), 'url' => [$breadcrumbs['2']['url']]];
+}
+$this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
 ?>
 <div class="projects-view">
-    <h1><?= Html::encode(strtok($this->title, ' ')) ?></h1>
+    <h1><?php if (isset($breadcrumbs['2']['name'])) { echo $breadcrumbs['2']['name'];} ?> <?= Html::encode(ucfirst(strtok($this->title, '::'))) ?></h1>
     <?php Pjax::begin(); ?>
     <style>
         .filters .form-control {
@@ -27,6 +32,26 @@ $this->params['breadcrumbs'][] = strtok($this->title, ' ');
             /*font-size: smaller;*/
         }
     </style>
+    <div class="projects-all-search">
+
+        <?php $form = ActiveForm::begin([
+            'action' => [$action],
+            'method' => 'get',
+            'options' => [
+                'data-pjax' => 1
+            ],
+        ]); ?>
+        <?php echo $form->field($searchModel, 'pool_month')->label(Yii::t('app', 'Pool Month')) ?>
+        <?php echo $form->field($searchModel, 'pool_year')->label(Yii::t('app', 'Pool Year')) ?>
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+            <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+
+    </div>
+
     <?php $tmp = Yii::$app->session->get('username') ?>
     <?=
     GridView::widget([
@@ -37,7 +62,9 @@ $this->params['breadcrumbs'][] = strtok($this->title, ' ');
         ],
         'rowOptions'=>function($data) use ($tmp) {
             if($data['xlogin'] == $tmp){
-                return ['class' => 'danger'];
+                return ['class' => 'info'];
+            } else if ($data['lastloc'] == 0) {
+                return ['class' => 'success'];
             }
         },
         'columns' => [
@@ -49,7 +76,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, ' ');
                 'format' => 'raw',
                 'attribute' => '',
                 'value'  => function ($data) use ($pageName) {
-                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),"$pageName/" . $data['xlogin']);
+                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),'/'. Yii::$app->language . "/$pageName/" . $data['xlogin'], ['data-pjax' => '0']);
                 },
             ],
             'final_mark',
@@ -57,7 +84,18 @@ $this->params['breadcrumbs'][] = strtok($this->title, ' ');
             'status',
             'validated',
             'location',
-            'lastloc',
+            [
+                'label' => Yii::t('app', 'lastloc'),
+                'attribute' => 'lastloc',
+                'format' => 'raw',
+                'value' => function($data) {
+                    if ($data['lastloc'] == 0) {
+
+                        return Yii::t('app', 'ONLINE');
+                    }
+                    return ViewHelper::getHumanTime($data['lastloc']);
+                },
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>
