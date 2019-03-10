@@ -11,7 +11,7 @@ use app\helpers\ViewHelper;
 
 ?>
 
-                    <h5 class="card-title">Projects</h5>
+                    <h5 class="card-title"><?= Yii::t('app', 'Projects') ?></h5>
                     <div style="max-width: 100%; overflow: auto;">
                         <table class="table ">
                             <thead>

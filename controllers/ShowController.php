@@ -172,6 +172,10 @@ class ShowController extends CommonController
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    /**
+     * @param array $models
+     * @return array
+     */
     private function sortedProjects(array $models)
     {
         $result = [];
@@ -188,6 +192,11 @@ class ShowController extends CommonController
         return ['common' => $result, 'parents' => $parents];
     }
 
+    /**
+     * @param $parent
+     * @param array $models
+     * @return string
+     */
     private function getProjectNameByID($parent, array $models)
     {
         foreach ($models as $model) {

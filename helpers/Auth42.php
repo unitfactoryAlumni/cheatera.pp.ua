@@ -9,7 +9,10 @@
 namespace app\helpers;
 
 use Yii;
+use yii\authclient\InvalidResponseException;
 use yii\authclient\OAuth2;
+use yii\helpers\Url;
+use yii\web\HttpException;
 
 class Auth42 extends OAuth2
 {
@@ -48,7 +51,13 @@ class Auth42 extends OAuth2
         return $this->composeUrl($this->authUrl, array_merge($defaultParams, $params));
     }
 
-    public function fetchClientAuthCode(OAuthToken $token = null, $params = [])
+    /**
+     * @param $token
+     * @param array $params
+     * @return mixed
+     * @throws \yii\authclient\InvalidResponseException
+     */
+    public function fetchClientAuthCode($token = null, $params = [])
     {
         if ($token === null) {
             $token = $this->getAccessToken();
@@ -65,7 +74,6 @@ class Auth42 extends OAuth2
             ->setData($params);
 
         $this->applyClientCredentialsToRequest($request);
-
         $response = $this->sendRequest($request);
 
         return $response['code'];
@@ -79,15 +87,35 @@ class Auth42 extends OAuth2
             ->setHeaders($params);
         $response = $this->sendRequest($request);
 
-        $cookies = Yii::$app->response->cookies;
-        $cookies->add(new \yii\web\Cookie([
-            'name' => 'level',
-            'value' => $response['cursus_users'][0]['level'],
-        ]));
-
+        if (isset($response['cursus_users'][0]['level'])) {
+            $cookies = Yii::$app->response->cookies;
+            $cookies->add(new \yii\web\Cookie([
+                'name' => 'level',
+                'value' => $response['cursus_users'][0]['level'],
+            ]));
+        }
+        $profileLink = '/pools/';
+        if (isset($response['cursus_users'])) {
+            if (count($response['cursus_users']) > 1 &&
+            isset($response['login'])) {
+                $profileLink = Url::to('/students/' . $response['login']);
+            } else if (isset($response['login'])) {
+                $profileLink .= $response['login'];
+            }
+        } else {
+            $profileLink = '';
+        }
+        Yii::$app->session['profile'] = $profileLink;
         return $response;
     }
 
+    /**
+     * @param $authCode
+     * @param $state
+     * @param array $params
+     * @return \yii\authclient\OAuthToken
+     * @throws HttpException
+     */
     public function fetchClientAccessToken($authCode, $state, array $params = [])
     {
         $params = array_merge([
@@ -103,7 +131,11 @@ class Auth42 extends OAuth2
             ->setMethod('POST')
             ->setUrl($this->tokenUrl)
             ->setData($params);
-        $response = $this->sendRequest($request);
+        try {
+            $response = $this->sendRequest($request);
+        } catch (InvalidResponseException $e) {
+            throw new \yii\web\ForbiddenHttpException(Yii::t('app', '42API error! Please, try again'));
+        }
 
         $token = $this->createToken(['params' => $response]);
         $this->setAccessToken($token);

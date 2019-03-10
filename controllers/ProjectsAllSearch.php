@@ -67,7 +67,7 @@ class ProjectsAllSearch extends ProjectsAll
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 50,
+                'pageSize' => -1,
             ],
             'sort'=> ['defaultOrder' => [
                 'final_mark' => SORT_DESC,

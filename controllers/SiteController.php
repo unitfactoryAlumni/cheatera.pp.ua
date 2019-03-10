@@ -66,19 +66,21 @@ class SiteController extends CommonController
 
     /**
      * Page after 42 auth.
-     * 
+     *
      * @return string
      * @throws HttpException
+     * @throws \yii\base\ExitException
      */
     public function actionWelcome()
     {
+        $request = Yii::$app->request->get();
+        if (!isset($request['code'])) {
+            Yii::$app->response->redirect(Url::to(['/']), 301);
+            Yii::$app->end();
+        }
         $user = new User;
         $api = new Auth42;
         $log = new Log;
-        $request = Yii::$app->request->get();
-        if (!isset($request['code'])) {
-            throw new HttpException(500, 'Sorry, try again later');
-        }
         $token = $api->fetchClientAccessToken($request['code'], $request['state']);
         $token = $token->getToken();
         $answer = $api->fetchMe(["Authorization: Bearer $token"]);
@@ -97,6 +99,7 @@ class SiteController extends CommonController
         Yii::$app->session->set('username', $answer['login']);
         return Yii::$app->response->redirect('/', 301)->send();
     }
+
     /**
      * Displays homepage.
      *
@@ -117,7 +120,9 @@ class SiteController extends CommonController
      */
     public function actionLogin()
     {
-//        return Yii::$app->response->redirect('/auth?authclient=auth42', 301)->send();
+        /**
+         *  Yii::$app->response->redirect('/auth?authclient=auth42', 301)->send();
+         */
 
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -126,7 +131,6 @@ class SiteController extends CommonController
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-
         $model->password = '';
         return $this->render('login', [
             'model' => $model,
