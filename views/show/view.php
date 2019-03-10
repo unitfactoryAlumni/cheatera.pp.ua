@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                     <p class="card-text"><b>Last login:</b> <?= $model['lastloc']?></p>
                     <p class="card-text"><b>Hours at cluster:</b> <?= $model['hours']?></p>
                     <a href="//profile.intra.42.fr/users/<?= $model['login']?>" target="_blank" class="btn btn-warning bg-warning">Intra</a>
-                    <a href="/<?= $switch ?>/<?= $model['login'] ?>" class="btn btn-success bg-success"><?= ucfirst(substr_replace($switch, "", -1)) ?> Profile</a>
+                    <a href="<?= '/' . Yii::$app->language . '/' . $switch ?>/<?= $model['login'] ?>" class="btn btn-success bg-success"><?= ucfirst(substr_replace($switch, "", -1)) ?> Profile</a>
                 </div>
             </div>
             <div class="card" style="width: 100%;">
@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                 'content' => $times,
             ],
             [
-                'label'   => '<i class="glyphicon glyphicon-ok-circle"></i> ' . Yii::t('app', 'Corrections Log'),
+                'label'   => '<i class="glyphicon glyphicon-ok-circle"></i> ' . Yii::t('app', 'Correction Logs'),
                 'content' => $corrections,
             ],
             [

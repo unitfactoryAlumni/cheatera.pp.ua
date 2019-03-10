@@ -30,7 +30,7 @@ use yii\widgets\Pjax;
             'labels' => $labels,
             'datasets' => [
                 [
-                    'label' => Yii::t('app', 'Time in cluster'),
+                    'label' => Yii::t('app', 'Correction Logs'),
                     'backgroundColor' => "rgba(255,99,132,0.2)",
                     'borderColor' => "rgba(255,99,132,1)",
                     'pointBackgroundColor' => "rgba(255,99,132,1)",

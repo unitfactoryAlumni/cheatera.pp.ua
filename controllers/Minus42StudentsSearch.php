@@ -57,6 +57,9 @@ class Minus42StudentsSearch extends Minus42
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => $this->getSort(),
+            'pagination' => [
+                'pageSize' => -1,
+            ],
         ]);
 
         $this->load($params);

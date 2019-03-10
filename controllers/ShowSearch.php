@@ -56,7 +56,10 @@ class ShowSearch extends Show
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => $this->getSort()
+            'sort' => $this->getSort(),
+            'pagination' => [
+                'pageSize' => -1,
+            ],
         ]);
 
         $this->load($params);

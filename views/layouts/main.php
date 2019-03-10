@@ -79,8 +79,13 @@ AppAsset::register($this);
                                 ['label' => Yii::t('app', 'Cheating'), 'url' => ['/pools/cheating']],
                             ],
                     ],
-                    ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
-                    ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
+                    [
+                            'label' => Yii::t('app', 'Services'),
+                            'items' => [
+                                ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
+                                ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
+                            ]
+                    ],
                     Yii::$app->user->isGuest ? (
                         [
                                 'label' => Yii::t('app', 'Account'),

@@ -4,11 +4,7 @@ namespace app\controllers;
 
 use app\models\ProjectsAll;
 use Yii;
-use app\models\Projects;
-use app\controllers\ProjectsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ProjectsController implements the CRUD actions for Projects model.
@@ -153,6 +149,12 @@ class ProjectsController extends CommonController
         ]);
     }
 
+    /**
+     * @param $id
+     * @param $case
+     * @param $course
+     * @return string
+     */
     private function renderSingleProjectChild($id, $case, $course)
     {
         self::beforeRender($id, $case, true);
@@ -181,6 +183,12 @@ class ProjectsController extends CommonController
         ]);
     }
 
+    /**
+     * @param $id
+     * @param $case
+     * @param $course
+     * @return string
+     */
     private function renderParentProject($id, $case, $course)
     {
         self::beforeRender($id, $case);
@@ -211,6 +219,11 @@ class ProjectsController extends CommonController
         ]);
     }
 
+    /**
+     * @param $id
+     * @param $case
+     * @param null $parent
+     */
     private function beforeRender($id, $case, $parent = null)
     {
         $getName = ProjectsAll::find()->where("slug = '$id'")->one();

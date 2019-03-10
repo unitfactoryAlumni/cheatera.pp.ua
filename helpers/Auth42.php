@@ -95,7 +95,6 @@ class Auth42 extends OAuth2
             ]));
         }
         $profileLink = '/pools/';
-        unset($response['cursus_users'][1]);
         if (isset($response['cursus_users'])) {
             if (count($response['cursus_users']) > 1 &&
             isset($response['login'])) {
