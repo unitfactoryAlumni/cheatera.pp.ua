@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="projects-all-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
+    <?php Pjax::begin(['timeout' => 10000 ]); ?>
     <style>
         .filters .form-control {
             max-height: 25px;
