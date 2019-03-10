@@ -113,7 +113,6 @@ class ViewHelper
 
     public static function getHumanTime($datetime, $full = false)
     {
-        date_default_timezone_set('GTM+2');
         $now = new DateTime;
         $ago = new DateTime($datetime);
         $diff = $now->diff($ago);

@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                     <p class="card-text"><b><?= Yii::t('app', 'Correction Point') ?>:</b> <?= $model['correction_point']?></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Achievements:') ?></b> <?= $model['howach']?></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Host') ?>:</b> <?= $model['location']?></p>
-                    <p class="card-text"><b><?= Yii::t('app', 'Last login') ?>:</b> <?=  ViewHelper::getHumanTime($model['lastloc'])?></p>
+                    <p class="card-text"><b><?= Yii::t('app', 'Last login') ?>:</b> <?php if ($model['lastloc'] == 0) { echo Yii::t('app', 'ONLINE'); } else { echo ViewHelper::getHumanTime($model['lastloc']);}?></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Hours at cluster') ?>:</b> <?= $model['hours']?></p>
                     <a href="//profile.intra.42.fr/users/<?= $model['login']?>" target="_blank" class="btn btn-warning bg-warning">Intra</a>
                     <a href="<?= '/' . Yii::$app->language . '/' . $switch ?>/<?= $model['login'] ?>" class="btn btn-success bg-success"><?= ucfirst(substr_replace($switch, "", -1)) ?> Profile</a>
