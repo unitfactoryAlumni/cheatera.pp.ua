@@ -20,7 +20,7 @@ use kartik\date\DatePicker;
     ]); ?>
 
 
-    <?= $form->field($model, 'dateStart')->widget(DatePicker::className(),[
+    <?= $form->field($model, 'dateStart')->label(Yii::t('app', 'dateStart'))->widget(DatePicker::className(),[
         'type' => DatePicker::TYPE_INPUT,
         'removeButton' => ['icon' => 'trash'],
         'pickerButton' => false,
@@ -30,7 +30,7 @@ use kartik\date\DatePicker;
             'todayHighlight' => true,
         ]
     ]) ?>
-    <?= $form->field($model, 'dateEnd')->widget(DatePicker::className(),[
+    <?= $form->field($model, 'dateEnd')->label(Yii::t('app', 'dateEnd'))->widget(DatePicker::className(),[
         'type' => DatePicker::TYPE_INPUT,
         'removeButton' => ['icon' => 'trash'],
         'pickerButton' => false,

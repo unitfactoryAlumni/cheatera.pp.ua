@@ -86,6 +86,7 @@ class ProjectsAll extends \yii\db\ActiveRecord
             'inprogress' => Yii::t('app', 'in progress'),
             'sag' => Yii::t('app', 'search group'),
             'cg' => Yii::t('app', 'created'),
+            'location' => Yii::t('app', 'Location'),
         ];
     }
 }

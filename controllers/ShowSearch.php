@@ -20,7 +20,7 @@ class ShowSearch extends Show
         return [
             [['id', 'xid', 'pool_year', 'kick', 'needupd', 'visible'], 'integer'],
             [['lasthours'], 'number'],
-            [['displayname', 'location', 'login', 'phone', 'pool_month', 'pool_year', 'location', 'lastloc'], 'safe'],
+            [['displayname', 'location', 'login', 'phone', 'pool_month', 'pool_year', 'location',], 'safe'],
         ];
     }
 

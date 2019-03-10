@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'labels' => $labels,
             'datasets' => [
                 [
-                    'label' => Yii::t('app', 'Correction Points Log'),
+                    'label' => Yii::t('app', 'Correction Logs'),
                     'backgroundColor' => "rgba(255,99,132,0.2)",
                     'borderColor' => "rgba(255,99,132,1)",
                     'pointBackgroundColor' => "rgba(255,99,132,1)",

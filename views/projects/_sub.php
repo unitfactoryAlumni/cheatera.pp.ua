@@ -23,8 +23,8 @@ use yii\widgets\Pjax;
             ],
         ]); ?>
 
-        <?php echo $form->field($searchModel, 'pool_month') ?>
-        <?php echo $form->field($searchModel, 'pool_year') ?>
+        <?php echo $form->field($searchModel, 'pool_month')->label(Yii::t('app', 'Pool Month')) ?>
+        <?php echo $form->field($searchModel, 'pool_year')->label(Yii::t('app', 'Pool Year')) ?>
 
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

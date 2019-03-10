@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\ViewHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -11,10 +12,10 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var string $pageName */
 
-$this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['0']['name']), 'url' => [$breadcrumbs['0']['url']]];
-$this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['1']['name']), 'url' => [$breadcrumbs['1']['url']]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', ucfirst($breadcrumbs['0']['name'])), 'url' => [$breadcrumbs['0']['url']]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', ucfirst($breadcrumbs['1']['name'])), 'url' => [$breadcrumbs['1']['url']]];
 if (isset($breadcrumbs['2'])) {
-    $this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['2']['name']), 'url' => [$breadcrumbs['2']['url']]];
+    $this->params['breadcrumbs'][] = ['label' => Yii::t('app', ucfirst($breadcrumbs['2']['name'])), 'url' => [$breadcrumbs['2']['url']]];
 }
 $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
 ?>
@@ -40,10 +41,8 @@ $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
                 'data-pjax' => 1
             ],
         ]); ?>
-
-        <?php echo $form->field($searchModel, 'pool_month') ?>
-        <?php echo $form->field($searchModel, 'pool_year') ?>
-
+        <?php echo $form->field($searchModel, 'pool_month')->label(Yii::t('app', 'Pool Month')) ?>
+        <?php echo $form->field($searchModel, 'pool_year')->label(Yii::t('app', 'Pool Year')) ?>
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
             <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
@@ -85,7 +84,18 @@ $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
             'status',
             'validated',
             'location',
-            'lastloc',
+            [
+                'label' => Yii::t('app', 'lastloc'),
+                'attribute' => 'lastloc',
+                'format' => 'raw',
+                'value' => function($data) {
+                    if ($data['lastloc'] == 0) {
+
+                        return Yii::t('app', 'ONLINE');
+                    }
+                    return ViewHelper::getHumanTime($data['lastloc']);
+                },
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

@@ -143,4 +143,19 @@ return [
     'Time in cluster' => 'Время в кластере',
     'Correction Logs' => 'Логи коррекшинов',
     'Achievements' => 'Ачивки',
+
+    'Show profile ' => 'Посмотреть профиль ',
+    'ONLINE' => 'ОНЛАЙН',
+    'lastloc' => 'Последний логин',
+    'Search' => 'Поиск',
+    'Reset' => 'Сброс',
+    'dateStart' => 'Дата начала',
+    'dateEnd' => 'Дата окончания',
+
+    'Pool Month' => 'Месяц бассейна',
+    'Pool Year' => 'Год бассейна',
+    'Sub Project' => 'Подпроекты',
+    'Marks' => 'Оценки',
+    'Location' => 'Хост',
+
 ];
