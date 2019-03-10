@@ -16,7 +16,7 @@ use kartik\select2\Select2;
 /* @var array $years */
 
     $tmp = Yii::$app->session->get('username') ?>
-    <?php Pjax::begin(); ?>
+    <?php Pjax::begin(['timeout' => 10000 ]); ?>
     <div class="projects-all-search-sub">
 
 

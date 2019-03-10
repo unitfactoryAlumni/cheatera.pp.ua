@@ -19,7 +19,6 @@ $this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['0']['name']),
 $this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['1']['name']), 'url' => [$breadcrumbs['1']['url']]];
 $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
 ?>
-<?php Pjax::begin(); ?>
 <div class="projects-view">
     <h1><?= Html::encode(ucfirst(strtok($this->title, '::'))) ?></h1>
 
@@ -59,4 +58,3 @@ $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
         }
     </style>
 </div>
-<?php Pjax::end(); ?>
