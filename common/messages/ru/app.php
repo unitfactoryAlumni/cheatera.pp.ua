@@ -43,7 +43,7 @@ return [
     'grade' => 'Звание',
 
     // Project Controllers
-    'Students projects UNIT Factory' => 'Проектов студентов UNIT Factory',
+    'Students projects UNIT Factory' => 'Проекты студентов UNIT Factory',
     'Full information about students projects from UNIT Factory' => 'Полная информация о проектах студентов в UNIT Factory',
     'Pools projects UNIT Factory' => 'Проекты участников бассейна в UNIT Factory',
     'Full information about pools projects from UNIT Factory' => 'Полная информация о проектах участников бассейна в UNIT Factory',

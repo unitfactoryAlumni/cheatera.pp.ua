@@ -15,42 +15,6 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
-
-    <p>
-    </p>
-    <style>
-        .filters .form-control {
-            max-height: 25px;
-        }
-
-        .table {
-            white-space: nowrap;
-            /*font-size: smaller;*/
-        }
-
-        .table > tbody > tr.warning > td{
-            background-color:#ffa200!important;
-        }
-
-        .table > tbody > tr.success > td {
-            background-color: #c8ffbe!important;
-        }
-
-    </style>
-    <script>
-        $(document).on({
-            mouseenter: function (e) {
-                //stuff to do on mouse enter
-                var test = e.target.getAttribute("name");
-                $("#ah-"+test).css("display", "block");
-            },
-            mouseleave: function (e) {
-                //stuff to do on mouse leave
-                var test = e.target.getAttribute("name");
-                $("#ah-"+test).css("display", "none");
-            }
-        }, "#ah");
-    </script>
     <?php $tmp = Yii::$app->session->get('username') ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

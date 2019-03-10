@@ -1,15 +1,18 @@
 <?php
 
-use yii\bootstrap\Collapse;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\ProjectsFilterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var array $breadcrumbs */
+/* @var array $months */
+/* @var array $years */
+/* @var array $action */
 
-//$this->title = Yii::t('app', 'Projects');
+$this->title = Yii::t('app', 'Projects');
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -29,16 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         }
     </style>
 
-    <?php echo Collapse::widget([
-        'items' => [
-            [
-                'label' => Yii::t('app', 'Advanced Filter'),
-                'content' => $this->render('_search', ['model' => $searchModel, 'action' => $action]),
-                'contentOptions' => [],
-                'options' => []
-            ],
-        ]
-    ]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel, 'action' => $action, 'months' => $months, 'years' => $years]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -19,12 +19,11 @@ use yii\widgets\Pjax;
     $labels = [];
     $data = [];
     $shit = [];
-    $it = 0;
     $tempDate = null;
     $count = count($dataProviderTime->models);
+    $tempDate = date('Y-m-d', time());
     foreach ($dataProviderTime->models as $model) {
-        $it++;
-        if ($it > 1 && $count > 0) {
+        if ($count > 0) {
             if ($tempDate != $model->date) {
                 while ($count > 0 && $tempDate != $model->date) {
                     $tempDate = date('Y-m-d',strtotime($tempDate . "-1 days"));
