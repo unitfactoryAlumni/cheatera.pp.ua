@@ -68,16 +68,12 @@ return [
     'Validated' => '',
 
     // models/Achievements.php
-    'Xlogin' => '',
     'Description' => '',
     'Kind' => 'Grade',
-    'Name' => '',
     'Nbr Of Success' => '',
     'Tier' => '',
 
     // models/PoolsList.php
-    'Year' => '',
-    'Month' => '',
     'Begin At' => '',
     'End At' => '',
 
@@ -136,4 +132,7 @@ return [
     'Skills Level' => '',
     'Skills Name' => '',
     'Subject' => '',
+
+
+    '42API error! Please, try again' => '',
 ];
