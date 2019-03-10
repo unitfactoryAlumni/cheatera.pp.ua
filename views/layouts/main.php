@@ -124,7 +124,7 @@ AppAsset::register($this);
             <?= $content ?>
         </div>
     </div>
-
+    <hr style="height: 130px; opacity: 0;">
     <footer class="footer">
         <div class="container">
             <p class="pull-left">
@@ -137,7 +137,39 @@ AppAsset::register($this);
         </div>
     </footer>
     <?php $this->endBody() ?>
+    <style>
+        .filters .form-control {
+            max-height: 25px;
+        }
 
+        .table {
+            white-space: nowrap;
+            /*font-size: smaller;*/
+        }
+
+        .table > tbody > tr.warning > td{
+            background-color:#ffa200!important;
+        }
+
+        .table > tbody > tr.success > td {
+            background-color: #c8ffbe!important;
+        }
+
+    </style>
+    <script>
+        $(document).on({
+            mouseenter: function (e) {
+                //stuff to do on mouse enter
+                var test = e.target.getAttribute("name");
+                $("#ah-"+test).css("display", "block");
+            },
+            mouseleave: function (e) {
+                //stuff to do on mouse leave
+                var test = e.target.getAttribute("name");
+                $("#ah-"+test).css("display", "none");
+            }
+        }, "#ah");
+    </script>
     <script>
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();

@@ -21,7 +21,8 @@
         "fedemotta/yii2-widget-datatables": "*",
         "kartik-v/yii2-tabs-x": "*",
         "2amigos/yii2-chartjs-widget": "~2.0",
-        "kartik-v/yii2-widget-datepicker": "@dev"
+        "kartik-v/yii2-widget-datepicker": "@dev",
+        "kartik-v/yii2-widget-select2": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
