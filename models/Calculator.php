@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
 
 /**
@@ -73,6 +74,12 @@ class Calculator extends Model
     {
         $this->result = 0;
         $this->lvl_max = count(self::$_expr_per_lvl) - 2;
+
+        $this->finalmark = 125;
+
+        $cookies = Yii::$app->request->cookies;
+        $level = $cookies->getValue('level');
+        $this->lvlstart = $level;
     }
 
     /**
@@ -83,6 +90,7 @@ class Calculator extends Model
         return [
             [['lvlstart', 'tier', 'finalmark'], 'required'],
             ['lvlstart', 'number', 'min' => 0, 'max' => $this->lvl_max],
+            ['tier', 'number', 'min' => 0, 'max' => 7],
             ['finalmark', 'number', 'min' => 50, 'max' => 125]
         ];
     }
@@ -98,6 +106,13 @@ class Calculator extends Model
             'finalmark' => '',
         ];
     }
+
+    public function getTier()
+    {
+        return [ 'T0', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7' ];
+    }
+
+
 
     /**
     * Do all magic ie counts the particular lvl up value from parameters.
@@ -119,7 +134,7 @@ class Calculator extends Model
         $fract_part = $this->lvlstart - $lvlstart_int;
         $eplvl = self::$_expr_per_lvl;
 
-        $expr_raising = self::$_expr_per_tier[$this->tier - 1] * $this->finalmark
+        $expr_raising = self::$_expr_per_tier[$this->tier] * $this->finalmark
         + $eplvl[$lvlstart_int]
         + ($eplvl[$lvlstart_int + 1] - $eplvl[$lvlstart_int]) * $fract_part;
 
@@ -135,6 +150,9 @@ class Calculator extends Model
         $res = (($expr_raising - $eplvl[$i]) / $res) / 100;
         $res += $i;
 
+        if ($this->lvlstart >= $res) {
+            return $this->result = 30;
+        }
         return $this->result = $res;
     }
 }

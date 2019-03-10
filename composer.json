@@ -1,6 +1,6 @@
 {
-    "name": "cheatera.pp.ua",
-    "description": "cheatera.pp.ua",
+    "name": "omentes/cheatera.pp.ua",
+    "description": "omentes/cheatera.pp.ua",
     "keywords": ["unit factory", "42"],
     "homepage": "https://cheatera.pp.ua/",
     "type": "project",
@@ -27,11 +27,7 @@
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
         "yiisoft/yii2-gii": "~2.0.0",
-        "yiisoft/yii2-faker": "~2.0.0",
-
-        "codeception/base": "^2.2.3",
-        "codeception/verify": "~0.3.1",
-        "codeception/specify": "~0.4.3"
+        "yiisoft/yii2-faker": "~2.0.0"
     },
     "config": {
         "process-timeout": 1800,

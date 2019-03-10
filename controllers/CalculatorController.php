@@ -20,8 +20,8 @@ class CalculatorController extends CommonController
         $title = Yii::t('app', 'Experience calculator');
         $description = Yii::t('app', 'Want to know your level after project evaluation -- use our Experience calculator!');
         $this->setMeta($title, $description);
+        
         $model = new Calculator();
-
         $request = \Yii::$app->request;
         if ($request->isPost) {
            if ($model->load($request->post()) && $model->validate()) {
