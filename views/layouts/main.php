@@ -83,21 +83,28 @@ AppAsset::register($this);
                     ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
                     Yii::$app->user->isGuest ? (
                         [
-                                'label' => Yii::t('app', 'Sign In'),
+                                'label' => Yii::t('app', 'Account'),
                                 'items' => [
                                     ['label' => Yii::t('app', 'with 42'), 'url' => ['/auth?authclient=auth42']],
                                     ['label' => Yii::t('app', 'with pass'), 'url' => ['/login']],
                             ],
                         ]
                     ) : (
-                        '<li>'
-                        . Html::beginForm(['/site/logout'], 'post')
-                        . Html::submitButton(
-                            Yii::t('app', 'Logout (') . Yii::$app->user->identity->username . ')',
-                            ['class' => 'btn btn-link logout']
-                        )
-                        . Html::endForm()
-                        . '</li>'
+                        [
+                                'label' => Yii::t('app', 'Account'),
+                                'items' => [
+                                    isset(Yii::$app->session['profile']) ? (
+                                            [
+                                                    'label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]
+                                            ]
+                                    ) : '<li class="divider"></li>',
+                                    [
+                                        'label' => Yii::t('app', 'Logout (') . Yii::$app->user->identity->username . ')',
+                                        'url' => ['/site/logout'],
+                                        'linkOptions' => ['data-method' => 'post']
+                                    ],
+                            ],
+                        ]
                     )
                 ],
             ]);

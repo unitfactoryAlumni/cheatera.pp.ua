@@ -120,33 +120,21 @@ class SiteController extends CommonController
      */
     public function actionLogin()
     {
+        /**
+         *  Yii::$app->response->redirect('/auth?authclient=auth42', 301)->send();
+         */
 
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-
         $model->password = '';
         return $this->render('login', [
             'model' => $model,
         ]);
-
-        /**
-         *
-        else {
-        return Yii::$app->response->redirect('/auth?authclient=auth42', 301)->send();
-        }
-         *
-
-
-         *
-         *
-         */
     }
 
     /**

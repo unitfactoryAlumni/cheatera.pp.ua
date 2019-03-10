@@ -11,6 +11,7 @@ namespace app\helpers;
 use Yii;
 use yii\authclient\InvalidResponseException;
 use yii\authclient\OAuth2;
+use yii\helpers\Url;
 use yii\web\HttpException;
 
 class Auth42 extends OAuth2
@@ -86,12 +87,26 @@ class Auth42 extends OAuth2
             ->setHeaders($params);
         $response = $this->sendRequest($request);
 
-        $cookies = Yii::$app->response->cookies;
-        $cookies->add(new \yii\web\Cookie([
-            'name' => 'level',
-            'value' => $response['cursus_users'][0]['level'],
-        ]));
-
+        if (isset($response['cursus_users'][0]['level'])) {
+            $cookies = Yii::$app->response->cookies;
+            $cookies->add(new \yii\web\Cookie([
+                'name' => 'level',
+                'value' => $response['cursus_users'][0]['level'],
+            ]));
+        }
+        $profileLink = '/pools/';
+        unset($response['cursus_users'][1]);
+        if (isset($response['cursus_users'])) {
+            if (count($response['cursus_users']) > 1 &&
+            isset($response['login'])) {
+                $profileLink = Url::to('/students/' . $response['login']);
+            } else if (isset($response['login'])) {
+                $profileLink .= $response['login'];
+            }
+        } else {
+            $profileLink = '';
+        }
+        Yii::$app->session['profile'] = $profileLink;
         return $response;
     }
 
