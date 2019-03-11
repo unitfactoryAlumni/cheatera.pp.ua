@@ -58,6 +58,7 @@ RUN usermod -u 1000 www-data
 
 # Copy the working dir to the image's web root
 COPY . /var/www/html
+RUN mkdir -p /var/www/html/web/assets
 
 # Writing php.ini
 RUN echo 'memory_limit=512M' >> /usr/local/etc/php/php.ini

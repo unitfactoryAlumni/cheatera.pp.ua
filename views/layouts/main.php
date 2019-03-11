@@ -11,7 +11,12 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+$this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);
+
+// echo '<pre>'; var_export($request->post('1')); echo '</pre>'; die();
+
 ?>
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -177,5 +182,6 @@ AppAsset::register($this);
     </script>
 
 </body>
+
 </html>
 <?php $this->endPage() ?>

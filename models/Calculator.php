@@ -77,9 +77,7 @@ class Calculator extends Model
 
         $this->finalmark = 125;
 
-        $cookies = Yii::$app->request->cookies;
-        $level = $cookies->getValue('level');
-        $this->lvlstart = $level;
+        $this->getCurlevel();
     }
 
     /**
@@ -88,9 +86,8 @@ class Calculator extends Model
     public function rules()
     {
         return [
-            [['lvlstart', 'tier', 'finalmark'], 'required'],
+            [['lvlstart', 'finalmark'], 'required'],
             ['lvlstart', 'number', 'min' => 0, 'max' => $this->lvl_max],
-            ['tier', 'number', 'min' => 0, 'max' => 7],
             ['finalmark', 'number', 'min' => 50, 'max' => 125]
         ];
     }
@@ -102,7 +99,6 @@ class Calculator extends Model
     {
         return [
             'lvlstart' => '',
-            'tier' => '',
             'finalmark' => '',
         ];
     }
@@ -110,6 +106,13 @@ class Calculator extends Model
     public function getTier()
     {
         return [ 'T0', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7' ];
+    }
+
+    public function getCurlevel()
+    {
+        $cookies = Yii::$app->request->cookies;
+        $level = $cookies->getValue('level');
+        return $this->lvlstart = $level;
     }
 
 
@@ -153,6 +156,8 @@ class Calculator extends Model
         if ($this->lvlstart >= $res) {
             return $this->result = 30;
         }
-        return $this->result = $res;
+
+        $this->result = round($res, 2);
+        return $this->result;
     }
 }

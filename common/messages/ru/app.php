@@ -80,7 +80,7 @@ return [
     'End At' => 'Окончание',
 
     // views/layouts/main.php
-    'Caclculator' => 'Калькулятор',
+    'Calculator' => 'Калькулятор',
     // controllers/CalculatorController.php
     'Experience calculator' => 'Калькулятор опыта',
     'Want to know your level after project evaluation -- use our Experience calculator!' => 'Узнай свой уровень после сдачи проекта -- используй наш Калькулятор Опыта!',
@@ -90,7 +90,7 @@ return [
     'Select tier' => 'Выбирете сложность',
     'Enter mark' => 'Введите оценку',
     'Calculate' => 'Подсчитать',
-    "Calculation kindly presented by {0}, errors in calculations may be from <code>0.01</code> till <code>0.2</code> (magic Intra, magic!)" => "Расчеты любезно предоставлены {0}, погрешности от <code>0.01</code> до <code>0.2</code> (magic Intra, magic!)",
+    'Calculations kindly presented by {0}, errors in calculations may be from <code>0.01</code> till <code>0.2</code> (magic Intra, magic!)' => 'Расчеты любезно предоставлены {0}, погрешности от <code>0.01</code> до <code>0.2</code> (magic Intra, magic!)',
 
 
 

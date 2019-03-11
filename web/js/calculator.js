@@ -1,13 +1,8 @@
 
-void function () {
-    if ( $('#fm').text() ) {
-        $('#calculator-lvlstart').val( $('#fm').text() );
-    }
-}();
+$("document").ready(function () {
 
-$('button[name=toInputButton]').click(function(event) {
-    event.preventDefault();
+    $("#new_note").on("pjax:end", function() {
+        $.pjax.reload({container:"#calculator"});  // Reload ActiveForm
+    });
 
-    $('#calculator-lvlstart').val( $('#fm').text() );
-    $('#fm').text('');
 });
