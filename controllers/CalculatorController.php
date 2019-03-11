@@ -10,11 +10,14 @@ use app\models\Calculator;
  */
 class CalculatorController extends CommonController
 {
+
     /**
-    * Displays calculator itself.
-    *
-    * @return string
-    */
+     * actionIndex
+     *
+     * @param   Object  $model  calculator's model
+     *
+     * @return  String          which sends to the View
+     */
     public function actionIndex( $model = null )
     {
         $title = Yii::t('app', 'Experience calculator');
@@ -24,6 +27,7 @@ class CalculatorController extends CommonController
         if ($model === null) {
             $model = new Calculator();
         }
+
         if (!$model->lvlstart) {
             $model->getCurlevel();
         }
@@ -37,30 +41,36 @@ class CalculatorController extends CommonController
         ]);
     }
 
+    /**
+     * actionFormSubmission
+     *
+     * @return  Float  to be set into the 'Result' field on the View
+     */
     public function actionFormSubmission()
     {
         $model = new Calculator();
         $request = \Yii::$app->request;
 
         if ($request->isPost) {
-            if ( $request->post('getCurLevel') ) {
-                $model->getCurlevel();
-            } else if ( $model->load($request->post()) && $model->validate() ) {
-
-                // Надо ли переносить код ниже в Модель???
-
-                foreach ($model->getTier() as $k => $v) {
-                    $post = $request->post();
-                    if ( array_key_exists($k, $post) ) {
-                        $tier = $model->tier = $k;
+            $post = $request->post();
+            switch ($post) {
+                case array_key_exists('getCurLevel', $post):
+                    $model->getCurlevel();
+                    break;
+                default:
+                    if ( $model->load($post) && $model->validate() ) {
+                        foreach ($model->getTier() as $k => $v) {
+                            if ( array_key_exists($k, $post) ) {
+                                $tier = $model->tier = $k;
+                            }
+                        }
+                        if ( isset($tier)
+                        && !is_nan($tier)
+                        && $tier <= 7
+                        && $tier >= 0 ) {
+                            $model->lvlstart = $model->getMark();
+                        }
                     }
-                }
-                if ( isset($tier)
-                    && !is_nan($tier)
-                    && $tier <= 7
-                    && $tier >= 0 ) {
-                    $model->lvlstart = $model->getMark();
-                }
             }
         }
 

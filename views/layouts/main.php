@@ -39,6 +39,7 @@ $this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\Bootstr
 
         gtag('config', 'UA-122178531-1');
     </script>
+
     <?php $this->head() ?>
 </head>
 
@@ -59,63 +60,64 @@ $this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\Bootstr
                 'items' => [
                     ['label' => 'Add issue', 'url' => 'https://github.com/omentes/cheatera.pp.ua/issues/new/choose'],
                     [
-                            'label' => Yii::$app->getRequest()->getUserIP(),
-                            'items' => [
-                                ['label' => 'Debug', 'url' => ['/debug']],
-                                '<li class="divider"></li>',
-                                ['label' => 'Gii Model', 'url' => ['/gii/model']],
-                                ['label' => 'Gii CRUD', 'url' => ['/gii/crud']],
-                                ['label' => 'Gii Controller', 'url' => ['/gii/controller']],
-                            ],
+                        'label' => Yii::$app->getRequest()->getUserIP(),
+                        'items' => [
+                            ['label' => 'Debug', 'url' => ['/debug']],
+                            '<li class="divider"></li>',
+                            ['label' => 'Gii Model', 'url' => ['/gii/model']],
+                            ['label' => 'Gii CRUD', 'url' => ['/gii/crud']],
+                            ['label' => 'Gii Controller', 'url' => ['/gii/controller']],
+                        ],
                     ],
                     [
-                            'label' => Yii::t('app', 'Students'),
-                            'items' => [
-                                ['label' => Yii::t('app', 'Members'), 'url' => ['/students']],
-                                ['label' => Yii::t('app', 'Projects'), 'url' => ['/students/projects']],
-                                ['label' => Yii::t('app', 'Cheating'), 'url' => ['/students/cheating']],
-                            ],
+                        'label' => Yii::t('app', 'Students'),
+                        'items' => [
+                            ['label' => Yii::t('app', 'Members'), 'url' => ['/students']],
+                            ['label' => Yii::t('app', 'Projects'), 'url' => ['/students/projects']],
+                            ['label' => Yii::t('app', 'Cheating'), 'url' => ['/students/cheating']],
+                        ],
                     ],
                     [
-                            'label' => Yii::t('app', 'Pools'),
-                            'items' => [
-                                ['label' => Yii::t('app', 'Members'), 'url' => ['/pools']],
-                                ['label' => Yii::t('app', 'Projects'), 'url' => ['/pools/projects']],
-                                ['label' => Yii::t('app', 'Cheating'), 'url' => ['/pools/cheating']],
-                            ],
+                        'label' => Yii::t('app', 'Pools'),
+                        'items' => [
+                            ['label' => Yii::t('app', 'Members'), 'url' => ['/pools']],
+                            ['label' => Yii::t('app', 'Projects'), 'url' => ['/pools/projects']],
+                            ['label' => Yii::t('app', 'Cheating'), 'url' => ['/pools/cheating']],
+                        ],
                     ],
                     [
-                            'label' => Yii::t('app', 'Services'),
-                            'items' => [
-                                ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
-                                ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
-                            ]
-                    ],
-                    Yii::$app->user->isGuest ? (
-                        [
-                                'label' => Yii::t('app', 'Account'),
-                                'items' => [
-                                    ['label' => Yii::t('app', 'with 42'), 'url' => ['/auth?authclient=auth42']],
-                                    ['label' => Yii::t('app', 'with pass'), 'url' => ['/login']],
-                            ],
+                        'label' => Yii::t('app', 'Services'),
+                        'items' => [
+                            ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
+                            ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
                         ]
-                    ) : (
-                        [
-                                'label' => Yii::t('app', 'Account'),
-                                'items' => [
-                                    isset(Yii::$app->session['profile']) ? (
-                                            [
-                                                    'label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]
-                                            ]
-                                    ) : '<li class="divider"></li>',
-                                    [
-                                        'label' => Yii::t('app', 'Logout (') . Yii::$app->user->identity->username . ')',
-                                        'url' => ['/site/logout'],
-                                        'linkOptions' => ['data-method' => 'post']
-                                    ],
+                    ],
+                    Yii::$app->user->isGuest
+                    ? ([
+                            'label' => Yii::t('app', 'Account'),
+                            'items' => [
+                                ['label' => Yii::t('app', 'with 42'), 'url' => ['/auth?authclient=auth42']],
+                                ['label' => Yii::t('app', 'with pass'), 'url' => ['/login']],
                             ],
-                        ]
-                    )
+                        ])
+                    : ([
+                            'label' => (isset(Yii::$app->session['profile'])
+                                ? (Yii::$app->user->identity->username)
+                                : (Yii::t('app', 'Account'))
+                            ),
+                            'items' => [
+                                isset(Yii::$app->session['profile'])
+                                ? ([
+                                    'label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]
+                                ])
+                                : '<li class="divider"></li>',
+                                [
+                                    'label' => Yii::t('app', 'Logout'),
+                                    'url' => ['/site/logout'],
+                                    'linkOptions' => ['data-method' => 'post']
+                                ],
+                            ],
+                        ])
                 ],
             ]);
             NavBar::end();

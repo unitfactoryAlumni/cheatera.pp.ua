@@ -10,7 +10,7 @@ return [
     // common
     'Students' => 'Студенты',
     'Pools' => 'Бассейны',
-    'Logout (' => 'Выход (',
+    'Logout' => 'Выход',
     'with 42' => 'через 42',
     'with pass' => 'через пароль',
     'Members' => 'Участники',

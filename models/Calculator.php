@@ -111,8 +111,8 @@ class Calculator extends Model
     public function getCurlevel()
     {
         $cookies = Yii::$app->request->cookies;
-        $level = $cookies->getValue('level');
-        return $this->lvlstart = $level;
+        $this->lvlstart = $cookies->getValue('level');
+        return $this->lvlstart;
     }
 
 

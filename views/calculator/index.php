@@ -17,8 +17,8 @@ $js = <<<JS
 JS;
 $this->registerJs($js);
 
-$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => $breadcrumbs['url']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => $breadcrumbs['url']];
+// $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
