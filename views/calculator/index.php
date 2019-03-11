@@ -10,9 +10,12 @@ use yii\widgets\Pjax;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
-$this->registerJsFile('js/calculator.js', ['depends' => [\yii\web\JqueryAsset::className()], 'position' => \yii\web\View::POS_END]);
-
-// echo '<pre>'; var_export($model); echo '</pre>'; die();
+$js = <<<JS
+    $("#new_note").on("pjax:end", function() {
+        $.pjax.reload({container:"#calculator"});  // Reload ActiveForm
+    });
+JS;
+$this->registerJs($js);
 
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => $breadcrumbs['url']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -52,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div>
                 <?php
                     foreach ($model->getTier() as $k => $v) {
-                        echo Html::submitButton($v, ['class' => 'btn btn-primary', 'name' => $k]) . ' ';
+                        echo Html::submitButton($v, ['class' => 'btn btn-primary', 'name' => $k, 'style' => 'margin: 3px']);
                     }
                 ?>
                 <h2>Result: <span id='fm'><?= $model->result ? $model->result : '' ?></span></h2>
