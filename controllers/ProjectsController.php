@@ -247,7 +247,7 @@ class ProjectsController extends CommonController
         }
     }
 
-    private function getPoolsMonthAndYear()
+    public function getPoolsMonthAndYear()
     {
         $months = [];
         $years = [];
@@ -258,7 +258,6 @@ class ProjectsController extends CommonController
         }
         foreach ($yearQuery as $item) {
             $str = "$item->pool_year";
-//            $years = array_merge(["$str" => (string)$item->pool_year], $years);
             $years[$str] = (string)$item->pool_year;
         }
         return [$months, $years];

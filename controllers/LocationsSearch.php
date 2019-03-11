@@ -20,10 +20,6 @@ use app\models\Locations;
  */
 class LocationsSearch extends Locations
 {
-    public $login;
-    public $dateStart = null;
-    public $dateEnd = null;
-
     public function __construct($login, array $configs = [])
     {
         $this->login = $login;

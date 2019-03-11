@@ -18,6 +18,9 @@ use Yii;
  */
 class Locations extends \yii\db\ActiveRecord
 {
+    public $login;
+    public $dateStart = null;
+    public $dateEnd = null;
     /**
      * {@inheritdoc}
      */

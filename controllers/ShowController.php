@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\SkillsHelper;
+use app\models\ProjectsAll;
 use app\models\ProjectsLogin;
 use Yii;
 use app\models\Show;
@@ -27,11 +28,14 @@ class ShowController extends CommonController
         $this->course = '42';
         $searchModel = new ShowSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->course);
-
+        [$months, $years] = ProjectsController::getPoolsMonthAndYear();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'pageName' => 'students',
+            'action' => 'students',
+            'months' => $months,
+            'years' => $years,
         ]);
     }
 
@@ -48,11 +52,14 @@ class ShowController extends CommonController
 
         $searchModel = new ShowSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->course);
-
+        [$months, $years] = ProjectsController::getPoolsMonthAndYear();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'pageName' => 'pools',
+            'action' => 'pools',
+            'months' => $months,
+            'years' => $years,
         ]);
     }
 
