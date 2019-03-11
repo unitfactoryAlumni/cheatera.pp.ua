@@ -29,7 +29,7 @@ class CalculatorController extends CommonController
         }
 
         if (!$model->lvlstart) {
-            $model->getCurlevel();
+            $model->resetToDefault();
         }
 
         return $this->render('index', [
@@ -41,6 +41,29 @@ class CalculatorController extends CommonController
         ]);
     }
 
+    /**
+     * getMarkFromPost
+     *
+     * @param   Object  $model  reference to Calculator's Model instance
+     * @param   Array   $post   $post request array
+     */
+    private function getMarkFromPost( &$model, $post )
+    {
+        if ($model && $post
+        && $model->load($post) && $model->validate() ) {
+            foreach ($model->getTier() as $k => $v) {
+                if ( array_key_exists($k, $post) ) {
+                    $tier = $model->tier = $k;
+                }
+            }
+            if ( isset($tier)
+            && !is_nan($tier)
+            && $tier <= 7
+            && $tier >= 0 ) {
+                $model->lvlstart = $model->getMark();
+            }
+        }
+    }
     /**
      * actionFormSubmission
      *
@@ -54,23 +77,11 @@ class CalculatorController extends CommonController
         if ($request->isPost) {
             $post = $request->post();
             switch ($post) {
-                case array_key_exists('getCurLevel', $post):
-                    $model->getCurlevel();
+                case array_key_exists('resetToDefault', $post):
+                    $model->resetToDefault();
                     break;
                 default:
-                    if ( $model->load($post) && $model->validate() ) {
-                        foreach ($model->getTier() as $k => $v) {
-                            if ( array_key_exists($k, $post) ) {
-                                $tier = $model->tier = $k;
-                            }
-                        }
-                        if ( isset($tier)
-                        && !is_nan($tier)
-                        && $tier <= 7
-                        && $tier >= 0 ) {
-                            $model->lvlstart = $model->getMark();
-                        }
-                    }
+                    $this->getMarkFromPost($model, $post);
             }
         }
 

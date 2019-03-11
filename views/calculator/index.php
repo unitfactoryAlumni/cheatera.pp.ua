@@ -17,8 +17,7 @@ $js = <<<JS
 JS;
 $this->registerJs($js);
 
-// $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => $breadcrumbs['url']];
-// $this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => ''];
 
 ?>
 
@@ -38,16 +37,16 @@ $this->registerJs($js);
         ]); ?>
 
             <br><div>
-                <?= Html::submitButton(Yii::t('app', 'Get current level of mine'), ['class' => 'btn btn-lg btn-primary', 'name' => 'getCurLevel']) ?>
+                <?= Html::submitButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-lg btn-primary', 'name' => 'resetToDefault']) ?>
             </div><br>
             <?= $form->field($model, 'lvlstart')
-                ->label('Enter level')
+                ->label(Yii::t('app', 'Enter level'))
                 ->input('text', ['placeholder' => Yii::t('app', 'Enter number')])
                 ->textInput(['autofocus' => true])
             ?>
 
             <?= $form->field($model, 'finalmark')
-                ->label('Enter mark')
+                ->label(Yii::t('app', 'Enter mark'))
                 ->input('text', ['placeholder' => Yii::t('app', 'Enter number')])
                 ->textInput()
             ?>
@@ -58,7 +57,7 @@ $this->registerJs($js);
                         echo Html::submitButton($v, ['class' => 'btn btn-primary', 'name' => $k, 'style' => 'margin: 3px']);
                     }
                 ?>
-                <h2>Result: <span id='fm'><?= $model->result ? $model->result : '' ?></span></h2>
+                <h2><?= Yii::t('app', 'Result') . ':' ?> <span id='fm'><?= $model->result ? $model->result : '' ?></span></h2>
             </div>
 
         <?php ActiveForm::end(); ?>

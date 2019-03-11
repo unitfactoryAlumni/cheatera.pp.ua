@@ -77,7 +77,7 @@ class Calculator extends Model
 
         $this->finalmark = 125;
 
-        $this->getCurlevel();
+        $this->resetToDefault();
     }
 
     /**
@@ -108,7 +108,7 @@ class Calculator extends Model
         return [ 'T0', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7' ];
     }
 
-    public function getCurlevel()
+    public function resetToDefault()
     {
         $cookies = Yii::$app->request->cookies;
         $this->lvlstart = $cookies->getValue('level');
