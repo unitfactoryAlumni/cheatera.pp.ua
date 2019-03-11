@@ -10,7 +10,7 @@ return [
     // common
     'Students' => 'Студенты',
     'Pools' => 'Бассейны',
-    'Logout (' => 'Выход (',
+    'Logout' => 'Выход',
     'with 42' => 'через 42',
     'with pass' => 'через пароль',
     'Members' => 'Участники',
@@ -80,17 +80,17 @@ return [
     'End At' => 'Окончание',
 
     // views/layouts/main.php
-    'Caclculator' => 'Калькулятор',
+    'Calculator' => 'Калькулятор',
+
     // controllers/CalculatorController.php
     'Experience calculator' => 'Калькулятор опыта',
     'Want to know your level after project evaluation -- use our Experience calculator!' => 'Узнай свой уровень после сдачи проекта -- используй наш Калькулятор Опыта!',
     // views/calculator/index.php
-    'To Input' => 'В поле ввода',
     'Enter level' => 'Введите уровень',
-    'Select tier' => 'Выбирете сложность',
+    'Enter number' => 'Введите номер',
     'Enter mark' => 'Введите оценку',
-    'Calculate' => 'Подсчитать',
-    "Calculation kindly presented by {0}, errors in calculations may be from <code>0.01</code> till <code>0.2</code> (magic Intra, magic!)" => "Расчеты любезно предоставлены {0}, погрешности от <code>0.01</code> до <code>0.2</code> (magic Intra, magic!)",
+    'Result' => 'Результат',
+    'Calculations kindly presented by {0}, errors in calculations may be from <code>0.01</code> till <code>0.2</code> (magic Intra, magic!)' => 'Расчеты любезно предоставлены {0}, погрешности от <code>0.01</code> до <code>0.2</code> (magic Intra, magic!)',
 
 
 

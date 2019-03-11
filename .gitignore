@@ -1,4 +1,4 @@
-# phpstorm project files
+# IDE's project files
 .idea
 .vscode
 
@@ -36,7 +36,7 @@ tests/_support/_generated
 # environment
 .env
 
-#yii2 dir
+#yii2 dirs
 /web/assets
 assets
 !assets/AppAsset.php

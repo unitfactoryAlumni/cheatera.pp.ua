@@ -10,10 +10,6 @@ RUN apt-get -y install --fix-missing apt-utils build-essential git curl libcurl3
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install xdebug
-#RUN pecl install xdebug-2.5.0
-#RUN docker-php-ext-enable xdebug
-
 # Other PHP7 Extensions
 RUN apt-get -y install libmcrypt-dev
 
@@ -60,15 +56,15 @@ RUN sed -i 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/web#' /etc/a
 # Fix write permissions with shared folders
 RUN usermod -u 1000 www-data
 
+# Copy the working dir to the image's web root
+COPY . /var/www/html
+RUN mkdir -p /var/www/html/web/assets
+
+# Writing php.ini
+RUN echo 'memory_limit=512M' >> /usr/local/etc/php/php.ini
+
 # We first install any composer packages outside of the web root to prevent them
 # from being overwritten by the COPY below. If the composer.lock file here didn't
 # change, docker will use the cached composer files.
-COPY composer.json /var/www/html/
-COPY composer.lock /var/www/html/
 RUN composer self-update
-RUN composer install
-
-# Finally copy the working dir to the image's web root
-COPY . /var/www/html
-
-RUN echo 'memory_limit=512M' >>   /usr/local/etc/php/php.ini
+RUN composer install --no-plugins --no-scripts
