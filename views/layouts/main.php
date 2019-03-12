@@ -11,6 +11,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+$this->registerJsFile('@web/js/site.js', ['depends' => [yii\web\JqueryAsset::className()], 'position' => \yii\web\View::POS_END]);
 $this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);
 
 // echo '<pre>'; var_export($request->post('1')); echo '</pre>'; die();

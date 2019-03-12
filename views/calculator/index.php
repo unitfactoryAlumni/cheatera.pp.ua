@@ -10,11 +10,11 @@ use yii\widgets\Pjax;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
-$js = <<<JS
+$js = <<<CALCULATOR_JS
     $("#new_note").on("pjax:end", function() {
         $.pjax.reload({container:"#calculator"});  // Reload ActiveForm
     });
-JS;
+CALCULATOR_JS;
 $this->registerJs($js);
 
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => ''];
