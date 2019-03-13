@@ -13,7 +13,7 @@ use yii\widgets\Pjax;
     <h3><?= Yii::t('app', 'Correction Logs') ?></h3>
 
 
-    <?php Pjax::begin(); ?>
+    <?php Pjax::begin(['timeout' => 10000 ]); ?>
     <?php echo $this->render('_correct_search', ['model' => $searchModelCorrections, 'action' => $action]);
 
     $labels = [];

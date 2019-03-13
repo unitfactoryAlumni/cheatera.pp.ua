@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php Pjax::begin(); ?>
+    <?php Pjax::begin(['timeout' => 10000 ]); ?>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
     <?php
     $labels = [];

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\ProjectsAll;
+use app\models\Show;
 use Yii;
 use yii\web\NotFoundHttpException;
 
@@ -24,10 +25,9 @@ class ProjectsController extends CommonController
         $title = Yii::t('app', 'Students projects UNIT Factory');
         $description = Yii::t('app','Full information about students projects from UNIT Factory');
         $this->setMeta($title, $description);
-
         $searchModel = new ProjectsFilterSearch(['course' => '1', 'parent' => '0']);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        [$months, $years] = self::getPoolsMonthAndYear();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -36,7 +36,9 @@ class ProjectsController extends CommonController
                 'url' => 'show/students'
             ],
             'subPage' => '/students/projects',
-            'action' => 'students'
+            'action' => 'students',
+            'months' => $months,
+            'years' => $years,
         ]);
     }
 
@@ -49,10 +51,9 @@ class ProjectsController extends CommonController
         $title = Yii::t('app', 'Pools projects UNIT Factory');
         $description = Yii::t('app','Full information about pools projects from UNIT Factory');
         $this->setMeta($title, $description);
-
         $searchModel = new ProjectsFilterSearch(['course' => 4, 'parent' => 0]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        [$months, $years] = self::getPoolsMonthAndYear();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -61,7 +62,9 @@ class ProjectsController extends CommonController
                 'url' => 'show/pools'
             ],
             'subPage' => '/pools/projects',
-            'action' => 'pools'
+            'action' => 'pools',
+            'months' => $months,
+            'years' => $years,
         ]);
     }
 
@@ -130,7 +133,7 @@ class ProjectsController extends CommonController
         self::beforeRender($id, $case);
         $searchModel = new ProjectsAllSearch($course, $id);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        [$months, $years] = self::getPoolsMonthAndYear();
         return $this->render('view', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -146,6 +149,8 @@ class ProjectsController extends CommonController
             ],
             'pageName' => $case,
             'action' => "$case/projects/$id",
+            'months' => $months,
+            'years' => $years,
         ]);
     }
 
@@ -160,7 +165,7 @@ class ProjectsController extends CommonController
         self::beforeRender($id, $case, true);
         $searchModel = new ProjectsAllSearch($course, $id);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        [$months, $years] = self::getPoolsMonthAndYear();
         return $this->render('view', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -180,6 +185,8 @@ class ProjectsController extends CommonController
             ],
             'pageName' => $case,
             'action' => "$case/projects/$id",
+            'months' => $months,
+            'years' => $years,
         ]);
     }
 
@@ -196,7 +203,7 @@ class ProjectsController extends CommonController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $searchModelSubProject = new ProjectsFilterSearch(['course' => $course, 'parent' => $this->getId]);
         $dataProviderSubProject = $searchModelSubProject->search(Yii::$app->request->queryParams);
-
+        [$months, $years] = self::getPoolsMonthAndYear();
         return $this->render('view_with_childs', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -215,7 +222,9 @@ class ProjectsController extends CommonController
             ],
             'pageName' => $case,
             'subPage' => "/$case/projects",
-            'action' => "$case/projects/$id"
+            'action' => "$case/projects/$id",
+            'months' => $months,
+            'years' => $years,
         ]);
     }
 
@@ -236,5 +245,21 @@ class ProjectsController extends CommonController
             $parentName = ProjectsAll::find()->where("project_id = '{$getName->parent_id}'")->one();
             $this->forParent = ['slug' => $parentName->slug, 'name' => $parentName->name];
         }
+    }
+
+    public function getPoolsMonthAndYear()
+    {
+        $months = [];
+        $years = [];
+        $monthQuery = Show::find()->select(['pool_month'])->where('visible = 1')->groupBy(['pool_month'])->all();
+        $yearQuery = Show::find()->select(['pool_year'])->where('visible = 1')->groupBy(['pool_year'])->all();
+        foreach ($monthQuery as $item) {
+            $months = array_merge(["$item->pool_month" => "$item->pool_month"], $months);
+        }
+        foreach ($yearQuery as $item) {
+            $str = "$item->pool_year";
+            $years[$str] = (string)$item->pool_year;
+        }
+        return [$months, $years];
     }
 }

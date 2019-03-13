@@ -1,7 +1,6 @@
 <?php
 
 use app\helpers\LogTimeHelper;
-use yii\helpers\Html;
 use dosamigos\chartjs\ChartJs;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
@@ -12,22 +11,38 @@ use yii\widgets\Pjax;
 <div class="time-in-cluster-index">
 
     <h3><?= Yii::t('app', 'Time in cluster') ?></h3>
-    <?php Pjax::begin(); ?>
+    <?php Pjax::begin(['timeout' => 10000 ]); ?>
     <?php echo $this->render('_search_time', ['model' => $searchModelTime, 'action' => $action]); ?>
     <?php
 
     $labels = [];
     $data = [];
     $shit = [];
-    $it = 0;
     $tempDate = null;
     $count = count($dataProviderTime->models);
+    $amount = 0;
+    $get = Yii::$app->request->get();
+    $tempDate = '';
+    if (isset($get['LocationsSearch']['dateEnd'])) {
+        $tempDate = $get['LocationsSearch']['dateEnd'];
+    } else {
+        $tempDate = date('Y-m-d', time());
+    }
+    $first = '';
     foreach ($dataProviderTime->models as $model) {
-        $it++;
-        if ($it > 1 && $count > 0) {
+        $first = $model->date;
+        break;
+    }
+    while ($tempDate != $first) {
+        $tempDate = date('Y-m-d', strtotime($tempDate . "-1 days"));
+        $shit[$tempDate] = '00.00';
+        break ;
+    }
+    foreach ($dataProviderTime->models as $model) {
+        if ($count > 0) {
             if ($tempDate != $model->date) {
                 while ($count > 0 && $tempDate != $model->date) {
-                    $tempDate = date('Y-m-d',strtotime($tempDate . "-1 days"));
+                    $tempDate = date('Y-m-d', strtotime($tempDate . "-1 days"));
                     $shit[$tempDate] = '00.00';
                 }
             } else {
@@ -46,6 +61,7 @@ use yii\widgets\Pjax;
     foreach ($shit as $key => $value) {
         $labels = array_merge([$key], $labels);
         $data = array_merge([$value], $data);
+        $amount += $value;
     }
     LogTimeHelper::fix24($data);
 
@@ -82,6 +98,7 @@ use yii\widgets\Pjax;
         ]
     ]);?>
 
+    <h4><?= Yii::t('app', 'Amount') . ': ' . $amount ?></h4>
     <?php Pjax::end(); ?>
 
 </div>

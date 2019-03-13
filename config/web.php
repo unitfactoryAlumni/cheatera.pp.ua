@@ -93,6 +93,7 @@ $config = [
                 'students' => 'show/students',
                 'pools' => 'show/pools',
                 'calculator' => 'calculator',
+                'calculator/form-submission' => 'calculator/form-submission',
                 'corrections' => 'corrections/index',
             ],
         ],

@@ -198,3 +198,7 @@ a.desc:after {
 .mini {
     white-space: nowrap;
 }
+
+.bottom-text {
+    color: #999;
+}

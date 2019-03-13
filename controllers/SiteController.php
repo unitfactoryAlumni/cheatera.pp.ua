@@ -5,12 +5,10 @@ namespace app\controllers;
 use app\helpers\Auth42;
 use app\models\Log;
 use app\models\User;
-use yii\authclient\ClientInterface as ClientInterfaceAlias;
 
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use yii\web\Controller;
 use yii\web\HttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -78,6 +76,7 @@ class SiteController extends CommonController
             Yii::$app->response->redirect(Url::to(['/']), 301);
             Yii::$app->end();
         }
+
         $user = new User;
         $api = new Auth42;
         $log = new Log;
@@ -85,10 +84,12 @@ class SiteController extends CommonController
         $token = $token->getToken();
         $answer = $api->fetchMe(["Authorization: Bearer $token"]);
         $userX = $user->findByUsername($answer['login']);
+
         if (!isset($userX)) {
             $userX = new User;
             $userX->newUser($answer);
         }
+
         $log->xlogin = $answer['login'];
         $log->agent = Yii::$app->request->headers["user-agent"];
         $log->ip = Yii::$app->request->userIP;
@@ -97,7 +98,8 @@ class SiteController extends CommonController
         Yii::$app->user->login($userX);
         $userX->generateAuthKey();
         Yii::$app->session->set('username', $answer['login']);
-        return Yii::$app->response->redirect('/', 301)->send();
+
+        return $this->goBack();
     }
 
     /**

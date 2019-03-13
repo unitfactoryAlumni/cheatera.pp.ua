@@ -2,8 +2,9 @@
 
 use yii\grid\GridView;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\widgets\Pjax;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\ProjectsFilterSearch */
@@ -11,20 +12,43 @@ use yii\widgets\Pjax;
 /* @var string $pageName */
 /* @var string $case */
 /* @var string $subPage */
+/* @var array $months */
+/* @var array $years */
 
     $tmp = Yii::$app->session->get('username') ?>
-    <div class="projects-all-search">
+    <?php Pjax::begin(['timeout' => 10000 ]); ?>
+    <div class="projects-all-search-sub">
+
 
         <?php $form = ActiveForm::begin([
+            'layout'=>'inline',
             'action' => [$action],
             'method' => 'get',
             'options' => [
                 'data-pjax' => 1
             ],
+            'fieldConfig' => [
+                'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+                'options' => [
+                    'class' => 'col-sm-3',
+                ],
+            ],
         ]); ?>
 
-        <?php echo $form->field($searchModel, 'pool_month')->label(Yii::t('app', 'Pool Month')) ?>
-        <?php echo $form->field($searchModel, 'pool_year')->label(Yii::t('app', 'Pool Year')) ?>
+        <?php echo $form->field($searchModel, 'pool_month')->widget(Select2::classname(), [
+            'data' => $months,
+            'options' => ['placeholder' => Yii::t('app', 'Pool Month')],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
+        <?php echo $form->field($searchModel, 'pool_year')->widget(Select2::classname(), [
+            'data' => $years,
+            'options' => ['placeholder' => Yii::t('app', 'Pool Year')],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
 
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
@@ -59,3 +83,4 @@ use yii\widgets\Pjax;
         'cg',
     ],
 ]); ?>
+<?php Pjax::end(); ?>

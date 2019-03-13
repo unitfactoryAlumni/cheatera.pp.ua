@@ -8,49 +8,18 @@ use \app\helpers\ViewHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\ShowSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var array $breadcrumbs */
+/* @var array $months */
+/* @var array $years */
+/* @var array $action */
 
 $this->params['breadcrumbs'][] = strtok($this->title, " ");
 ?>
 <div class="show-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
-
-    <p>
-    </p>
-    <style>
-        .filters .form-control {
-            max-height: 25px;
-        }
-
-        .table {
-            white-space: nowrap;
-            /*font-size: smaller;*/
-        }
-
-        .table > tbody > tr.warning > td{
-            background-color:#ffa200!important;
-        }
-
-        .table > tbody > tr.success > td {
-            background-color: #c8ffbe!important;
-        }
-
-    </style>
-    <script>
-        $(document).on({
-            mouseenter: function (e) {
-                //stuff to do on mouse enter
-                var test = e.target.getAttribute("name");
-                $("#ah-"+test).css("display", "block");
-            },
-            mouseleave: function (e) {
-                //stuff to do on mouse leave
-                var test = e.target.getAttribute("name");
-                $("#ah-"+test).css("display", "none");
-            }
-        }, "#ah");
-    </script>
+    <?php Pjax::begin(['timeout' => 10000 ]); ?>
+    <?php echo $this->render('_search', ['searchModel' => $searchModel, 'action' => $action, 'months' => $months, 'years' => $years]); ?>
     <?php $tmp = Yii::$app->session->get('username') ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

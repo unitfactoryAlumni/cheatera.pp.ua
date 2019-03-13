@@ -10,15 +10,11 @@ RUN apt-get -y install --fix-missing apt-utils build-essential git curl libcurl3
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install xdebug
-#RUN pecl install xdebug-2.5.0
-#RUN docker-php-ext-enable xdebug
-
 # Other PHP7 Extensions
 RUN apt-get -y install libmcrypt-dev
 
 RUN apt-get -y install libsqlite3-dev libsqlite3-0 mysql-client
-RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo_mysql 
 RUN docker-php-ext-install pdo_sqlite
 RUN docker-php-ext-install mysqli
 
@@ -36,10 +32,10 @@ RUN docker-php-ext-install -j$(nproc) intl
 RUN docker-php-ext-install mbstring
 
 RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ 
 RUN docker-php-ext-install -j$(nproc) gd
 
-RUN apt-get -y install wget
+RUN apt-get -y install wget 
 
 # Install phpunit
 RUN wget https://phar.phpunit.de/phpunit-6.0.phar && \
@@ -60,18 +56,15 @@ RUN sed -i 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/web#' /etc/a
 # Fix write permissions with shared folders
 RUN usermod -u 1000 www-data
 
+# Copy the working dir to the image's web root
+COPY . /var/www/html
+RUN mkdir -p /var/www/html/web/assets
+
+# Writing php.ini
+RUN echo 'memory_limit=512M' >> /usr/local/etc/php/php.ini
+
 # We first install any composer packages outside of the web root to prevent them
 # from being overwritten by the COPY below. If the composer.lock file here didn't
 # change, docker will use the cached composer files.
-COPY . /var/www/html
 RUN composer self-update
-RUN composer install
-
-# Finally copy the working dir to the image's web root
-
-# Setup xdebug
-RUN yes | pecl install xdebug
-# Copy php.ini into image
-COPY php.ini.example /usr/local/etc/php/php.ini
-RUN echo "\nzend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" >> /usr/local/etc/php/php.ini
-RUN echo 'memory_limit=512M' >> /usr/local/etc/php/php.ini
+RUN composer install --no-plugins --no-scripts

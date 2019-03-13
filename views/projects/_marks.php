@@ -1,9 +1,11 @@
 <?php
 
+use app\helpers\ViewHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\widgets\Pjax;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\ProjectsFilterSearch */
@@ -11,20 +13,42 @@ use yii\widgets\Pjax;
 /* @var string $pageName */
 /* @var string $case */
 /* @var string $subPage */
+/* @var array $months */
+/* @var array $years */
 
     $tmp = Yii::$app->session->get('username') ?>
-    <div class="projects-all-search">
+<?php Pjax::begin(['timeout' => 10000 ]); ?>
+    <div class="projects-all-search-marks">
 
         <?php $form = ActiveForm::begin([
+            'layout'=>'inline',
             'action' => [$action],
             'method' => 'get',
             'options' => [
                 'data-pjax' => 1
             ],
+            'fieldConfig' => [
+                'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+                'options' => [
+                    'class' => 'col-sm-3',
+                ],
+            ],
         ]); ?>
 
-        <?php echo $form->field($searchModel, 'pool_month')->label(Yii::t('app', 'Pool Month')) ?>
-        <?php echo $form->field($searchModel, 'pool_year')->label(Yii::t('app', 'Pool Year')) ?>
+        <?php echo $form->field($searchModel, 'pool_month')->widget(Select2::classname(), [
+            'data' => $months,
+            'options' => ['placeholder' => Yii::t('app', 'Pool Month')],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
+        <?php echo $form->field($searchModel, 'pool_year')->widget(Select2::classname(), [
+            'data' => $years,
+            'options' => ['placeholder' => Yii::t('app', 'Pool Year')],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
 
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
@@ -33,7 +57,6 @@ use yii\widgets\Pjax;
 
         <?php ActiveForm::end(); ?>
 
-    </div>
 <?php     $tmp = Yii::$app->session->get('username'); ?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -43,7 +66,7 @@ use yii\widgets\Pjax;
     ],
     'rowOptions'=>function($data) use ($tmp) {
         if($data['xlogin'] == $tmp){
-            return ['class' => 'info'];
+            return ['class' => 'warning'];
         } else if ($data['lastloc'] == 0) {
             return ['class' => 'success'];
         }
@@ -56,8 +79,9 @@ use yii\widgets\Pjax;
             'label' => '',
             'format' => 'raw',
             'attribute' => '',
-            'value'  => function ($data) use ($pageName) {
-                return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),'/'. Yii::$app->language . '/'. $pageName . '/'. $data['xlogin'], ['data-pjax' => '0']);
+            'contentOptions'=> ['style'=>'position: relative'],
+            'value'  => function($data) use ($pageName) {
+                return ViewHelper::getLinkWithHover($data['xlogin'], $pageName);
             },
         ],
         'final_mark',
@@ -65,6 +89,20 @@ use yii\widgets\Pjax;
         'status',
         'validated',
         'location',
-        'lastloc',
+        [
+            'label' => Yii::t('app', 'lastloc'),
+            'attribute' => 'lastloc',
+            'format' => 'raw',
+            'value' => function($data) {
+                if ($data['lastloc'] == 0) {
+
+                    return Yii::t('app', 'ONLINE');
+                }
+                return ViewHelper::getHumanTime($data['lastloc']);
+            },
+        ],
     ],
 ]); ?>
+    </div>
+<?php Pjax::end(); ?>
+
