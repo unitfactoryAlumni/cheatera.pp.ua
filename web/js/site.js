@@ -11,22 +11,23 @@ void function menuOpenOnHover()
     });
 }();
 
-$(document).on({
-    mouseenter: function (e) {
-        //stuff to do on mouse enter
-        var test = e.target.getAttribute("name");
-        $("#ah-"+test).css("display", "block");
-    },
-    mouseleave: function (e) {
-        //stuff to do on mouse leave
-        var test = e.target.getAttribute("name");
-        $("#ah-"+test).css("display", "none");
-    }
-}, "#ah");
+void function mainPhpBottomCode()
+{
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 
-$(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
+    $(document).on({
+        mouseenter: function (e) {
+            var test = e.target.getAttribute("name");
+            $("#ah-"+test).css("display", "block");
+        },
+        mouseleave: function (e) {
+            var test = e.target.getAttribute("name");
+            $("#ah-"+test).css("display", "none");
+        }
+    }, "#ah");
+}();
 
 // void function changeTheme()
 // {

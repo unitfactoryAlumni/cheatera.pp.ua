@@ -220,11 +220,6 @@ a.desc:after {
 }
 
 /* Styles for SearchModel form */
-#w0 * {
+form#w0 * {
   margin-bottom: 10px;
-}
-@media(min-width:767px) {
-  #w0 > .form-group {
-    margin-bottom: -10px;
-  }
 }
