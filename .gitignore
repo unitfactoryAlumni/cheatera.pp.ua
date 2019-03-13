@@ -27,23 +27,22 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-tests/_output/*
-tests/_support/_generated
-
-#vagrant folder
 /.vagrant
-
-# environment
 .env
 
-#yii2 dirs
+# yii2 dirs
 /web/assets
 assets
-!assets/AppAsset.php
 /runtime/*
 
-#sql dump
+# sql dump
 schema.sql
 
-#tmps
+# tmps
 lags_example
+tests/_output/*
+tests/_support/_generated
+*.map
+
+# to include
+!assets/AppAsset.php

@@ -7,9 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\Pjax;
-use app\assets\AppAsset;
 
-AppAsset::register($this);
 $js = <<<CALCULATOR_JS
     $("#new_note").on("pjax:end", function() {
         $.pjax.reload({container:"#calculator"});  // Reload ActiveForm
