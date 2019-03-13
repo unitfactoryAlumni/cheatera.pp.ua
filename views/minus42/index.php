@@ -7,9 +7,9 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\controllers\Minus42Search */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="minus42-index">
 

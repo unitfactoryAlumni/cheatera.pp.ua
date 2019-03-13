@@ -25,14 +25,14 @@ use kartik\select2\Select2;
     ],
 ]); ?>
 
-<?php echo $form->field($searchModel, 'pool_month')->widget(Select2::classname(), [
+<?= $form->field($searchModel, 'pool_month')->widget(Select2::classname(), [
     'data' => $months,
     'options' => ['placeholder' => Yii::t('app', 'Pool Month')],
     'pluginOptions' => [
         'allowClear' => true
     ],
 ]); ?>
-<?php echo $form->field($searchModel, 'pool_year')->widget(Select2::classname(), [
+<?= $form->field($searchModel, 'pool_year')->widget(Select2::classname(), [
     'data' => $years,
     'options' => ['placeholder' => Yii::t('app', 'Pool Year')],
     'pluginOptions' => [
