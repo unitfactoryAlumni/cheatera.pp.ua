@@ -59,7 +59,7 @@ use kartik\select2\Select2;
 
     </div>
 
-    <div class="table-responsive">
+    <div class="table-responsive col-lg-12">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,

@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
         <?= $this->render('_search', ['searchModel' => $searchModel, 'action' => $action, 'months' => $months, 'years' => $years]) ?>
         <?php $tmp = Yii::$app->session->get('username') ?>
 
-        <div class="table-responsive">
+        <div class="table-responsive col-lg-12">
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel'  => $searchModel,

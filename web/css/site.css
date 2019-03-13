@@ -1,4 +1,4 @@
-@charset "UTF-8";
+
 html,
 body {
   height: 100%;
@@ -42,7 +42,7 @@ a.asc:after, a.desc:after {
   position: relative;
   top: 1px;
   display: inline-block;
-  font-family: "Glyphicons Halflings";
+  font-family: 'Glyphicons Halflings';
   font-style: normal;
   font-weight: normal;
   line-height: 1;
@@ -50,27 +50,27 @@ a.asc:after, a.desc:after {
 }
 
 a.asc:after {
-  content: "";
+  content: /*"\e113"*/ "\e151";
 }
 
 a.desc:after {
-  content: "";
+  content: /*"\e114"*/ "\e152";
 }
 
 .sort-numerical a.asc:after {
-  content: "";
+  content: "\e153";
 }
 
 .sort-numerical a.desc:after {
-  content: "";
+  content: "\e154";
 }
 
 .sort-ordinal a.asc:after {
-  content: "";
+  content: "\e155";
 }
 
 .sort-ordinal a.desc:after {
-  content: "";
+  content: "\e156";
 }
 
 .grid-view th {
@@ -97,14 +97,15 @@ a.desc:after {
   border: none;
 }
 
-@media (max-width: 767px) {
+@media(max-width:767px) {
   .nav li > form > button.logout {
-    display: block;
+    display:block;
     text-align: left;
     width: 100%;
     padding: 10px 15px;
   }
 }
+
 .nav > li > form > button.logout:focus,
 .nav > li > form > button.logout:hover {
   text-decoration: none;
@@ -125,8 +126,8 @@ a.desc:after {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
   margin-top: 15px;
 }
 
@@ -143,7 +144,7 @@ a.desc:after {
 }
 
 .card-title {
-  margin-bottom: 0.75rem;
+  margin-bottom: .75rem;
 }
 
 .h5, h5 {
@@ -187,7 +188,6 @@ a.desc:after {
   background-color: #636363;
   margin-bottom: 10px;
 }
-
 .my-shadow {
   margin-bottom: 5px;
 }
@@ -196,7 +196,6 @@ a.desc:after {
   text-align: left;
   padding-left: 5px;
 }
-
 .mini {
   white-space: nowrap;
 }
@@ -209,18 +208,23 @@ a.desc:after {
 .filters .form-control {
   max-height: 25px;
 }
-
 .table {
   white-space: nowrap;
   /*font-size: smaller;*/
 }
-
-.table > tbody > tr.warning > td {
+.table > tbody > tr.warning > td{
   background-color: #ffa200 !important;
 }
-
 .table > tbody > tr.success > td {
   background-color: #c8ffbe !important;
 }
 
-/*# sourceMappingURL=site.css.map */
+/* Styles for SearchModel form */
+#w0 * {
+  margin-bottom: 10px;
+}
+@media(min-width:767px) {
+  #w0 > .form-group {
+    margin-bottom: -10px;
+  }
+}

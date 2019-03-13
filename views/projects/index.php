@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(['timeout' => 10000 ]); ?>
         <?= $this->render('_search', ['model' => $searchModel, 'action' => $action, 'months' => $months, 'years' => $years]) ?>
 
-        <div class="table-responsive">
+        <div class="table-responsive col-lg-12">
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
