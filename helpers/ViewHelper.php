@@ -8,6 +8,7 @@
 
 namespace app\helpers;
 
+use app\models\UpdatedDb;
 use DateTime;
 use Yii;
 use yii\helpers\Url;
@@ -75,6 +76,8 @@ class ViewHelper
     }
 
     /**
+     * Get link with hover image
+     *
      * @param $login
      * @param $course
      * @return string
@@ -111,6 +114,14 @@ class ViewHelper
         );
     }
 
+    /**
+     * Convert time to human format
+     *
+     * @param $datetime
+     * @param bool $full
+     * @return string
+     * @throws \Exception
+     */
     public static function getHumanTime($datetime, $full = false)
     {
         $now = new DateTime;
@@ -141,4 +152,17 @@ class ViewHelper
         return $string ? implode(', ', $string) . ' ago' : 'no data';
     }
 
-}
+    public static function getLastUpdate()
+    {
+        $result = [];
+        $record = UpdatedDb::find()->where(['subject' => 'locations'])->orderBy(['updated_at' => SORT_DESC])->limit('1')->one();
+        $result[] = ['label' =>  'Update ' . $record->subject . ' ' . self::getHumanTime($record->updated_at) . '.'];
+        $record = UpdatedDb::find()->where(['subject' => 'users and projects'])->orderBy(['updated_at' => SORT_DESC])->limit('1')->one();
+        $result[] = ['label' =>  'Update ' . $record->subject . ' ' . self::getHumanTime($record->updated_at) . '.'];
+        $record = UpdatedDb::find()->where(['subject' => 'cheating'])->orderBy(['updated_at' => SORT_DESC])->limit('1')->one();
+        $result[] = ['label' =>  'Update ' . $record->subject . ' ' . self::getHumanTime($record->updated_at) . '.'];
+        $record = UpdatedDb::find()->where(['subject' => 'time at cluster'])->orderBy(['updated_at' => SORT_DESC])->limit('1')->one();
+        $result[] = ['label' =>  'Update ' . $record->subject . ' ' . self::getHumanTime($record->updated_at) . '.'];
+        return $result;
+    }
+    }
