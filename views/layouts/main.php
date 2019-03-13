@@ -60,6 +60,10 @@ $this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\Bootstr
                 'items' => [
                     ['label' => 'Add issue', 'url' => 'https://github.com/omentes/cheatera.pp.ua/issues/new/choose'],
                     [
+                        'label' => 'Update',
+                        'items' => \app\helpers\ViewHelper::getLastUpdate(),
+                    ],
+                    [
                         'label' => Yii::$app->getRequest()->getUserIP(),
                         'items' => [
                             ['label' => 'Debug', 'url' => ['/debug']],
