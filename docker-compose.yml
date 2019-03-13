@@ -6,14 +6,11 @@ services:
       - '8888:80'
     expose:
       - "80"
+      - "9000"
     volumes:
       - ./:/var/www/html/
     links:
       - mysql
-    environment:
-      ENABLE_ENV_FILE: 1
-      ENABLE_LOCALCONF: 0
-      API_TOKEN: "<YOUR GITHUB API TOKEN>"
 
   mysql:
     image: mysql:5.7
