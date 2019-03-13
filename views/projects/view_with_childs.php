@@ -2,7 +2,6 @@
 
 use kartik\tabs\TabsX;
 use yii\helpers\Html;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var array $breadcrumbs */
@@ -47,14 +46,5 @@ $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
         'encodeLabels'=>false
     ]);
     ?>
-    <style>
-        .filters .form-control {
-            max-height: 25px;
-        }
 
-        .table {
-            white-space: nowrap;
-            /*font-size: smaller;*/
-        }
-    </style>
 </div>

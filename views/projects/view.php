@@ -25,16 +25,7 @@ $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
 <div class="projects-view">
     <h1><?php if (isset($breadcrumbs['2']['name'])) { echo $breadcrumbs['2']['name'];} ?> <?= Html::encode(ucfirst(strtok($this->title, '::'))) ?></h1>
     <?php Pjax::begin(['timeout' => 10000 ]); ?>
-    <style>
-        .filters .form-control {
-            max-height: 25px;
-        }
 
-        .table {
-            white-space: nowrap;
-            /*font-size: smaller;*/
-        }
-    </style>
     <div class="projects-all-search">
 
         <?php $form = ActiveForm::begin([

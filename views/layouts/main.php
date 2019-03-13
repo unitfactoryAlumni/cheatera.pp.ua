@@ -10,8 +10,35 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
-// $BootswatchAsset_themes = ['cerulean', 'cosmo', 'custom', 'cyborg', 'darkly', 'flatly', 'fonts', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti'];
-raoul2000\bootswatch\BootswatchAsset::$theme = 'cosmo';
+$themes = [
+    'cerulean' => 'Cerulean',
+    'cosmo' => 'Cosmo',
+    'custom' => 'Custom',
+    'cyborg' => 'Cyborg',
+    'darkly' => 'Darkly',
+    'flatly' => 'Flatly',
+    'fonts' => 'Fonts',
+    'journal' => 'Journal',
+    'lumen' => 'Lumen',
+    'paper' => 'Paper',
+    'readable' => 'Readable',
+    'sandstone' => 'Sandstone',
+    'simplex' => 'Simplex',
+    'slate' => 'Slate',
+    'spacelab' => 'Spacelab',
+    'superhero' => 'Superhero',
+    'united' => 'United',
+    'yeti' => 'Yeti',
+
+    'default' => 'cosmo'
+];
+
+$labled_themes = [];
+foreach ($themes as $k => $v) {
+    $labled_themes[] = ['label' => $v, 'url' => ['']];
+}
+
+raoul2000\bootswatch\BootswatchAsset::$theme = $themes['default'];
 AppAsset::register($this);
 $this->registerJsFile('@web/js/site.js', ['depends' => [yii\web\JqueryAsset::className()], 'position' => \yii\web\View::POS_END]);
 $this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);
@@ -95,6 +122,10 @@ $this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['
                             ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
                         ]
                     ],
+                    [
+                        'label' => Yii::t('app', 'Themes'),
+                        'items' => $labled_themes
+                    ],
                     Yii::$app->user->isGuest
                     ? ([
                             'label' => Yii::t('app', 'Account'),
@@ -134,7 +165,7 @@ $this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['
             <?= $content ?>
         </div>
     </div>
-    <hr style="height: 130px; opacity: 0;">
+
     <footer class="footer">
         <div class="container">
             <p class="pull-left">
@@ -147,44 +178,6 @@ $this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['
         </div>
     </footer>
     <?php $this->endBody() ?>
-    <style>
-        .filters .form-control {
-            max-height: 25px;
-        }
-
-        .table {
-            white-space: nowrap;
-            /*font-size: smaller;*/
-        }
-
-        .table > tbody > tr.warning > td{
-            background-color:#ffa200!important;
-        }
-
-        .table > tbody > tr.success > td {
-            background-color: #c8ffbe!important;
-        }
-
-    </style>
-    <script>
-        $(document).on({
-            mouseenter: function (e) {
-                //stuff to do on mouse enter
-                var test = e.target.getAttribute("name");
-                $("#ah-"+test).css("display", "block");
-            },
-            mouseleave: function (e) {
-                //stuff to do on mouse leave
-                var test = e.target.getAttribute("name");
-                $("#ah-"+test).css("display", "none");
-            }
-        }, "#ah");
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
 
 </body>
 

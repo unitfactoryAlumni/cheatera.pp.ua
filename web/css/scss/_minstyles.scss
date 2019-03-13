@@ -203,3 +203,18 @@ a.desc:after {
 .bottom-text {
     color: #999;
 }
+
+/* main.php bottom style */
+.filters .form-control {
+    max-height: 25px;
+}
+.table {
+    white-space: nowrap;
+    /*font-size: smaller;*/
+}
+.table > tbody > tr.warning > td{
+    background-color: #ffa200 !important;
+}
+.table > tbody > tr.success > td {
+    background-color: #c8ffbe !important;
+}
