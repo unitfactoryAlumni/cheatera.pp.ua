@@ -76,14 +76,16 @@ XDEBUG with PHPStorm
 -------
 
 1. Start docker and open website, and check IP in menu
-2. Open PhpStorm settings PHP > Debug
-3. Debug Port 9999
-4. All marks is checked (xDebug Section)
-5. Open  PHP > Debug > DBGp Proxy and write `PHPStorm`, IP from menu, `9999`
-6. Open PHP > Servers and add mapping `/var/www/html` - Absolute path on server for project files
-7. Open PHP > Debug and press 'Validate', add /web for project path and website adn press Validate
-8. Install https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc
-9. Enjoy!
+2. Change IP in Docker file (root project directory, line `xdebug.remote_host`)
+3. `docker-compose stop && docker-compose up -d --build (stop! not down!) 
+4. Open PhpStorm settings PHP > Debug
+5. Debug Port 9999
+6. All marks is checked (xDebug Section)
+7. Open  PHP > Debug > DBGp Proxy and write `PHPStorm`, IP from menu, `9999`
+8. Open PHP > Servers and add mapping `/var/www/html` - Absolute path on server for project files
+9. Open PHP > Debug and press 'Validate', add /web for project path and website adn press Validate
+10. Install https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc
+11. Enjoy!
 
 TESTING
 -------
