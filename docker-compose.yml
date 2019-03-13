@@ -11,12 +11,6 @@ services:
       - ./:/var/www/html/
     links:
       - mysql
-    environment:
-      ENABLE_ENV_FILE: 1
-      ENABLE_LOCALCONF: 0
-      API_TOKEN: "<YOUR GITHUB API TOKEN>"
-      PHP_XDEBUG_ENABLED: 1
-      XDEBUG_CONFIG: remote_host=172.18.0.3
 
   mysql:
     image: mysql:5.7
