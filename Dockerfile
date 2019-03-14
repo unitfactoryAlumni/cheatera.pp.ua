@@ -50,9 +50,6 @@ RUN wget http://codeception.com/codecept.phar && \
 
 RUN a2enmod rewrite
 
-#Update apache2.conf
-RUN sed -i 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/web#' /etc/apache2/apache2.conf
-
 # Fix write permissions with shared folders
 RUN usermod -u 1000 www-data
 
@@ -60,11 +57,17 @@ RUN usermod -u 1000 www-data
 COPY . /var/www/html
 RUN mkdir -p /var/www/html/web/assets
 
-# Writing php.ini
-RUN echo 'memory_limit=512M' >> /usr/local/etc/php/php.ini
-
-# We first install any composer packages outside of the web root to prevent them
-# from being overwritten by the COPY below. If the composer.lock file here didn't
-# change, docker will use the cached composer files.
 RUN composer self-update
 RUN composer install --no-plugins --no-scripts
+
+# Setup xdebug
+RUN pecl install redis xdebug-2.6.0 \
+    && docker-php-ext-enable xdebug
+RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_host=172.24.0.1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_port=9999" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.default_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_autostart=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.idekey=PHPStorm" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo 'memory_limit=-1' >> /usr/local/etc/php/php.ini
