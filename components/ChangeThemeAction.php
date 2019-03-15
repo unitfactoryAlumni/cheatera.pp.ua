@@ -4,7 +4,6 @@ namespace app\components;
 
 use Yii;
 use yii\base\Action;
-use app\helpers\ThemesHelper;
 
 class ChangeThemeAction extends Action
 {
@@ -22,6 +21,6 @@ class ChangeThemeAction extends Action
             $theme->setDefault();
         }
 
-        return Yii::$app->getResponse()->redirect(Yii::$app->getUser()->getReturnUrl(null));
+        return Yii::$app->getResponse()->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
     }
 }
