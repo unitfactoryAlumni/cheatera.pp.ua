@@ -17,7 +17,9 @@ use yii\helpers\Html;
 $this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['0']['name']), 'url' => [$breadcrumbs['0']['url']]];
 $this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['1']['name']), 'url' => [$breadcrumbs['1']['url']]];
 $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
+
 ?>
+
 <div class="projects-view">
     <h1><?= Html::encode(ucfirst(strtok($this->title, '::'))) ?></h1>
 

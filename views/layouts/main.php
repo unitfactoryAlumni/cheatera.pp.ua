@@ -126,10 +126,10 @@ $this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['
                             ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
                         ]
                     ],
-                    [
-                        'label' => Yii::t('app', 'Themes'),
-                        'items' => $labled_themes
-                    ],
+                    // [
+                    //     'label' => Yii::t('app', 'Themes'),
+                    //     'items' => $labled_themes
+                    // ],
                     Yii::$app->user->isGuest
                     ? ([
                             'label' => Yii::t('app', 'Account'),

@@ -129,6 +129,7 @@ a.desc:after {
   border: 1px solid rgba(0,0,0,.125);
   border-radius: .25rem;
   margin-top: 15px;
+  width: 100% !important;
 }
 
 .card-img-top {
@@ -145,6 +146,34 @@ a.desc:after {
 
 .card-title {
   margin-bottom: .75rem;
+}
+
+.progress {
+  background-color: #636363;
+  margin: 0.75rem auto;
+  margin-bottom: 10px;
+  height: 20px;
+}
+
+.progress p {
+  text-align: left !important;
+  padding-left: 10px;
+  font-size: 14px !important;
+  line-height: 20px !important;
+}
+
+.progress p a {
+  text-decoration: none !important;
+}
+
+#progress-bar-main {
+  height: 30px !important;
+}
+#progress-bar-main>div {
+  text-align: left !important;
+  padding-left: 30px;
+  font-size: 20px !important;
+  line-height: 30px !important;
 }
 
 .h5, h5 {
@@ -184,18 +213,6 @@ a.desc:after {
   background-color: #ff003b;
 }
 
-.progress {
-  background-color: #636363;
-  margin-bottom: 10px;
-}
-.my-shadow {
-  margin-bottom: 5px;
-}
-
-.progress p {
-  text-align: left;
-  padding-left: 5px;
-}
 .mini {
   white-space: nowrap;
 }
@@ -213,13 +230,22 @@ a.desc:after {
   /*font-size: smaller;*/
 }
 .table > tbody > tr.warning > td{
-  background-color: #ffa200 !important;
+  background-color: #ffa200;
 }
 .table > tbody > tr.success > td {
-  background-color: #c8ffbe !important;
+  
+  /* background-color: #c8ffbe; */
+  background-color: #3fb618;
+}
+.btn-outline-secondary:hover {
+  filter: brightness(85%);
+  color: inherit;
+}
+.table-responsive {
+  padding-bottom: 200px;
 }
 
 /* Styles for SearchModel form */
-form#w0 * {
-  margin-bottom: 10px;
+form #w0 * {
+  padding-bottom: 10px;
 }

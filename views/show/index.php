@@ -14,7 +14,9 @@ use \app\helpers\ViewHelper;
 /* @var array $action */
 
 $this->params['breadcrumbs'][] = strtok($this->title, " ");
+
 ?>
+
 <div class="show-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -64,7 +66,6 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                         'format' => 'raw',
                         'value' => function($data) {
                             if ($data['lastloc'] == 0) {
-
                                 return Yii::t('app', 'ONLINE');
                             }
                             return ViewHelper::getHumanTime($data['lastloc']);

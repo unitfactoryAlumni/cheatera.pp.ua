@@ -62,7 +62,7 @@ return [
     'true' => 'Да',
     'false' => 'Нет',
 
-    //models/ProjectsAll
+    // models/ProjectsAll
     'Xlogin' =>  'Логин',
     'Final Mark' => 'Финальная оценка',
     'Retry' => 'Попыток',
@@ -129,6 +129,7 @@ return [
     'Url' => 'Ссылка',
     'Needupd' => '',
     'Cursus ID' => '',
+    'Skills' => 'Навыки',
     'Skills ID' => '',
     'Skills Level' => '',
     'Skills Name' => '',

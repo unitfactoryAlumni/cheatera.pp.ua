@@ -28,9 +28,3 @@ void function mainPhpBottomCode()
         }
     }, "#ah");
 }();
-
-// void function changeTheme()
-// {
-//     themes = $( '#w' + ($('#w0-collapse ul').length - 1) ); // second node from the end is Themes <ul>
-//     console.log( themes );
-// }();
