@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: omentes
- * Date: 1/11/19
- * Time: 11:04 PM
- */
 
 return [
     // common
@@ -16,6 +10,10 @@ return [
     'Members' => 'Участники',
     'Projects' => 'Проекты',
     'Cheating' => 'Читинг',
+
+    // views/layouts/main.php
+    'Set Default Theme' => 'Установить стандартную тему',
+    'Set Dark Theme' => 'Установить тёмную тему',
 
     // Show Controller
     'Students UNIT Factory' => 'Студенты UNIT Factory',

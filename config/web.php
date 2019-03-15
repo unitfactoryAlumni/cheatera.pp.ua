@@ -68,7 +68,6 @@ $config = [
                     'clientId' => env('42_API_CI', ''),
                     'clientSecret' => env('42_API_CS', ''),
                 ],
-                // etc.
             ],
         ],
         'db' => $db,

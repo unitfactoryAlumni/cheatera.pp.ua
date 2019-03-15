@@ -1,0 +1,16 @@
+
+/* Styles to fix superhero theme appearance */
+footer {
+  background-color: #4e5d6c !important;
+  border-color: #4e5d6c !important;
+  color: #EEF0F1;
+}
+#alldata > tr > td {
+  padding-top: 16px;
+}
+#alldata > tr > td:first-child {
+  padding-top: 6px;
+}
+code {
+  background-color: #EEF0F1;
+}

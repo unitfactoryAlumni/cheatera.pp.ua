@@ -18,6 +18,7 @@ body {
   background-color: #f5f5f5;
   border-top: 1px solid #ddd;
   padding-top: 20px;
+  color: white;
 }
 
 .jumbotron {
@@ -53,6 +54,12 @@ a.asc:after {
 
 a.desc:after {
   content: /*"\e114"*/ "\e152";
+}
+
+a.reglink {
+  color: inherit;
+  text-decoration: none;
+  cursor: auto;
 }
 
 .sort-numerical a.asc:after {
@@ -259,19 +266,3 @@ form#w0 div:nth-child(1),
 form#w0 div:nth-child(2) {
   padding-top: 2.5px;
 }
-
-/* Styles for superhero theme */
-/* footer {
-  background-color: #4e5d6c !important;
-  border-color: #4e5d6c !important;
-  color: #EEF0F1;
-}
-#alldata > tr > td {
-  padding-top: 16px;
-}
-#alldata > tr > td:first-child {
-  padding-top: 6px;
-}
-code {
-  background-color: #EEF0F1;
-} */

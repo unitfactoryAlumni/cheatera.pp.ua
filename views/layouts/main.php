@@ -10,39 +10,14 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
-$themes = [
-    'cerulean' => 'Cerulean',
-    'cosmo' => 'Cosmo',
-    'custom' => 'Custom',
-    'cyborg' => 'Cyborg',
-    'darkly' => 'Darkly',
-    'flatly' => 'Flatly',
-    'fonts' => 'Fonts',
-    'journal' => 'Journal',
-    'lumen' => 'Lumen',
-    'paper' => 'Paper',
-    'readable' => 'Readable',
-    'sandstone' => 'Sandstone',
-    'simplex' => 'Simplex',
-    'slate' => 'Slate',
-    'spacelab' => 'Spacelab',
-    'superhero' => 'Superhero',
-    'united' => 'United',
-    'yeti' => 'Yeti',
-
-    'default' => 'cosmo'
-];
-
-$labled_themes = [];
-foreach ($themes as $k => $v) {
-    $labled_themes[] = ['label' => $v, 'url' => ['']];
-}
-
-// raoul2000\bootswatch\BootswatchAsset::$theme = $themes['superhero']; // -- black theme
-raoul2000\bootswatch\BootswatchAsset::$theme = $themes['cosmo'];
+$theme = new app\helpers\Themes;
+raoul2000\bootswatch\BootswatchAsset::$theme = $theme->getCurrent();
 AppAsset::register($this);
 $this->registerJsFile('@web/js/site.js', ['depends' => [yii\web\JqueryAsset::className()], 'position' => \yii\web\View::POS_END]);
 $this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);
+if ($theme->isDark()) {
+    $this->registerCssFile('@web/css/fix-dark-theme.css');
+}
 
 // echo '<pre>'; var_export($request->post('1')); echo '</pre>'; die();
 
@@ -127,10 +102,6 @@ $this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['
                             ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
                         ]
                     ],
-                    // [
-                    //     'label' => Yii::t('app', 'Themes'),
-                    //     'items' => $labled_themes
-                    // ],
                     Yii::$app->user->isGuest
                     ? ([
                             'label' => Yii::t('app', 'Account'),
@@ -177,8 +148,13 @@ $this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['
                 <?= \app\helpers\FlagsLang::widget() ?>
             </p>
 
-            <p class="pull-right">
-                <?= Yii::powered() ?>
+            <p class="pull-right bs-component">
+                <a class="label reglink <?= $theme->isDefault() ? 'label-primary' : 'label-default' ?>">
+                    <?= Yii::t('app', 'Set Default Theme') ?>
+                </a>
+                <a class="label reglink <?= $theme->isDark() ? 'label-primary' : 'label-default' ?>">
+                    <?= Yii::t('app', 'Set Dark Theme') ?>
+                </a>
             </p>
         </div>
     </footer>
