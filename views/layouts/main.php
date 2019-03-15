@@ -38,7 +38,8 @@ foreach ($themes as $k => $v) {
     $labled_themes[] = ['label' => $v, 'url' => ['']];
 }
 
-raoul2000\bootswatch\BootswatchAsset::$theme = $themes['default'];
+// raoul2000\bootswatch\BootswatchAsset::$theme = $themes['superhero']; // -- black theme
+raoul2000\bootswatch\BootswatchAsset::$theme = $themes['cosmo'];
 AppAsset::register($this);
 $this->registerJsFile('@web/js/site.js', ['depends' => [yii\web\JqueryAsset::className()], 'position' => \yii\web\View::POS_END]);
 $this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);

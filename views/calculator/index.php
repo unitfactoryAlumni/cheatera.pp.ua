@@ -15,7 +15,7 @@ $js = <<<CALCULATOR_JS
 CALCULATOR_JS;
 $this->registerJs($js);
 
-$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => ''];
+$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name']];
 
 ?>
 

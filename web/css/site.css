@@ -5,10 +5,8 @@ body {
 }
 
 .wrap {
-  min-height: 100%;
+  min-height: 95%;
   height: auto;
-  margin: 0 auto -60px;
-  padding: 0 0 60px;
 }
 
 .wrap > .container {
@@ -16,7 +14,7 @@ body {
 }
 
 .footer {
-  height: 60px;
+  height: 5%;
   background-color: #f5f5f5;
   border-top: 1px solid #ddd;
   padding-top: 20px;
@@ -124,12 +122,18 @@ a.desc:after {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: inherit;
   background-clip: border-box;
   border: 1px solid rgba(0,0,0,.125);
   border-radius: .25rem;
   margin-top: 15px;
   width: 100% !important;
+}
+.phone {
+  color: inherit;
+}
+.card-text {
+  
 }
 
 .card-img-top {
@@ -166,10 +170,10 @@ a.desc:after {
   text-decoration: none !important;
 }
 
-#progress-bar-main {
+.progress-bar-main {
   height: 30px !important;
 }
-#progress-bar-main>div {
+.progress-bar-main>div {
   text-align: left !important;
   padding-left: 30px;
   font-size: 20px !important;
@@ -221,7 +225,7 @@ a.desc:after {
   color: #999;
 }
 
-/* main.php bottom style */
+/* table styles */
 .filters .form-control {
   max-height: 25px;
 }
@@ -233,19 +237,41 @@ a.desc:after {
   background-color: #ffa200;
 }
 .table > tbody > tr.success > td {
-  
   /* background-color: #c8ffbe; */
   background-color: #3fb618;
 }
+.btn-outline-secondary {
+  color: black;
+}
 .btn-outline-secondary:hover {
   filter: brightness(85%);
-  color: inherit;
+  color: black;
 }
 .table-responsive {
+  margin-top: 10px;
   padding-bottom: 200px;
 }
-
-/* Styles for SearchModel form */
-form #w0 * {
-  padding-bottom: 10px;
+.dropdown-header {
+  color: inherit;
 }
+/* Styles for SearchModel form */
+form#w0 div:nth-child(1),
+form#w0 div:nth-child(2) {
+  padding-top: 2.5px;
+}
+
+/* Styles for superhero theme */
+/* footer {
+  background-color: #4e5d6c !important;
+  border-color: #4e5d6c !important;
+  color: #EEF0F1;
+}
+#alldata > tr > td {
+  padding-top: 16px;
+}
+#alldata > tr > td:first-child {
+  padding-top: 6px;
+}
+code {
+  background-color: #EEF0F1;
+} */

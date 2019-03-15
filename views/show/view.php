@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
 ?>
 
     <div class="row"> <div class="col-lg-12 mx-auto">
-            <div id="progress-bar-main" class="progress my-shadow">
+            <div class="progress my-shadow progress-bar-main">
                 <div class="progress-bar progress-bar-<?= ViewHelper::getLevelColorClass($model['level'])?> progress-bar-striped active" role="progressbar" style="width: <?= ViewHelper::getProgress($model['level'])?>%"><?= $model['level'] ?></div>
             </div>
         </div>
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                     <h5 class="card-title"><?= $model['displayname']?></h5>
                     <p class="card-text"><b><?= Yii::t('app', 'Login:') ?></b> <?= $model['login']?></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Level:') ?></b> <?= $model['level']?></p>
-                    <p class="card-text"><b><?= Yii::t('app', 'Phone:') ?></b> <a style="color:#000;" href="tel:<?= $model['phone']?>"><?= $model['phone']?></a></p>
+                    <p class="card-text"><b><?= Yii::t('app', 'Phone:') ?></b> <a class="phone" href="tel:<?= $model['phone']?>"><?= $model['phone']?></a></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Email:') ?></b> <?= $model['email']?></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Pool Year') ?>:</b> <?= $model['pool_year']?></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Pool Month') ?>:</b> <?= $model['pool_month']?></p>
