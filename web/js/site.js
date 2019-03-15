@@ -28,3 +28,16 @@ void function mainPhpBottomCode()
         }
     }, "#ah");
 }();
+
+
+void function calculatorJS()
+{
+    if (window.location.pathname.split('/')[1] === 'calculator') {
+        $.each($('.tier-key'), function() {
+            $(this).click(function () {
+                $.pjax.defaults.timeout = false;
+                $.pjax.reload({container:"#calculator"});  // Reload ActiveForm
+            })
+        });
+    }
+}();

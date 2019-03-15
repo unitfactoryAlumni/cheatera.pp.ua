@@ -70,4 +70,4 @@ RUN composer install --no-plugins --no-scripts
 #     && echo "xdebug.remote_port=9999" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 #     && echo "xdebug.remote_host=192.168.99.1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 #     && echo "xdebug.idekey=VSCODE" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#     && echo "memory_limit=-1" >> /usr/local/etc/php/php.ini
+RUN echo "memory_limit=-1" >> /usr/local/etc/php/php.ini

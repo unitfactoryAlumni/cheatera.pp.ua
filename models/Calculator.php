@@ -114,7 +114,7 @@ class Calculator extends Model
         if (!$session->isActive) {
             $session->open();
         }
-        
+
         $this->lvlstart = (!$session->has('level') ? 0 : $session->get('level'));
 
         return $this->lvlstart;
