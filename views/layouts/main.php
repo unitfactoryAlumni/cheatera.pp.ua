@@ -9,8 +9,9 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\helpers\ThemesHelper;
 
-$theme = new app\helpers\Themes;
+$theme = new ThemesHelper;
 raoul2000\bootswatch\BootswatchAsset::$theme = $theme->getCurrent();
 AppAsset::register($this);
 $this->registerJsFile('@web/js/site.js', ['depends' => [yii\web\JqueryAsset::className()], 'position' => \yii\web\View::POS_END]);
@@ -148,13 +149,8 @@ if ($theme->isDark()) {
                 <?= \app\helpers\FlagsLang::widget() ?>
             </p>
 
-            <p class="pull-right bs-component">
-                <a class="label reglink <?= $theme->isDefault() ? 'label-primary' : 'label-default' ?>">
-                    <?= Yii::t('app', 'Set Default Theme') ?>
-                </a>
-                <a class="label reglink <?= $theme->isDark() ? 'label-primary' : 'label-default' ?>">
-                    <?= Yii::t('app', 'Set Dark Theme') ?>
-                </a>
+            <p class="pull-right">
+                <?= ThemesHelper::getThemesSwitcherHtml($theme) ?>
             </p>
         </div>
     </footer>

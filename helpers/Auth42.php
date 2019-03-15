@@ -67,7 +67,6 @@ class Auth42 extends OAuth2
      * @param array $params
      * 
      * @return mixed
-     * 
      * @throws \yii\authclient\InvalidResponseException
      */
     public function fetchClientAuthCode($token = null, $params = [])
@@ -123,7 +122,6 @@ class Auth42 extends OAuth2
      * @param array $params
      *
      * @return \yii\authclient\OAuthToken
-     * 
      * @throws HttpException
      */
     public function fetchClientAccessToken($authCode, $state, array $params = [])

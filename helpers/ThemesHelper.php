@@ -3,11 +3,12 @@
 namespace app\helpers;
 
 use Yii;
+use yii\helpers\Html;
 
-class Themes
+class ThemesHelper
 {
-
-    private const COOCKIE_NAME = 'theme';
+    public const ACTION_NAME = 'change-theme';
+    public const NAME = 'theme';
 
     private $themes = [
         'cerulean' => 'Cerulean',
@@ -42,19 +43,38 @@ class Themes
         $this->cookies = Yii::$app->response->cookies;
         $this->expire = time() + 86400 * 365;
 
-        if (!$this->cookies->has(self::COOCKIE_NAME)) {
+        if (!$this->cookies->has(self::NAME)) {
             $this->cookies->add(new \yii\web\Cookie([
-                'name' => self::COOCKIE_NAME,
+                'name' => self::NAME,
                 'value' => $this->themes['default'],
                 'expire' => $this->expire,
             ]));
         }
     }
 
+    /**
+     * getThemesSwitchetHtml - 
+     *
+     * @param   Object  $theme  Initialized ThemeHelper, themself, Object
+     *
+     * @return  String          Generated Html for current ThemeHelper Object
+     */
+    static public function getThemesSwitcherHtml($theme)
+    {
+        $toReturn = '<span class="bs-component">';
+            foreach (['Default', 'Dark'] as $v) {
+                $classes = 'label reglink ' . ($theme->{('is' . $v)}() ? 'label-primary' : 'label-default');
+                $toReturn .= Html::a( Yii::t('app', "Set $v Theme"), '/' . self::ACTION_NAME, ['class' => $classes] );
+            }
+        $toReturn .= '</span>';
+
+        return $toReturn;
+    }
+
 
     public function getCurrent()
     {
-        return $this->cookies->get(self::COOCKIE_NAME)->value;
+        return $this->cookies->get(self::NAME)->value;
     }
 
     public function getDefault()
@@ -79,9 +99,9 @@ class Themes
 
     public function setDark()
     {
-        $this->cookies->remove(self::COOCKIE_NAME);
+        $this->cookies->remove(self::NAME);
         $this->cookies->add(new \yii\web\Cookie([
-            'name' => self::COOCKIE_NAME,
+            'name' => self::NAME,
             'value' => $this->themes['dark'],
             'expire' => $this->expire,
         ]));
@@ -89,9 +109,9 @@ class Themes
 
     public function setDefault()
     {
-        $this->cookies->remove(self::COOCKIE_NAME);
+        $this->cookies->remove(self::NAME);
         $this->cookies->add(new \yii\web\Cookie([
-            'name' => self::COOCKIE_NAME,
+            'name' => self::NAME,
             'value' => $this->themes['default'],
             'expire' => $this->expire,
         ]));
