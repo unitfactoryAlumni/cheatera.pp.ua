@@ -10,7 +10,11 @@ class ChangeThemeAction extends Action
 {
     public function run()
     {
-        $theme = new ThemesHelper;
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+        $theme = $session->get('theme');
 
         if ($theme->isDefault()) {
             $theme->setDark();

@@ -42,7 +42,7 @@ class ThemesHelper
     public function __construct()
     {
         $this->cookies = Yii::$app->response->cookies;
-        $this->expire = time() + 86400 * 365;
+        $this->expire = time() + 86400 * 365 * 5;
 
         if (!$this->cookies->has(self::NAME)) {
             $this->cookies->add(new \yii\web\Cookie([
