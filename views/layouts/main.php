@@ -11,22 +11,11 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\helpers\ThemesHelper;
 
-$session = Yii::$app->session;
-if (!$session->isActive) {
-    $session->open();
-}
-if (!$session->has('theme')) {
-    $theme = new ThemesHelper;
-    $session->set('theme', $theme);
-} else {
-    $theme = $session->get('theme');
-}
-raoul2000\bootswatch\BootswatchAsset::$theme = $theme->getCurrent();
-
+raoul2000\bootswatch\BootswatchAsset::$theme = ThemesHelper::getCurrent();
 AppAsset::register($this);
 $this->registerJsFile('@web/js/site.js', ['depends' => [yii\web\JqueryAsset::className()], 'position' => \yii\web\View::POS_END]);
 $this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);
-if ($theme->isDark()) {
+if (ThemesHelper::isDark()) {
     $this->registerCssFile('@web/css/fix-dark-theme.css');
 }
 
@@ -160,7 +149,7 @@ if ($theme->isDark()) {
             </p>
 
             <p class="pull-right">
-                <?= ThemesHelper::getThemesSwitcherHtml($theme) ?>
+                <?= ThemesHelper::getThemesSwitcherHtml() ?>
             </p>
         </div>
     </footer>

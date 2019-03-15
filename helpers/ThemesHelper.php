@@ -6,12 +6,15 @@ use Yii;
 use yii\helpers\Html;
 use yii\web\Cookie;
 
+/**
+ * ThemesHelper
+ */
 class ThemesHelper
 {
     public const ACTION_NAME = 'change-theme';
     public const NAME = 'theme';
 
-    private $themes = [
+    static private $themes = [
         'cerulean' => 'Cerulean',
         'cosmo' => 'Cosmo',
         'custom' => 'Custom',
@@ -35,22 +38,25 @@ class ThemesHelper
         'dark' => 'superhero',
     ];
 
-    private $cookies;
-    private $expire;
 
-
-    public function __construct()
+    public static function getExpired()
     {
-        $this->cookies = Yii::$app->response->cookies;
-        $this->expire = time() + 86400 * 365 * 5;
+        return time() + 86400 * 365 * 5;
+    }
 
-        if (!$this->cookies->has(self::NAME)) {
-            $this->cookies->add(new \yii\web\Cookie([
+    public static function checkThemeCoockie()
+    {
+        $cookies = Yii::$app->response->cookies;
+
+        if (!$cookies->has(self::NAME)) {
+            $cookies->add(new \yii\web\Cookie([
                 'name' => self::NAME,
-                'value' => $this->themes['default'],
-                'expire' => $this->expire,
+                'value' => self::$themes['default'],
+                'expire' => self::getExpired(),
             ]));
         }
+
+        return $cookies;
     }
 
     /**
@@ -60,55 +66,59 @@ class ThemesHelper
      *
      * @return  String          Generated Html for current ThemeHelper Object
      */
-    static public function getThemesSwitcherHtml($theme)
+    public static function getThemesSwitcherHtml()
     {
-        return Html::a( Yii::t('app', ($theme->isDefault() ? 'Set Dark Theme' : 'Set Default Theme'))
+        return Html::a( Yii::t('app', (self::isDefault() ? 'Set Dark Theme' : 'Set Default Theme'))
         , '/' . self::ACTION_NAME );
     }
 
 
-    public function getCurrent()
+    public static function getCurrent()
     {
-        return $this->cookies->get(self::NAME)->value;
+        return self::checkThemeCoockie()->get(self::NAME)->value;
     }
 
-    public function getDefault()
+    public static function getDefault()
     {
-        return $this->themes['default'];
+        return self::$themes['default'];
     }
 
-    public function getDark()
+    public static function getDark()
     {
-        return $this->themes['dark'];
+        return self::$themes['dark'];
     }
 
-    public function isDefault()
+    public static function isDefault()
     {
-        return $this->themes['default'] == $this->getCurrent();
+        return self::$themes['default'] == self::getCurrent();
     }
 
-    public function isDark()
+    public static function isDark()
     {
-        return $this->themes['dark'] == $this->getCurrent();
+        return self::$themes['dark'] == self::getCurrent();
     }
 
-    public function setDark()
+    public static function setDark()
     {
-        $this->cookies->remove(self::NAME);
-        $this->cookies->add(new Cookie([
+        $cookies = self::checkThemeCoockie();
+
+        $cookies->remove(self::NAME);
+        $cookies->add(new Cookie([
             'name' => self::NAME,
-            'value' => $this->themes['dark'],
-            'expire' => $this->expire,
+            'value' => self::$themes['dark'],
+            'expire' => self::getExpired(),
         ]));
     }
 
-    public function setDefault()
+    public static function setDefault()
     {
-        $this->cookies->remove(self::NAME);
-        $this->cookies->add(new Cookie([
+        $cookies = self::checkThemeCoockie();
+
+        $cookies->remove(self::NAME);
+        $cookies->add(new Cookie([
             'name' => self::NAME,
-            'value' => $this->themes['default'],
-            'expire' => $this->expire,
+            'value' => self::$themes['default'],
+            'expire' => self::getExpired(),
         ]));
     }
 
