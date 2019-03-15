@@ -4,6 +4,7 @@ namespace app\helpers;
 
 use Yii;
 use yii\helpers\Html;
+use yii\web\Cookie;
 
 class ThemesHelper
 {
@@ -31,7 +32,7 @@ class ThemesHelper
         'yeti' => 'Yeti',
 
         'default' => 'cosmo',
-        'black' => 'superhero',
+        'dark' => 'superhero',
     ];
 
     private $cookies;
@@ -53,7 +54,7 @@ class ThemesHelper
     }
 
     /**
-     * getThemesSwitchetHtml - 
+     * getThemesSwitchetHtml - get html code for theme switcher to input to any place on site
      *
      * @param   Object  $theme  Initialized ThemeHelper, themself, Object
      *
@@ -61,14 +62,8 @@ class ThemesHelper
      */
     static public function getThemesSwitcherHtml($theme)
     {
-        $toReturn = '<span class="bs-component">';
-            foreach (['Default', 'Dark'] as $v) {
-                $classes = 'label reglink ' . ($theme->{('is' . $v)}() ? 'label-primary' : 'label-default');
-                $toReturn .= Html::a( Yii::t('app', "Set $v Theme"), '/' . self::ACTION_NAME, ['class' => $classes] );
-            }
-        $toReturn .= '</span>';
-
-        return $toReturn;
+        return Html::a( Yii::t('app', ($theme->isDefault() ? 'Set Dark Theme' : 'Set Default Theme'))
+        , '/' . self::ACTION_NAME );
     }
 
 
@@ -100,7 +95,7 @@ class ThemesHelper
     public function setDark()
     {
         $this->cookies->remove(self::NAME);
-        $this->cookies->add(new \yii\web\Cookie([
+        $this->cookies->add(new Cookie([
             'name' => self::NAME,
             'value' => $this->themes['dark'],
             'expire' => $this->expire,
@@ -110,7 +105,7 @@ class ThemesHelper
     public function setDefault()
     {
         $this->cookies->remove(self::NAME);
-        $this->cookies->add(new \yii\web\Cookie([
+        $this->cookies->add(new Cookie([
             'name' => self::NAME,
             'value' => $this->themes['default'],
             'expire' => $this->expire,

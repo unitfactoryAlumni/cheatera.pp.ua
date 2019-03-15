@@ -55,7 +55,7 @@ class SiteController extends CommonController
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => (YII_ENV_TEST ? 'testme' : null),
             ],
-            app\helpers\ThemesHelper::ACTION_NAME => 'app\components\ChangeThemeAction',
+            'change-theme' => 'app\components\ChangeThemeAction',
         ];
     }
 

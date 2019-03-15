@@ -143,6 +143,7 @@ if ($theme->isDark()) {
         </div>
     </div>
 
+    <?php echo '<pre>'; var_export($theme->getCurrent()); echo '</pre>'; ?>
     <footer class="footer">
         <div class="container">
             <p class="pull-left">
