@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                 'dataProvider' => $dataProvider,
                 'filterModel'  => $searchModel,
                 'tableOptions' => [
-                    'class' => 'table table-striped table-bordered table-responsive'
+                    'class' => 'table table-striped table-bordered table-responsive row'
                 ],
                 'rowOptions'=>function($data) use ($tmp) {
                     if($data['login'] == $tmp){

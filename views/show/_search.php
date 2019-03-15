@@ -16,12 +16,13 @@ use kartik\select2\Select2;
     'action' => [$action],
     'method' => 'get',
     'options' => [
+        'class' => 'row',
         'data-pjax' => 1
     ],
     'fieldConfig' => [
         'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
         'options' => [
-            'class' => 'col-lg-3',
+            'class' => 'col-md-3',
         ],
     ],
 ]); ?>
@@ -41,9 +42,10 @@ use kartik\select2\Select2;
         ],
     ]); ?>
 
-    <div class="col-lg-3 col-xs-12 form-group">
+    <div class="col-md-offset-1 col-md-3 col-xs-9 col-xs-offset-3 form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>
+    
 
 <?php ActiveForm::end(); ?>
