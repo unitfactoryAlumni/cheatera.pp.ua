@@ -27,7 +27,6 @@ class CalculatorController extends CommonController
         if ($model === null) {
             $model = new Calculator();
         }
-
         if (!$model->lvlstart) {
             $model->resetToDefault();
         }

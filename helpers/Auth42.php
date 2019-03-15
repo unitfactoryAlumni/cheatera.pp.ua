@@ -46,20 +46,16 @@ class Auth42 extends OAuth2
         return $this->composeUrl($this->authUrl, array_merge($defaultParams, $params));
     }
 
-    public function setDefaultCoockies($response = null)
+    public function rememberUserInfo($response = null)
     {
         if ($response === null)
             return ;
 
-        $cookies = Yii::$app->response->cookies;
-
-        if (isset($response['cursus_users'][0]['level']) && !$cookies->has('level')) {
-            $cookies->add(new \yii\web\Cookie([
-                'name' => 'level',
-                'value' => $response['cursus_users'][0]['level'],
-                'expire' => time() + 86400 * 365,
-            ]));
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
         }
+        $session->set('level', $response['cursus_users'][0]['level']);
     }
 
     /**
@@ -99,7 +95,7 @@ class Auth42 extends OAuth2
             ->setHeaders($params);
         $response = $this->sendRequest($request);
 
-        $this->setDefaultCoockies($response);
+        $this->rememberUserInfo($response);
 
         $profileLink = '/pools/';
         if (isset($response['cursus_users'])) {

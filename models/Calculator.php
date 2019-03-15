@@ -75,8 +75,6 @@ class Calculator extends Model
         $this->result = 0;
         $this->lvl_max = count(self::$_expr_per_lvl) - 2;
 
-        $this->finalmark = 125;
-
         $this->resetToDefault();
     }
 
@@ -110,8 +108,15 @@ class Calculator extends Model
 
     public function resetToDefault()
     {
-        $cookies = Yii::$app->request->cookies;
-        $this->lvlstart = $cookies->getValue('level');
+        $this->finalmark = 125;
+
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+        
+        $this->lvlstart = (!$session->has('level') ? 0 : $session->get('level'));
+
         return $this->lvlstart;
     }
 
