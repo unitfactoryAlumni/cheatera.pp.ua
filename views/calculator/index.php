@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name']];
             <?= $form->field($model, 'lvlstart')
                 ->label(Yii::t('app', 'Enter level'))
                 ->input('text', ['placeholder' => Yii::t('app', 'Enter number')])
-                ->textInput()
+                ->textInput(2)
             ?>
 
             <?= $form->field($model, 'finalmark')

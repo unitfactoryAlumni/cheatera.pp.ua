@@ -5,7 +5,6 @@ body {
 }
 
 .wrap {
-  min-height: 95%;
   height: auto;
 }
 
@@ -14,11 +13,20 @@ body {
 }
 
 .footer {
-  height: 5%;
+  clear: both;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: auto;
+  min-height: 3%;
   background-color: #f5f5f5;
   border-top: 1px solid #ddd;
-  padding-top: 20px;
   color: white;
+}
+.footer .container {
+  margin-top: 2vh;
+  height: 3vh;
 }
 
 .jumbotron {
@@ -280,3 +288,4 @@ tbody#alldata > tr > td {
 tbody#alldata > tr > td:first-child {
   padding-top: 6px;
 }
+ 
