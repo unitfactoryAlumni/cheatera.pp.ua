@@ -57,8 +57,7 @@ RUN usermod -u 1000 www-data
 COPY . /var/www/html
 RUN mkdir -p /var/www/html/web/assets
 
-RUN composer self-update
-RUN composer install --no-plugins --no-scripts
+RUN composer install
 
 # Setup xdebug
 RUN pecl install redis xdebug-2.6.0 \

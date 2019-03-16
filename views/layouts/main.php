@@ -42,7 +42,12 @@ $this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\Bootstr
 
     <?php $this->head() ?>
 </head>
+<style>
+    .new-friend {
+        /* @TODO Add style */
+    }
 
+</style>
 <body>
     <?php $this->beginBody() ?>
 
@@ -57,6 +62,7 @@ $this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\Bootstr
             ]);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
+                'encodeLabels' => false,
                 'items' => [
                     ['label' => 'Add issue', 'url' => 'https://github.com/omentes/cheatera.pp.ua/issues/new/choose'],
                     [
@@ -106,15 +112,19 @@ $this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\Bootstr
                         ])
                     : ([
                             'label' => (isset(Yii::$app->session['profile'])
-                                ? (Yii::$app->user->identity->username)
+                                ? (true) ? Html::tag('span', '', ['class' => 'glyphicon glyphicon-ok-sign', 'style' => 'color:#008200']) . ' ' . (Yii::$app->user->identity->username) :  (Yii::$app->user->identity->username)
                                 : (Yii::t('app', 'Account'))
                             ),
                             'items' => [
                                 isset(Yii::$app->session['profile'])
-                                ? ([
-                                    'label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]
-                                ])
+                                ?
+                                    ['label' => '40 | ' . ' ' . Yii::t('app', 'Friends'), 'url' => ['friend/index'], 'options'=> ['class' => 'new-friend']]
+
                                 : '<li class="divider"></li>',
+                                isset(Yii::$app->session['profile']) ?
+                                    ['label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]]
+                                :
+                                    '',
                                 [
                                     'label' => Yii::t('app', 'Logout'),
                                     'url' => ['/site/logout'],
