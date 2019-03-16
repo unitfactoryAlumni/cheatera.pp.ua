@@ -30,8 +30,16 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => env('VD_KEY', ''),
+            'enableCookieValidation' => true,
+            'enableCsrfValidation' => true,
             'baseUrl' => '', //убрать frontend/web
             'class' => 'klisl\languages\Request',
+        ],
+        'session' => [
+            'cookieParams' => [
+                // 'domain' => '.',
+                'httpOnly' => true,
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -39,7 +47,12 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-            'loginUrl' => ['/auth?authclient=auth42']
+            'loginUrl' => ['/auth?authclient=auth42'],
+            'identityCookie' => [
+                'name' => '_identity',
+                'httpOnly' => true,
+                // 'domain' => '.',
+            ],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

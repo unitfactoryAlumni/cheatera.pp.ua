@@ -3,8 +3,8 @@
 namespace app\helpers;
 
 use Yii;
-use yii\helpers\Html;
 use yii\web\Cookie;
+use yii\helpers\Html;
 
 /**
  * ThemesHelper
@@ -13,7 +13,7 @@ class ThemesHelper
 {
     public const ACTION_NAME = 'change-theme';
     public const NAME = 'theme';
-
+    
     static private $themes = [
         'cerulean' => 'Cerulean',
         'cosmo' => 'Cosmo',
@@ -33,30 +33,47 @@ class ThemesHelper
         'superhero' => 'Superhero',
         'united' => 'United',
         'yeti' => 'Yeti',
-
+        
         'default' => 'cosmo',
         'dark' => 'superhero',
     ];
 
 
-    public static function getExpired()
+    private static function setCookie($value)
     {
-        return time() + 86400 * 365 * 5;
+        // return new Cookie([
+        //     'name' => self::NAME,
+        //     'value' => $value,
+        //     'expire' => time() + 86400 * 365 * 5,
+        //     // 'domain' => '.',
+        // ]);
+        setcookie(self::NAME, $value, time() + 86400 * 365 * 5);
     }
 
-    public static function checkThemeCoockie()
+    /**
+     * checkThemeCookie - get cookies Object for all the class
+     * sets, if necessary, self::NAME cookie to self::$themes['default'] value.
+     *
+     * @return  Object      Cookies Object
+     */
+    private static function checkThemeCookie()
     {
-        $cookies = Yii::$app->response->cookies;
+        // $cookies = Yii::$app->getResponse()->getCookies();
 
-        if (!$cookies->has(self::NAME)) {
-            $cookies->add(new \yii\web\Cookie([
-                'name' => self::NAME,
-                'value' => self::$themes['default'],
-                'expire' => self::getExpired(),
-            ]));
+        // echo '<pre>'; var_export($cookies); echo '</pre>'; die();
+
+        // if (!$cookies->getValue(self::NAME, false)) {
+        //     $cookies->add( self::createCookie(self::$themes['default']) );
+        // }
+
+        // return $cookies;
+
+        if (!$_COOKIE[self::NAME]) {
+            ThemesHelper::setDefault();
+            return self::$themes['default'];
         }
 
-        return $cookies;
+        return $_COOKIE[self::NAME];
     }
 
     /**
@@ -75,7 +92,7 @@ class ThemesHelper
 
     public static function getCurrent()
     {
-        return self::checkThemeCoockie()->get(self::NAME)->value;
+        return self::checkThemeCookie(); //, self::getDefault());
     }
 
     public static function getDefault()
@@ -100,26 +117,12 @@ class ThemesHelper
 
     public static function setDark()
     {
-        $cookies = self::checkThemeCoockie();
-
-        $cookies->remove(self::NAME);
-        $cookies->add(new Cookie([
-            'name' => self::NAME,
-            'value' => self::$themes['dark'],
-            'expire' => self::getExpired(),
-        ]));
+        self::setCookie( self::$themes['dark'] );
     }
 
     public static function setDefault()
     {
-        $cookies = self::checkThemeCoockie();
-
-        $cookies->remove(self::NAME);
-        $cookies->add(new Cookie([
-            'name' => self::NAME,
-            'value' => self::$themes['default'],
-            'expire' => self::getExpired(),
-        ]));
+        self::setCookie( self::$themes['default'] );
     }
 
 }

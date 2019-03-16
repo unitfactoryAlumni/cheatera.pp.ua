@@ -142,6 +142,7 @@ if (ThemesHelper::isDark()) {
         </div>
     </div>
 
+    
     <footer class="footer">
         <div class="container">
             <p class="pull-left">
