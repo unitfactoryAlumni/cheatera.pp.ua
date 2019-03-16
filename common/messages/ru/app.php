@@ -134,7 +134,6 @@ return [
     'Subject' => '',
 
 
-    'Calculator' => 'Калькулятор',
     'Corrections' => 'Коррекшины',
     '42API error! Please, try again' => 'Ошибка 42АПИ. Попробуйте еще раз!',
     'Profile' => 'Профиль',
@@ -157,4 +156,5 @@ return [
     'Marks' => 'Оценки',
     'Location' => 'Хост',
 
+    'If you have a trouble with style - please use hard refresh on page (refresh page with shift, or remove you cookie)' => 'Если у вас есть проблемы со стилем - пожалуйста, используйте жесткое обновление на странице (обновите страницу с shift или удалите куки)'
 ];
