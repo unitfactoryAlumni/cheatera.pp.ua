@@ -68,7 +68,7 @@ class ThemesHelper
 
         // return $cookies;
 
-        if (!$_COOKIE[self::NAME]) {
+        if (!isset($_COOKIE[self::NAME])) {
             ThemesHelper::setDefault();
             return self::$themes['default'];
         }
