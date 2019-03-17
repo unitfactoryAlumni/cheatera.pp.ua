@@ -49,16 +49,13 @@ class SiteController extends CommonController
     public function actions()
     {
         return [
-            'auth' => [
-                'class' => 'yii\authclient\AuthAction',
-            ],
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
+            'auth' => 'yii\authclient\AuthAction',
+            'error' => 'yii\web\ErrorAction',
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'fixedVerifyCode' => (YII_ENV_TEST ? 'testme' : null),
             ],
+            'change-theme' => 'app\components\ChangeThemeAction',
         ];
     }
 
@@ -109,8 +106,8 @@ class SiteController extends CommonController
      */
     public function actionIndex()
     {
-        $title = Yii::t('app', 'Cheatera from UNIT Factory');
-        $description = Yii::t('app', 'Cheatera - private social network for students from UNIT Factory');
+        $title = Yii::t('app', 'Cheatera of UNIT Factory');
+        $description = Yii::t('app', 'Cheatera - private social network for students of UNIT Factory');
         $this->setMeta($title, $description);
         return $this->render('index');
     }

@@ -23,7 +23,6 @@ Cheatera Yii 2
       web/                contains the entry script and Web resources
 
 
-
 REQUIREMENTS
 ------------
 
@@ -48,26 +47,26 @@ Install docker https://forum.intra.42.fr/topics/19933/messages/last
 Register new 42 API app and fill Oauth42 in .env
 
     docker-compose up -d --build
-    
+
 You can then access the application through the following URL:
 
     http://192.168.99.100:8888
 
 If after installation you see fatal error `require()`:
 
-	docker-compose exec web bash
+    docker-compose exec web bash
     chown www-data:www-data runtime web/assets
-	composer update
+    composer update
 
 Automation import DB from file (write @apakhomo in Slack, or @omentes in Telegram) 
 Put file schema.sql on project dir.
 
 PhpMyAdmin
-    
+
     http://192.168.99.100:8080
 
 Login with user `yii2` and pass `yii2`, select `yii2`
-    
+
 **TEST AUTH:** 
 - Press 'Login' at nav bar
 
@@ -99,13 +98,11 @@ By default there are 3 test suites:
 
 Tests can be executed by running
 
-```
-vendor/bin/codecept run
-```
+    vendor/bin/codecept run
 
 The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
 tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
+they perform testing in real browser.
 
 
 ### Running  acceptance tests
@@ -117,7 +114,7 @@ To execute acceptance tests do the following:
 2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
    version of Codeception
 
-3. Update dependencies with Composer 
+3. Update dependencies with Composer
 
     ```
     composer update  
@@ -134,13 +131,13 @@ To execute acceptance tests do the following:
     ```
     # for Firefox
     java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
-    
+
     # for Google Chrome
     java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
     ``` 
-    
+
     As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
-    
+
     ```
     docker run --net=host selenium/standalone-firefox:2.53.0
     ```
@@ -151,7 +148,7 @@ To execute acceptance tests do the following:
    tests/bin/yii migrate
    ```
 
-   The database configuration can be found at `config/test_db.php`.
+    The database configuration can be found at `config/test_db.php`.
 
 
 6. Start web server:
@@ -162,16 +159,16 @@ To execute acceptance tests do the following:
 
 7. Now you can run all available tests
 
-   ```
-   # run all available tests
-   vendor/bin/codecept run
+    ```
+    # run all available tests
+    vendor/bin/codecept run
 
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
+    # run acceptance tests
+    vendor/bin/codecept run acceptance
 
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
+    # run only unit and functional tests
+    vendor/bin/codecept run unit,functional
+    ```
 
 ### Code coverage support
 

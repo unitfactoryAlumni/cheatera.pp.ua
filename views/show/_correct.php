@@ -14,7 +14,7 @@ use yii\widgets\Pjax;
 
 
     <?php Pjax::begin(['timeout' => 10000 ]); ?>
-    <?php echo $this->render('_correct_search', ['model' => $searchModelCorrections, 'action' => $action]);
+    <?= $this->render('_correct_search', ['model' => $searchModelCorrections, 'action' => $action]);
 
     $labels = [];
     $data = [];

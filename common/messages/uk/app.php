@@ -33,4 +33,7 @@ return [
     'in progress' => '',
     'search group' => '',
     'created' => '',
+
+    'If you have a trouble with style - please use hard refresh on page (refresh page with shift, or remove you cookie)' => 'Якщо у вас виникли проблеми зі стилем, будь ласка, використовуйте жорстке оновлення на сторінці (оновіть сторінку за допомогою shift, або видаліть cookie)'
+
 ];

@@ -2,7 +2,6 @@
 
 use kartik\tabs\TabsX;
 use yii\helpers\Html;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var array $breadcrumbs */
@@ -18,7 +17,9 @@ use yii\widgets\Pjax;
 $this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['0']['name']), 'url' => [$breadcrumbs['0']['url']]];
 $this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['1']['name']), 'url' => [$breadcrumbs['1']['url']]];
 $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
+
 ?>
+
 <div class="projects-view">
     <h1><?= Html::encode(ucfirst(strtok($this->title, '::'))) ?></h1>
 
@@ -47,14 +48,5 @@ $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
         'encodeLabels'=>false
     ]);
     ?>
-    <style>
-        .filters .form-control {
-            max-height: 25px;
-        }
 
-        .table {
-            white-space: nowrap;
-            /*font-size: smaller;*/
-        }
-    </style>
 </div>

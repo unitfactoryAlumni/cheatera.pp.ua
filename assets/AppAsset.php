@@ -27,6 +27,7 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'fedemotta\datatables\DataTablesAsset',
+        'raoul2000\bootswatch\BootswatchAsset',
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
 }

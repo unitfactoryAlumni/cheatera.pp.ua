@@ -30,8 +30,16 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => env('VD_KEY', ''),
+            'enableCookieValidation' => true,
+            'enableCsrfValidation' => true,
             'baseUrl' => '', //убрать frontend/web
             'class' => 'klisl\languages\Request',
+        ],
+        'session' => [
+            'cookieParams' => [
+                // 'domain' => '.',
+                'httpOnly' => true,
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -39,7 +47,12 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-            'loginUrl' => ['/auth?authclient=auth42']
+            'loginUrl' => ['/auth?authclient=auth42'],
+            'identityCookie' => [
+                'name' => '_identity',
+                'httpOnly' => true,
+                // 'domain' => '.',
+            ],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -68,7 +81,6 @@ $config = [
                     'clientId' => env('42_API_CI', ''),
                     'clientSecret' => env('42_API_CS', ''),
                 ],
-                // etc.
             ],
         ],
         'db' => $db,
@@ -93,6 +105,7 @@ $config = [
                 'students' => 'show/students',
                 'pools' => 'show/pools',
                 'calculator' => 'calculator',
+                'change-theme' => 'site/change-theme',
                 'calculator/form-submission' => 'calculator/form-submission',
                 'corrections' => 'corrections/index',
             ],

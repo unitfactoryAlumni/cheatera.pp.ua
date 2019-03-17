@@ -5,23 +5,14 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\bootstrap\ActiveForm;
 use yii\widgets\Pjax;
-use app\assets\AppAsset;
+use yii\bootstrap\ActiveForm;
 
-AppAsset::register($this);
-$js = <<<JS
-    $("#new_note").on("pjax:end", function() {
-        $.pjax.reload({container:"#calculator"});  // Reload ActiveForm
-    });
-JS;
-$this->registerJs($js);
-
-$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => ''];
+$this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name']];
 
 ?>
 
-<div class="calculator-index">
+<div id="calculator-index">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php Pjax::begin(['id' => 'calculator']); ?>
@@ -41,20 +32,20 @@ $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => ''];
             </div><br>
             <?= $form->field($model, 'lvlstart')
                 ->label(Yii::t('app', 'Enter level'))
-                ->input('text', ['placeholder' => Yii::t('app', 'Enter number')])
-                ->textInput(['autofocus' => true])
+                ->input('number', ['placeholder' => Yii::t('app', 'Enter number')])
+                ->textInput()
             ?>
 
             <?= $form->field($model, 'finalmark')
                 ->label(Yii::t('app', 'Enter mark'))
-                ->input('text', ['placeholder' => Yii::t('app', 'Enter number')])
+                ->input('number', ['placeholder' => Yii::t('app', 'Enter number')])
                 ->textInput()
             ?>
 
             <div>
                 <?php
                     foreach ($model->getTier() as $k => $v) {
-                        echo Html::submitButton($v, ['class' => 'btn btn-primary', 'name' => $k, 'style' => 'margin: 3px']);
+                        echo Html::submitButton($v, ['class' => 'btn btn-primary tier-key', 'name' => $k, 'style' => 'margin: 3px']);
                     }
                 ?>
                 <h2><?= Yii::t('app', 'Result') . ':' ?> <span id='fm'><?= $model->result ? $model->result : '' ?></span></h2>

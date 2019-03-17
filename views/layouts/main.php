@@ -9,9 +9,15 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\helpers\ThemesHelper;
 
+raoul2000\bootswatch\BootswatchAsset::$theme = ThemesHelper::getCurrent();
 AppAsset::register($this);
-$this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);
+$this->registerJsFile('@web/js/site.js', ['depends' => [yii\web\JqueryAsset::className()], 'position' => \yii\web\View::POS_END]);
+$this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);
+if (ThemesHelper::isDark()) {
+    $this->registerCssFile('@web/css/fix-dark-theme.css');
+}
 
 // echo '<pre>'; var_export($request->post('1')); echo '</pre>'; die();
 
@@ -52,7 +58,7 @@ $this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\Bootstr
                 'brandLabel' => Yii::$app->name,
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar-default navbar-fixed-top',
                 ],
             ]);
             echo Nav::widget([
@@ -135,57 +141,20 @@ $this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\Bootstr
             <?= $content ?>
         </div>
     </div>
-    <hr style="height: 130px; opacity: 0;">
+
+    
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">
+            <span class="pull-left">
                 <?= \app\helpers\FlagsLang::widget() ?>
-            </p>
+            </span>
 
-            <p class="pull-right">
-                <?= Yii::powered() ?>
-            </p>
+            <span class="pull-right">
+                <?= ThemesHelper::getThemesSwitcherHtml() ?>
+            </span>
         </div>
     </footer>
     <?php $this->endBody() ?>
-    <style>
-        .filters .form-control {
-            max-height: 25px;
-        }
-
-        .table {
-            white-space: nowrap;
-            /*font-size: smaller;*/
-        }
-
-        .table > tbody > tr.warning > td{
-            background-color:#ffa200!important;
-        }
-
-        .table > tbody > tr.success > td {
-            background-color: #c8ffbe!important;
-        }
-
-    </style>
-    <script>
-        $(document).on({
-            mouseenter: function (e) {
-                //stuff to do on mouse enter
-                var test = e.target.getAttribute("name");
-                $("#ah-"+test).css("display", "block");
-            },
-            mouseleave: function (e) {
-                //stuff to do on mouse leave
-                var test = e.target.getAttribute("name");
-                $("#ah-"+test).css("display", "none");
-            }
-        }, "#ah");
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
 
 </body>
 
