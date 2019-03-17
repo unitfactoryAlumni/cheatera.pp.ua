@@ -5,8 +5,8 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\bootstrap\ActiveForm;
 use yii\widgets\Pjax;
+use yii\bootstrap\ActiveForm;
 
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name']];
 

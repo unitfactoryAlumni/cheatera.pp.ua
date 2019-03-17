@@ -9,6 +9,7 @@ use kartik\select2\Select2;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var array $months */
 /* @var array $years */
+
 ?>
 
 <?php $form = ActiveForm::begin([

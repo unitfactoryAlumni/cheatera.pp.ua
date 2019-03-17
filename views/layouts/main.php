@@ -145,13 +145,13 @@ if (ThemesHelper::isDark()) {
     
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">
+            <span class="pull-left">
                 <?= \app\helpers\FlagsLang::widget() ?>
-            </p>
+            </span>
 
-            <p class="pull-right">
+            <span class="pull-right">
                 <?= ThemesHelper::getThemesSwitcherHtml() ?>
-            </p>
+            </span>
         </div>
     </footer>
     <?php $this->endBody() ?>

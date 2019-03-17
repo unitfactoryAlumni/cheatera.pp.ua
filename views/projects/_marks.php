@@ -16,7 +16,10 @@ use kartik\select2\Select2;
 /* @var array $months */
 /* @var array $years */
 
-    $tmp = Yii::$app->session->get('username') ?>
+$tmp = Yii::$app->session->get('username');
+
+?>
+
 <?php Pjax::begin(['timeout' => 10000 ]); ?>
     <div class="projects-all-search-marks">
 
@@ -64,7 +67,7 @@ use kartik\select2\Select2;
                 'dataProvider' => $dataProvider,
                 'filterModel'  => $searchModel,
                 'tableOptions' => [
-                    'class' => 'table table-striped table-bordered table-responsive'
+                    'class' => 'table table-striped table-bordered'
                 ],
                 'rowOptions'=>function($data) use ($tmp) {
                     if($data['xlogin'] == $tmp){
@@ -97,7 +100,6 @@ use kartik\select2\Select2;
                         'format' => 'raw',
                         'value' => function($data) {
                             if ($data['lastloc'] == 0) {
-
                                 return Yii::t('app', 'ONLINE');
                             }
                             return ViewHelper::getHumanTime($data['lastloc']);

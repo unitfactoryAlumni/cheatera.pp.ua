@@ -156,5 +156,5 @@ return [
     'Marks' => 'Оценки',
     'Location' => 'Хост',
 
-    'If you have a trouble with style - please use hard refresh on page (refresh page with shift, or remove you cookie)' => 'Если у вас есть проблемы со стилем - пожалуйста, используйте жесткое обновление на странице (обновите страницу с shift или удалите куки)'
+    'If you have a trouble with style - please use hard refresh on page(refresh page with shift), or delete all you cookies' => 'Если у вас есть проблемы со стилем - пожалуйста, используйте жёсткое обновление страницы(обновите страницу с shift), или удалите все ваши куки'
 ];
