@@ -77,7 +77,7 @@ class Minus42StudentsSearch extends Minus42
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'xlogin', $this->xlogin])
+        $query->andFilterWhere(['like', 'xlogins.login', $this->xlogin])
          ->andFilterWhere(['like', 'name', $this->name])
          ->andFilterWhere(['like', 'pool_year', $this->pool_year])
          ->andFilterWhere(['like', 'pool_month', $this->pool_month]);

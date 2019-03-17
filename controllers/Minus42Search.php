@@ -136,6 +136,10 @@ class Minus42Search extends ProjectsAll
                 'final_mark' => [
                     'asc' => ['final_mark' => SORT_ASC],
                     'desc' => ['final_mark' => SORT_DESC],
+                ],
+                'xlogin' => [
+                    'asc' => ['xlogin' => SORT_ASC],
+                    'desc' => ['xlogin' => SORT_DESC],
                 ]
             ]
         ];
