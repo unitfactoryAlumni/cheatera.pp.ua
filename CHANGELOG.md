@@ -1,7 +1,8 @@
 # Cheatera Change Log
 
 ------------------------
-
+- Issue #24 Added new templates for git documentation
+- Issue #73 Added changelog
 - Issue #87 Fixed slash URLs to no-slash URLs
 - Issue #79 Тёмная тема
 - Issue #77 Фильтрация по логину на странице читера

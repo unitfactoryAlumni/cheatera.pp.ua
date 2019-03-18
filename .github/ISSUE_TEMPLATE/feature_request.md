@@ -1,20 +1,16 @@
----
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+Название ишью должно начинаться со слова "сделать/добавить/улучшить" и тд (удалите эту строку и первую заполненую табличку для примера, ниже есть табличка, которую надо заполнить)
 
----
+| Вопрос | Ответ |
+| ------------ | ------------ |
+| Что нужно добавить? | Ваш ответ, максимально подробно, внутри этих двух пайпов, чтобы сохранилась табличка |
+| Как это должно работать? | Ваш ответ, максимально подробно, внутри этих двух пайпов, чтобы сохранилась табличка |
+| Как это не должно работать | Ваш ответ, максимально подробно, внутри этих двух пайпов, чтобы сохранилась табличка |
+| Какую проблему поможет решить эта фича? | Ваш ответ, максимально подробно, внутри этих двух пайпов, чтобы сохранилась табличка |
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
-
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+| Вопрос | Ответ |
+| ------------ | ------------ |
+| Что нужно добавить? | ... |
+| Как это должно работать? | ... |
+| Как это не должно работать | ... |
+| Какую проблему поможет решить эта фича? | ... |

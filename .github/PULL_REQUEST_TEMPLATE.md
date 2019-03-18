@@ -1,14 +1,12 @@
-# Создание нового пулреквеста
+Please, filling table and remove this lines.
+1. Issue number with hash
+2. Need DB update?
+3. You are testing your code locally?
+4. All commits have prefix? For example `Issue-NUMBER: Commit message`
 
-- делаем форк проекта
-- клоним оригнальный репозиторий
-- добавляем себе ссылку на свой репозиторий `git remote add myfork %url%`
-- создаем новую ветку (если вы будете работать над конкретным issue - в названии пишите номер, например `git checkout -b '#16')
-- пишем код
-- коммитим в формате '#ISSUE: How to fix'
-- `git push myfork <branchName>`
-- создаем пул реквест в мастер
-- если есть конфликт - делаем `git pull origin master`, разрешаем конфликт
-- проверяем, есть ли проблемы с кодклиматом, если да - фиксим по максимуму
-- ждем код ревью
-- фиксим правки по ревью
+|Issue| #1 |
+| ------------ | ------------ |
+| DB changed? | no |
+| Test locally? | yes |
+| Commit name have issue prefix? | yes |
+| Update CHANGELOG.md? | yes |
