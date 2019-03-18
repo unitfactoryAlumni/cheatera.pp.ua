@@ -12,7 +12,7 @@ return [
     'Cheating' => 'Читинг',
 
     // views/layouts/main.php
-    'Set Default Theme' => 'Установить стандартную тему',
+    'Set Light Theme' => 'Установить светлую тему',
     'Set Dark Theme' => 'Установить тёмную тему',
 
     // Show Controller
