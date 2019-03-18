@@ -85,7 +85,7 @@ class ThemesHelper
      */
     public static function getThemesSwitcherHtml()
     {
-        return Html::a( Yii::t('app', (self::isDefault() ? 'Set Dark Theme' : 'Set Default Theme'))
+        return Html::a( Yii::t('app', (self::isDefault() ? 'Set Dark Theme' : 'Set Light Theme'))
         , '/' . self::ACTION_NAME );
     }
 
