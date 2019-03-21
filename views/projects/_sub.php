@@ -63,6 +63,9 @@ use kartik\select2\Select2;
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
+            'rowOptions' => function ($data, $key, $index, $grid) use ($subPage) {
+                return ['data-href' => '/'. Yii::$app->language . "$subPage/" . $data['slug']];
+            },
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 

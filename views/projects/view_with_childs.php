@@ -47,6 +47,12 @@ $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
         'position'=>TabsX::POS_ABOVE,
         'encodeLabels'=>false
     ]);
+$this->registerJs("
+    $('table tr[data-href]').click(function () {
+        if ($(this).data('href') !== undefined) {
+            window.location.href = $(this).data('href');
+        }
+    });");
     ?>
 
 </div>
