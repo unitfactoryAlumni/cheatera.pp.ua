@@ -1,12 +1,23 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Calculator */
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 use yii\bootstrap\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\Calculator */
+
+$calc_js = <<<CALC_JS
+    $.each($('.tier-key'), function() {
+        $(this).click(function () {
+            $.pjax.defaults.timeout = false;
+            $.pjax.reload({container:"#calculator"});  // Reload ActiveForm
+        })
+    });
+CALC_JS;
+
+$this->registerJs($calc_js, yii\web\View::POS_END);
 
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name']];
 

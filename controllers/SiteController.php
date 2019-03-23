@@ -2,15 +2,14 @@
 
 namespace app\controllers;
 
-use app\helpers\Auth42;
+use Yii;
+use yii\helpers\Url;
 use app\models\Log;
 use app\models\User;
-
-use Yii;
-use yii\filters\AccessControl;
-use yii\helpers\Url;
-use yii\web\HttpException;
 use yii\web\Response;
+use app\helpers\Auth42;
+use yii\filters\AccessControl;
+use yii\web\HttpException;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;

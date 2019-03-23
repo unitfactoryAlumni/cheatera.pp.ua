@@ -35,6 +35,7 @@ use kartik\select2\Select2;
             'allowClear' => true
         ],
     ]); ?>
+
     <?= $form->field($searchModel, 'pool_year')->widget(Select2::classname(), [
         'data' => $years,
         'options' => ['placeholder' => Yii::t('app', 'Pool Year')],
@@ -43,10 +44,9 @@ use kartik\select2\Select2;
         ],
     ]); ?>
 
-    <div class="col-md-offset-1 col-md-3 col-xs-9 col-xs-offset-3 form-group">
+    <div class="col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8 col-xs-offset-3 col-xs-9 form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>
-    
 
 <?php ActiveForm::end(); ?>
