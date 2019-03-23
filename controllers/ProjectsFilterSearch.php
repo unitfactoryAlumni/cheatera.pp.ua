@@ -165,10 +165,6 @@ class ProjectsFilterSearch extends ProjectsAll
                     'asc' => ['cg' => SORT_ASC],
                     'desc' => ['cg' => SORT_DESC],
                 ],
-//                'name' => [
-//                    'asc' => ['name' => SORT_ASC],
-//                    'desc' => ['name' => SORT_DESC],
-//                ]
             ]
         ];
     }

@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                 'tableOptions' => [
                     'class' => 'table table-striped table-bordered table-responsive row'
                 ],
-                'rowOptions'=>function($data) use ($tmp) {
+                'rowOptions' => function($data) use ($tmp) {
                     if($data['login'] == $tmp){
                         return ['class' => 'warning'];
                     } else if ($data['lastloc'] == 0) {
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                         'format' => 'raw',
                         'attribute' => '',
                         'contentOptions'=> ['style'=>'position: relative'],
-                        'value'  => function($data) use ($pageName) {
+                        'value' => function($data) use ($pageName) {
                             return ViewHelper::getLinkWithHover($data['login'], $pageName);
                         },
                     ],

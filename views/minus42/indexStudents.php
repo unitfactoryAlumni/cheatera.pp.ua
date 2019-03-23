@@ -3,16 +3,18 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\Minus42StudentsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="minus42-index">
     <h1><?= Html::encode($this->title) ?></h1>
+
     <?php Pjax::begin(['timeout' => 10000 ]); ?>
         <div class="table-responsive col-lg-12">
             <?= GridView::widget([
