@@ -1,6 +1,7 @@
 # Cheatera Change Log
 
 ------------------------
+- Issue #96 Change issue link to new repo
 - Issue #94 Сделать всю строку в проектах кликабельной
 - Issue #24 Added new templates for git documentation
 - Issue #73 Added changelog
