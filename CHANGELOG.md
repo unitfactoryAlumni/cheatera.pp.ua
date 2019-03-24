@@ -4,6 +4,7 @@
 - Issue #83 Dark mode framing of student list
 - Issue #81 Текст при тёмной теме
 - Issue #71 Prettify dark(bootswatch/superhero) theme, make it more compliant with styles used on site
+- Issue #96 Change issue link to new repo
 - Issue #94 Сделать всю строку в проектах кликабельной
 - Issue #24 Added new templates for git documentation
 - Issue #73 Added changelog
