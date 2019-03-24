@@ -1,6 +1,9 @@
 # Cheatera Change Log
 
 ------------------------
+- Issue #83 Dark mode framing of student list
+- Issue #71 Prettify dark(bootswatch/superhero) theme, make it more compliant with styles used on site
+- Issue #96 Change issue link to new repo
 - Issue #94 Сделать всю строку в проектах кликабельной
 - Issue #24 Added new templates for git documentation
 - Issue #73 Added changelog
@@ -36,4 +39,3 @@
 - Issue #6 Need add hover image from user at show/index double feature
 - Issue #5 Need create all models from db
 - Issue #3 Add exp calculator feature work in progress
-
