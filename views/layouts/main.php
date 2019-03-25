@@ -64,7 +64,7 @@ if (ThemesHelper::isDark()) {
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Add issue', 'url' => 'https://github.com/omentes/cheatera.pp.ua/issues/new/choose'],
+                    ['label' => 'Add issue', 'url' => 'https://github.com/cheatera-pp-ua/cheatera.pp.ua/issues/new/choose'],
                     [
                         'label' => 'Update',
                         'items' => \app\helpers\ViewHelper::getLastUpdate(),

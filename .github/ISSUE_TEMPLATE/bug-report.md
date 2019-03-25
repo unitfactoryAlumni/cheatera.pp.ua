@@ -1,3 +1,12 @@
+---
+name: Bug Report
+about: Create a report to help us improve
+title: 'BUG: _сюда_короткое_описание_бага_'
+labels: BUG, new
+assignees: omentes, Millon15
+
+---
+
 | Вопрос | Ответ |
 | ------------ | ------------ |
 | OS | MacOS |
