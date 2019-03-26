@@ -13,27 +13,18 @@ services:
       - mysql
 
   mysql:
+    image: mysql:5.7
     container_name: 'yii2-mysql'
     restart: 'always'
-    build:
-      context: ./
-      dockerfile: mysql.dockerfile
-      args:
-        - MYSQL_DATABASE=${DB_NAME}
-        - MYSQL_USER=${DB_USERNAME}
-        - MYSQL_PASSWORD=${DB_PASSWORD}
-        - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     ports:
-        - "${DB_PORT}:3306"
-    # env_file:
-    #   - ./.env
-    # environment:
-    #   MYSQL_ROOT_PASSWORD: yii2
-    #   MYSQL_DATABASE: yii2
-    #   MYSQL_USER: yii2
-    #   MYSQL_PASSWORD: yii2
-    # volumes:
-    #   - ./config/:/docker-entrypoint-initdb.d/
+      - "${DB_PORT}:3306"
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./config/:/docker-entrypoint-initdb.d/
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -41,8 +32,8 @@ services:
     links:
       - mysql
     environment:
-      PMA_HOST: mysql
-      PMA_PORT: ${DB_PORT}
+      - PMA_HOST=mysql
+      - PMA_PORT=${DB_PORT}
     ports:
       - '8080:80'
     volumes:
