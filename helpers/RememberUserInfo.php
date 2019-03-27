@@ -3,6 +3,7 @@
 namespace app\helpers;
 
 use Yii;
+use app\models\Xlogins;
 
 class RememberUserInfo
 {
@@ -11,6 +12,7 @@ class RememberUserInfo
         if ($response === null) {
             return ;
         }
+
         static::rememberLevel($response);
         static::rememberXlogin($response);
     }
@@ -26,10 +28,9 @@ class RememberUserInfo
 
     private static function rememberXlogin($response)
     {
-        echo '<pre>';
-        foreach ($response as $k => $v) {
-            echo $k . PHP_EOL;
-        }
-        echo '</pre>'; die();
+        $xlogins = new Xlogins();
+        $xlogins->attributes = $xlogins->findOne(['xid' => $response['id']]);
+        $xlogins->attributes = $response;
+        $xlogins->save(false);
     }
 }
