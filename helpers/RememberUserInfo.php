@@ -36,7 +36,8 @@ class RememberUserInfo
     private function rememberXlogin()
     {
         $xlogins = new Xlogins();
-        $xlogins = $xlogins->findOne(['xid' => $this->response['id']]);
+        $xlogins =  $xlogins->findOne(['xid' => $this->response['id']])
+                    ?? $xlogins;
         $xlogins->attributes = $this->response;
         $xlogins->save(false);
     }
@@ -47,10 +48,10 @@ class RememberUserInfo
         $skills = new Skills();
         $cursus_users = $this->response['cursus_users'];
 
-        $skills = $skills->findOne([ 'xlogin' => $this->response['login'] ]);
-
         foreach ($cursus_users as $cursus) {
             foreach ($cursus['skills'] as $skill) {
+                $skills =   $skills->findOne([ 'xlogin' => $this->response['login'], 'skills_id' => $skill['id'] ])
+                            ?? $skills;
                 $skill['skills_id'] = $skill['id']; // ???WTF
                 $skill['skills_name'] = $skill['name']; // ???WTF
                 $skill['skills_level'] = $skill['level']; // ???WTF
@@ -58,7 +59,8 @@ class RememberUserInfo
                 $skills->attributes = $skill;
                 $skills->save(false);
             }
-            $cursusUsers = $cursusUsers->findOne(['cursus_users_id' => $cursus['id']]);
+            $cursusUsers =  $cursusUsers->findOne(['cursus_users_id' => $cursus['id']])
+                            ?? $cursusUsers;
             $cursus['begin_at'] = date('Y-m-d H:i:s', strtotime($cursus['begin_at'])); // ! normilizing time format for mySQL
             $cursusUsers->attributes = $cursus;
             $cursusUsers->save(false);
