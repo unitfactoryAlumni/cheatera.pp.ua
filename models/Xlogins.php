@@ -60,6 +60,16 @@ class Xlogins extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function init()
+    {
+        $this->kick = 0; // ???WTF
+        $this->lastloc = date('Y-m-d H:i:s'); // ???WTF
+        parent::init();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function attributeLabels()
     {
         return [
