@@ -3,7 +3,7 @@
 namespace app\helpers;
 
 use Yii;
-use yii\web\Cookie;
+// use yii\web\Cookie;
 use yii\helpers\Html;
 
 /**
@@ -42,18 +42,17 @@ class ThemesHelper
     private static function setCookie($value)
     {
         // return new Cookie([
-        //     'name' => self::NAME,
+        //     'name' => static::NAME,
         //     'value' => $value,
         //     'expire' => time() + 86400 * 365 * 5,
         //     // 'domain' => '.',
         // ]);
-//            setcookie(self::NAME, self::getCurrent(), 0);
-            setcookie(self::NAME, $value, time() + 86400 * 365 * 5, '/', Yii::getAlias('@web'));
+        setcookie(static::NAME, $value, time() + 86400 * 365 * 5);
     }
 
     /**
      * checkThemeCookie - get cookies Object for all the class
-     * sets, if necessary, self::NAME cookie to self::$themes['default'] value.
+     * sets, if necessary, static::NAME cookie to static::$themes['default'] value.
      *
      * @return  Object      Cookies Object
      */
@@ -63,18 +62,18 @@ class ThemesHelper
 
         // echo '<pre>'; var_export($cookies); echo '</pre>'; die();
 
-        // if (!$cookies->getValue(self::NAME, false)) {
-        //     $cookies->add( self::createCookie(self::$themes['default']) );
+        // if (!$cookies->getValue(static::NAME, false)) {
+        //     $cookies->add( static::createCookie(static::$themes['default']) );
         // }
 
         // return $cookies;
 
-        if (!isset($_COOKIE[self::NAME])) {
+        if (!isset($_COOKIE[static::NAME])) {
             ThemesHelper::setDefault();
-            return self::$themes['default'];
+            return static::$themes['default'];
         }
 
-        return $_COOKIE[self::NAME];
+        return $_COOKIE[static::NAME];
     }
 
     /**
@@ -86,44 +85,44 @@ class ThemesHelper
      */
     public static function getThemesSwitcherHtml()
     {
-        return Html::a( Yii::t('app', (self::isDefault() ? 'Set Dark Theme' : 'Set Light Theme'))
-        , '/' . self::ACTION_NAME );
+        return Html::a( Yii::t('app', (static::isDefault() ? 'Set Dark Theme' : 'Set Light Theme'))
+        , '/' . static::ACTION_NAME );
     }
 
 
     public static function getCurrent()
     {
-        return self::checkThemeCookie(); //, self::getDefault());
+        return static::checkThemeCookie(); //, static::getDefault());
     }
 
     public static function getDefault()
     {
-        return self::$themes['default'];
+        return static::$themes['default'];
     }
 
     public static function getDark()
     {
-        return self::$themes['dark'];
+        return static::$themes['dark'];
     }
 
     public static function isDefault()
     {
-        return self::$themes['default'] == self::getCurrent();
+        return static::$themes['default'] == static::getCurrent();
     }
 
     public static function isDark()
     {
-        return self::$themes['dark'] == self::getCurrent();
+        return static::$themes['dark'] == static::getCurrent();
     }
 
     public static function setDark()
     {
-        self::setCookie( self::$themes['dark'] );
+        static::setCookie( static::$themes['dark'] );
     }
 
     public static function setDefault()
     {
-        self::setCookie( self::$themes['default'] );
+        static::setCookie( static::$themes['default'] );
     }
 
 }

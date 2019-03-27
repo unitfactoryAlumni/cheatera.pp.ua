@@ -3,10 +3,11 @@
 namespace app\helpers;
 
 use Yii;
-use app\models\Xlogins;
+
+use app\models\Show;
+use app\models\Curses;
 use app\models\Skills;
-use app\models\CursusUsers;
-use app\models\ProjectsUsers;
+use app\models\ProjectsAll;
 
 class RememberUserInfo
 {
@@ -40,6 +41,41 @@ class RememberUserInfo
         $this->rememberProjectsUsers();
     }
 
+    private function isArraysIdentical($arrayKeysToCompare, $a1, $a2)
+    {
+        foreach ($arrayKeysToCompare as $keyFor_a1 => $keyFor_a2) {
+            if ($a1[$keyFor_a1] != $a2[$keyFor_a2]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private function norminateArrToPut(&$arrToPut, $keys)
+    {
+        foreach ($keys as $keyToReplace => $keyToPut) {
+            $arrToPut[$keyToPut] = $arrToPut[$keyToReplace];
+            unset($arrToPut[$keyToReplace]);
+        }
+    }
+
+    private function makeDbAction($activeRecords, $arrToPutIntoDb)
+    {
+        if ( empty($activeRecords) ) {
+            // ! INSERT
+        }
+
+        $len = sizeof($activeRecords);
+        foreach ($activeRecords as $index => $AR) {
+            if ( $index == $len  ) {
+                // ! UPDATE
+                $AR->attributes = $arrToPutIntoDb;
+                $AR->save(false);
+            }
+            // ! DELETE
+        }
+    }
+
     private function rememberLevel()
     {
         Yii::$app->session->set('level', $this->response['cursus_users'][0]['level']);
@@ -47,50 +83,51 @@ class RememberUserInfo
 
     private function rememberXlogin()
     {
-        $xlogins = new Xlogins();
-        $xlogins =  $xlogins->findOne(['xid' => $this->response['id']])
-                    ?? $xlogins;
-        $xlogins->attributes = $this->response;
-        $xlogins->save(false);
+        $xlogins = (new Show())->find()->where([ 'xid' => $this->response['id'] ])->all();
+
+        // $this->norminateArrToPut($arrToPutIntoDb, $norminationRules);
+        $this->makeDbAction($xlogins, $this->response);
+        // $xlogins->attributes = $this->response;
+        // $xlogin->save(false);
     }
 
     private function rememberCursusUsersAndSkills()
     {
-        $cursusUsers = new CursusUsers();
+        $cursusUsers = new Curses();
         $skills = new Skills();
         $cursus_users = $this->response['cursus_users'];
 
-        foreach ($cursus_users as $cursus) { // !!! Optimisation needed
-            foreach ($cursus['skills'] as $skill) {
-                // $skills =   $skills->findOne([ 'xlogin' => $this->response['login'], 'skills_id' => $skill['id'] ])
-                //             ?? $skills;
-                $adopted_skill['xlogin'] = $this->response['login']; // ??? WTF
-                $adopted_skill['skills_id'] = $skill['id']; // ??? WTF
-                $adopted_skill['skills_name'] = $skill['name']; // ??? WTF
-                $adopted_skill['skills_level'] = $skill['level']; // ??? WTF
+        // foreach ($cursus_users as $cursus) { // !!! Optimisation needed
+        //     foreach 2($cursus['skills'] as $skill) {
+        //         // $skills =   $skills->findOne([ 'xlogin' => $this->response['login'], 'skills_id' => $skill['id'] ])
+        //         //             ?? $skills;
+        //         $adopted_skill['xlogin'] = $this->response['login']; // ??? WTF
+        //         $adopted_skill['skills_id'] = $skill['id']; // ??? WTF
+        //         $adopted_skill['skills_name'] = $skill['name']; // ??? WTF
+        //         $adopted_skill['skills_level'] = $skill['level']; // ??? WTF
 
-                $skills->attributes = $adopted_skill;
-                $skills->save(false);
-            }
-            $cursusUsers =  $cursusUsers->findOne(['cursus_users_id' => $cursus['id']])
-                            ?? $cursusUsers;
-            $cursus['begin_at'] = date('Y-m-d H:i:s', strtotime($cursus['begin_at'])); // ! normilizing time format for mySQL
-            $cursusUsers->attributes = $cursus;
-            $cursusUsers->save(false);
-        }
+        //         $skills->attributes = $adopted_skill;
+        //         $skills->save(false);
+        //     }
+        //     $cursusUsers =  $cursusUsers->findOne(['cursus_users_id' => $cursus['id']])
+        //                     ?? $cursusUsers;
+        //     $cursus['begin_at'] = date('Y-m-d H:i:s', strtotime($cursus['begin_at'])); // ! normilizing time format for mySQL
+        //     $cursusUsers->attributes = $cursus;
+        //     $cursusUsers->save(false);
+        // }
     }
 
     private function rememberProjectsUsers()
     {
-        $pusers = new ProjectsUsers();
+        $pusers = new ProjectsAll();
 
-        foreach ($this->response['projects_users'] as $project) { // !!! Optimisation needed
-            $pusers =   $pusers->findOne(['current_team_id' => $project['current_team_id']])
-                        ?? $pusers;
+        // foreach ($this->response['projects_users'] as $project) { // !!! Optimisation needed
+        //     $pusers =   $pusers->findOne(['current_team_id' => $project['current_team_id']])
+        //                 ?? $pusers;
 
-            $pusers->attributes = $project;
-            $pusers->save(false);
-        }
+        //     $pusers->attributes = $project;
+        //     $pusers->save(false);
+        // }
     }
 
     // TODO private function rememberPatroning()
