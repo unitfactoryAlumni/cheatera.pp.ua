@@ -19,7 +19,7 @@ if (ThemesHelper::isDark()) {
     $this->registerCssFile('@web/css/fix-dark-theme.css');
 }
 
-// echo '<pre>'; var_export($request->post('1')); echo '</pre>'; die();
+// echo '<pre>'; var_export(  ); echo '</pre>'; die();
 
 ?>
 

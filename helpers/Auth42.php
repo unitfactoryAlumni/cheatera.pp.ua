@@ -83,7 +83,7 @@ class Auth42 extends OAuth2
             ->setHeaders($params);
         $response = $this->sendRequest($request);
 
-        RememberUserInfo::rememberAll($response);
+        (new RememberUserInfo($response))->rememberAll();
 
         $profileLink = '/pools/';
         if (isset($response['cursus_users'])) {
