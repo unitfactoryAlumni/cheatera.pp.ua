@@ -47,16 +47,20 @@ class RememberUserInfo
         $skills = new Skills();
         $cursus_users = $this->response['cursus_users'];
 
-        $skills->attributes = $skills->findOne(['xlogin' => $this->response['login']]); // ? Is this check considers enough?
+        $skills = $skills->findOne([ 'xlogin' => $this->response['login'] ]);
 
-        $cursus_users[0]['grade'] = 'lol';
-        foreach ($cursus_users as $v) {
-            // foreach ($v['skills'] as $k => $v) {
-            //     
-            // }
-            $cursusUsers = $cursusUsers->findOne(['cursus_users_id' => $v['id']]);
-            $v['begin_at'] = date('Y-m-d H:i:s', strtotime($v['begin_at'])); // ! normilizing time format for mySQL
-            $cursusUsers->attributes = $v;
+        foreach ($cursus_users as $cursus) {
+            foreach ($cursus['skills'] as $skill) {
+                $skill['skills_id'] = $skill['id']; // ???WTF
+                $skill['skills_name'] = $skill['name']; // ???WTF
+                $skill['skills_level'] = $skill['level']; // ???WTF
+
+                $skills->attributes = $skill;
+                $skills->save(false);
+            }
+            $cursusUsers = $cursusUsers->findOne(['cursus_users_id' => $cursus['id']]);
+            $cursus['begin_at'] = date('Y-m-d H:i:s', strtotime($cursus['begin_at'])); // ! normilizing time format for mySQL
+            $cursusUsers->attributes = $cursus;
             $cursusUsers->save(false);
         }
     }
