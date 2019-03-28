@@ -28,7 +28,6 @@ class RememberUserInfo
         $this->response = $response;
     }
 
-
     public function rememberAll()
     {
         if ($this->response === null) {
@@ -37,44 +36,61 @@ class RememberUserInfo
 
         $this->rememberLevel();
         $this->rememberXlogin();
-        $this->rememberCursusUsersAndSkills();
-        $this->rememberProjectsUsers();
+        $this->rememberCurses();
+        $this->rememberSkills();
+        $this->rememberProjects();
     }
 
-    private function isArraysIdentical($arrayKeysToCompare, $a1, $a2)
+
+
+    private static function isArraysIdentical($a1, $a2, $arrayKeysToCompare)
     {
-        foreach ($arrayKeysToCompare as $keyFor_a1 => $keyFor_a2) {
-            if ($a1[$keyFor_a1] != $a2[$keyFor_a2]) {
+        foreach ($arrayKeysToCompare as $keyFor_both) {
+            if ($a1[$keyFor_both] != $a2[$keyFor_both]) {
                 return false;
             }
         }
         return true;
     }
 
-    private function norminateArrToPut(&$arrToPut, $keys)
+    private static function dateToSqlFormat($date)
+    {
+        return date('Y-m-d H:i:s', strtotime( $date ));
+    }
+
+    private static function changeKeysInArr(&$arrToChangeKeys, $keys)
     {
         foreach ($keys as $keyToReplace => $keyToPut) {
-            $arrToPut[$keyToPut] = $arrToPut[$keyToReplace];
-            unset($arrToPut[$keyToReplace]);
+            $arrToChangeKeys[$keyToPut] = $arrToChangeKeys[$keyToReplace];
+            unset($arrToChangeKeys[$keyToReplace]);
         }
     }
 
-    private function makeDbAction($activeRecords, $arrToPutIntoDb)
+    private function makeDbAction($baseActiveRecordModel, $arrToPutIntoDb, $activeRecords)
     {
         if ( empty($activeRecords) ) {
-            // ! INSERT
+            $baseActiveRecordModel->attributes = $arrToPutIntoDb;
+            $baseActiveRecordModel->insert(false);
         }
 
-        $len = sizeof($activeRecords);
+        $identicalNotFound = true;
+        $len = sizeof($activeRecords) - 1;
+
         foreach ($activeRecords as $index => $AR) {
-            if ( $index == $len  ) {
-                // ! UPDATE
-                $AR->attributes = $arrToPutIntoDb;
-                $AR->save(false);
+            if ( self::isArraysIdentical($arrToPutIntoDb, $AR, $AR::attributes()) ) {
+                $identicalNotFound = false;
+                continue ;
             }
-            // ! DELETE
+
+            if ( $identicalNotFound && $index == $len  ) {
+                $AR->attributes = $arrToPutIntoDb;
+                $AR->update(false);
+            } else {
+                $AR->delete();
+            }
         }
     }
+
 
     private function rememberLevel()
     {
@@ -83,52 +99,75 @@ class RememberUserInfo
 
     private function rememberXlogin()
     {
-        $xlogins = (new Show())->find()->where([ 'xid' => $this->response['id'] ])->all();
+        $xlogin = new Show();
+        self::changeKeysInArr($this->response, [ 'id' => 'xid' ]);
 
-        // $this->norminateArrToPut($arrToPutIntoDb, $norminationRules);
-        $this->makeDbAction($xlogins, $this->response);
-        // $xlogins->attributes = $this->response;
-        // $xlogin->save(false);
+
+        $this->makeDbAction($xlogin, $this->response, $xlogin->find()
+            ->Where([ 'xid' => $this->response['xid'] ])
+            ->orWhere([ 'login' => $this->response['login'] ])
+        ->all());
     }
 
-    private function rememberCursusUsersAndSkills()
+    private function rememberCurses()
     {
-        $cursusUsers = new Curses();
-        $skills = new Skills();
-        $cursus_users = $this->response['cursus_users'];
+        // $curses = new Curses();
 
-        // foreach ($cursus_users as $cursus) { // !!! Optimisation needed
-        //     foreach 2($cursus['skills'] as $skill) {
-        //         // $skills =   $skills->findOne([ 'xlogin' => $this->response['login'], 'skills_id' => $skill['id'] ])
-        //         //             ?? $skills;
-        //         $adopted_skill['xlogin'] = $this->response['login']; // ??? WTF
-        //         $adopted_skill['skills_id'] = $skill['id']; // ??? WTF
-        //         $adopted_skill['skills_name'] = $skill['name']; // ??? WTF
-        //         $adopted_skill['skills_level'] = $skill['level']; // ??? WTF
+        // foreach ($this->response['cursus_users'] as $curs) {
+        //     $curs['begin_at'] = self::dateToSqlFormat($curs['begin_at']);
 
-        //         $skills->attributes = $adopted_skill;
-        //         $skills->save(false);
-        //     }
-        //     $cursusUsers =  $cursusUsers->findOne(['cursus_users_id' => $cursus['id']])
-        //                     ?? $cursusUsers;
-        //     $cursus['begin_at'] = date('Y-m-d H:i:s', strtotime($cursus['begin_at'])); // ! normilizing time format for mySQL
-        //     $cursusUsers->attributes = $cursus;
-        //     $cursusUsers->save(false);
+        //     $this->makeDbAction($curses, $curs, $curses->find()
+        //             ->Where([ 'xid' => $this->response['xid'] ])
+        //             ->orWhere([ 'login' => $this->response['login'] ])
+        //         ->all());
         // }
     }
 
-    private function rememberProjectsUsers()
+    private function rememberSkills()
+    {
+        // $skills = new Skills();
+
+        // foreach ($this->response['cursus_users'] as &$cursus) {
+        //     foreach ($cursus['skills'] as &$skill) {
+        //         $skill['xlogin'] = $this->response['login'];
+        //         self::changeKeysInArr($skill, [ 'id' => 'skills_id', 'name' => 'skills_name', 'level' => 'skills_level' ]);
+
+        //         $this->makeDbAction($skills, $skill, $skills->find()
+        //                 ->Where([ 'xid' => $this->response['xid'] ])
+        //                 ->orWhere([ 'login' => $this->response['login'] ])
+        //             ->all());
+        //     }
+        // }
+    }
+
+    /**
+     * rememberProjects
+     *
+     * !!! Needs refactor for optimization purposes
+     */
+    private function rememberProjects()
     {
         $pusers = new ProjectsAll();
 
-        // foreach ($this->response['projects_users'] as $project) { // !!! Optimisation needed
-        //     $pusers =   $pusers->findOne(['current_team_id' => $project['current_team_id']])
-        //                 ?? $pusers;
+        foreach ($this->response['projects_users'] as &$project) {
+            $project['xlogin'] = $this->response['login'];
+            $project['cursus_ids'] = $project['cursus_ids'][0]; // ??? WTF
+            $project['marked_at'] = self::dateToSqlFormat($project['marked_at']);
+            self::changeKeysInArr($project, [ 'id' => 'puid', 'validated?' => 'validated' ]);
+            $project['validated'] = $project['validated'] ? 'True' : 'False';
+            // ??? WTF 'validated?' ? True ? False ? true ? false ?
+        
+            foreach ($project['project'] as $key => $val) {
+                $project[$key] = $val;
+            }
+            unset($project['project']);
+            self::changeKeysInArr($project, [ 'id' => 'project_id' ]);
 
-        //     $pusers->attributes = $project;
-        //     $pusers->save(false);
-        // }
+
+            $this->makeDbAction($pusers, $project, $pusers->find()
+                ->Where([ 'puid' => $project['puid'] ])
+            ->all());
+        }
     }
 
-    // TODO private function rememberPatroning()
 }
