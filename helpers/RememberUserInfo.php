@@ -53,17 +53,25 @@ class RememberUserInfo
         return true;
     }
 
-    private static function dateToSqlFormat($date)
+    static function dateToSqlFormat(&$date)
     {
-        return date('Y-m-d H:i:s', strtotime( $date ));
+        $date = date('Y-m-d H:i:s', strtotime( $date ));
     }
 
-    private static function changeKeysInArr(&$arrToChangeKeys, $keys)
+    private static function swapKeysInArr(&$arrToChangeKeys, $keys)
     {
         foreach ($keys as $keyToReplace => $keyToPut) {
             $arrToChangeKeys[$keyToPut] = $arrToChangeKeys[$keyToReplace];
             unset($arrToChangeKeys[$keyToReplace]);
         }
+    }
+
+    private static function mergeChildArrByKey(&$arr, $key)
+    {
+        foreach ($arr[$key] as $key => $val) {
+            $arr[$key] = $val;
+        }
+        unset($arr[$key]);
     }
 
     private function makeDbAction($baseActiveRecordModel, $arrToPutIntoDb, $activeRecords)
@@ -100,7 +108,7 @@ class RememberUserInfo
     private function rememberXlogin()
     {
         $xlogin = new Show();
-        self::changeKeysInArr($this->response, [ 'id' => 'xid' ]);
+        self::swapKeysInArr($this->response, [ 'id' => 'xid' ]);
 
 
         $this->makeDbAction($xlogin, $this->response, $xlogin->find()
@@ -111,33 +119,41 @@ class RememberUserInfo
 
     private function rememberCurses()
     {
-        // $curses = new Curses();
+        $curses = new Curses();
 
-        // foreach ($this->response['cursus_users'] as $curs) {
-        //     $curs['begin_at'] = self::dateToSqlFormat($curs['begin_at']);
+        foreach ($this->response['cursus_users'] as &$curs) {
+            self::dateToSqlFormat($curs['begin_at']);
+            self::swapKeysInArr($curs, [ 'id' => 'xid' ]);
+            self::mergeChildArrByKey($curs, 'cursus');
+            unset($curs['id']);
+            unset($curs['user']);
+            $curs['has_coalition'] = $curs['has_coalition'] ? 'True' : 'False';
+            self::dateToSqlFormat($curs['created_at']);
 
-        //     $this->makeDbAction($curses, $curs, $curses->find()
-        //             ->Where([ 'xid' => $this->response['xid'] ])
-        //             ->orWhere([ 'login' => $this->response['login'] ])
-        //         ->all());
-        // }
+
+            $this->makeDbAction($curses, $curs, $curses->find()
+                ->Where([ 'xlogin' => $curs['xlogin'] ])
+                ->andWhere([ 'cursus_id' => $curs['cursus_id'] ])
+            ->all());
+        }
     }
 
     private function rememberSkills()
     {
-        // $skills = new Skills();
+        $skills = new Skills();
 
-        // foreach ($this->response['cursus_users'] as &$cursus) {
-        //     foreach ($cursus['skills'] as &$skill) {
-        //         $skill['xlogin'] = $this->response['login'];
-        //         self::changeKeysInArr($skill, [ 'id' => 'skills_id', 'name' => 'skills_name', 'level' => 'skills_level' ]);
+        foreach ($this->response['cursus_users'] as &$cursus) {
+            foreach ($cursus['skills'] as &$skill) {
+                $skill['xlogin'] = $this->response['login'];
+                $skill['cursus_id'] = $cursus['skills']['cursus_id'];
+                self::swapKeysInArr($skill, [ 'id' => 'skills_id', 'name' => 'skills_name', 'level' => 'skills_level' ]);
 
-        //         $this->makeDbAction($skills, $skill, $skills->find()
-        //                 ->Where([ 'xid' => $this->response['xid'] ])
-        //                 ->orWhere([ 'login' => $this->response['login'] ])
-        //             ->all());
-        //     }
-        // }
+                $this->makeDbAction($skills, $skill, $skills->find()
+                    ->Where([ 'skills_id' => $skill['skills_id'] ])
+                    ->andWhere([ 'xlogin' => $skill['xlogin'] ])
+                ->all());
+            }
+        }
     }
 
     /**
@@ -152,20 +168,18 @@ class RememberUserInfo
         foreach ($this->response['projects_users'] as &$project) {
             $project['xlogin'] = $this->response['login'];
             $project['cursus_ids'] = $project['cursus_ids'][0]; // ??? WTF
-            $project['marked_at'] = self::dateToSqlFormat($project['marked_at']);
-            self::changeKeysInArr($project, [ 'id' => 'puid', 'validated?' => 'validated' ]);
-            $project['validated'] = $project['validated'] ? 'True' : 'False';
+            $project['validated?'] = $project['validated?'] ? 'True' : 'False';
+            // $project['marked'] = $project['marked'] ? 'True' : 'False';
+            // self::dateToSqlFormat($project['marked_at']); // ??? WTF
+            self::swapKeysInArr($project, [ 'id' => 'puid', 'validated?' => 'validated' ]);
             // ??? WTF 'validated?' ? True ? False ? true ? false ?
-        
-            foreach ($project['project'] as $key => $val) {
-                $project[$key] = $val;
-            }
-            unset($project['project']);
-            self::changeKeysInArr($project, [ 'id' => 'project_id' ]);
+            self::mergeChildArrByKey($project, 'project');
+            self::swapKeysInArr($project, [ 'id' => 'project_id' ]);
 
 
             $this->makeDbAction($pusers, $project, $pusers->find()
                 ->Where([ 'puid' => $project['puid'] ])
+                ->andWhere([ 'xlogin' => $project['xlogin'] ])
             ->all());
         }
     }
