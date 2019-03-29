@@ -264,13 +264,10 @@ a.reglink {
 }
 
 /* Styles for SearchModel form */
-form#w0 div:nth-child(1),
-form#w0 div:nth-child(2),
-form#w0 div:nth-child(3)
-{
-  padding-top: 2.5px;
+form#w0 div {
+  padding-top: 5px;
 }
-@media(max-width:991px) {
+@media(max-width: 991px) {
   form#w0 div:nth-child(3) {
     padding-top: 10px;
   }
