@@ -43,7 +43,7 @@ use kartik\select2\Select2;
         ],
     ]); ?>
 
-    <div class="col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8 col-xs-offset-3 col-xs-9 form-group">
+    <div class="col-md-3 col-xs-12 form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>
