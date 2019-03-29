@@ -23,3 +23,8 @@ table > thead > tr > th,
 .table > tfoot > tr > td {
   border: 1px solid rgba(0,0,0,.125) !important;
 }
+@media(min-width: 991px) {
+  form#w0 div:nth-child(3) {
+    padding-top: 8px;
+  }
+}
