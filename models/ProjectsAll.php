@@ -26,7 +26,7 @@ use Yii;
 class ProjectsAll extends \yii\db\ActiveRecord
 {
     public $pool_year;
-    public $pool_month = '';
+    public $pool_month;
 
     public $fmark;
     public $finished;

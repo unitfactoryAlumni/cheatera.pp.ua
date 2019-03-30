@@ -48,7 +48,12 @@ if (ThemesHelper::isDark()) {
 
     <?php $this->head() ?>
 </head>
+<style>
+    .new-friend {
+        /* @TODO Add style */
+    }
 
+</style>
 <body>
     <?php $this->beginBody() ?>
 
@@ -63,6 +68,7 @@ if (ThemesHelper::isDark()) {
             ]);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
+                'encodeLabels' => false,
                 'items' => [
                     ['label' => 'Add issue', 'url' => 'https://github.com/cheatera-pp-ua/cheatera.pp.ua/issues/new/choose'],
                     [
@@ -111,22 +117,26 @@ if (ThemesHelper::isDark()) {
                             ],
                         ])
                     : ([
-                            'label' => (isset(Yii::$app->session['profile'])
-                                ? (Yii::$app->user->identity->username)
-                                : (Yii::t('app', 'Account'))
-                            ),
-                            'items' => [
-                                isset(Yii::$app->session['profile'])
+                        'label' => (isset(Yii::$app->session['profile'])
+                            ? (Yii::$app->user->identity->username)
+                            : (Yii::t('app', 'Account'))
+                        ),
+                        'items' => [
+                            isset(Yii::$app->session['profile'])
                                 ? ([
-                                    'label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]
-                                ])
+                                'label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]
+                            ])
                                 : '<li class="divider"></li>',
-                                [
-                                    'label' => Yii::t('app', 'Logout'),
-                                    'url' => ['/site/logout'],
-                                    'linkOptions' => ['data-method' => 'post']
-                                ],
+                            [
+                                'label' => Yii::t('app', 'Friends'),
+                                'url' => ['friend/index'],
                             ],
+                            [
+                                'label' => Yii::t('app', 'Logout'),
+                                'url' => ['/site/logout'],
+                                'linkOptions' => ['data-method' => 'post']
+                            ],
+                        ],
                         ])
                 ],
             ]);

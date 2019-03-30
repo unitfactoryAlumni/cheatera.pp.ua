@@ -51,7 +51,6 @@ $config = [
             'identityCookie' => [
                 'name' => '_identity',
                 'httpOnly' => true,
-                // 'domain' => '.',
             ],
         ],
         'errorHandler' => [
@@ -104,10 +103,14 @@ $config = [
                 'pools/<id:\w+>' => 'show/pools-view',
                 'students' => 'show/students',
                 'pools' => 'show/pools',
-                'calculator' => 'calculator',
+                'calculator' => 'calculator/index',
                 'change-theme' => 'site/change-theme',
                 'calculator/form-submission' => 'calculator/form-submission',
                 'corrections' => 'corrections/index',
+                'friends' => 'friend/index',
+                'friends/create/<id:[\w\-]+>/<course:\w+>' => 'friend/create',
+                'friends/delete/<id:[\w\-]+>' => 'friend/delete',
+                'friends/update/<id:[\w\-]+>' => 'friend/update',
             ],
         ],
     ],

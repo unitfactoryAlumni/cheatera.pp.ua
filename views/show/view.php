@@ -1,5 +1,4 @@
 <?php
-
 use kartik\tabs\TabsX;
 use app\helpers\ViewHelper;
 
@@ -17,6 +16,10 @@ use app\helpers\ViewHelper;
 
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = strtok($this->title, " ");
+\yii\web\YiiAsset::register($this);
+$explode = explode('/', $urlHelperForProjects);
+$explode = $explode[1];
+Yii::$app->user->setReturnUrl(['/' . $explode . '/'. $model['login']]);
 
 ?>
 
@@ -28,7 +31,7 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
         <div class="col-lg-3 mx-auto">
             <div class="card">
                 <img class="card-img-top" src="<?= $model['image_url']?>" alt="">
-                <div class="card-body">
+                <div class="card-body" <?= ViewHelper::friendOnline($model) ?>>
                     <h5 class="card-title"><?= $model['displayname']?></h5>
                     <p class="card-text"><b><?= Yii::t('app', 'Login:') ?></b> <?= $model['login']?></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Level:') ?></b> <?= $model['level']?></p>
@@ -43,8 +46,15 @@ $this->params['breadcrumbs'][] = strtok($this->title, " ");
                     <p class="card-text"><b><?= Yii::t('app', 'Host') ?>:</b> <?= $model['location']?></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Last login') ?>:</b> <?php if ($model['lastloc'] == 0) { echo Yii::t('app', 'ONLINE'); } else { echo ViewHelper::getHumanTime($model['lastloc']);}?></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Hours at cluster') ?>:</b> <?= $model['hours']?></p>
-                    <a href="//profile.intra.42.fr/users/<?= $model['login']?>" target="_blank" class="btn btn-warning bg-warning">Intra</a>
-                    <a href="<?= '/' . Yii::$app->language . '/' . $switch ?>/<?= $model['login'] ?>" class="btn btn-success bg-success"><?= ucfirst(substr_replace($switch, "", -1)) ?> Profile</a>
+                    <p class="card-text"><a href="//profile.intra.42.fr/users/<?= $model['login']?>" target="_blank" class="btn btn-warning bg-warning">Intra</a></p>
+                    <p class="card-text"><a href="<?= '/' . Yii::$app->language . '/' . $switch ?>/<?= $model['login'] ?>" class="btn btn-success bg-success"><?= ucfirst(substr_replace($switch, "", -1)) ?> Profile</a></p>
+                    <?php  if ($model['login'] !== Yii::$app->user->identity->username) {
+                    if(\app\models\Friend::check($model['login'])) { ?>
+                        <a href="<?php echo '/' . Yii::$app->language ?>/friends/delete/<?= $model['login'] ?>" class="btn btn-md btn-danger bg-danger" data-method="POST"><?= Yii::t('app', 'Delete Friend')?></a>
+                    <?php } else {;?>
+                        <a href="<?php echo '/' . Yii::$app->language ?>/friends/create/<?= $model['login'] ?>/<?= $explode ?>" class="btn btn-md btn-success bg-success"><?= Yii::t('app', 'Add Friend')?></a>
+                    <?php }
+                    } ?>
                 </div>
             </div>
             <div class="card">
