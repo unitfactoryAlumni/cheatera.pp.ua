@@ -7,24 +7,30 @@ use app\models\Skills;
 class RememberSkills extends RememberHelper
 {
 
-    protected function norminateTheResponse()
+    protected function init()
     {
-        foreach ($this->response['cursus_users'] as &$cursus) {
+        $this->responseSubSet =& $this->response['projects_users'];
+        $this->model = new Skills();
+    }
+
+    protected function norminate()
+    {
+        $this->responseSubSet =& $this->response['cursus_users'];
+
+        foreach ($this->responseSubSet as &$cursus) {
             foreach ($cursus['skills'] as &$skill) {
-                $skill['xlogin'] = $this->response['login'];
-                $skill['cursus_id'] = $cursus['skills']['cursus_id'];
+                $this->setXlogin($skill);
+                $skill['cursus_id'] = $cursus['cursus_id'];
                 self::swapKeysInArr($skill, [ 'id' => 'skills_id', 'name' => 'skills_name', 'level' => 'skills_level' ]);
             }
         }
     }
 
-    public function rememberToDB()
+    protected function remember()
     {
-        $skills = new Skills();
-
-        foreach ($this->response['cursus_users'] as &$cursus) {
+        foreach ($this->responseSubSet as &$cursus) {
             foreach ($cursus['skills'] as &$skill) {
-                self::saveChangesToDB($skills, $skill, $skills->find()
+                self::saveChangesToDB($this->model, $skill, $this->model->find()
                     ->Where([ 'skills_id' => $skill['skills_id'] ])
                     ->andWhere([ 'xlogin' => $skill['xlogin'] ])
                 ->all());

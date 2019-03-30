@@ -7,10 +7,17 @@ use app\models\ProjectsAll;
 class RememberProjects extends RememberHelper
 {
 
-    protected function norminateTheResponse()
+    protected function init()
     {
-        foreach ($this->response['projects_users'] as &$project) {
-            $project['xlogin'] = $this->response['login'];
+        $this->responseSubSet =& $this->response['projects_users'];
+        $this->model = new ProjectsAll();
+    }
+
+    protected function norminate()
+    {
+
+        foreach ($this->responseSubSet as &$project) {
+            $this->setXlogin($project);
             $project['cursus_ids'] = $project['cursus_ids'][0]; // ??? WTF
             $project['validated?'] = $project['validated?'] ? 'True' : 'False';
             // $project['marked'] = $project['marked'] ? 'True' : 'False';
@@ -22,12 +29,10 @@ class RememberProjects extends RememberHelper
         }
     }
 
-    public function rememberToDB()
+    protected function remember()
     {
-        $pusers = new ProjectsAll();
-
-        foreach ($this->response['projects_users'] as &$project) {
-            self::saveChangesToDB($pusers, $project, $pusers->find()
+        foreach ($this->responseSubSet as &$project) {
+            self::saveChangesToDB($this->model, $project, $this->model->find()
                 ->Where([ 'puid' => $project['puid'] ])
                 ->andWhere([ 'xlogin' => $project['xlogin'] ])
             ->all());
