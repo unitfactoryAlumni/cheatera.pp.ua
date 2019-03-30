@@ -111,26 +111,26 @@ $this->registerCssFile('@web/css/site.css', ['depends' => [yii\bootstrap\Bootstr
                             ],
                         ])
                     : ([
-                            'label' => (isset(Yii::$app->session['profile'])
-                                ? (true) ? Html::tag('span', '', ['class' => 'glyphicon glyphicon-ok-sign', 'style' => 'color:#008200']) . ' ' . (Yii::$app->user->identity->username) :  (Yii::$app->user->identity->username)
-                                : (Yii::t('app', 'Account'))
-                            ),
-                            'items' => [
-                                isset(Yii::$app->session['profile'])
-                                ?
-                                    ['label' => '40 | ' . ' ' . Yii::t('app', 'Friends'), 'url' => ['friend/index'], 'options'=> ['class' => 'new-friend']]
-
+                        'label' => (isset(Yii::$app->session['profile'])
+                            ? (Yii::$app->user->identity->username)
+                            : (Yii::t('app', 'Account'))
+                        ),
+                        'items' => [
+                            isset(Yii::$app->session['profile'])
+                                ? ([
+                                'label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]
+                            ])
                                 : '<li class="divider"></li>',
-                                isset(Yii::$app->session['profile']) ?
-                                    ['label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]]
-                                :
-                                    '',
-                                [
-                                    'label' => Yii::t('app', 'Logout'),
-                                    'url' => ['/site/logout'],
-                                    'linkOptions' => ['data-method' => 'post']
-                                ],
+                            [
+                                'label' => Yii::t('app', 'Friends'),
+                                'url' => ['friend/index'],
                             ],
+                            [
+                                'label' => Yii::t('app', 'Logout'),
+                                'url' => ['/site/logout'],
+                                'linkOptions' => ['data-method' => 'post']
+                            ],
+                        ],
                         ])
                 ],
             ]);
