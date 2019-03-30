@@ -46,8 +46,8 @@ Yii::$app->user->setReturnUrl(['/' . $explode . '/'. $model['login']]);
                     <p class="card-text"><b><?= Yii::t('app', 'Host') ?>:</b> <?= $model['location']?></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Last login') ?>:</b> <?php if ($model['lastloc'] == 0) { echo Yii::t('app', 'ONLINE'); } else { echo ViewHelper::getHumanTime($model['lastloc']);}?></p>
                     <p class="card-text"><b><?= Yii::t('app', 'Hours at cluster') ?>:</b> <?= $model['hours']?></p>
-                    <a href="//profile.intra.42.fr/users/<?= $model['login']?>" target="_blank" class="btn btn-warning bg-warning">Intra</a>
-                    <a href="<?= '/' . Yii::$app->language . '/' . $switch ?>/<?= $model['login'] ?>" class="btn btn-success bg-success"><?= ucfirst(substr_replace($switch, "", -1)) ?> Profile</a>
+                    <p class="card-text"><a href="//profile.intra.42.fr/users/<?= $model['login']?>" target="_blank" class="btn btn-warning bg-warning">Intra</a></p>
+                    <p class="card-text"><a href="<?= '/' . Yii::$app->language . '/' . $switch ?>/<?= $model['login'] ?>" class="btn btn-success bg-success"><?= ucfirst(substr_replace($switch, "", -1)) ?> Profile</a></p>
                     <?php  if ($model['login'] !== Yii::$app->user->identity->username) {
                     if(\app\models\Friend::check($model['login'])) { ?>
                         <a href="<?php echo '/' . Yii::$app->language ?>/friends/delete/<?= $model['login'] ?>" class="btn btn-md btn-danger bg-danger" data-method="POST"><?= Yii::t('app', 'Delete Friend')?></a>
