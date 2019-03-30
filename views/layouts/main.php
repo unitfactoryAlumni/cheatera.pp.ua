@@ -70,12 +70,8 @@ if (ThemesHelper::isDark()) {
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'encodeLabels' => false,
                 'items' => [
-                    ['label' => 'Add issue', 'url' => 'https://github.com/cheatera-pp-ua/cheatera.pp.ua/issues/new/choose'],
-                    [
-                        'label' => 'Update',
-                        'items' => \app\helpers\ViewHelper::getLastUpdate(),
-                    ],
-                    !YII_ENV_DEV ?: [
+                    YII_ENV_DEV
+                    ? [
                         'label' => Yii::$app->getRequest()->getUserIP(),
                         'items' => [
                             ['label' => 'Debug', 'url' => ['/debug']],
@@ -84,7 +80,13 @@ if (ThemesHelper::isDark()) {
                             ['label' => 'Gii CRUD', 'url' => ['/gii/crud']],
                             ['label' => 'Gii Controller', 'url' => ['/gii/controller']],
                         ],
+                    ]
+                    : ['label' => 'Add issue', 'url' => 'https://github.com/cheatera-pp-ua/cheatera.pp.ua/issues/new/choose'],
+                    [
+                        'label' => 'Update',
+                        'items' => \app\helpers\ViewHelper::getLastUpdate(),
                     ],
+
                     [
                         'label' => Yii::t('app', 'Students'),
                         'items' => [
