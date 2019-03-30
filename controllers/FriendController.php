@@ -10,7 +10,7 @@ use yii\filters\VerbFilter;
 /**
  * FriendController implements the CRUD actions for Friend model.
  */
-class FriendController extends Controller
+class FriendController extends CommonController
 {
     /**
      * {@inheritdoc}
