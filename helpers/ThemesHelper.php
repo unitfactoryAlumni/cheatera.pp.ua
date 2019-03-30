@@ -47,7 +47,8 @@ class ThemesHelper
         //     'expire' => time() + 86400 * 365 * 5,
         //     // 'domain' => '.',
         // ]);
-        setcookie(self::NAME, $value, time() + 86400 * 365 * 5);
+//            setcookie(self::NAME, self::getCurrent(), 0);
+            setcookie(self::NAME, $value, time() + 86400 * 365 * 5, '/', Yii::getAlias('@web'));
     }
 
     /**
