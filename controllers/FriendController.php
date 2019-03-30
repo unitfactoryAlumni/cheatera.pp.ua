@@ -17,14 +17,14 @@ class FriendController extends CommonController
      */
     public function behaviors()
     {
-        return [
+        return array_merge([
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
-        ];
+        ], parent::behaviors());
     }
 
     /**
