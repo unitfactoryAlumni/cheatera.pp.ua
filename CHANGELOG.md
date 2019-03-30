@@ -1,6 +1,7 @@
 # Cheatera Change Log
 
 ------------------------
+- Issue #65 Добавить друзей
 - Issue #83 Dark mode framing of student list
 - Issue #71 Prettify dark(bootswatch/superhero) theme, make it more compliant with styles used on site
 - Issue #96 Change issue link to new repo
