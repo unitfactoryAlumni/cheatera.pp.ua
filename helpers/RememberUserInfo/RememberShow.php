@@ -7,18 +7,26 @@ use app\models\Show;
 class RememberShow extends RememberHelper
 {
 
-    protected function norminateTheResponse()
+    protected function init()
     {
-        self::swapKeysInArr($this->response, [ 'id' => 'xid' ]);
+        $this->responseSubSet =& $this->response['projects_users'];
+        $this->model = new Show();
     }
 
-    public function rememberToDB()
+    protected function norminate()
     {
-        $show = new Show();
+        $this->responseSubSet =& $this->response;
 
-        self::saveChangesToDB($show, $this->response, $show->find()
-            ->Where([ 'xid' => $this->response['xid'] ])
-            ->orWhere([ 'login' => $this->response['login'] ])
+        $this->responseSubSet['kick'] = 0; // ??? WTF
+        $this->responseSubSet['lastloc'] = date('Y-m-d H:i:s'); // ??? WTF
+        self::swapKeysInArr($this->responseSubSet, [ 'id' => 'xid' ]);
+    }
+
+    protected function remember()
+    {
+        self::saveChangesToDB($this->model, $this->responseSubSet, $this->model->find()
+            ->Where([ 'xid' => $this->responseSubSet['xid'] ])
+            ->orWhere([ 'login' => $this->responseSubSet['login'] ])
         ->all());
     }
 

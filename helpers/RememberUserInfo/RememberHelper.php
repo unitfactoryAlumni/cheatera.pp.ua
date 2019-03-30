@@ -5,25 +5,37 @@ namespace app\helpers\RememberUserInfo;
 abstract class RememberHelper
 {
 
-    abstract public function rememberToDB();
-    abstract protected function norminateTheResponse();
+    abstract protected function init();
+    abstract protected function remember();
+    abstract protected function norminate();
 
 
     protected $response;
+
+    protected $responseSubSet;
+    protected $model;
 
 
     public function __construct(&$response)
     {
         $this->response =& $response;
-        static::norminateTheResponse();
-        static::rememberToDB();
+        $this->init();
+
+        $this->norminate();
+        $this->remember();
+    }
+
+
+    protected function setXlogin(&$arrToSetXlogin, $xloginKey = 'xlogin')
+    {
+        $arrToSetXlogin[$xloginKey] = $this->response['login'];
     }
 
 
     protected static function isArraysIdentical($a1, $a2, $arrayKeysToCompare)
     {
-        foreach ($arrayKeysToCompare as $keyFor_both) {
-            if ($a1[$keyFor_both] != $a2[$keyFor_both]) {
+        foreach ($arrayKeysToCompare as $keyForBoth) {
+            if ($a1[$keyForBoth] != $a2[$keyForBoth]) {
                 return false;
             }
         }
@@ -70,7 +82,7 @@ abstract class RememberHelper
 
             if ( $identicalNotFound && $index == $len ) {
                 $AR->attributes = $arrToPutIntoDb;
-                $AR->update(false);
+                $AR->save(false);
             } else {
                 $AR->delete();
             }

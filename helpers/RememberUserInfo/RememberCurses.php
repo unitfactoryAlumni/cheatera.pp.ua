@@ -7,9 +7,17 @@ use app\models\Curses;
 class RememberCurses extends RememberHelper
 {
 
-    protected function norminateTheResponse()
+    protected function init()
     {
-        foreach ($this->response['cursus_users'] as &$curs) {
+        $this->responseSubSet =& $this->response['projects_users'];
+        $this->model = new Curses();
+    }
+
+    protected function norminate()
+    {
+        $this->responseSubSet =& $this->response['cursus_users'];
+
+        foreach ($this->responseSubSet as &$curs) {
             self::dateToSqlFormat($curs['begin_at']);
             self::swapKeysInArr($curs, [ 'id' => 'xid' ]);
             self::mergeChildArrByKey($curs, 'cursus');
@@ -20,12 +28,10 @@ class RememberCurses extends RememberHelper
         }
     }
 
-    public function rememberToDB()
+    protected function remember()
     {
-        $curses = new Curses();
-
-        foreach ($this->response['cursus_users'] as &$curs) {
-            self::saveChangesToDB($curses, $curs, $curses->find()
+        foreach ($this->responseSubSet as &$curs) {
+            self::saveChangesToDB($this->model, $curs, $this->model->find()
                 ->Where([ 'xlogin' => $curs['xlogin'] ])
                 ->andWhere([ 'cursus_id' => $curs['cursus_id'] ])
             ->all());

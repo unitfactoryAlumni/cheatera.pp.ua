@@ -20,3 +20,4 @@ class RememberUserInfo
     }
 
 }
+//  WHERE `xlogin`='vbrazas'
