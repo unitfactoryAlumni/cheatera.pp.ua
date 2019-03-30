@@ -2,6 +2,8 @@
 
 namespace app\helpers;
 
+// use RememberUserInfo\RememberUserInfo;
+
 use Yii;
 use yii\authclient\InvalidResponseException;
 use yii\authclient\OAuth2;
@@ -83,7 +85,7 @@ class Auth42 extends OAuth2
             ->setHeaders($params);
         $response = $this->sendRequest($request);
 
-        (new RememberUserInfo($response))->rememberAll();
+        RememberUserInfo\RememberUserInfo::rememberAllToDB($response);
 
         $profileLink = '/pools/';
         if (isset($response['cursus_users'])) {

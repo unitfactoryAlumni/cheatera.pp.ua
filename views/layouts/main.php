@@ -40,7 +40,7 @@ if (ThemesHelper::isDark()) {
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122178531-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'UA-122178531-1');
@@ -75,7 +75,7 @@ if (ThemesHelper::isDark()) {
                         'label' => 'Update',
                         'items' => \app\helpers\ViewHelper::getLastUpdate(),
                     ],
-                    [
+                    !YII_ENV_DEV ?: [
                         'label' => Yii::$app->getRequest()->getUserIP(),
                         'items' => [
                             ['label' => 'Debug', 'url' => ['/debug']],
