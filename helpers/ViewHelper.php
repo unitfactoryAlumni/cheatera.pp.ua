@@ -179,7 +179,7 @@ class ViewHelper
         if($model->lastloc > 0){
             return '';
         } else {
-            return 'style="background-color: #e5ffe5;"';
+            return ThemesHelper::isDark() ? 'style="background-color: #1f601f;"' : 'style="background-color: #e5ffe5;"';
         }
     }
 }
