@@ -35,8 +35,37 @@ class FriendController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new FriendSearch(Yii::$app->user->identity->username);
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new FriendSearch(Yii::$app->user->identity->username, 1);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, true);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    /**
+     * Lists all Friend models.
+     * @return mixed
+     */
+    public function actionIncomeRequest()
+    {
+        $searchModel = new FriendSearch(Yii::$app->user->identity->username, 0);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, true);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all Friend models.
+     * @return mixed
+     */
+    public function actionOutgoingRequest()
+    {
+        $searchModel = new FriendSearch(Yii::$app->user->identity->username, 0);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, false);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -57,12 +86,29 @@ class FriendController extends Controller
         $model->mylogin = Yii::$app->user->identity->username;
         $model->xlogin = $id;
         $model->course = $course;
-//        var_export($model);die();
         if ($model->save()) {
             return $this->goBack();
         }
         return $this->redirect(['error']);
     }
+
+    /**
+     * Deletes an existing Friend model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete($id)
+    {
+        if (Friend::find()->where(['mylogin' => Yii::$app->user->identity->username, 'xlogin' => $id])->one()->delete() !== null) {
+            return $this->goBack();
+        }
+        return $this->redirect(['friend/index']);
+    }
+
+
 
     /**
      * Updates an existing Friend model.
@@ -81,23 +127,6 @@ class FriendController extends Controller
         return $this->redirect(['friend/index']);
     }
 
-    /**
-     * Deletes an existing Friend model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
-     */
-    public function actionDelete($id)
-    {
-        if (Friend::find()->where(['mylogin' => Yii::$app->user->identity->username, 'xlogin' => $id])->one()->delete() !== null) {
-//            return $this->redirect(['friend/index']);
-            return $this->goBack();
-        }
-        return $this->redirect(['friend/index']);
-    }
 
     /**
      * Finds the Friend model based on its primary key value.

@@ -152,6 +152,10 @@ class ViewHelper
         return $string ? implode(', ', $string) . ' ago' : 'no data';
     }
 
+    /**
+     * @return array
+     * @throws \Exception
+     */
     public static function getLastUpdate()
     {
         $result = [];
@@ -165,4 +169,17 @@ class ViewHelper
         $result[] = ['label' =>  'Update ' . $record->subject . ' ' . self::getHumanTime($record->updated_at) . '.'];
         return $result;
     }
+
+    /**
+     * @param $model
+     * @return string
+     */
+    public static function friendOnline($model)
+    {
+        if($model->lastloc > 0){
+            return '';
+        } else {
+            return 'style="background-color: #e5ffe5;"';
+        }
     }
+}

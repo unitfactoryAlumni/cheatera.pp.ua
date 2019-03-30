@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         'itemView' => function ($model , $key , $index , $widget) {
             Yii::$app->user->setReturnUrl(['friend/index']);
-            $loc = ($model->lastloc != 0) ? ViewHelper::getHumanTime($model->lastloc) : Yii::t('app', 'ONLINE');
+            $loc = ($model->lastloc !== 0) ? ViewHelper::getHumanTime($model->lastloc) : Yii::t('app', 'ONLINE');
             return '<div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
             <div class="thumbnail friend-card" '. ViewHelper::friendOnline($model) . '>
                 <img src="' . $model->image_url . '" class="img-card">
