@@ -4,9 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Friend;
-use app\controllers\FriendSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -37,48 +35,25 @@ class FriendController extends Controller
     {
         $searchModel = new FriendSearch(Yii::$app->user->identity->username, 1);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, true);
+        $searchModelIncome = new FriendSearch(Yii::$app->user->identity->username, 0);
+        $dataProviderIncome = $searchModelIncome->search(Yii::$app->request->queryParams, true);
+        $searchModelOutgoing = new FriendSearch(Yii::$app->user->identity->username, 0);
+        $dataProviderOutgoing = $searchModelOutgoing->search(Yii::$app->request->queryParams, false);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModelIncome' => $searchModelIncome,
+            'dataProviderIncome' => $dataProviderIncome,
+            'searchModelOutgoing' => $searchModelOutgoing,
+            'dataProviderOutgoing' => $dataProviderOutgoing,
         ]);
     }
-    /**
-     * Lists all Friend models.
-     * @return mixed
-     */
-    public function actionIncomeRequest()
-    {
-        $searchModel = new FriendSearch(Yii::$app->user->identity->username, 0);
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, true);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Lists all Friend models.
-     * @return mixed
-     */
-    public function actionOutgoingRequest()
-    {
-        $searchModel = new FriendSearch(Yii::$app->user->identity->username, 0);
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, false);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
 
     /**
      * Creates a new Friend model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
-     * @throws NotFoundHttpException
      */
     public function actionCreate($id, $course)
     {
@@ -86,6 +61,12 @@ class FriendController extends Controller
         $model->mylogin = Yii::$app->user->identity->username;
         $model->xlogin = $id;
         $model->course = $course;
+        $friend = Friend::find()->where(['mylogin' => $id, 'xlogin' => Yii::$app->user->identity->username])->one();
+        if ($friend) {
+            $friend->status = 1;
+            $friend->save();
+            $model->status = 1;
+        }
         if ($model->save()) {
             return $this->goBack();
         }
@@ -102,45 +83,14 @@ class FriendController extends Controller
      */
     public function actionDelete($id)
     {
+        $friend = Friend::find()->where(['mylogin' => $id, 'xlogin' => Yii::$app->user->identity->username])->one();
+        if ($friend) {
+            $friend->status = 0;
+            $friend->save();
+        }
         if (Friend::find()->where(['mylogin' => Yii::$app->user->identity->username, 'xlogin' => $id])->one()->delete() !== null) {
             return $this->goBack();
         }
         return $this->redirect(['friend/index']);
-    }
-
-
-
-    /**
-     * Updates an existing Friend model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException
-     */
-    public function actionUpdate($id)
-    {
-        $model = Friend::find()->where(['xlogin' => Yii::$app->user->identity->username, 'mylogin' => $id])->one(); //inverse
-        $model->status = 1;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['friend/index']);
-        }
-        return $this->redirect(['friend/index']);
-    }
-
-
-    /**
-     * Finds the Friend model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Friend the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Friend::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 }

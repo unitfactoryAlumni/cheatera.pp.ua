@@ -1,15 +1,16 @@
 <?php
 
-use app\helpers\ViewHelper;
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\web\User;
-use yii\widgets\ListView;
-use yii\widgets\Pjax;
+use kartik\tabs\TabsX;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\FriendSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $searchModelIncome app\controllers\FriendSearch */
+/* @var $dataProviderIncome yii\data\ActiveDataProvider */
+/* @var $searchModelOutgoing app\controllers\FriendSearch */
+/* @var $dataProviderOutgoing yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Friends');
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,39 +18,36 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="friend-index row">
 
     <h1><?= Html::encode($this->title) ?></h1>
-<style>
-    .friend-card {
-        height: 530px;
-    }
-</style>
-    <?php Pjax::begin(); ?>
-    <?=
-    ListView::widget ( [
-        'dataProvider' => $dataProvider,
-        'summary' => false,
-
-        'itemView' => function ($model , $key , $index , $widget) {
-            Yii::$app->user->setReturnUrl(['friend/index']);
-            $loc = ($model->lastloc != 0) ? ViewHelper::getHumanTime($model->lastloc) : Yii::t('app', 'ONLINE');
-            return '<div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
-            <div class="thumbnail friend-card" '. ViewHelper::friendOnline($model) . '>
-                <img src="' . $model->image_url . '" class="img-card">
-                <div class="caption">
-                    <h4 class="">' . $model->login . '</h4>
-                    <p>' . $loc . ' ' . $model->location . '</p>
-                    <p>' . $model->displayname . '</p>
-                    <p>' . $model->phone . '</p>
-                    <p>' . $model->pool_month  . ' ' . $model->pool_year . '</p>
-                    '. Html::a('', '', ['class' => 'popupModal btn btn-danger btn-sm pull-right glyphicon glyphicon-trash', 'data-toggle' => 'modal', 'data-target' => '#modal', 'data-id' => $model->login]) .'
-                    <a href="' . Url::to('/' . Yii::$app->language . "/$model->course/$model->login") . '" class="btn btn-success btn-sm" data-pjax=0>' . Yii::t('app', 'Profile') . '</a>
-                </div>
-            </div>
-        </div>
-         ';
-        }
-    ] ); ?>
     <?php
-    Pjax::end();
+
+    $friends = $this->render('view', ['searchModel' => $searchModel, 'dataProvider' => $dataProvider, 'tab' => 'friends']);
+    $income = $this->render('view', ['searchModel' => $searchModelIncome, 'dataProvider' => $dataProviderIncome, 'tab' => 'income']);
+    $outgoing = $this->render('view', ['searchModel' => $searchModelOutgoing, 'dataProvider' => $dataProviderOutgoing, 'tab' => 'outgoing']);
+
+    $tmp = Yii::$app->session->get('username');
+
+    $items = [
+        [
+            'label'   => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'Friends'),
+            'content' => $friends,
+            'active'  => true
+        ],
+        [
+            'label'   => '<i class="glyphicon glyphicon-import"></i> ' . Yii::t('app', 'Income'),
+            'content' => $income,
+        ],
+        [
+            'label'   => '<i class="glyphicon glyphicon-export"></i> ' . Yii::t('app', 'Outgoing'),
+            'content' => $outgoing,
+        ],
+    ];
+
+    echo TabsX::widget([
+        'items'=>$items,
+        'position'=>TabsX::POS_ABOVE,
+        'encodeLabels'=>false
+    ]);
+
     Modal::begin([
         'header' => '<h2 class="modal-title">' . Yii::t('app','Are you sure about this?') . '</h2>',
         'id'     => 'modal-delete',
