@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: omentes
- * Date: 1/11/19
- * Time: 11:04 PM
- */
 
 return [
     // common
@@ -16,6 +10,10 @@ return [
     'Members' => 'Участники',
     'Projects' => 'Проекты',
     'Cheating' => 'Читинг',
+
+    // views/layouts/main.php
+    'Set Light Theme' => 'Установить светлую тему',
+    'Set Dark Theme' => 'Установить тёмную тему',
 
     // Show Controller
     'Students UNIT Factory' => 'Студенты UNIT Factory',
@@ -62,7 +60,7 @@ return [
     'true' => 'Да',
     'false' => 'Нет',
 
-    //models/ProjectsAll
+    // models/ProjectsAll
     'Xlogin' =>  'Логин',
     'Final Mark' => 'Финальная оценка',
     'Retry' => 'Попыток',
@@ -106,8 +104,8 @@ return [
     'Students Projects' => 'Проекты студентов',
     '{0} :: {1} project UNIT Factory' => '{0} :: {1} проект UNIT Factory',
     'Pools Projects' => 'Проекты бассейнов',
-    'Cheatera from UNIT Factory' => 'Читера UNIT Factory',
-    'Cheatera - private social network for students from UNIT Factory' => 'Читера - закрытая социальная сеть UNIT Factory',
+    'Cheatera of UNIT Factory' => 'Читера UNIT Factory',
+    'Cheatera - private social network for students of UNIT Factory' => 'Читера - закрытая социальная сеть UNIT Factory',
     'Account' => 'Аккаунт',
     'Aid' => 'id',
     'Image' => 'Фото',
@@ -129,13 +127,13 @@ return [
     'Url' => 'Ссылка',
     'Needupd' => '',
     'Cursus ID' => '',
+    'Skills' => 'Навыки',
     'Skills ID' => '',
     'Skills Level' => '',
     'Skills Name' => '',
     'Subject' => '',
 
 
-    'Calculator' => 'Калькулятор',
     'Corrections' => 'Коррекшины',
     '42API error! Please, try again' => 'Ошибка 42АПИ. Попробуйте еще раз!',
     'Profile' => 'Профиль',
@@ -158,4 +156,5 @@ return [
     'Marks' => 'Оценки',
     'Location' => 'Хост',
 
+    'If you have a trouble with style - please use hard refresh on page(refresh page with shift), or delete all you cookies' => 'Если у вас есть проблемы со стилем - пожалуйста, используйте жёсткое обновление страницы(обновите страницу с shift), или удалите все ваши куки'
 ];

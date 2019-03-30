@@ -21,43 +21,44 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(['timeout' => 10000 ]); ?>
-    <style>
-        .filters .form-control {
-            max-height: 25px;
-        }
+        <?= $this->render('_search', ['model' => $searchModel, 'action' => $action, 'months' => $months, 'years' => $years]) ?>
 
-        .table {
-            white-space: nowrap;
-            /*font-size: smaller;*/
-        }
-    </style>
-
-    <?php echo $this->render('_search', ['model' => $searchModel, 'action' => $action, 'months' => $months, 'years' => $years]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'name',
-            [
-                'label' => '',
-                'format' => 'raw',
-                'attribute' => '',
-                'value'  => function ($data) use ($subPage) {
-                    return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),'/'. Yii::$app->language . "$subPage/" . $data['slug'], ['data-pjax' => '0']);
+        <div class="table-responsive col-lg-12">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'rowOptions' => function ($data, $key, $index, $grid) use ($subPage) {
+                    return ['data-href' => '/'. Yii::$app->language . "$subPage/" . $data['slug']];
                 },
-            ],
-            'final_mark',
-            'validated',
-            'finished',
-            'failed',
-            'wfc',
-            'inprogress',
-            'sag',
-            'cg',
-        ],
-    ]); ?>
-    <?php Pjax::end(); ?>
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+
+                    'name',
+//                    [
+//                        'label' => '',
+//                        'format' => 'raw',
+//                        'attribute' => '',
+//                        'value'  => function ($data) use ($subPage) {
+//                            return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),, ['data-pjax' => '0']);
+//                        },
+//                    ],
+                    'final_mark',
+                    'validated',
+                    'finished',
+                    'failed',
+                    'wfc',
+                    'inprogress',
+                    'sag',
+                    'cg',
+                ],
+            ]); ?>
+        </div>
+    <?php Pjax::end();
+    $this->registerJs("
+    $('table tr[data-href]').click(function () {
+        if ($(this).data('href') !== undefined) {
+            window.location.href = $(this).data('href');
+        }
+    });");
+    ?>
 </div>

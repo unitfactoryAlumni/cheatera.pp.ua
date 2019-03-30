@@ -5,7 +5,7 @@ WORKDIR /var/www/html
 # Install required packages and PHP modules
 RUN apt-get update 
 RUN apt-get upgrade -y
-RUN apt-get -y install --fix-missing apt-utils build-essential git curl libcurl3 libcurl3-dev zip
+RUN apt-get -y install --fix-missing apt-utils build-essential git curl libcurl3 libcurl3-dev zip vim
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -42,7 +42,6 @@ RUN wget https://phar.phpunit.de/phpunit-6.0.phar && \
     chmod +x phpunit-6.0.phar && \
     mv phpunit-6.0.phar /usr/local/bin/phpunit
 
-
 # Install codecept
 RUN wget http://codeception.com/codecept.phar && \
     chmod +x codecept.phar && \
@@ -57,16 +56,17 @@ RUN usermod -u 1000 www-data
 COPY . /var/www/html
 RUN mkdir -p /var/www/html/web/assets
 
-RUN composer install
+# Init composer
+RUN composer self-update
+RUN composer install --no-plugins --no-scripts
 
 # Setup xdebug
 RUN pecl install redis xdebug-2.6.0 \
-    && docker-php-ext-enable xdebug
-RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_host=172.24.0.1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_port=9999" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.default_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_autostart=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.idekey=PHPStorm" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo 'memory_limit=-1' >> /usr/local/etc/php/php.ini
+    && docker-php-ext-enable xdebug \
+    && echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.default_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_autostart=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_port=9999" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_host=192.168.99.1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+RUN echo "memory_limit=-1" >> /usr/local/etc/php/php.ini

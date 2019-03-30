@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: omentes
- * Date: 12/27/18
- * Time: 12:45 AM
- */
 
 namespace app\helpers;
 
@@ -24,6 +18,7 @@ class Auth42 extends OAuth2
 
     /**
      * Initializes authenticated user attributes.
+     * 
      * @return array auth user attributes.
      */
     protected function initUserAttributes()
@@ -51,9 +46,22 @@ class Auth42 extends OAuth2
         return $this->composeUrl($this->authUrl, array_merge($defaultParams, $params));
     }
 
+    public function rememberUserInfo($response = null)
+    {
+        if ($response === null)
+            return ;
+
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+        $session->set('level', $response['cursus_users'][0]['level']);
+    }
+
     /**
      * @param $token
      * @param array $params
+     * 
      * @return mixed
      * @throws \yii\authclient\InvalidResponseException
      */
@@ -87,17 +95,12 @@ class Auth42 extends OAuth2
             ->setHeaders($params);
         $response = $this->sendRequest($request);
 
-        if (isset($response['cursus_users'][0]['level'])) {
-            $cookies = Yii::$app->response->cookies;
-            $cookies->add(new \yii\web\Cookie([
-                'name' => 'level',
-                'value' => $response['cursus_users'][0]['level'],
-            ]));
-        }
+        $this->rememberUserInfo($response);
+
         $profileLink = '/pools/';
         if (isset($response['cursus_users'])) {
-            if (count($response['cursus_users']) > 1 &&
-            isset($response['login'])) {
+            if (count($response['cursus_users']) > 1
+            && isset($response['login'])) {
                 $profileLink = Url::to('/students/' . $response['login']);
             } else if (isset($response['login'])) {
                 $profileLink .= $response['login'];
@@ -113,6 +116,7 @@ class Auth42 extends OAuth2
      * @param $authCode
      * @param $state
      * @param array $params
+     *
      * @return \yii\authclient\OAuthToken
      * @throws HttpException
      */

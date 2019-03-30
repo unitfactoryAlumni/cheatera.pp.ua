@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
 
     <h3><?= Yii::t('app', 'Time in cluster') ?></h3>
     <?php Pjax::begin(['timeout' => 10000 ]); ?>
-    <?php echo $this->render('_search_time', ['model' => $searchModelTime, 'action' => $action]); ?>
+    <?= $this->render('_search_time', ['model' => $searchModelTime, 'action' => $action]); ?>
     <?php
 
     $labels = [];

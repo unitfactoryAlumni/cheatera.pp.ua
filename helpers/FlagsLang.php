@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: omentes
- * Date: 1/19/19
- * Time: 11:26 PM
- */
 
 namespace app\helpers;
-
 
 use klisl\languages\widgets\ListWidget;
 use yii\helpers\Html;

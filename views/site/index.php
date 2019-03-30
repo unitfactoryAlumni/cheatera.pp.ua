@@ -7,7 +7,7 @@
 
     <div class="jumbotron">
         <h1>Welcome!</h1>
-
+        <h4><?= Yii::t('app', 'If you have a trouble with style - please use hard refresh on page(refresh page with shift), or delete all you cookies')?></h4>
 
     </div>
 

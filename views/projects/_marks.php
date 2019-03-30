@@ -16,7 +16,10 @@ use kartik\select2\Select2;
 /* @var array $months */
 /* @var array $years */
 
-    $tmp = Yii::$app->session->get('username') ?>
+$tmp = Yii::$app->session->get('username');
+
+?>
+
 <?php Pjax::begin(['timeout' => 10000 ]); ?>
     <div class="projects-all-search-marks">
 
@@ -35,14 +38,14 @@ use kartik\select2\Select2;
             ],
         ]); ?>
 
-        <?php echo $form->field($searchModel, 'pool_month')->widget(Select2::classname(), [
+        <?= $form->field($searchModel, 'pool_month')->widget(Select2::classname(), [
             'data' => $months,
             'options' => ['placeholder' => Yii::t('app', 'Pool Month')],
             'pluginOptions' => [
                 'allowClear' => true
             ],
         ]); ?>
-        <?php echo $form->field($searchModel, 'pool_year')->widget(Select2::classname(), [
+        <?= $form->field($searchModel, 'pool_year')->widget(Select2::classname(), [
             'data' => $years,
             'options' => ['placeholder' => Yii::t('app', 'Pool Year')],
             'pluginOptions' => [
@@ -57,52 +60,54 @@ use kartik\select2\Select2;
 
         <?php ActiveForm::end(); ?>
 
-<?php     $tmp = Yii::$app->session->get('username'); ?>
-<?= GridView::widget([
-    'dataProvider' => $dataProvider,
-    'filterModel'  => $searchModel,
-    'tableOptions' => [
-        'class' => 'table table-striped table-bordered table-responsive'
-    ],
-    'rowOptions'=>function($data) use ($tmp) {
-        if($data['xlogin'] == $tmp){
-            return ['class' => 'warning'];
-        } else if ($data['lastloc'] == 0) {
-            return ['class' => 'success'];
-        }
-    },
-    'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
+        <?php $tmp = Yii::$app->session->get('username'); ?>
 
-        'xlogin',
-        [
-            'label' => '',
-            'format' => 'raw',
-            'attribute' => '',
-            'contentOptions'=> ['style'=>'position: relative'],
-            'value'  => function($data) use ($pageName) {
-                return ViewHelper::getLinkWithHover($data['xlogin'], $pageName);
-            },
-        ],
-        'final_mark',
-        'occurrence',
-        'status',
-        'validated',
-        'location',
-        [
-            'label' => Yii::t('app', 'lastloc'),
-            'attribute' => 'lastloc',
-            'format' => 'raw',
-            'value' => function($data) {
-                if ($data['lastloc'] == 0) {
+        <div class="table-responsive col-lg-12">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel'  => $searchModel,
+                'tableOptions' => [
+                    'class' => 'table table-striped table-bordered'
+                ],
+                'rowOptions'=>function($data) use ($tmp) {
+                    if($data['xlogin'] == $tmp){
+                        return ['class' => 'warning'];
+                    } else if ($data['lastloc'] == 0) {
+                        return ['class' => 'success'];
+                    }
+                },
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-                    return Yii::t('app', 'ONLINE');
-                }
-                return ViewHelper::getHumanTime($data['lastloc']);
-            },
-        ],
-    ],
-]); ?>
+                    'xlogin',
+                    [
+                        'label' => '',
+                        'format' => 'raw',
+                        'attribute' => '',
+                        'contentOptions'=> ['style'=>'position: relative'],
+                        'value'  => function($data) use ($pageName) {
+                            return ViewHelper::getLinkWithHover($data['xlogin'], $pageName);
+                        },
+                    ],
+                    'final_mark',
+                    'occurrence',
+                    'status',
+                    'validated',
+                    'location',
+                    [
+                        'label' => Yii::t('app', 'lastloc'),
+                        'attribute' => 'lastloc',
+                        'format' => 'raw',
+                        'value' => function($data) {
+                            if ($data['lastloc'] == 0) {
+                                return Yii::t('app', 'ONLINE');
+                            }
+                            return ViewHelper::getHumanTime($data['lastloc']);
+                        },
+                    ],
+                ],
+            ]); ?>
+        </div>
     </div>
 <?php Pjax::end(); ?>
 

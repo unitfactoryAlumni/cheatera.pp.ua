@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: omentes
- * Date: 12/26/18
- * Time: 11:22 PM
- */
 
 if ( ! function_exists('env'))
 {

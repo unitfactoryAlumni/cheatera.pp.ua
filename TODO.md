@@ -1,25 +1,25 @@
 # Roadmap 
 
-- add 42 Oauth2 //done
-- add user table //done
+- ~~add 42 Oauth2~~ //done
+- ~~add user table~~ //done
     - add birthday
     - add job experience
         - add table companies //??
         
-- add CommonController (main with set meta and access rule) //done
+- ~~add CommonController (main with set meta and access rule)~~ //done
 
-- add ShowController //done
-	- actionStudents  //done
+- ~~add ShowController~~ //done
+	- ~~actionStudents ~~ //done
 		- real top //??
-	- actionPools //done
-	- actionLogin //done
-	- ajax sort etc //done
-	- need debug and join cursus_users table (create class etc) //done
+	- ~~actionPools~~ //done
+	- ~~actionLogin~~ //done
+	- ~~ajax sort etc~~ //done
+	- ~~need debug and join cursus_users table (create class etc)~~ //done
 	
 - add ProjectController
-	- actionStudent //done
-	- actionPool //done
-	- actionView //done, but need calculate results
+	- ~~actionStudent~~ //done
+	- ~~actionPool~~ //done
+	- ~~actionView //done, but need~~ calculate results
 		- add bonus reference
 		- add giude reference
 		- add links reference
@@ -29,8 +29,8 @@
 	- actionStudent
 	- actionPool
 
-- add CalculatorController //in progress
-	- actionView //in progress
+- ~~add CalculatorController~~ //done
+	- ~~actionView~~ //done
 
 - add FriendController
 	- actionView
