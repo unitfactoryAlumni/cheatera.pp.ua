@@ -95,6 +95,7 @@ $config = [
                 '<action:(captcha|welcome|login|auth|contact|logout|language|about)>' => 'site/<action>',
                 'students/projects/<id:[\w\-]+>' => 'projects/students-view',
                 'pools/projects/<id:[\w\-]+>' => 'projects/pools-view',
+                '<course:(students|pools)>/projects/<name:([\w\-]+)>/team/<id:[0-9]+>' => 'projects/team',
                 'students/projects' => 'projects/students',
                 'pools/projects' => 'projects/pools',
                 'students/cheating' => 'minus42/students',

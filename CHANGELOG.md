@@ -1,6 +1,7 @@
 # Cheatera Change Log
 
 ------------------------
+- Issue #64  FEATURE: Добавить просмотры групп по проектам
 - Issue #114 FEATURE: Добавить друзей на страницу юзера
 - Issue #65  FEATURE: Добавить друзей
 - Issue #83  BUG: Dark mode framing of student list

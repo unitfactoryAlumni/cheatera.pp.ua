@@ -14,13 +14,23 @@ use kartik\select2\Select2;
 /* @var string $pageName */
 /* @var array $months */
 /* @var array $years */
+/* @var int $team */
 
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', ucfirst($breadcrumbs['0']['name'])), 'url' => [$breadcrumbs['0']['url']]];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', ucfirst($breadcrumbs['1']['name'])), 'url' => [$breadcrumbs['1']['url']]];
-if (isset($breadcrumbs['2'])) {
-    $this->params['breadcrumbs'][] = ['label' => Yii::t('app', ucfirst($breadcrumbs['2']['name'])), 'url' => [$breadcrumbs['2']['url']]];
+if ($team > 0) {
+    if (isset($breadcrumbs['2'])) {
+        $this->params['breadcrumbs'][] = ['label' => Yii::t('app', ucfirst($breadcrumbs['2']['name'])), 'url' => [$breadcrumbs['2']['url']]];
+    }
+    $this->params['breadcrumbs'][] = ['label' => ucfirst(strtok($this->title, '::')), 'url' => '/' . Yii::$app->language . '/'. $action];
+    $this->params['breadcrumbs'][] = Yii::t('app', 'Team') . ' ' .$team;
+} else {
+    $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
+
 }
-$this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
+
+
+
 ?>
 <div class="projects-view">
     <h1><?php if (isset($breadcrumbs['2']['name'])) { echo $breadcrumbs['2']['name'];} ?> <?= Html::encode(ucfirst(strtok($this->title, '::'))) ?></h1>
@@ -109,6 +119,15 @@ $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
                             return ViewHelper::getHumanTime($data['lastloc']);
                         },
                     ],
+                    [
+                        'label' => Yii::t('app', 'Team'),
+                        'attribute' => 'current_team_id',
+                        'format' => 'raw',
+                        'value' => function($data) use ($linkToProject, $action) {
+                            return Html::a($data['current_team_id'],[$action
+                                . '/team/' . $data['current_team_id']], ['data-pjax' => 0]);
+                        },
+                    ]
                 ],
             ]); ?>
         </div>

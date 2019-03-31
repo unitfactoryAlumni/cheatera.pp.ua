@@ -34,14 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'name',
-//                    [
-//                        'label' => '',
-//                        'format' => 'raw',
-//                        'attribute' => '',
-//                        'value'  => function ($data) use ($subPage) {
-//                            return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),, ['data-pjax' => '0']);
-//                        },
-//                    ],
+                    [
+                        'label' => '',
+                        'format' => 'raw',
+                        'attribute' => '',
+                        'value'  => function ($data) use ($subPage) {
+                            return Html::a(Html::img(yii\helpers\Url::to('/web/img/profile.jpg'), ['width' => '20px']),'/'. Yii::$app->language . "$subPage/" . $data['slug']);
+                        },
+                    ],
                     'final_mark',
                     'validated',
                     'finished',
@@ -53,12 +53,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]); ?>
         </div>
-    <?php Pjax::end();
-    $this->registerJs("
-    $('table tr[data-href]').click(function () {
-        if ($(this).data('href') !== undefined) {
-            window.location.href = $(this).data('href');
-        }
-    });");
-    ?>
+<!--<!--    -->--><?php ////Pjax::end();
+////    $this->registerJs("
+////    $('table tr[data-href]').click(function () {
+////        if ($(this).data('href') !== undefined) {
+////            window.location.href = $(this).data('href');
+////        }
+////    });");
+//    ?>
 </div>

@@ -14,12 +14,16 @@ class ProjectsAllSearch extends ProjectsAll
     protected $course;
 
     protected $projectSlug;
+    protected $team = null;
 
-    public function __construct($searchCourse, $searchSlug, array $config = [])
+    public function __construct($searchCourse, $searchSlug, $team)
     {
         $this->course = $searchCourse;
         $this->projectSlug = $searchSlug;
-        parent::__construct($config);
+        if ($team > 0) {
+            $this->team = $team;
+        }
+        parent::__construct();
     }
 
     /**
@@ -51,16 +55,20 @@ class ProjectsAllSearch extends ProjectsAll
      */
     public function search($params)
     {
+        $where = [
+            'cursus_ids' => $this->course,
+            'slug' => $this->projectSlug
+        ];
+        if ($this->team) {
+            $where['current_team_id'] = $this->team;
+        }
         $query = ProjectsAll::find()
             ->select([
                 'projects_users.*',
                 'xlogins.*',
             ])
             ->innerJoin('xlogins','projects_users.xlogin = xlogins.login')
-            ->where([
-                'cursus_ids' => $this->course,
-                'slug' => $this->projectSlug
-            ]);
+            ->where($where);
 
         // add conditions that should always apply here
 
