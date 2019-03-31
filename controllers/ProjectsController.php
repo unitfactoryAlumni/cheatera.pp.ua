@@ -15,6 +15,7 @@ class ProjectsController extends CommonController
     protected $course;
     protected $getId;
     protected $forParent;
+    protected $team = 0;
 
     /**
      * Lists all Projects models.
@@ -131,7 +132,7 @@ class ProjectsController extends CommonController
     private function renderSingleProject($id, $case, $course)
     {
         self::beforeRender($id, $case);
-        $searchModel = new ProjectsAllSearch($course, $id);
+        $searchModel = new ProjectsAllSearch($course, $id, $this->team);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         [$months, $years] = self::getPoolsMonthAndYear();
         return $this->render('view', [
@@ -151,6 +152,7 @@ class ProjectsController extends CommonController
             'action' => "$case/projects/$id",
             'months' => $months,
             'years' => $years,
+            'team' => $this->team,
         ]);
     }
 
@@ -163,7 +165,7 @@ class ProjectsController extends CommonController
     private function renderSingleProjectChild($id, $case, $course)
     {
         self::beforeRender($id, $case, true);
-        $searchModel = new ProjectsAllSearch($course, $id);
+        $searchModel = new ProjectsAllSearch($course, $id, $this->team);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         [$months, $years] = self::getPoolsMonthAndYear();
         return $this->render('view', [
@@ -187,6 +189,7 @@ class ProjectsController extends CommonController
             'action' => "$case/projects/$id",
             'months' => $months,
             'years' => $years,
+            'team' => $this->team,
         ]);
     }
 
@@ -199,7 +202,7 @@ class ProjectsController extends CommonController
     private function renderParentProject($id, $case, $course)
     {
         self::beforeRender($id, $case);
-        $searchModel = new ProjectsAllSearch($course, $id);
+        $searchModel = new ProjectsAllSearch($course, $id, $this->team);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $searchModelSubProject = new ProjectsFilterSearch(['course' => $course, 'parent' => $this->getId]);
         $dataProviderSubProject = $searchModelSubProject->search(Yii::$app->request->queryParams);
@@ -225,6 +228,7 @@ class ProjectsController extends CommonController
             'action' => "$case/projects/$id",
             'months' => $months,
             'years' => $years,
+            'team' => $this->team,
         ]);
     }
 
@@ -247,6 +251,9 @@ class ProjectsController extends CommonController
         }
     }
 
+    /**
+     * @return array
+     */
     public function getPoolsMonthAndYear()
     {
         $months = [];
@@ -261,5 +268,11 @@ class ProjectsController extends CommonController
             $years[$str] = (string)$item->pool_year;
         }
         return [$months, $years];
+    }
+
+    public function actionTeam($course, $name, $id)
+    {
+        $this->team = $id;
+        return $course === 'students' ? $this->actionStudentsView($name) : $this->actionPoolsView($name) ;
     }
 }
