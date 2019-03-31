@@ -80,6 +80,8 @@ class ShowController extends CommonController
         $dataProviderCorrections = $searchModelCorrections->search(Yii::$app->request->queryParams);
         $searchModelTime = new LocationsSearch($id);
         $dataProviderTime = $searchModelTime->search(Yii::$app->request->queryParams);
+        $searchModelFriend = new FriendSearch($id, 1);
+        $dataProviderFriend = $searchModelFriend->search(Yii::$app->request->queryParams, true);
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -97,7 +99,9 @@ class ShowController extends CommonController
             'projects' => $projects['common'],
             'parents' => $projects['parents'],
             'course' => 1,
-            'action' => "/students/$id"
+            'action' => "/students/$id",
+            'searchModelFriend' => $searchModelFriend,
+            'dataProviderFriend' => $dataProviderFriend,
         ]);
     }
 
@@ -118,6 +122,8 @@ class ShowController extends CommonController
         $dataProviderCorrections = $searchModelCorrections->search(Yii::$app->request->queryParams);
         $searchModelTime = new LocationsSearch($id);
         $dataProviderTime = $searchModelTime->search(Yii::$app->request->queryParams);
+        $searchModelFriend = new FriendSearch($id, 1);
+        $dataProviderFriend = $searchModelFriend->search(Yii::$app->request->queryParams, true);
 
         return $this->render('view', [
             'model' => $this->findModelLogin($id),
@@ -136,6 +142,8 @@ class ShowController extends CommonController
             'action' => "/pools/$id",
             'searchModelCorrections' => $searchModelCorrections,
             'dataProviderCorrections' => $dataProviderCorrections,
+            'searchModelFriend' => $searchModelFriend,
+            'dataProviderFriend' => $dataProviderFriend,
         ]);
     }
 

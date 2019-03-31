@@ -24,7 +24,7 @@ use yii\widgets\Pjax;
         'itemView' => function ($model , $key , $index , $widget) use ($tab) {
             Yii::$app->user->setReturnUrl(['friend/index']);
             $loc = ($model->lastloc != 0) ? ViewHelper::getHumanTime($model->lastloc) : Yii::t('app', 'ONLINE');
-            $link = Html::a('', '', ['class' => 'popupModal btn btn-danger btn-sm pull-right glyphicon glyphicon-trash', 'data-toggle' => 'modal', 'data-target' => '#modal', 'data-id' => $model->login]);
+            $link = $tab !== 'profile' ? Html::a('', '', ['class' => 'popupModal btn btn-danger btn-sm pull-right glyphicon glyphicon-trash', 'data-toggle' => 'modal', 'data-target' => '#modal', 'data-id' => $model->login]) :'';
             if ($tab === 'income') {
                 $link = Html::a('', '/' . Yii::$app->language . '/friends/create/' . $model['login'] . '/' . $model['course'], ['class' => 'btn btn-success btn-sm pull-right glyphicon glyphicon-plus']);
             }
