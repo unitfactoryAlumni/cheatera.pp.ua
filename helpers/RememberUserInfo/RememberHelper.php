@@ -56,7 +56,9 @@ abstract class RememberHelper
 
     protected static function dateToSqlFormat(&$date)
     {
-        $date = date('Y-m-d H:i:s', strtotime( $date ));
+        if ($date) {
+            $date = date('Y-m-d H:i:s', strtotime( $date ));
+        }
     }
 
     protected static function swapKeysInArr(&$arrToChangeKeys, $keys)

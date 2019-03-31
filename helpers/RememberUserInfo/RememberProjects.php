@@ -32,8 +32,8 @@ class RememberProjects extends RememberHelper
     protected function remember()
     {
         foreach ($this->responseSubSet as &$project) {
-            $model = new ProjectsAll();
-            self::saveChangesToDB($model, $project, $model->find()
+            $this->model = new ProjectsAll();
+            self::saveChangesToDB($this->model, $project, $this->model->find()
                 ->Where([ 'puid' => $project['puid'] ])
                 ->andWhere([ 'xlogin' => $project['xlogin'] ])
             ->all());
