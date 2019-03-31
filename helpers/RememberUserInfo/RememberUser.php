@@ -9,14 +9,12 @@ class RememberUser extends RememberHelper
 
     protected function init()
     {
-        $this->responseSubSet =& $this->response['projects_users'];
+        $this->responseSubSet =& $this->response;
         $this->model = new Show();
     }
 
     protected function norminate()
     {
-        $this->responseSubSet =& $this->response;
-
         $this->responseSubSet['kick'] = 0; // ??? WTF
         $this->responseSubSet['lastloc'] = date('Y-m-d H:i:s'); // ??? WTF
         self::swapKeysInArr($this->responseSubSet, [ 'id' => 'xid' ]);
