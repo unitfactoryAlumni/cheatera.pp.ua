@@ -23,7 +23,7 @@ class RememberCurses extends RememberHelper
             self::mergeChildArrByKey($curs, 'cursus');
             unset($curs['id']);
             unset($curs['user']);
-            $curs['has_coalition'] = $curs['has_coalition'] ? 'True' : 'False';
+            self::setTrueFalse($curs['has_coalition']);
             self::dateToSqlFormat($curs['created_at']);
         }
     }

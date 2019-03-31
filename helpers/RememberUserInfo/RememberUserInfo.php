@@ -12,7 +12,7 @@ class RememberUserInfo
         }
 
         new RememberLevel($response);
-        new RememberShow($response);
+        new RememberUser($response);
         new RememberCurses($response);
         new RememberSkills($response);
         new RememberProjects($response);

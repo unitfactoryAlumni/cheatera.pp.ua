@@ -26,9 +26,9 @@ abstract class RememberHelper
     }
 
 
-    protected function setXlogin(&$arrToSetXlogin, $xloginKey = 'xlogin')
+    protected function setLogin(&$varToSetLogin)
     {
-        $arrToSetXlogin[$xloginKey] = $this->response['login'];
+        $varToSetLogin = $this->response['login'];
     }
 
 
@@ -42,6 +42,18 @@ abstract class RememberHelper
         return true;
     }
 
+    protected static function setTrueFalse(&$varToSetTrueFalse)
+    {
+        $varToSetTrueFalse = $varToSetTrueFalse ? 'True' : 'False';
+    }
+
+    protected static function setNULLtoZero(&$arrToSetZeros)
+    {
+        foreach ($arrToSetZeros as &$val) {
+            $val = $val ?? 0;
+        }
+    }
+
     protected static function dateToSqlFormat(&$date)
     {
         $date = date('Y-m-d H:i:s', strtotime( $date ));
@@ -50,15 +62,17 @@ abstract class RememberHelper
     protected static function swapKeysInArr(&$arrToChangeKeys, $keys)
     {
         foreach ($keys as $keyToReplace => $keyToPut) {
-            $arrToChangeKeys[$keyToPut] = $arrToChangeKeys[$keyToReplace];
-            unset($arrToChangeKeys[$keyToReplace]);
+            if ($arrToChangeKeys[$keyToPut] === null && $arrToChangeKeys[$keyToReplace] != null) {
+                $arrToChangeKeys[$keyToPut] = $arrToChangeKeys[$keyToReplace];
+                unset($arrToChangeKeys[$keyToReplace]);
+            }
         }
     }
 
     protected static function mergeChildArrByKey(&$arr, $key)
     {
-        foreach ($arr[$key] as $key => $val) {
-            $arr[$key] = $val;
+        foreach ($arr[$key] as $k => $v) {
+            $arr[$k] = $v;
         }
         unset($arr[$key]);
     }
@@ -66,25 +80,25 @@ abstract class RememberHelper
 
     protected static function saveChangesToDB($baseActiveRecordModel, $arrToPutIntoDb, $activeRecords)
     {
-        if ( empty($activeRecords) ) {
+        if (empty($activeRecords)) {
             $baseActiveRecordModel->attributes = $arrToPutIntoDb;
             $baseActiveRecordModel->insert(false);
         }
 
-        $identicalNotFound = true;
+        $identicalFound = false;
         $len = sizeof($activeRecords) - 1;
 
-        foreach ($activeRecords as $index => $AR) {
-            if ( static::isArraysIdentical($arrToPutIntoDb, $AR, $AR::attributes()) ) {
-                $identicalNotFound = false;
+        foreach ($activeRecords as $index => &$AR) {
+            if (static::isArraysIdentical($arrToPutIntoDb, $AR, $AR::attributes())) {
+                $identicalFound = true;
                 continue ;
             }
 
-            if ( $identicalNotFound && $index == $len ) {
-                $AR->attributes = $arrToPutIntoDb;
-                $AR->save(false);
-            } else {
+            if ($identicalFound || $index != $len) {
                 $AR->delete();
+            } else {
+                $AR->attributes = $arrToPutIntoDb;
+                $AR->update(false);
             }
         }
     }
