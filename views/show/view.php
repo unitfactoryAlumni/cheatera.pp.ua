@@ -13,6 +13,8 @@ use app\helpers\ViewHelper;
 /* @var $dataProviderTime yii\data\ActiveDataProvider */
 /* @var $searchModelCorrections app\controllers\CorrectionsSearch */
 /* @var $dataProviderCorrections yii\data\ActiveDataProvider */
+/* @var $searchModelFriend app\controllers\FriendSearch */
+/* @var $dataProviderFriend yii\data\ActiveDataProvider */
 
 $this->params['breadcrumbs'][] = ['label' => $breadcrumbs['name'], 'url' => [$breadcrumbs['url']]];
 $this->params['breadcrumbs'][] = strtok($this->title, " ");
@@ -105,6 +107,8 @@ Yii::$app->user->setReturnUrl(['/' . $explode . '/'. $model['login']]);
                     'action' => $action
             ]);
 
+            $friends = $this->render('@app/views/friend/view', ['searchModel' => $searchModelFriend, 'dataProvider' => $dataProviderFriend, 'tab' => 'profile']);
+
             $tmp = Yii::$app->session->get('username');
 
             $items = [
@@ -124,6 +128,10 @@ Yii::$app->user->setReturnUrl(['/' . $explode . '/'. $model['login']]);
                 [
                     'label'   => '<i class="glyphicon glyphicon-gift"></i> ' . Yii::t('app', 'Achievements'),
                     'content' => '',
+                ],
+                [
+                    'label'   => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'Friends'),
+                    'content' => $friends,
                 ],
             ];
         ?>
