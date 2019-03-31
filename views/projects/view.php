@@ -123,7 +123,7 @@ if ($team > 0) {
                         'label' => Yii::t('app', 'Team'),
                         'attribute' => 'current_team_id',
                         'format' => 'raw',
-                        'value' => function($data) use ($linkToProject, $action) {
+                        'value' => function($data) use ($action) {
                             return Html::a($data['current_team_id'],[$action
                                 . '/team/' . $data['current_team_id']], ['data-pjax' => 0]);
                         },
