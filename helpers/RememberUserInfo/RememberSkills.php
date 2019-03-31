@@ -19,7 +19,7 @@ class RememberSkills extends RememberHelper
 
         foreach ($this->responseSubSet as &$cursus) {
             foreach ($cursus['skills'] as &$skill) {
-                $this->setXlogin($skill);
+                $this->setLogin($skill['xlogin']);
                 $skill['cursus_id'] = $cursus['cursus_id'];
                 self::swapKeysInArr($skill, [ 'id' => 'skills_id', 'name' => 'skills_name', 'level' => 'skills_level' ]);
             }

@@ -4,7 +4,7 @@ namespace app\helpers\RememberUserInfo;
 
 use app\models\Show;
 
-class RememberShow extends RememberHelper
+class RememberUser extends RememberHelper
 {
 
     protected function init()

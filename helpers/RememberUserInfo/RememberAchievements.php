@@ -18,8 +18,8 @@ class RememberAchievements extends RememberHelper
         $this->responseSubSet =& $this->response['achievements'];
 
         foreach ($this->responseSubSet as &$achievement) {
-            $this->setXlogin($achievement);
-            $achievement['visible'] = $achievement['visible'] ? 'True' : 'False';
+            $this->setLogin($achievement['xlogin']);
+            self::setTrueFalse($achievement['visible']);
             $achievement['nbr_of_success'] = $achievement['nbr_of_success'] ?? 'None';
             self::swapKeysInArr($achievement, [ 'id' => 'aid' ]);
         }
