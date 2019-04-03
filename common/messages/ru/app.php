@@ -90,7 +90,8 @@ return [
     'Result' => 'Результат',
     'Calculations kindly presented by {0}, errors in calculations may be from <code>0.01</code> till <code>0.2</code> (magic Intra, magic!)' => 'Расчеты любезно предоставлены {0}, погрешности от <code>0.01</code> до <code>0.2</code> (magic Intra, magic!)',
 
-
+    // controllers/CamsController
+    'Cams' => 'Камеры',
 
     // unsorted
     /**

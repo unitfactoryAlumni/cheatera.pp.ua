@@ -105,6 +105,7 @@ if (ThemesHelper::isDark()) {
                         'label' => Yii::t('app', 'Services'),
                         'items' => [
                             ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
+                            ['label' => Yii::t('app', 'Cameras from unit online'), 'url' => ['/cams']],
                             ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
                         ]
                     ],
