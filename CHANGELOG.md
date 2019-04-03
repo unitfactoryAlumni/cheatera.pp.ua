@@ -1,6 +1,7 @@
 # Cheatera Change Log
 
 ------------------------
+- Issue #102 FEATURE: Добавить камеры с marvin.unit.ua
 - Issue #64  FEATURE: Добавить просмотры групп по проектам
 - Issue #114 FEATURE: Добавить друзей на страницу юзера
 - Issue #65  FEATURE: Добавить друзей
