@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\filters\AccessControl;
 
 /**
  * This is the model class for table "cams".
@@ -12,6 +13,29 @@ use Yii;
  */
 class Cams extends \yii\db\ActiveRecord
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only'  => ['index'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'ips' => ['10.112.*.*', '172.*.*.*', '192.168.99.1', '127.0.0.1', '::1'],
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                    throw new \Exception(Yii::t('app', 'You are not allowed to access this page'));
+                }
+            ],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */

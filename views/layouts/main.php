@@ -104,41 +104,45 @@ if (ThemesHelper::isDark()) {
                     [
                         'label' => Yii::t('app', 'Services'),
                         'items' => [
+                            preg_match('/^10\.112\.\d+\.\d+$/', Yii::$app->getRequest()->getUserIP())
+                            || YII_ENV_DEV
+                                ? ['label' => Yii::t('app', 'Cameras from unit factory online'), 'url' => ['/cams']]
+                                : [],
                             ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
-                            ['label' => Yii::t('app', 'Cameras from unit online'), 'url' => ['/cams']],
                             ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
                         ]
                     ],
                     Yii::$app->user->isGuest
-                    ? ([
-                            'label' => Yii::t('app', 'Account'),
-                            'items' => [
-                                ['label' => Yii::t('app', 'with 42'), 'url' => ['/auth?authclient=auth42']],
-                                ['label' => Yii::t('app', 'with pass'), 'url' => ['/login']],
-                            ],
-                        ])
-                    : ([
-                        'label' => (isset(Yii::$app->session['profile'])
-                            ? (Yii::$app->user->identity->username)
-                            : (Yii::t('app', 'Account'))
-                        ),
-                        'items' => [
-                            isset(Yii::$app->session['profile'])
-                                ? ([
-                                'label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]
+                        ? ([
+                                'label' => Yii::t('app', 'Account'),
+                                'items' => [
+                                    ['label' => Yii::t('app', 'with 42'), 'url' => ['/auth?authclient=auth42']],
+                                    ['label' => Yii::t('app', 'with pass'), 'url' => ['/login']],
+                                ],
                             ])
-                                : '<li class="divider"></li>',
-                            [
-                                'label' => Yii::t('app', 'Friends'),
-                                'url' => ['friend/index'],
-                            ],
-                            [
-                                'label' => Yii::t('app', 'Logout'),
-                                'url' => ['/site/logout'],
-                                'linkOptions' => ['data-method' => 'post']
-                            ],
-                        ],
-                        ])
+                        : ([
+                            'label' => (
+                                isset(Yii::$app->session['profile'])
+                                    ? (Yii::$app->user->identity->username)
+                                    : (Yii::t('app', 'Account'))
+                            ),
+                            'items' => [
+                                isset(Yii::$app->session['profile'])
+                                    ? ([
+                                        'label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]
+                                    ])
+                                    : '<li class="divider"></li>',
+                                    [
+                                        'label' => Yii::t('app', 'Friends'),
+                                        'url' => ['friend/index'],
+                                    ],
+                                    [
+                                        'label' => Yii::t('app', 'Logout'),
+                                        'url' => ['/site/logout'],
+                                        'linkOptions' => ['data-method' => 'post']
+                                    ],
+                                ],
+                            ])
                 ],
             ]);
             NavBar::end();

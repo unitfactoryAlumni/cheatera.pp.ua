@@ -92,6 +92,10 @@ return [
 
     // controllers/CamsController
     'Cams' => 'Камеры',
+    'Area Name' => '',
+    'Cam Address' => '',
+    'Cameras from unit factory online' => '',
+    'Cameras has been stolen from https://marvin.unit.ua/cams' => '',
 
     // unsorted
     /**
@@ -107,6 +111,7 @@ return [
     'Pools Projects' => 'Проекты бассейнов',
     'Cheatera of UNIT Factory' => 'Читера UNIT Factory',
     'Cheatera - private social network for students of UNIT Factory' => 'Читера - закрытая социальная сеть UNIT Factory',
+    'You are not allowed to access this page' => '',
     'Account' => 'Аккаунт',
     'Aid' => 'id',
     'Image' => 'Фото',

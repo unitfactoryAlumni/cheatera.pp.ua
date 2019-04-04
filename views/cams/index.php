@@ -1,6 +1,5 @@
 <?php
 
-use yii\widgets\Pjax;
 use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
@@ -14,7 +13,7 @@ refreshTimeout = 4500;
 
 function refreshImages() {
     $.each($(".cam_address"), function(key, img) {
-        img.src = img.src.replace(/\btime=[^&]*/, "time=" + new Date().getTime());
+        img.src = img.src.replace(/\btime=[^&]*/, "time=" + (new Date()).getTime());
     });
     setTimeout(refreshImages, refreshTimeout);
 }
