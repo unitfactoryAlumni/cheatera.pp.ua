@@ -10,6 +10,8 @@ return [
     'Members' => 'Участники',
     'Projects' => 'Проекты',
     'Cheating' => 'Читинг',
+    'Add issue' => '',
+    'Update' => '',
 
     // views/layouts/main.php
     'Set Light Theme' => 'Установить светлую тему',
