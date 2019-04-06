@@ -70,23 +70,24 @@ if (ThemesHelper::isDark()) {
                     'options' => ['class' => 'navbar-nav navbar-right'],
                     'encodeLabels' => false,
                     'items' => [
-                        'Add issue' => [
-                            'label' => Yii::t('app', 'Add issue'),
-                            'url' => 'https://github.com/cheatera-pp-ua/cheatera.pp.ua/issues/new/choose'
-                        ],
-                        'Update' => [
-                            'label' => Yii::t('app', 'Update'),
-                            'items' => \app\helpers\ViewHelper::getLastUpdate(),
-                        ],
-                        'ip' => [
-                            'label' => Yii::$app->getRequest()->getUserIP(),
-                            'items' => [
-                                ['label' => 'Debug', 'url' => ['/debug']],
-                                '<li class="divider"></li>',
-                                ['label' => 'Gii Model', 'url' => ['/gii/model']],
-                                ['label' => 'Gii CRUD', 'url' => ['/gii/crud']],
-                                ['label' => 'Gii Controller', 'url' => ['/gii/controller']],
+                        'Misc' => YII_ENV_DEV
+                            ? [
+                                'label' => Yii::$app->getRequest()->getUserIP(),
+                                'items' => [
+                                    ['label' => 'Debug', 'url' => ['/debug']],
+                                    '<li class="divider"></li>',
+                                    ['label' => 'Gii Model', 'url' => ['/gii/model']],
+                                    ['label' => 'Gii CRUD', 'url' => ['/gii/crud']],
+                                    ['label' => 'Gii Controller', 'url' => ['/gii/controller']],
+                                ]
+                            ]
+                            : [
+                                'label' => Yii::t('app', 'Add issue'),
+                                'url' => 'https://github.com/cheatera-pp-ua/cheatera.pp.ua/issues/new/choose'
                             ],
+                        'Update' => [
+                            'label' => Yii::t('app', 'Update log'),
+                            'items' => \app\helpers\ViewHelper::getLastUpdate(),
                         ],
                         'Students' => [
                             'label' => Yii::t('app', 'Students'),
@@ -108,11 +109,11 @@ if (ThemesHelper::isDark()) {
                             'label' => Yii::t('app', 'Services'),
                             'items' => 
                             YII_ENV_DEV
-                            || '178.214.196.34' == Yii::$app->getRequest()->getUserIP()
+                            || in_array(Yii::$app->getRequest()->getUserIP(), app\controllers\CamsController::$garantedIps)
                                 ? [
-                                    ['label' => Yii::t('app', 'Cameras from unit factory online'), 'url' => ['/cams']],
                                     ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
                                     ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
+                                    ['label' => Yii::t('app', 'Cams'), 'url' => ['/cams']],
                                 ]
                                 : [
                                     ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],

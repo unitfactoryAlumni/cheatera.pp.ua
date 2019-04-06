@@ -8,25 +8,7 @@ use yii\data\ActiveDataProvider;
 
 class CamsController extends CommonController
 {
-    // /**
-    //  * {@inheritdoc}
-    //  */
-    // public function behaviors()
-    // {
-    //     return [
-    //         'access' => [
-    //             'class' => yii\filters\AccessControl::className(),
-    //             'only'  => ['index'],
-    //             'rules' => [
-    //                 [
-    //                     'allow' => true,
-    //                     'roles' => ['@'],
-    //                     'ips' => ['178.214.196.34'],
-    //                 ],
-    //             ],
-    //         ],
-    //     ];
-    // }
+    public static $garantedIps = ['178.214.196.34'];
 
     public function actionIndex()
     {
@@ -34,13 +16,15 @@ class CamsController extends CommonController
         $description = Yii::t('app', 'Cameras has been stolen from https://marvin.unit.ua/cams');
         $this->setMeta($title, $description);
 
-        $model = new Cams();
         $dataProvider = new ActiveDataProvider([
-            'query' => $model::find(),
+            'query' => Cams::find(),
         ]);
+
+        $isAccessGaranted = YII_ENV_DEV || in_array(Yii::$app->getRequest()->getUserIP(), self::$garantedIps);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'isAccessGaranted' => $isAccessGaranted,
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Cams'),
                 'url' => 'cams'
