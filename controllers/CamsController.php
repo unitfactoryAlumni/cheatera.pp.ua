@@ -8,25 +8,25 @@ use yii\data\ActiveDataProvider;
 
 class CamsController extends CommonController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => yii\filters\AccessControl::className(),
-                'only'  => ['index'],
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'ips' => ['178.214.196.34'],
-                    ],
-                ],
-            ],
-        ];
-    }
+    // /**
+    //  * {@inheritdoc}
+    //  */
+    // public function behaviors()
+    // {
+    //     return [
+    //         'access' => [
+    //             'class' => yii\filters\AccessControl::className(),
+    //             'only'  => ['index'],
+    //             'rules' => [
+    //                 [
+    //                     'allow' => true,
+    //                     'roles' => ['@'],
+    //                     'ips' => ['178.214.196.34'],
+    //                 ],
+    //             ],
+    //         ],
+    //     ];
+    // }
 
     public function actionIndex()
     {
