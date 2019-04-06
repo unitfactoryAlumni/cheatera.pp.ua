@@ -36,6 +36,7 @@ assets
 /runtime/*
 
 # sql dump
+db_changes.sql
 schema.sql
 
 # tmps

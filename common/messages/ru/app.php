@@ -11,7 +11,7 @@ return [
     'Projects' => 'Проекты',
     'Cheating' => 'Читинг',
     'Add issue' => '',
-    'Update' => '',
+    'Update log' => '',
 
     // views/layouts/main.php
     'Set Light Theme' => 'Установить светлую тему',

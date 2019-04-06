@@ -5,6 +5,7 @@ use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $isAccessGaranted */
 
 $this->params['breadcrumbs'][] = ucfirst(substr(Yii::$app->request->url, 1));
 
@@ -24,8 +25,7 @@ $.each($(images), function(key, img) {
 });
 setTimeout(refreshImages, refreshTimeout);
 
-$(images).click(function() {
-    console.log( $(this).is() );
+$(".cam-address-container > " + images).click(function() {
     $("#modal-view-full-image").modal("show")
         .find("#modalHeader")
         .empty()
@@ -35,16 +35,14 @@ $(images).click(function() {
 
     $(this)
         .clone()
-        .removeClass(images.slice(1))
         .removeAttr("title")
         .appendTo("#modal-view-full-image #modalContent");
 });
 ');
 
-if ('178.214.196.34' != Yii::$app->getRequest()->getUserIP()) {
-    ?><h1>Use only in UNIT Factory</h1><?php
-
-} else {
+if (!$isAccessGaranted) {
+    echo '<h1>For use only inside UNIT Factory!</h1>';
+}
 
 ?>
 
@@ -52,8 +50,10 @@ if ('178.214.196.34' != Yii::$app->getRequest()->getUserIP()) {
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'summary' => false,
-        'itemView' => function ($model, $key, $index, $widget) {
-            return $this->render('_camimg', ['model' => $model, 'key' => $key, 'index' => $index, 'widget' => $widget]);
+        'itemView' => function ($model, $key, $index, $widget) use ($isAccessGaranted) {
+            if ($isAccessGaranted || $model->accessible_outside_unit) {
+                return $this->render('_camimg', ['model' => $model, 'key' => $key, 'index' => $index, 'widget' => $widget]);
+            }
         },
     ]); ?>
 </div>
@@ -66,5 +66,4 @@ if ('178.214.196.34' != Yii::$app->getRequest()->getUserIP()) {
     ]);
         echo '<div id="modalContent"></div>';
     Modal::end();
-
-} ?>
+?>
