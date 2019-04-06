@@ -41,6 +41,11 @@ $(images).click(function() {
 });
 ');
 
+if ('178.214.196.34' != Yii::$app->getRequest()->getUserIP()) {
+    ?><h1>Use only in UNIT Factory</h1><?php
+
+} else {
+
 ?>
 
 <div class="row">
@@ -61,4 +66,5 @@ $(images).click(function() {
     ]);
         echo '<div id="modalContent"></div>';
     Modal::end();
-?>
+
+} ?>
