@@ -2,15 +2,14 @@
 
 namespace app\helpers\RememberUserInfo;
 
-use app\models\ProjectsAll;
-
 class RememberProjects extends RememberHelper
 {
 
     protected function init()
     {
         $this->responseSubSet =& $this->response['projects_users'];
-        $this->model = 'ProjectsAll';
+        $this->model = 'app\models\ProjectsAll';
+        $this->idcol = 'puid';
     }
 
     protected function norminate()
@@ -32,18 +31,13 @@ class RememberProjects extends RememberHelper
 
     protected function remember()
     {
-        $found = ProjectsAll::find()
+        $this->ARcollection = $this->model::find()
             ->where(['xlogin' => $this->xlogin])
         ->all();
 
-        // echo '<pre>'; var_export( $found ); echo '</pre>'; die();
-
-
         foreach ($this->responseSubSet as $project) {
-            self::saveChangesToDB($project, $found, 'puid');
+            $this->saveChangesToDB($project);
         }
-
-        self::pruneDB($found);
     }
 
 }

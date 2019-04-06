@@ -2,6 +2,8 @@
 
 namespace app\helpers\RememberUserInfo;
 
+use Yii;
+
 class RememberUserInfo
 {
 
@@ -11,7 +13,8 @@ class RememberUserInfo
             return ;
         }
 
-        new RememberLevel($response);
+        Yii::$app->session->set('level', $response['cursus_users'][0]['level']);
+
         // new RememberUser($response);
         // new RememberCurses($response);
         // new RememberSkills($response);
@@ -20,3 +23,4 @@ class RememberUserInfo
     }
 
 }
+//  WHERE `xlogin`='vbrazas'
