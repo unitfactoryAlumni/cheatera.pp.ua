@@ -10,6 +10,8 @@ return [
     'Members' => 'Участники',
     'Projects' => 'Проекты',
     'Cheating' => 'Читинг',
+    'Add issue' => '',
+    'Update' => '',
 
     // views/layouts/main.php
     'Set Light Theme' => 'Установить светлую тему',
@@ -90,7 +92,12 @@ return [
     'Result' => 'Результат',
     'Calculations kindly presented by {0}, errors in calculations may be from <code>0.01</code> till <code>0.2</code> (magic Intra, magic!)' => 'Расчеты любезно предоставлены {0}, погрешности от <code>0.01</code> до <code>0.2</code> (magic Intra, magic!)',
 
-
+    // controllers/CamsController
+    'Cams' => 'Камеры',
+    'Area Name' => '',
+    'Cam Address' => '',
+    'Cameras from unit factory online' => '',
+    'Cameras has been stolen from https://marvin.unit.ua/cams' => '',
 
     // unsorted
     /**
@@ -106,6 +113,7 @@ return [
     'Pools Projects' => 'Проекты бассейнов',
     'Cheatera of UNIT Factory' => 'Читера UNIT Factory',
     'Cheatera - private social network for students of UNIT Factory' => 'Читера - закрытая социальная сеть UNIT Factory',
+    'You are not allowed to access this page' => '',
     'Account' => 'Аккаунт',
     'Aid' => 'id',
     'Image' => 'Фото',

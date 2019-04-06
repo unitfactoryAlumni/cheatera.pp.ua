@@ -112,6 +112,7 @@ $config = [
                 'friends/create/<id:[\w\-]+>/<course:\w+>' => 'friend/create',
                 'friends/delete/<id:[\w\-]+>' => 'friend/delete',
                 'friends/update/<id:[\w\-]+>' => 'friend/update',
+                'cams' => 'cams/index',
             ],
         ],
     ],

@@ -336,3 +336,12 @@ input.form-control {
   width: 1000px;
   height: 600px;
 }
+
+/* Cams styles */
+.cam-address-container img {
+  width: 100%;
+  cursor: pointer;
+}
+#modal-view-full-image img {
+  width: 100%;
+}
