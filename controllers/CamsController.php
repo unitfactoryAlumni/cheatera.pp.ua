@@ -8,6 +8,28 @@ use yii\data\ActiveDataProvider;
 
 class CamsController extends CommonController
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only'  => ['index'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'ips' => ['178.214.196.34'],
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                    throw new \Exception(Yii::t('app', 'You are not allowed to access this page'));
+                }
+            ],
+        ];
+    }
 
     public function actionIndex()
     {
