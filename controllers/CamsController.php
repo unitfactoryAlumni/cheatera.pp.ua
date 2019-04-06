@@ -24,9 +24,6 @@ class CamsController extends CommonController
                         'ips' => ['178.214.196.34'],
                     ],
                 ],
-                'denyCallback' => function ($rule, $action) {
-                    throw new \Exception(Yii::t('app', 'You are not allowed to access this page'));
-                }
             ],
         ];
     }
