@@ -15,8 +15,9 @@ class RememberUser extends RememberHelper
 
     protected function norminate()
     {
-        $this->responseSubSet['kick'] = 0; // ??? WTF
-        $this->responseSubSet['lastloc'] = date('Y-m-d H:i:s'); // ??? WTF
+        $this->responseSubSet['kick'] = 0;
+        $this->responseSubSet['lastloc'] = date('Y-m-d H:i:s');
+        $this->responseSubSet['howach'] = count($this->responseSubSet['achievements']);
         self::swapKeysInArr($this->responseSubSet, [ 'id' => 'xid' ]);
     }
 

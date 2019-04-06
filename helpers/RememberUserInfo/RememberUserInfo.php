@@ -12,11 +12,11 @@ class RememberUserInfo
         }
 
         new RememberLevel($response);
-        new RememberUser($response);
-        new RememberCurses($response);
-        new RememberSkills($response);
+        // new RememberUser($response);
+        // new RememberCurses($response);
+        // new RememberSkills($response);
         new RememberProjects($response);
-        new RememberAchievements($response);
+        // new RememberAchievements($response);
     }
 
 }

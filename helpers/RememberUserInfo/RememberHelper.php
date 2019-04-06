@@ -11,24 +11,31 @@ abstract class RememberHelper
 
 
     protected $response;
+    protected $xlogin;
 
     protected $responseSubSet;
     protected $model;
+
+    protected $bulkInsertArray = [];
+    protected $bulkUpdateArray = [];
+    protected $bulkDeleteArray = [];
 
 
     public function __construct(&$response)
     {
         $this->response =& $response;
+        $this->xlogin = $response['login'];
         $this->init();
 
         $this->norminate();
         $this->remember();
+        $this->updateDB();
     }
 
 
     protected function setLogin(&$varToSetLogin)
     {
-        $varToSetLogin = $this->response['login'];
+        $varToSetLogin = $this->xlogin;
     }
 
 
@@ -80,29 +87,61 @@ abstract class RememberHelper
     }
 
 
-    protected static function saveChangesToDB($baseActiveRecordModel, $arrToPutIntoDb, $activeRecords)
+    protected static function findARbyId($arrToPutIntoDb, $activeRecords, $idstr)
     {
-        if (empty($activeRecords)) {
-            $baseActiveRecordModel->attributes = $arrToPutIntoDb;
-            $baseActiveRecordModel->insert(false);
-        }
-
-        $identicalFound = false;
-        $len = sizeof($activeRecords) - 1;
-
-        foreach ($activeRecords as $index => &$AR) {
-            if (static::isArraysIdentical($arrToPutIntoDb, $AR, $AR::attributes())) {
-                $identicalFound = true;
-                continue ;
-            }
-
-            if ($identicalFound || $index != $len) {
-                $AR->delete();
-            } else {
-                $AR->attributes = $arrToPutIntoDb;
-                $AR->update(false);
+        foreach ($activeRecords as $key => $AR) {
+            if ($AR[$idstr] == $arrToPutIntoDb[$idstr]) {
+                return $key;
             }
         }
+
+        return false;
+    }
+
+    protected static function saveBulkArr(&$bulkArr, $arrToPutIntoDb, $AR)
+    {
+        $bulkArr[] = ['arr' => $arrToPutIntoDb, 'AR' => $AR];
+    }
+
+    protected function updateDB($activeRecords)
+    {
+        foreach ($activeRecords as $AR) {
+            static::saveBulkArr($this->bulkDeleteArray, null, $AR);
+        }
+        Yii::$app->db->createCommand()
+            ->batchDelete(
+                    $tableName, $columnNameArray, $bulkInsertArray
+                )
+            ->execute();
+    }
+
+    protected function saveChangesToDB($arrToPutIntoDb, &$activeRecords, $idstr = 'id')
+    {
+        $ARkey = static::findARbyId($arrToPutIntoDb, $activeRecords, $idstr);
+
+        if ($ARkey === false) {
+            static::saveBulkArr($this->bulkInsertArray, $arrToPutIntoDb, $activeRecords[$ARkey]);
+        } else {
+            static::saveBulkArr($this->bulkUpdateArray, $arrToPutIntoDb, $activeRecords[$ARkey]);
+        }
+        unset($activeRecords[$ARkey]);
+
+        // $identicalFound = false;
+        // $len = count($activeRecords) - 1;
+
+        // foreach ($activeRecords as $index => &$AR) {
+        //     if (static::isArraysIdentical($arrToPutIntoDb, $AR, $AR::attributes())) {
+        //         $identicalFound = true;
+        //         continue ;
+        //     }
+
+        //     if ($identicalFound || $index != $len) {
+        //         $AR->delete();
+        //     } else {
+        //         $AR->attributes = $arrToPutIntoDb;
+        //         $AR->update(false);
+        //     }
+        // }
     }
 
 }

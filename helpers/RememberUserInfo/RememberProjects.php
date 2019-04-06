@@ -10,6 +10,7 @@ class RememberProjects extends RememberHelper
     protected function init()
     {
         $this->responseSubSet =& $this->response['projects_users'];
+        $this->model = 'ProjectsAll';
     }
 
     protected function norminate()
@@ -31,13 +32,18 @@ class RememberProjects extends RememberHelper
 
     protected function remember()
     {
-        foreach ($this->responseSubSet as &$project) {
-            $this->model = new ProjectsAll();
-            self::saveChangesToDB($this->model, $project, $this->model->find()
-                ->Where([ 'puid' => $project['puid'] ])
-                ->andWhere([ 'xlogin' => $project['xlogin'] ])
-            ->all());
+        $found = ProjectsAll::find()
+            ->where(['xlogin' => $this->xlogin])
+        ->all();
+
+        // echo '<pre>'; var_export( $found ); echo '</pre>'; die();
+
+
+        foreach ($this->responseSubSet as $project) {
+            self::saveChangesToDB($project, $found, 'puid');
         }
+
+        self::pruneDB($found);
     }
 
 }
