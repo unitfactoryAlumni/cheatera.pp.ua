@@ -15,7 +15,7 @@ class CamsController extends CommonController
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => yii\filters\AccessControl::className(),
                 'only'  => ['index'],
                 'rules' => [
                     [

@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\filters\AccessControl;
 
 /**
  * This is the model class for table "cams".
