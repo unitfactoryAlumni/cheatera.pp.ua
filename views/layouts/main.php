@@ -106,14 +106,18 @@ if (ThemesHelper::isDark()) {
                         ],
                         'Services' => [
                             'label' => Yii::t('app', 'Services'),
-                            'items' => [
-                                preg_match('/^10\.112\.\d+\.\d+$/', Yii::$app->getRequest()->getUserIP())
-                                || YII_ENV_DEV
-                                    ? ['label' => Yii::t('app', 'Cameras from unit factory online'), 'url' => ['/cams']]
-                                    : [],
-                                ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
-                                ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
-                            ]
+                            'items' => 
+                            YII_ENV_DEV
+                            || '178.214.196.34' == Yii::$app->getRequest()->getUserIP()
+                                ? [
+                                    ['label' => Yii::t('app', 'Cameras from unit factory online'), 'url' => ['/cams']],
+                                    ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
+                                    ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
+                                ]
+                                : [
+                                    ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
+                                    ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
+                                ]
                         ],
                         'Account' => Yii::$app->user->isGuest
                             ? [

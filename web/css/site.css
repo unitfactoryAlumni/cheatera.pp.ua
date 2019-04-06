@@ -339,8 +339,7 @@ input.form-control {
 
 /* Cams styles */
 .cam-address-container img {
-  width: 555px;
-  height: 353px;
+  width: 100%;
   cursor: pointer;
 }
 #modal-view-full-image img {

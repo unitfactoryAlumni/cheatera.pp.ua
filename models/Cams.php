@@ -26,7 +26,7 @@ class Cams extends \yii\db\ActiveRecord
                     [
                         'allow' => true,
                         'roles' => ['@'],
-                        'ips' => ['10.112.*.*'],
+                        'ips' => ['178.214.196.34'],
                     ],
                 ],
                 'denyCallback' => function ($rule, $action) {

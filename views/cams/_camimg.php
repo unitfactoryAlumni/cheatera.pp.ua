@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 ?>
 
-<div class="col-md-6 col-xs-6 cam-address-container">
+<div class="col-md-6 col-xs-12 cam-address-container">
     <h2><?= Html::encode($model->area_name) ?></h2>
     <img class="cam-address img-responsive" alt="<?= Html::encode($model->area_name) ?>" title="Click it!" src="<?= $model->cam_address ?>">
 </div>
