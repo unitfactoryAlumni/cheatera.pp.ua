@@ -11,22 +11,31 @@ class RememberUser extends RememberHelper
     {
         $this->responseSubSet =& $this->response;
         $this->model = new Show();
+        $this->idcol = 'xid';
     }
 
     protected function norminate()
     {
-        $this->responseSubSet['kick'] = 0;
         $this->responseSubSet['lastloc'] = date('Y-m-d H:i:s');
         $this->responseSubSet['howach'] = count($this->responseSubSet['achievements']);
-        self::swapKeysInArr($this->responseSubSet, [ 'id' => 'xid' ]);
+        $this->responseSubSet['visible'] = $this->responseSubSet['visible'] ?? 1;
+        $this->responseSubSet['needupd'] = 0;
+        $this->responseSubSet['kick'] = 0;
+
+        $this->responseSubSet['hours'] = 0; // ! Need help
+        $this->responseSubSet['lasthours'] = 0; // ! Need help
+
+        self::swapKeysInArr($this->responseSubSet, [ 'id' => 'xid', 'staff?' => 'staff' ]);
+        self::setTrueFalse($this->responseSubSet['staff']);
     }
 
     protected function remember()
     {
-        self::saveChangesToDB($this->model, $this->responseSubSet, $this->model->find()
-            ->Where([ 'xid' => $this->responseSubSet['xid'] ])
-            ->orWhere([ 'login' => $this->responseSubSet['login'] ])
-        ->all());
+        $this->ARcollection = $this->model::find()
+            ->where([ 'xid' => $this->responseSubSet['xid'] ])
+        ->all();
+
+        $this->saveChangesToDB($this->responseSubSet);
     }
 
 }

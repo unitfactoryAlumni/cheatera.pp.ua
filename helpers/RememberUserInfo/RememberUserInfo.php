@@ -15,7 +15,7 @@ class RememberUserInfo
 
         Yii::$app->session->set('level', $response['cursus_users'][0]['level']);
 
-        // new RememberUser($response);
+        new RememberUser($response);
         // new RememberCurses($response);
         // new RememberSkills($response);
         new RememberProjects($response);

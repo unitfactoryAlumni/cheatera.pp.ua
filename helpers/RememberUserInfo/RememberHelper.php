@@ -68,10 +68,8 @@ abstract class RememberHelper
     public static function swapKeysInArr(&$arrToChangeKeys, $keys)
     {
         foreach ($keys as $keyToReplace => $keyToPut) {
-            if ($arrToChangeKeys[$keyToPut] === null && $arrToChangeKeys[$keyToReplace] != null) {
-                $arrToChangeKeys[$keyToPut] = $arrToChangeKeys[$keyToReplace];
-                unset($arrToChangeKeys[$keyToReplace]);
-            }
+            $arrToChangeKeys[$keyToPut] = $arrToChangeKeys[$keyToReplace];
+            unset($arrToChangeKeys[$keyToReplace]);
         }
     }
 
