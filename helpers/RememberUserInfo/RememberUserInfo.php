@@ -18,9 +18,8 @@ class RememberUserInfo
         new RememberCurses($response);
         new RememberSkills($response);
         new RememberProjects($response);
-        // new RememberAchievements($response);
+        new RememberAchievements($response);
         new RememberUser($response);
     }
 
 }
-//  WHERE `xlogin`='vbrazas'

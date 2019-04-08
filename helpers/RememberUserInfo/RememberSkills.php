@@ -30,8 +30,8 @@ class RememberSkills extends RememberHelper
             ->where([ 'xlogin' => $this->xlogin ])
         ->all();
 
-        foreach ($this->responseSubset as &$cursus) {
-            foreach ($cursus['skills'] as &$skill) {
+        foreach ($this->responseSubset as $cursus) {
+            foreach ($cursus['skills'] as $skill) {
                 self::saveChangesToDB($skill);
             }
         }
