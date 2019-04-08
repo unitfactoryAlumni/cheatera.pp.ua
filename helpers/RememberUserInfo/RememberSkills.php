@@ -5,6 +5,9 @@ namespace app\helpers\RememberUserInfo;
 class RememberSkills extends RememberHelper
 {
 
+    /**
+     * {@inheritdoc}
+     */
     protected function init()
     {
         $this->responseSubset = $this->response['cursus_users'];
@@ -12,6 +15,9 @@ class RememberSkills extends RememberHelper
         $this->idcol = 'skills_id';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function norminate()
     {
         foreach ($this->responseSubset as &$cursus) {
@@ -24,6 +30,9 @@ class RememberSkills extends RememberHelper
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function remember()
     {
         $this->ARcollection = $this->model::find()

@@ -5,6 +5,9 @@ namespace app\helpers\RememberUserInfo;
 class RememberUser extends RememberHelper
 {
 
+    /**
+     * {@inheritdoc}
+     */
     protected function init()
     {
         $this->responseSubset = $this->response;
@@ -12,6 +15,9 @@ class RememberUser extends RememberHelper
         $this->idcol = 'xid';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function norminate()
     {
         $this->responseSubset['lastloc'] = date('Y-m-d H:i:s');
@@ -27,6 +33,9 @@ class RememberUser extends RememberHelper
         self::setTrueFalse($this->responseSubset['staff']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function remember()
     {
         $this->ARcollection = $this->model::find()

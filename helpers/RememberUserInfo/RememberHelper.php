@@ -4,17 +4,55 @@ namespace app\helpers\RememberUserInfo;
 
 use Yii;
 
+/**
+ * Abstract class created to help save data to cheatera's database from .json given from 42 RESTfull API
+ */
 abstract class RememberHelper
 {
 
+    /**
+     * init
+     *
+     * @return void
+     */
     abstract protected function init();
+    /**
+     * remember
+     *
+     * @return void
+     */
     abstract protected function remember();
+    /**
+     * norminate
+     *
+     * @return void
+     */
     abstract protected function norminate();
 
 
+    /**
+     * $response
+     *
+     * @var array
+     */
     protected $response;
+    /**
+     * $xlogin - $response['login']
+     *
+     * @var string
+     */
     protected $xlogin;
+    /**
+     * $xid - $response['login']
+     *
+     * @var string
+     */
     protected $xid;
+    /**
+     * $idcol - // TODO document
+     *
+     * @var string
+     */
     protected $idcol = 'id';
 
     protected $responseSubset;
@@ -24,7 +62,12 @@ abstract class RememberHelper
     protected $bulkInsertArray = [];
     protected $bulkUpdateArray = [];
 
-
+    /**
+     * __construct - method will done all work children of the class created for
+     * @see app\helpers\RememberUserInfo\RememberUserInfo
+     * 
+     * @param  array $response - .json given from 42 RESTfull API converted to php array
+     */
     public function __construct(&$response)
     {
         $this->response =& $response;
@@ -37,7 +80,15 @@ abstract class RememberHelper
         $this->updateDB();
     }
 
-
+    /**
+     * isArraysIdentical
+     *
+     * @param  array $a1
+     * @param  array $a2
+     * @param  array $arrayKeysToCompare
+     *
+     * @return bool
+     */
     public static function isArraysIdentical($a1, $a2, $arrayKeysToCompare)
     {
         foreach ($arrayKeysToCompare as $keyForBoth) {
@@ -48,11 +99,25 @@ abstract class RememberHelper
         return true;
     }
 
+    /**
+     * setTrueFalse
+     *
+     * @param  bool reference $varToSetTrueFalse
+     *
+     * @return void
+     */
     public static function setTrueFalse(&$varToSetTrueFalse)
     {
         $varToSetTrueFalse = $varToSetTrueFalse ? 'True' : 'False';
     }
 
+    /**
+     * setNULLtoZero
+     *
+     * @param  array reference $arrToSetZeros
+     *
+     * @return void
+     */
     public static function setNULLtoZero(&$arrToSetZeros)
     {
         foreach ($arrToSetZeros as &$val) {
@@ -60,6 +125,13 @@ abstract class RememberHelper
         }
     }
 
+    /**
+     * dateToSqlFormat
+     *
+     * @param  string $date
+     *
+     * @return void
+     */
     public static function dateToSqlFormat(&$date)
     {
         if ($date) {
@@ -67,6 +139,14 @@ abstract class RememberHelper
         }
     }
 
+    /**
+     * swapKeysInArr
+     *
+     * @param  array reference $arrToChangeKeys
+     * @param  array $keys
+     *
+     * @return void
+     */
     public static function swapKeysInArr(&$arrToChangeKeys, $keys)
     {
         foreach ($keys as $keyToReplace => $keyToPut) {
@@ -75,6 +155,14 @@ abstract class RememberHelper
         }
     }
 
+    /**
+     * mergeChildArrByKey
+     *
+     * @param  array $arr
+     * @param  mixed $key - $arr's valid key
+     *
+     * @return void
+     */
     public static function mergeChildArrByKey(&$arr, $key)
     {
         foreach ($arr[$key] as $k => $v) {
@@ -84,12 +172,13 @@ abstract class RememberHelper
     }
 
 
-
-    protected function setLogin(&$varToSetLogin)
-    {
-        $varToSetLogin = $this->xlogin;
-    }
-
+    /**
+     * findARbyId
+     *
+     * @param  array $arrToPutIntoDb
+     *
+     * @return mixed|bool
+     */
     protected function findARbyId($arrToPutIntoDb)
     {
         foreach ($this->ARcollection as $key => $AR) {
@@ -102,6 +191,11 @@ abstract class RememberHelper
     }
 
 
+    /**
+     * batchInsert
+     *
+     * @return bool|void
+     */
     protected function batchInsert()
     {
         if (empty($this->bulkInsertArray)) {
@@ -113,6 +207,11 @@ abstract class RememberHelper
             ->execute();
     }
 
+    /**
+     * batchUpdate
+     *
+     * @return bool|void
+     */
     protected function batchUpdate()
     {
         if (empty($this->bulkUpdateArray)) {
@@ -124,6 +223,11 @@ abstract class RememberHelper
         }
     }
 
+    /**
+     * batchDelete
+     *
+     * @return bool|void
+     */
     protected function batchDelete()
     {
         if (empty($this->ARcollection)) {
@@ -135,6 +239,12 @@ abstract class RememberHelper
         }
     }
 
+    /**
+     * updateDB
+     *
+     * @return void
+     * @throws \Exception
+     */
     protected function updateDB()
     {
         $transaction = Yii::$app->db->beginTransaction();
@@ -149,6 +259,13 @@ abstract class RememberHelper
         }
     }
 
+    /**
+     * saveChangesToDB
+     *
+     * @param  mixed $arrToPutIntoDb
+     *
+     * @return void
+     */
     protected function saveChangesToDB($arrToPutIntoDb)
     {
         $ARkey = $this->findARbyId($arrToPutIntoDb);
