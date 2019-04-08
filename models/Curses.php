@@ -52,19 +52,19 @@ class Curses extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'xlogin' => 'Xlogin',
-            'cursus_id' => 'Curses ID',
-            'begin_at' => 'Begin At',
-            'created_at' => 'Created At',
-            'name' => 'Name',
-            'slug' => 'Slug',
-            'end_at' => 'End At',
-            'grade' => 'Grade',
-            'has_coalition' => 'Has Coalition',
-            'cursus_users_id' => 'Curses Users ID',
-            'level' => 'Level',
-            'xid' => 'Xid',
+            'id' => Yii::t('app', 'ID'),
+            'xlogin' => Yii::t('app', 'Xlogin'),
+            'cursus_id' => Yii::t('app', 'Cursus ID'),
+            'begin_at' => Yii::t('app', 'Begin At'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'name' => Yii::t('app', 'Name'),
+            'slug' => Yii::t('app', 'Slug'),
+            'end_at' => Yii::t('app', 'End At'),
+            'grade' => Yii::t('app', 'Grade'),
+            'has_coalition' => Yii::t('app', 'Has Coalition'),
+            'cursus_users_id' => Yii::t('app', 'Cursus Users ID'),
+            'level' => Yii::t('app', 'Level'),
+            'xid' => Yii::t('app', 'Xid'),
         ];
     }
 }

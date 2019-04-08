@@ -9,13 +9,13 @@ class RememberAchievements extends RememberHelper
 
     protected function init()
     {
-        $this->responseSubSet =& $this->response['achievements'];
+        $this->responseSubset =& $this->response['achievements'];
     }
 
     protected function norminate()
     {
-        foreach ($this->responseSubSet as &$achievement) {
-            $this->setLogin($achievement['xlogin']);
+        foreach ($this->responseSubset as &$achievement) {
+            $achievement['xlogin'] = $this->xlogin;
             self::setTrueFalse($achievement['visible']);
             $achievement['nbr_of_success'] = $achievement['nbr_of_success'] ?? 'None';
             self::swapKeysInArr($achievement, [ 'id' => 'aid' ]);
@@ -24,7 +24,7 @@ class RememberAchievements extends RememberHelper
 
     protected function remember()
     {
-        foreach ($this->responseSubSet as &$achievement) {
+        foreach ($this->responseSubset as &$achievement) {
             $this->model = new Achievements();
             self::saveChangesToDB($this->model, $achievement, $this->model->find()
                 ->Where([ 'aid' => $achievement['aid'] ])

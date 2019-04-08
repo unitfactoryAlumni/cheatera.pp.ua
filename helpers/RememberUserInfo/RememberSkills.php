@@ -9,14 +9,14 @@ class RememberSkills extends RememberHelper
 
     protected function init()
     {
-        $this->responseSubSet =& $this->response['cursus_users'];
+        $this->responseSubset =& $this->response['cursus_users'];
     }
 
     protected function norminate()
     {
-        foreach ($this->responseSubSet as &$cursus) {
+        foreach ($this->responseSubset as &$cursus) {
             foreach ($cursus['skills'] as &$skill) {
-                $this->setLogin($skill['xlogin']);
+                $skill['xlogin'] = $this->xlogin;
                 $skill['cursus_id'] = $cursus['cursus_id'];
                 self::swapKeysInArr($skill, [ 'id' => 'skills_id', 'name' => 'skills_name', 'level' => 'skills_level' ]);
             }
@@ -25,7 +25,7 @@ class RememberSkills extends RememberHelper
 
     protected function remember()
     {
-        foreach ($this->responseSubSet as &$cursus) {
+        foreach ($this->responseSubset as &$cursus) {
             foreach ($cursus['skills'] as &$skill) {
                 $this->model = new Skills();
                 self::saveChangesToDB($this->model, $skill, $this->model->find()

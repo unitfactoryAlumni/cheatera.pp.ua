@@ -2,40 +2,38 @@
 
 namespace app\helpers\RememberUserInfo;
 
-use app\models\Show;
-
 class RememberUser extends RememberHelper
 {
 
     protected function init()
     {
-        $this->responseSubSet =& $this->response;
-        $this->model = new Show();
+        $this->responseSubset = $this->response;
+        $this->model = 'app\models\Show';
         $this->idcol = 'xid';
     }
 
     protected function norminate()
     {
-        $this->responseSubSet['lastloc'] = date('Y-m-d H:i:s');
-        $this->responseSubSet['howach'] = count($this->responseSubSet['achievements']);
-        $this->responseSubSet['visible'] = $this->responseSubSet['visible'] ?? 1;
-        $this->responseSubSet['needupd'] = 0;
-        $this->responseSubSet['kick'] = 0;
+        $this->responseSubset['lastloc'] = date('Y-m-d H:i:s');
+        $this->responseSubset['howach'] = count($this->responseSubset['achievements']);
+        $this->responseSubset['visible'] = $this->responseSubset['visible'] ?? 1;
+        $this->responseSubset['needupd'] = 0;
+        $this->responseSubset['kick'] = 0;
 
-        $this->responseSubSet['hours'] = 0; // ! Need help
-        $this->responseSubSet['lasthours'] = 0; // ! Need help
+        $this->responseSubset['hours'] = 0; // ! Need help
+        $this->responseSubset['lasthours'] = 0; // ! Need help
 
-        self::swapKeysInArr($this->responseSubSet, [ 'id' => 'xid', 'staff?' => 'staff' ]);
-        self::setTrueFalse($this->responseSubSet['staff']);
+        self::swapKeysInArr($this->responseSubset, [ 'id' => 'xid', 'staff?' => 'staff' ]);
+        self::setTrueFalse($this->responseSubset['staff']);
     }
 
     protected function remember()
     {
         $this->ARcollection = $this->model::find()
-            ->where([ 'xid' => $this->responseSubSet['xid'] ])
+            ->where([ 'xid' => $this->responseSubset['xid'] ])
         ->all();
 
-        $this->saveChangesToDB($this->responseSubSet);
+        $this->saveChangesToDB($this->responseSubset);
     }
 
 }

@@ -2,27 +2,28 @@
 
 namespace app\helpers\RememberUserInfo;
 
-use app\models\Curses;
-
 class RememberCurses extends RememberHelper
 {
 
     protected function init()
     {
-        $this->responseSubSet =& $this->response['cursus_users'];
+        $this->responseSubset = $this->response['cursus_users'];
+        $this->model = 'app\models\Curses';
+        $this->idcol = 'cursus_users_id';
     }
 
     protected function norminate()
     {
-        foreach ($this->responseSubSet as &$curs) {
-            $this->setLogin($curs['xlogin']);
+        foreach ($this->responseSubset as &$curs) {
             unset($curs['user']);
             unset($curs['cursus']['id']);
             self::mergeChildArrByKey($curs, 'cursus');
             self::dateToSqlFormat($curs['begin_at']);
             self::dateToSqlFormat($curs['created_at']);
             self::dateToSqlFormat($curs['end_at']);
-            self::swapKeysInArr($curs, [ 'id' => 'xid' ]);
+            self::swapKeysInArr($curs, [ 'id' => 'cursus_users_id' ]);
+            $curs['xlogin'] = $this->xlogin;
+            $curs['xid'] = $this->xid;
             self::setTrueFalse($curs['has_coalition']);
             $curs['grade'] = $curs['grade'] ?? 'None';
         }
@@ -30,12 +31,12 @@ class RememberCurses extends RememberHelper
 
     protected function remember()
     {
-        foreach ($this->responseSubSet as &$curs) {
-            $this->model = new Curses();
-            self::saveChangesToDB($this->model, $curs, $this->model->find()
-                ->Where([ 'xlogin' => $curs['xlogin'] ])
-                ->andWhere([ 'cursus_id' => $curs['cursus_id'] ])
-            ->all());
+        $this->ARcollection = $this->model::find()
+            ->where([ 'xlogin' => $this->xlogin ])
+        ->all();
+
+        foreach ($this->responseSubset as $curs) {
+            $this->saveChangesToDB($curs);
         }
     }
 

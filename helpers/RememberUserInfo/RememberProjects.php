@@ -7,15 +7,15 @@ class RememberProjects extends RememberHelper
 
     protected function init()
     {
-        $this->responseSubSet =& $this->response['projects_users'];
+        $this->responseSubset = $this->response['projects_users'];
         $this->model = 'app\models\ProjectsAll';
         $this->idcol = 'puid';
     }
 
     protected function norminate()
     {
-        foreach ($this->responseSubSet as &$project) {
-            $this->setLogin($project['xlogin']);
+        foreach ($this->responseSubset as &$project) {
+            $project['xlogin'] = $this->xlogin;
             if (is_array($project['cursus_ids'])) {
                 $project['cursus_ids'] = $project['cursus_ids'][0] ?? 1;
             }
@@ -35,7 +35,7 @@ class RememberProjects extends RememberHelper
             ->where(['xlogin' => $this->xlogin])
         ->all();
 
-        foreach ($this->responseSubSet as $project) {
+        foreach ($this->responseSubset as $project) {
             $this->saveChangesToDB($project);
         }
     }

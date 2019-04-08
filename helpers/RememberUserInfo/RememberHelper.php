@@ -14,9 +14,10 @@ abstract class RememberHelper
 
     protected $response;
     protected $xlogin;
+    protected $xid;
     protected $idcol = 'id';
 
-    protected $responseSubSet;
+    protected $responseSubset;
     protected $model;
     protected $ARcollection;
 
@@ -28,6 +29,7 @@ abstract class RememberHelper
     {
         $this->response =& $response;
         $this->xlogin = $response['login'];
+        $this->xid = $response['id'];
         $this->init();
 
         $this->norminate();
