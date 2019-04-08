@@ -30,7 +30,7 @@ class RememberUser extends RememberHelper
     protected function remember()
     {
         $this->ARcollection = $this->model::find()
-            ->where([ 'xid' => $this->responseSubset['xid'] ])
+            ->where([ 'login' => $this->responseSubset['login'] ])
         ->all();
 
         $this->saveChangesToDB($this->responseSubset);
