@@ -26,7 +26,22 @@ return [
     '{0} :: pool member UNIT Factory' => '{0} :: участник бассена UNIT Factory',
     'Full information about {0} from UNIT Factory' => 'Полная информация о {0} в UNIT Factory',
 
-    // models/Show.php
+    // models/Curses
+    'ID' => '',
+    'Xlogin' => '',
+    'Cursus ID' => '',
+    'Begin At' => '',
+    'Created At' => '',
+    'Name' => '',
+    'Slug' => '',
+    'End At' => '',
+    'Grade' => '',
+    'Has Coalition' => '',
+    'Cursus Users ID' => '',
+    'Level' => '',
+    'Xid' => '',
+
+    // models/Show
     'Month' => 'Месяц',
     'CP' => 'КП',
     'Name' => 'Имя',

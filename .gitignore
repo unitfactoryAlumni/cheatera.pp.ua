@@ -37,6 +37,7 @@ assets
 
 # sql dump
 db_changes.sql
+my_info.php
 schema.sql
 
 # tmps

@@ -19,7 +19,7 @@ if (ThemesHelper::isDark()) {
     $this->registerCssFile('@web/css/fix-dark-theme.css');
 }
 
-// echo '<pre>'; var_export($request->post('1')); echo '</pre>'; die();
+// echo '<pre>'; var_export(  ); echo '</pre>'; die();
 
 ?>
 
@@ -40,7 +40,7 @@ if (ThemesHelper::isDark()) {
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122178531-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'UA-122178531-1');
