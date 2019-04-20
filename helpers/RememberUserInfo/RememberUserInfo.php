@@ -14,9 +14,10 @@ class RememberUserInfo
     /**
      * rememberAllToDB
      *
-     * @param  array $response - .json given from 42 RESTfull API converted to php array
+     * @param array $response - .json given from 42 RESTfull API converted to php array
      *
      * @return void
+     * @throws \Exception
      */
     public static function rememberAllToDB($response)
     {

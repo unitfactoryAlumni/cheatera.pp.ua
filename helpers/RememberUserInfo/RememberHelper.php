@@ -9,6 +9,15 @@ use Yii;
  */
 abstract class RememberHelper
 {
+    protected $response;
+    protected $xlogin;
+    protected $xid;
+    protected $idcol = 'id';
+    protected $responseSubset;
+    protected $model;
+    protected $ARcollection;
+    protected $bulkInsertArray = [];
+    protected $bulkUpdateArray = [];
 
     /**
      * init
@@ -16,12 +25,14 @@ abstract class RememberHelper
      * @return void
      */
     abstract protected function init();
+
     /**
      * remember
      *
      * @return void
      */
     abstract protected function remember();
+
     /**
      * norminate
      *
@@ -29,44 +40,12 @@ abstract class RememberHelper
      */
     abstract protected function norminate();
 
-
-    /**
-     * $response
-     *
-     * @var array
-     */
-    protected $response;
-    /**
-     * $xlogin - $response['login']
-     *
-     * @var string
-     */
-    protected $xlogin;
-    /**
-     * $xid - $response['login']
-     *
-     * @var string
-     */
-    protected $xid;
-    /**
-     * $idcol - // TODO document
-     *
-     * @var string
-     */
-    protected $idcol = 'id';
-
-    protected $responseSubset;
-    protected $model;
-    protected $ARcollection;
-
-    protected $bulkInsertArray = [];
-    protected $bulkUpdateArray = [];
-
     /**
      * __construct - method will done all work children of the class created for
+     * @param array $response - .json given from 42 RESTfull API converted to php array
+     * @throws \Exception
      * @see app\helpers\RememberUserInfo\RememberUserInfo
-     * 
-     * @param  array $response - .json given from 42 RESTfull API converted to php array
+     *
      */
     public function __construct(&$response)
     {
