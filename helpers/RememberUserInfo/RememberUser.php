@@ -13,12 +13,16 @@ class RememberUser extends RememberHelper
         $this->responseSubset = $this->response;
         $this->model = 'app\models\Show';
         $this->idcol = 'xid';
+
+        $this->ARcollection = $this->model::find()
+            ->where([ 'login' => $this->responseSubset['login'] ])
+        ->all();
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function norminate()
+    protected function remember()
     {
         $this->responseSubset['lastloc'] = date('Y-m-d H:i:s');
         $this->responseSubset['howach'] = count($this->responseSubset['achievements']);
@@ -33,16 +37,6 @@ class RememberUser extends RememberHelper
 
         self::swapKeysInArr($this->responseSubset, [ 'id' => 'xid', 'staff?' => 'staff' ]);
         self::setTrueFalse($this->responseSubset['staff']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function remember()
-    {
-        $this->ARcollection = $this->model::find()
-            ->where([ 'login' => $this->responseSubset['login'] ])
-        ->all();
 
         $this->saveChangesToDB($this->responseSubset);
     }

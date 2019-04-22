@@ -13,12 +13,16 @@ class RememberProjects extends RememberHelper
         $this->responseSubset = $this->response['projects_users'];
         $this->model = 'app\models\ProjectsAll';
         $this->idcol = 'puid';
+
+        $this->ARcollection = $this->model::find()
+            ->where(['xlogin' => $this->xlogin])
+        ->all();
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function norminate()
+    protected function remember()
     {
         foreach ($this->responseSubset as &$project) {
             $project['xlogin'] = $this->xlogin;
@@ -32,19 +36,7 @@ class RememberProjects extends RememberHelper
             self::mergeChildArrByKey($project, 'project');
             self::swapKeysInArr($project, [ 'id' => 'project_id' ]);
             self::setNULLtoZero($project);
-        }
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function remember()
-    {
-        $this->ARcollection = $this->model::find()
-            ->where(['xlogin' => $this->xlogin])
-        ->all();
-
-        foreach ($this->responseSubset as $project) {
             $this->saveChangesToDB($project);
         }
     }

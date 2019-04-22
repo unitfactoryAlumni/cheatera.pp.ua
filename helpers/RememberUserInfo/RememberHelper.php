@@ -32,12 +32,6 @@ abstract class RememberHelper
     abstract protected function remember();
 
     /**
-     * norminate
-     * @return void
-     */
-    abstract protected function norminate();
-
-    /**
      * __construct - method will done all work children of the class created for
      * @param array $response - .json given from 42 RESTfull API converted to php array
      * @see app\helpers\RememberUserInfo\RememberUserInfo
@@ -48,9 +42,8 @@ abstract class RememberHelper
         $this->response =& $response;
         $this->xlogin = $response['login'];
         $this->xid = $response['id'];
-        $this->init();
 
-        $this->norminate();
+        $this->init();
         $this->remember();
         $this->updateDB();
     }

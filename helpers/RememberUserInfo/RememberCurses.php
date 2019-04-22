@@ -13,12 +13,16 @@ class RememberCurses extends RememberHelper
         $this->responseSubset = $this->response['cursus_users'];
         $this->model = 'app\models\Curses';
         $this->idcol = 'cursus_users_id';
+
+        $this->ARcollection = $this->model::find()
+            ->where([ 'xlogin' => $this->xlogin ])
+        ->all();
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function norminate()
+    protected function remember()
     {
         foreach ($this->responseSubset as &$curs) {
             unset($curs['user']);
@@ -32,19 +36,7 @@ class RememberCurses extends RememberHelper
             $curs['xid'] = $this->xid;
             self::setTrueFalse($curs['has_coalition']);
             $curs['grade'] = $curs['grade'] ?? 'None';
-        }
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function remember()
-    {
-        $this->ARcollection = $this->model::find()
-            ->where([ 'xlogin' => $this->xlogin ])
-        ->all();
-
-        foreach ($this->responseSubset as $curs) {
             $this->saveChangesToDB($curs);
         }
     }
