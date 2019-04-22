@@ -13,10 +13,10 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-   'modules' => [
+    'modules' => [
         'languages' => [
             'class' => 'klisl\languages\Module',
-        //Языки используемые в приложении
+            //Языки используемые в приложении
             'languages' => [
                 'Русский' => 'ru',
                 'Українська' => 'uk',
@@ -28,8 +28,7 @@ $config = [
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => env('VD_KEY', ''),
+            'cookieValidationKey' => getenv('VD_KEY'),
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'baseUrl' => '', //убрать frontend/web
@@ -77,8 +76,8 @@ $config = [
             'clients' => [
                 'auth42' => [
                     'class' => 'app\helpers\Auth42',
-                    'clientId' => env('42_API_CI', ''),
-                    'clientSecret' => env('42_API_CS', ''),
+                    'clientId' => getenv('42_API_CI'),
+                    'clientSecret' => getenv('42_API_CS'),
                 ],
             ],
         ],
@@ -105,8 +104,8 @@ $config = [
                 'students' => 'show/students',
                 'pools' => 'show/pools',
                 'calculator' => 'calculator/index',
-                'change-theme' => 'site/change-theme',
                 'calculator/form-submission' => 'calculator/form-submission',
+                'change-theme' => 'site/change-theme',
                 'corrections' => 'corrections/index',
                 'friends' => 'friend/index',
                 'friends/create/<id:[\w\-]+>/<course:\w+>' => 'friend/create',

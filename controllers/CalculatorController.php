@@ -18,7 +18,7 @@ class CalculatorController extends CommonController
      *
      * @return  String          which sends to the View
      */
-    public function actionIndex( $model = null )
+    public function actionIndex($model = null)
     {
         $title = Yii::t('app', 'Experience calculator');
         $description = Yii::t('app', 'Want to know your level after project evaluation -- use our Experience calculator!');
@@ -46,7 +46,7 @@ class CalculatorController extends CommonController
      * @param   Object  $model  reference to Calculator's Model instance
      * @param   Array   $post   $post request array
      */
-    private function getMarkFromPost( &$model, $post )
+    private function getMarkFromPost(&$model, $post)
     {
         if ($model && $post
         && $model->load($post) && $model->validate() ) {

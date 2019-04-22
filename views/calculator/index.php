@@ -9,9 +9,10 @@ use yii\bootstrap\ActiveForm;
 /* @var $model app\models\Calculator */
 
 $calc_js = <<<CALC_JS
+    $.pjax.defaults.timeout = false;
+
     $.each($('.tier-key'), function() {
         $(this).click(function () {
-            $.pjax.defaults.timeout = false;
             $.pjax.reload({container:"#calculator"});  // Reload ActiveForm
         })
     });
