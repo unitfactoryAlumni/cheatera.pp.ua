@@ -52,9 +52,9 @@ Yii::$app->user->setReturnUrl(['/' . $explode . '/'. $model['login']]);
                     <p class="card-text"><a href="<?= '/' . Yii::$app->language . '/' . $switch ?>/<?= $model['login'] ?>" class="btn btn-success bg-success"><?= ucfirst(substr_replace($switch, "", -1)) ?> Profile</a></p>
                     <?php  if ($model['login'] !== Yii::$app->user->identity->username) {
                     if(\app\models\Friend::check($model['login'])) { ?>
-                        <a href="<?php echo '/' . Yii::$app->language ?>/friends/delete/<?= $model['login'] ?>" class="btn btn-md btn-danger bg-danger" data-method="POST"><?= Yii::t('app', 'Delete Friend')?></a>
+                        <a href="<?php echo '/' . Yii::$app->language ?>/friends/delete/<?= $model['login'] ?>" id="friends-delete" class="btn btn-md btn-danger bg-danger" data-method="POST"><?= Yii::t('app', 'Delete Friend')?></a>
                     <?php } else {;?>
-                        <a href="<?php echo '/' . Yii::$app->language ?>/friends/create/<?= $model['login'] ?>/<?= $explode ?>" class="btn btn-md btn-success bg-success"><?= Yii::t('app', 'Add Friend')?></a>
+                        <a href="<?php echo '/' . Yii::$app->language ?>/friends/create/<?= $model['login'] ?>/<?= $explode ?>" id="friends-create" class="btn btn-md btn-success bg-success"><?= Yii::t('app', 'Add Friend')?></a>
                     <?php }
                     } ?>
                 </div>
