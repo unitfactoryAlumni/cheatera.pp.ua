@@ -33,9 +33,10 @@ class RememberUser extends RememberHelper
         $this->responseSubset['visible'] = ($this->responseSubset['campus'] === 'Kyiv');
 
         $this->responseSubset['needupd'] = 0;
-        $this->responseSubset['kick'] = $user->kick ?? 0; // ! Need help
-        $this->responseSubset['hours'] = $user->hours ?? 0; // ! Need help
-        $this->responseSubset['lasthours'] = $user->lasthours ?? 0; // ! Need help
+        $this->responseSubset['kick'] = $user->kick ?? 0; // ! Need some refactor
+        $this->responseSubset['location'] = $user->location ?? 0; // ! Need some refactor
+        $this->responseSubset['hours'] = $user->hours ?? 0; // ! Need some refactor
+        $this->responseSubset['lasthours'] = $user->lasthours ?? 0; // ! Need some refactor
 
         self::swapKeysInArr($this->responseSubset, [ 'id' => 'xid', 'staff?' => 'staff' ]);
         self::setTrueFalse($this->responseSubset['staff']);

@@ -24,11 +24,9 @@ composer.phar
 
 # phpunit itself is not needed
 phpunit.phar
+
 # local phpunit config
 /phpunit.xml
-
-/.vagrant
-.env
 
 # yii2 dirs
 /web/assets
@@ -48,3 +46,7 @@ tests/_support/_generated
 
 # to include
 !assets/AppAsset.php
+
+# files to exclude
+.env
+index.php
