@@ -35,7 +35,6 @@ abstract class RememberHelper
      * __construct - method will done all work children of the class created for
      * @param array $response - .json given from 42 RESTfull API converted to php array
      * @see app\helpers\RememberUserInfo\RememberUserInfo
-     * @throws \Exception - in case of db error
      */
     public function __construct(&$response)
     {
@@ -124,13 +123,13 @@ abstract class RememberHelper
 
     /**
      * findARbyId
-     * @param  array $arrToPutIntoDb
+     * @param  array $id
      * @return mixed|bool
      */
-    protected function findARbyId($arrToPutIntoDb)
+    protected function findARbyId($id)
     {
         foreach ($this->ARcollection as $key => $AR) {
-            if ($AR[$this->idcol] == $arrToPutIntoDb[$this->idcol]) {
+            if ($AR[$this->idcol] == $id) {
                 return $key;
             }
         }
@@ -186,7 +185,6 @@ abstract class RememberHelper
 
     /**
      * updateDB
-     * @throws \Exception - in case of db error
      */
     protected function updateDB()
     {
@@ -198,7 +196,6 @@ abstract class RememberHelper
             $transaction->commit();
         } catch (\Exception $e) {
             $transaction->rollBack();
-            throw $e;
         }
     }
 
@@ -208,7 +205,7 @@ abstract class RememberHelper
      */
     protected function saveChangesToDB($arrToPutIntoDb)
     {
-        $ARkey = $this->findARbyId($arrToPutIntoDb);
+        $ARkey = $this->findARbyId($arrToPutIntoDb[$this->idcol]);
 
         if ($ARkey === false) {
             $ARtoInsert = new $this->model();

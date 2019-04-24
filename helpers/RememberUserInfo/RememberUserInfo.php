@@ -14,7 +14,6 @@ class RememberUserInfo
     /**
      * rememberAllToDB
      * @param array $response - .json given from 42 RESTfull API converted to php array
-     * @throws \Exception - in case of db error
      */
     public function __construct($response)
     {
