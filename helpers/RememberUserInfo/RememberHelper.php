@@ -21,52 +21,38 @@ abstract class RememberHelper
 
     /**
      * init
-     *
      * @return void
      */
     abstract protected function init();
 
     /**
      * remember
-     *
      * @return void
      */
     abstract protected function remember();
 
     /**
-     * norminate
-     *
-     * @return void
-     */
-    abstract protected function norminate();
-
-    /**
      * __construct - method will done all work children of the class created for
      * @param array $response - .json given from 42 RESTfull API converted to php array
-     * @throws \Exception
      * @see app\helpers\RememberUserInfo\RememberUserInfo
-     *
+     * @throws \Exception - in case of db error
      */
     public function __construct(&$response)
     {
         $this->response =& $response;
         $this->xlogin = $response['login'];
         $this->xid = $response['id'];
-        $this->init();
 
-        $this->norminate();
+        $this->init();
         $this->remember();
         $this->updateDB();
     }
 
     /**
      * isArraysIdentical
-     *
      * @param  array $a1
      * @param  array $a2
      * @param  array $arrayKeysToCompare
-     *
-     * @return bool
      */
     public static function isArraysIdentical($a1, $a2, $arrayKeysToCompare)
     {
@@ -80,10 +66,7 @@ abstract class RememberHelper
 
     /**
      * setTrueFalse
-     *
      * @param  bool reference $varToSetTrueFalse
-     *
-     * @return void
      */
     public static function setTrueFalse(&$varToSetTrueFalse)
     {
@@ -92,10 +75,7 @@ abstract class RememberHelper
 
     /**
      * setNULLtoZero
-     *
      * @param  array reference $arrToSetZeros
-     *
-     * @return void
      */
     public static function setNULLtoZero(&$arrToSetZeros)
     {
@@ -106,10 +86,7 @@ abstract class RememberHelper
 
     /**
      * dateToSqlFormat
-     *
      * @param  string $date
-     *
-     * @return void
      */
     public static function dateToSqlFormat(&$date)
     {
@@ -120,11 +97,8 @@ abstract class RememberHelper
 
     /**
      * swapKeysInArr
-     *
      * @param  array reference $arrToChangeKeys
      * @param  array $keys
-     *
-     * @return void
      */
     public static function swapKeysInArr(&$arrToChangeKeys, $keys)
     {
@@ -136,11 +110,8 @@ abstract class RememberHelper
 
     /**
      * mergeChildArrByKey
-     *
      * @param  array $arr
      * @param  mixed $key - $arr's valid key
-     *
-     * @return void
      */
     public static function mergeChildArrByKey(&$arr, $key)
     {
@@ -153,9 +124,7 @@ abstract class RememberHelper
 
     /**
      * findARbyId
-     *
      * @param  array $arrToPutIntoDb
-     *
      * @return mixed|bool
      */
     protected function findARbyId($arrToPutIntoDb)
@@ -172,7 +141,6 @@ abstract class RememberHelper
 
     /**
      * batchInsert
-     *
      * @return bool|void
      */
     protected function batchInsert()
@@ -188,7 +156,6 @@ abstract class RememberHelper
 
     /**
      * batchUpdate
-     *
      * @return bool|void
      */
     protected function batchUpdate()
@@ -204,7 +171,6 @@ abstract class RememberHelper
 
     /**
      * batchDelete
-     *
      * @return bool|void
      */
     protected function batchDelete()
@@ -220,9 +186,7 @@ abstract class RememberHelper
 
     /**
      * updateDB
-     *
-     * @return void
-     * @throws \Exception
+     * @throws \Exception - in case of db error
      */
     protected function updateDB()
     {
@@ -240,10 +204,7 @@ abstract class RememberHelper
 
     /**
      * saveChangesToDB
-     *
-     * @param  mixed $arrToPutIntoDb
-     *
-     * @return void
+     * @param  array $arrToPutIntoDb
      */
     protected function saveChangesToDB($arrToPutIntoDb)
     {

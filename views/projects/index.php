@@ -20,7 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="projects-all-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
     <?php Pjax::begin(['timeout' => 10000 ]); ?>
+
         <?= $this->render('_search', ['model' => $searchModel, 'action' => $action, 'months' => $months, 'years' => $years]) ?>
 
         <div class="table-responsive col-lg-12">
@@ -53,12 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]); ?>
         </div>
-<!--<!--    -->--><?php ////Pjax::end();
-////    $this->registerJs("
-////    $('table tr[data-href]').click(function () {
-////        if ($(this).data('href') !== undefined) {
-////            window.location.href = $(this).data('href');
-////        }
-////    });");
-//    ?>
+
+    <?= Pjax::end(); ?>
+
 </div>

@@ -1,12 +1,12 @@
-version: '3'
+version: '3.4'
+
 services:
   web:
     build: ./
     ports:
-      - '8888:80'
+      - '${WEB_PORT:-8888}:80'
     expose:
-      - "80"
-      - "9000"
+      - '9000'
     volumes:
       - ./:/var/www/html/
     links:
@@ -17,12 +17,12 @@ services:
     container_name: 'yii2-mysql'
     restart: 'always'
     ports:
-      - "3306:3306"
+      - '${DB_PORT:-3306}:3306'
     environment:
-      MYSQL_ROOT_PASSWORD: yii2
-      MYSQL_DATABASE: yii2
-      MYSQL_USER: yii2
-      MYSQL_PASSWORD: yii2
+      MYSQL_DATABASE: ${DB_NAME:-yii2}
+      MYSQL_USER: ${DB_USERNAME:-yii2}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-yii2}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-yii2}
     volumes:
       - ./config/:/docker-entrypoint-initdb.d/
 
@@ -35,6 +35,6 @@ services:
       PMA_HOST: mysql
       PMA_PORT: 3306
     ports:
-      - '8080:80'
+      - '${PHPMA_PORT:-8080}:80'
     volumes:
       - /sessions

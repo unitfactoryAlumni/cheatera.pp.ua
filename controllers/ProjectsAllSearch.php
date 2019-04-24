@@ -82,15 +82,14 @@ class ProjectsAllSearch extends ProjectsAll
                 'xlogin' => SORT_ASC,
             ]],
         ]);
-
-
         $dataProvider->sort->attributes['location'] = [
             'asc' => ['xlogins.location' => SORT_ASC],
-            'desc' => ['xlogins.location' => SORT_DESC],];
-
+            'desc' => ['xlogins.location' => SORT_DESC],
+        ];
         $dataProvider->sort->attributes['lastloc'] = [
             'asc' => ['xlogins.lastloc' => SORT_ASC],
-            'desc' => ['xlogins.lastloc' => SORT_DESC],];
+            'desc' => ['xlogins.lastloc' => SORT_DESC],
+        ];
 
         $this->load($params);
 

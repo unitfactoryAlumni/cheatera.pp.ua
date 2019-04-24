@@ -5,21 +5,18 @@ namespace app\helpers\RememberUserInfo;
 use Yii;
 
 /**
- * Fills `cursus_users`, `skills`, `projects_users`, `achievements` and `xlogin` tables of cheatera's database
- * .json given from 42 RESTfull API -- $response
+ * Fills `cursus_users`, `skills`, `projects_users`, `achievements` and `xlogin` tables of cheatera's database 
+ * by response from OAuth2, 42API, when user login
  */
 class RememberUserInfo
 {
 
     /**
      * rememberAllToDB
-     *
      * @param array $response - .json given from 42 RESTfull API converted to php array
-     *
-     * @return void
-     * @throws \Exception
+     * @throws \Exception - in case of db error
      */
-    public static function rememberAllToDB($response)
+    public function __construct($response)
     {
         if ($response === null) {
             return ;

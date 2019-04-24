@@ -70,10 +70,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     <?php Pjax::end(); ?>
 
-    <?php
-        // echo '<pre>';
-        //     var_export(  );
-        // echo '</pre>';
-    ?>
-
 </div>

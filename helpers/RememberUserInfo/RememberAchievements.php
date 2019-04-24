@@ -13,12 +13,16 @@ class RememberAchievements extends RememberHelper
         $this->responseSubset = $this->response['achievements'];
         $this->model = 'app\models\Achievements';
         $this->idcol = 'aid';
+
+        $this->ARcollection = $this->model::find()
+            ->where(['xlogin' => $this->xlogin])
+        ->all();
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function norminate()
+    protected function remember()
     {
         foreach ($this->responseSubset as &$achievement) {
             $achievement['xlogin'] = $this->xlogin;
@@ -27,19 +31,7 @@ class RememberAchievements extends RememberHelper
             self::swapKeysInArr($achievement, [ 'id' => 'aid' ]);
             $achievement['description'] = htmlentities($achievement['description']);
             $achievement['visible'] = $achievement['visible'] ?? 'True';
-        }
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function remember()
-    {
-        $this->ARcollection = $this->model::find()
-            ->where(['xlogin' => $this->xlogin])
-        ->all();
-
-        foreach ($this->responseSubset as $achievement) {
             self::saveChangesToDB($achievement);
         }
     }

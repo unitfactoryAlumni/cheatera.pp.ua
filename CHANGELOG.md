@@ -1,6 +1,7 @@
 # Cheatera Change Log
 
 ------------------------
+- Issue #129 BUG: #66 fix
 - Issue #66  FEATURE: Добавить обновление данных о пользователе в БД при логине
 - Issue #102 FEATURE: Добавить камеры с marvin.unit.ua
 - Issue #64  FEATURE: Добавить просмотры групп по проектам

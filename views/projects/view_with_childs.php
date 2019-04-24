@@ -18,13 +18,19 @@ $this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['0']['name']),
 $this->params['breadcrumbs'][] = ['label' => ucfirst($breadcrumbs['1']['name']), 'url' => [$breadcrumbs['1']['url']]];
 $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
 
+$this->registerJs("
+    $('table tr[data-href]').click(function () {
+        if ($(this).data('href') !== undefined) {
+            window.location.href = $(this).data('href');
+        }
+    });");
+
 ?>
 
 <div class="projects-view">
     <h1><?= Html::encode(ucfirst(strtok($this->title, '::'))) ?></h1>
 
 <?php
-
     $subProjects = $this->render('_sub', ['action' => $action, 'searchModel' => $searchModelSubProject, 'dataProvider' => $dataProviderSubProject, 'pageName' => $pageName, 'subPage' => $subPage, 'months' => $months, 'years' => $years]);
     $marks = $this->render('_marks', ['action' => $action, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider, 'pageName' => $pageName, 'months' => $months, 'years' => $years]);
 
@@ -47,12 +53,6 @@ $this->params['breadcrumbs'][] = ucfirst(strtok($this->title, '::'));
         'position'=>TabsX::POS_ABOVE,
         'encodeLabels'=>false
     ]);
-$this->registerJs("
-    $('table tr[data-href]').click(function () {
-        if ($(this).data('href') !== undefined) {
-            window.location.href = $(this).data('href');
-        }
-    });");
-    ?>
+?>
 
 </div>
