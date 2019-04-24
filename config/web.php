@@ -28,7 +28,7 @@ $config = [
     ],
     'components' => [
         'request' => [
-            'cookieValidationKey' => getenv('VD_KEY'),
+            'cookieValidationKey' => env('VD_KEY'),
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'baseUrl' => '', //убрать frontend/web
@@ -76,8 +76,8 @@ $config = [
             'clients' => [
                 'auth42' => [
                     'class' => 'app\helpers\Auth42',
-                    'clientId' => getenv('42_API_CI'),
-                    'clientSecret' => getenv('42_API_CS'),
+                    'clientId' => env('42_API_CI'),
+                    'clientSecret' => env('42_API_CS'),
                 ],
             ],
         ],

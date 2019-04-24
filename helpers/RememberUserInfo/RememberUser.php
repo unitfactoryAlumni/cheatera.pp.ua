@@ -24,7 +24,7 @@ class RememberUser extends RememberHelper
      */
     protected function remember()
     {
-        $user = $this->ARcollection[$this->findARbyId($this->ARcollection)];
+        $user = $this->ARcollection[$this->findARbyId($this->xid)];
 
         $this->responseSubset['lastloc'] = date('Y-m-d H:i:s');
         $this->responseSubset['howach'] = count($this->responseSubset['achievements']);
