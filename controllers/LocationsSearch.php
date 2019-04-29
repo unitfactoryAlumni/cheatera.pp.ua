@@ -55,8 +55,9 @@ class LocationsSearch extends Locations
     public function search($params)
     {
         $query = Locations::find()
-        ->where(['xlogin' => $this->login])
-        ->andWhere('end_at > 0');
+            ->where(['xlogin' => $this->login])
+            ->andWhere('end_at > 0')
+        ;
 
         $this->load($params);
         // add conditions that should always apply here

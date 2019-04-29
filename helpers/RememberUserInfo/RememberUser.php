@@ -2,6 +2,10 @@
 
 namespace app\helpers\RememberUserInfo;
 
+use Yii;
+use app\controllers\LocationsSearch;
+use app\helpers\LogTimeHelper;
+
 class RememberUser extends RememberHelper
 {
 
@@ -32,11 +36,17 @@ class RememberUser extends RememberHelper
         $this->responseSubset['campus'] = $this->responseSubset['campus'][0]['name'];
         $this->responseSubset['visible'] = ($this->responseSubset['campus'] === 'Kyiv');
 
-        $this->responseSubset['needupd'] = 0;
-        $this->responseSubset['kick'] = $user->kick ?? 0; // ! Need some refactor
-        $this->responseSubset['location'] = $user->location ?? 0; // ! Need some refactor
-        $this->responseSubset['hours'] = $user->hours ?? 0; // ! Need some refactor
-        $this->responseSubset['lasthours'] = $user->lasthours ?? 0; // ! Need some refactor
+        $searchModelTime = new LocationsSearch($this->xlogin);
+        $dataProviderTime = $searchModelTime->search(Yii::$app->request->queryParams);
+        $lastloc = $dataProviderTime->models[0];
+        [$amount, $labels, $data] = LogTimeHelper::getChartJSInfo($dataProviderTime->models);
+        $this->responseSubset['hours'] = $amount;
+
+        $this->responseSubset['needupd'] = $user->needupd ?? 0;
+        $this->responseSubset['lasthours'] = $user->lasthours ?? 0;
+        $this->responseSubset['kick'] = $user->kick ?? 0;
+        // $this->responseSubset['lastloc'] = $lastloc->begin_at;
+        $this->responseSubset['location'] = $user->location ?? $lastloc->host;
 
         self::swapKeysInArr($this->responseSubset, [ 'id' => 'xid', 'staff?' => 'staff' ]);
         self::setTrueFalse($this->responseSubset['staff']);

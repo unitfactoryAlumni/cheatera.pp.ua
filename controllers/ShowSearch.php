@@ -51,7 +51,7 @@ class ShowSearch extends Show
             ->where([
                 'xlogins.visible' => 1,
                 'cursus_users.name' => $course,
-                ]);
+            ]);
 
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
