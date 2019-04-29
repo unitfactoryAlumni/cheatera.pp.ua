@@ -56,6 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
         </div>
 
-    <?= Pjax::end(); ?>
+    <?php Pjax::end(); ?>
 
 </div>
