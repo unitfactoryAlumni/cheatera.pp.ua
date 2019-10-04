@@ -89,6 +89,13 @@ if (ThemesHelper::isDark()) {
                             'label' => Yii::t('app', 'Update log'),
                             'items' => \app\helpers\ViewHelper::getLastUpdate(),
                         ],
+                        'Links' => [
+                            'label' => 'Links',
+                            'items' => [
+                                ['label' => 'UNIT Portal', 'url' => 'https://unitportal.click/'],
+                                ['label' => 'Telegram Chat', 'url' => 'https://t.me/unit2k17'],
+                            ],
+                        ],
                         'Students' => [
                             'label' => Yii::t('app', 'Students'),
                             'items' => [
