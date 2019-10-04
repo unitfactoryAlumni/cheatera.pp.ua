@@ -32,13 +32,11 @@ return [
     'Cursus ID' => '',
     'Begin At' => '',
     'Created At' => '',
-    'Name' => '',
     'Slug' => '',
     'End At' => '',
     'Grade' => '',
     'Has Coalition' => '',
     'Cursus Users ID' => '',
-    'Level' => '',
     'Xid' => '',
 
     // models/Show
@@ -179,5 +177,8 @@ return [
     'Marks' => 'Оценки',
     'Location' => 'Хост',
     'Server paid until September 17, 2019' => 'Сервер оплачен до 17 сентября 2019 года',
-    'If you have a trouble with style - please use hard refresh on page(refresh page with shift), or delete all you cookies' => 'Если у вас есть проблемы со стилем - пожалуйста, используйте жёсткое обновление страницы(обновите страницу с shift), или удалите все ваши куки'
+    'If you have a trouble with style - please use hard refresh on page(refresh page with shift), or delete all you cookies' => 'Если у вас есть проблемы со стилем - пожалуйста, используйте жёсткое обновление страницы(обновите страницу с shift), или удалите все ваши куки',
+    'Donate project' => 'Помощь проекту',
+    'Donate' => 'Донат',
+    'Get a monobank card' => 'Получить карту моно',
 ];
