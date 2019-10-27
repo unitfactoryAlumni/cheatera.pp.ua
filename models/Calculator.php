@@ -137,7 +137,7 @@ class Calculator extends Model
         // $tier_exps["6"] = $tier_exps["0"] * 42.5;
         // $tier_exps["7"] = $tier_exps["0"] * 60;
 
-        $lvlstart_int = intval($this->lvlstart);
+        $lvlstart_int = (int)$this->lvlstart;
         $fract_part = $this->lvlstart - $lvlstart_int;
         $eplvl = self::$_expr_per_lvl;
 
