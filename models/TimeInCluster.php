@@ -6,8 +6,7 @@ use Yii;
 
 /**
  * This is the model class for table "time_in_cluster".
- *
- * @property int $id
+ * @property int    $id
  * @property string $xlogin
  * @property string $oneday
  * @property double $timer

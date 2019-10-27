@@ -6,28 +6,40 @@ use Yii;
 
 /**
  * This is the model class for table "friend".
- *
- * @property int $id
+ * @property int    $id
  * @property string $mylogin
  * @property string $xlogin
- * @property int $status
+ * @property int    $status
  * @property string $course
  */
 class Friend extends \yii\db\ActiveRecord
 {
     public $login;
+
     public $displayname;
+
     public $phone;
+
     public $image_url;
+
     public $level;
+
     public $correction_point;
+
     public $pool_year;
+
     public $pool_month;
+
     public $location;
+
     public $lastloc;
+
     public $wallet;
+
     public $howach;
+
     public $hours;
+
     /**
      * {@inheritdoc}
      */

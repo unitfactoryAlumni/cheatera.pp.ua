@@ -3,20 +3,18 @@
 namespace app\controllers;
 
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
 use app\models\Locations;
+use yii\data\ActiveDataProvider;
 
 /**
  * LocationsSearch represents the model behind the search form of `app\models\Locations`.
- *
  * DELIMITER //
  * CREATE TRIGGER `locations_upd` BEFORE INSERT ON `locations`
  * FOR EACH ROW
-        BEGIN
-        SET NEW.date = SUBSTRING_INDEX(NEW.begin_at, ' ', 1);
-        SET NEW.how = (CASE WHEN NEW.end_at > 0 AND  LENGTH(NEW.xlogin) > 2  THEN TIMEDIFF (NEW.end_at, NEW.begin_at) ELSE 0 END);
-        END//
- * DELIMITER ;
+ * BEGIN
+ * SET NEW.date = SUBSTRING_INDEX(NEW.begin_at, ' ', 1);
+ * SET NEW.how = (CASE WHEN NEW.end_at > 0 AND  LENGTH(NEW.xlogin) > 2  THEN TIMEDIFF (NEW.end_at, NEW.begin_at) ELSE 0
+ * END); END// DELIMITER ;
  */
 class LocationsSearch extends Locations
 {
@@ -25,6 +23,7 @@ class LocationsSearch extends Locations
         $this->login = $login;
         parent::__construct($configs);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -32,7 +31,7 @@ class LocationsSearch extends Locations
     {
         return [
             [['id', 'lid', 'campus_id', 'user_id'], 'integer'],
-            [['host', 'begin_at', 'end_at', 'xlogin', 'date','dateStart', 'dateEnd', 'how'], 'safe'],
+            [['host', 'begin_at', 'end_at', 'xlogin', 'date', 'dateStart', 'dateEnd', 'how'], 'safe'],
         ];
     }
 
@@ -56,8 +55,7 @@ class LocationsSearch extends Locations
     {
         $query = Locations::find()
             ->where(['xlogin' => $this->login])
-            ->andWhere('end_at > 0')
-        ;
+            ->andWhere('end_at > 0');
 
         $this->load($params);
         // add conditions that should always apply here
@@ -71,8 +69,8 @@ class LocationsSearch extends Locations
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                    'date' => SORT_DESC
-                ]
+                    'date' => SORT_DESC,
+                ],
             ],
             'pagination' => [
                 'pageSize' => -1,

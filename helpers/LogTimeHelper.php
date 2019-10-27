@@ -16,7 +16,7 @@ class LogTimeHelper
             strtok($countTime, '.');
             $exp = explode(':', $countTime);
             $result = intval($exp[0]);
-            $result = $result . '.' . strtok((($exp[1]/60) * 100), '.');
+            $result = $result . '.' . strtok((($exp[1] / 60) * 100), '.');
 
             return ($result);
         }
@@ -24,8 +24,9 @@ class LogTimeHelper
         $summa = floatval("$summa");
         $exp = explode(':', $countTime);
         $result = intval($exp[0]);
-        $result = $result . '.' . strtok((($exp[1]/60) * 100), '.');
+        $result = $result . '.' . strtok((($exp[1] / 60) * 100), '.');
         $forReturn = round(floatval($result) + floatval($summa), 2);
+
         return "$forReturn";
     }
 
@@ -50,7 +51,8 @@ class LogTimeHelper
      * getChartJSInfo
      *
      * @param Locations[] $models
-     * @param array $get - GET request
+     * @param array       $get - GET request
+     *
      * @return array [$labels, $data, $amount] - info for ChartJS::widget
      */
     public static function getChartJSInfo($models, $get = [])
@@ -78,7 +80,7 @@ class LogTimeHelper
         while ($tempDate != $first) {
             $tempDate = date('Y-m-d', strtotime($tempDate . "-1 days"));
             $arr[$tempDate] = '00.00';
-            break ;
+            break;
         }
 
         foreach ($models as $model) {
@@ -89,7 +91,7 @@ class LogTimeHelper
                         $arr[$tempDate] = '00.00';
                     }
                 } else {
-                    $tempDate = date('Y-m-d',strtotime($model->date));
+                    $tempDate = date('Y-m-d', strtotime($model->date));
                     $count--;
                 }
             }
@@ -98,7 +100,7 @@ class LogTimeHelper
             } else {
                 $arr[$model->date] = self::countTime($model->how);
             }
-            $tempDate = date('Y-m-d',strtotime($model->date));
+            $tempDate = date('Y-m-d', strtotime($model->date));
         }
 
         foreach ($arr as $key => $value) {

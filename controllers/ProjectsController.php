@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\ProjectsAll;
 use app\models\Show;
+use app\models\ProjectsAll;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -13,8 +13,11 @@ use yii\web\NotFoundHttpException;
 class ProjectsController extends CommonController
 {
     protected $course;
+
     protected $getId;
+
     protected $forParent;
+
     protected $team = 0;
 
     /**
@@ -24,17 +27,18 @@ class ProjectsController extends CommonController
     public function actionStudents()
     {
         $title = Yii::t('app', 'Students projects UNIT Factory');
-        $description = Yii::t('app','Full information about students projects from UNIT Factory');
+        $description = Yii::t('app', 'Full information about students projects from UNIT Factory');
         $this->setMeta($title, $description);
         $searchModel = new ProjectsFilterSearch(['course' => '1', 'parent' => '0']);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         [$months, $years] = self::getPoolsMonthAndYear();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Students'),
-                'url' => 'show/students'
+                'url' => 'show/students',
             ],
             'subPage' => '/students/projects',
             'action' => 'students',
@@ -50,17 +54,18 @@ class ProjectsController extends CommonController
     public function actionPools()
     {
         $title = Yii::t('app', 'Pools projects UNIT Factory');
-        $description = Yii::t('app','Full information about pools projects from UNIT Factory');
+        $description = Yii::t('app', 'Full information about pools projects from UNIT Factory');
         $this->setMeta($title, $description);
         $searchModel = new ProjectsFilterSearch(['course' => 4, 'parent' => 0]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         [$months, $years] = self::getPoolsMonthAndYear();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Pools'),
-                'url' => 'show/pools'
+                'url' => 'show/pools',
             ],
             'subPage' => '/pools/projects',
             'action' => 'pools',
@@ -71,7 +76,9 @@ class ProjectsController extends CommonController
 
     /**
      * Displays a single students Projects model.
+     *
      * @param integer $id
+     *
      * @return string
      * @throws NotFoundHttpException
      */
@@ -79,15 +86,18 @@ class ProjectsController extends CommonController
     {
         $type = self::checkParentAndChildProjects($id);
         if (isset($type)) {
-            return $type > 0 ? self::renderSingleProjectChild($id, 'students', 1): self::renderParentProject($id, 'students', 1);
+            return $type > 0 ? self::renderSingleProjectChild($id, 'students', 1)
+                : self::renderParentProject($id, 'students', 1);
         }
+
         return self::renderSingleProject($id, 'students', 1);
     }
 
-
     /**
      * Displays a single Project models.
+     *
      * @param integer $id
+     *
      * @return string
      * @throws NotFoundHttpException
      */
@@ -95,13 +105,16 @@ class ProjectsController extends CommonController
     {
         $type = self::checkParentAndChildProjects($id);
         if (isset($type)) {
-            return $type > 0 ? self::renderSingleProjectChild($id, 'pools', 4) : self::renderParentProject($id, 'pools', 4);
+            return $type > 0 ? self::renderSingleProjectChild($id, 'pools', 4)
+                : self::renderParentProject($id, 'pools', 4);
         }
+
         return self::renderSingleProject($id, 'pools', 4);
     }
 
     /**
      * @param $id
+     *
      * @return int
      * @throws NotFoundHttpException
      */
@@ -111,11 +124,13 @@ class ProjectsController extends CommonController
         if ($model !== null) {
             if (ProjectsAll::find()
                     ->where(['parent_id' => $model->project_id])
-                    ->one() !== null) {
-                    return 0;
-            } else if ($model->parent_id !== 0) {
+                    ->one() !== null
+            ) {
+                return 0;
+            } elseif ($model->parent_id !== 0) {
                 return 1;
             }
+
             return null;
         }
         throw new NotFoundHttpException('The requested page does not exist.');
@@ -127,6 +142,7 @@ class ProjectsController extends CommonController
      * @param $id
      * @param $case
      * @param $course
+     *
      * @return string
      */
     private function renderSingleProject($id, $case, $course)
@@ -135,6 +151,7 @@ class ProjectsController extends CommonController
         $searchModel = new ProjectsAllSearch($course, $id, $this->team);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         [$months, $years] = self::getPoolsMonthAndYear();
+
         return $this->render('view', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -160,6 +177,7 @@ class ProjectsController extends CommonController
      * @param $id
      * @param $case
      * @param $course
+     *
      * @return string
      */
     private function renderSingleProjectChild($id, $case, $course)
@@ -168,6 +186,7 @@ class ProjectsController extends CommonController
         $searchModel = new ProjectsAllSearch($course, $id, $this->team);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         [$months, $years] = self::getPoolsMonthAndYear();
+
         return $this->render('view', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -197,6 +216,7 @@ class ProjectsController extends CommonController
      * @param $id
      * @param $case
      * @param $course
+     *
      * @return string
      */
     private function renderParentProject($id, $case, $course)
@@ -207,6 +227,7 @@ class ProjectsController extends CommonController
         $searchModelSubProject = new ProjectsFilterSearch(['course' => $course, 'parent' => $this->getId]);
         $dataProviderSubProject = $searchModelSubProject->search(Yii::$app->request->queryParams);
         [$months, $years] = self::getPoolsMonthAndYear();
+
         return $this->render('view_with_childs', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -219,7 +240,7 @@ class ProjectsController extends CommonController
                 ],
                 '1' => [
                     'name' => Yii::t('app', $case . ' Projects'),
-//                    'url' => "projects/$case",
+                    //                    'url' => "projects/$case",
                     'url' => "projects/$case",
                 ],
             ],
@@ -233,8 +254,8 @@ class ProjectsController extends CommonController
     }
 
     /**
-     * @param $id
-     * @param $case
+     * @param      $id
+     * @param      $case
      * @param null $parent
      */
     private function beforeRender($id, $case, $parent = null)
@@ -243,7 +264,7 @@ class ProjectsController extends CommonController
         $this->getId = (ProjectsAll::find()->where("slug = '$id'")->one())->project_id;
         $project_name = $getName->name;
         $title = Yii::t('app', '{0} :: {1} project UNIT Factory', [$project_name, $case]);
-        $description = Yii::t('app','Full information about {0} from UNIT Factory', $project_name);
+        $description = Yii::t('app', 'Full information about {0} from UNIT Factory', $project_name);
         $this->setMeta($title, $description);
         if (isset($parent)) {
             $parentName = ProjectsAll::find()->where("project_id = '{$getName->parent_id}'")->one();
@@ -267,12 +288,14 @@ class ProjectsController extends CommonController
             $str = "$item->pool_year";
             $years[$str] = (string)$item->pool_year;
         }
+
         return [$months, $years];
     }
 
     public function actionTeam($course, $name, $id)
     {
         $this->team = $id;
-        return $course === 'students' ? $this->actionStudentsView($name) : $this->actionPoolsView($name) ;
+
+        return $course === 'students' ? $this->actionStudentsView($name) : $this->actionPoolsView($name);
     }
 }

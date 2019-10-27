@@ -6,21 +6,23 @@ use Yii;
 
 /**
  * This is the model class for table "locations".
- *
- * @property int $id
- * @property int $lid
- * @property int $campus_id
+ * @property int    $id
+ * @property int    $lid
+ * @property int    $campus_id
  * @property string $host
  * @property string $begin_at
  * @property string $end_at
  * @property string $xlogin
- * @property int $user_id
+ * @property int    $user_id
  */
 class Locations extends \yii\db\ActiveRecord
 {
     public $login;
+
     public $dateStart = null;
+
     public $dateEnd = null;
+
     /**
      * {@inheritdoc}
      */

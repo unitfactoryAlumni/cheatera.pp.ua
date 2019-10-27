@@ -16,36 +16,36 @@ use kartik\date\DatePicker;
         'action' => [$action],
         'method' => 'get',
         'options' => [
-            'data-pjax' => 1
+            'data-pjax' => 1,
         ],
     ]); ?>
 
-        <?= $form->field($model, 'dateStart')->label(Yii::t('app', 'dateStart'))->widget(DatePicker::className(),[
-            'type' => DatePicker::TYPE_INPUT,
-            'removeButton' => ['icon' => 'trash'],
-            'pickerButton' => false,
-            'pluginOptions' => [
-                'format' => 'yyyy-mm-dd',
-                'autoclose' => true,
-                'todayHighlight' => true,
-            ]
-        ]) ?>
+    <?= $form->field($model, 'dateStart')->label(Yii::t('app', 'dateStart'))->widget(DatePicker::className(), [
+        'type' => DatePicker::TYPE_INPUT,
+        'removeButton' => ['icon' => 'trash'],
+        'pickerButton' => false,
+        'pluginOptions' => [
+            'format' => 'yyyy-mm-dd',
+            'autoclose' => true,
+            'todayHighlight' => true,
+        ],
+    ]) ?>
 
-        <?= $form->field($model, 'dateEnd')->label(Yii::t('app', 'dateEnd'))->widget(DatePicker::className(),[
-            'type' => DatePicker::TYPE_INPUT,
-            'removeButton' => ['icon' => 'trash'],
-            'pickerButton' => false,
-            'pluginOptions' => [
-                'format' => 'yyyy-mm-dd',
-                'autoclose' => true,
-                'todayHighlight' => true,
-            ]
-        ]) ?>
+    <?= $form->field($model, 'dateEnd')->label(Yii::t('app', 'dateEnd'))->widget(DatePicker::className(), [
+        'type' => DatePicker::TYPE_INPUT,
+        'removeButton' => ['icon' => 'trash'],
+        'pickerButton' => false,
+        'pluginOptions' => [
+            'format' => 'yyyy-mm-dd',
+            'autoclose' => true,
+            'todayHighlight' => true,
+        ],
+    ]) ?>
 
-        <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-            <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
-        </div>
+    <div class="form-group">
+        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+    </div>
 
     <?php ActiveForm::end(); ?>
 

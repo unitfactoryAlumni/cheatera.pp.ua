@@ -7,15 +7,13 @@ use yii\base\Model;
 
 /**
  * Calculator is the model behind the Calculator controller.
- *
- * @property array $_expr_per_lvl - read-only array with coeficents to each level point earnings
+ * @property array $_expr_per_lvl  - read-only array with coeficents to each level point earnings
  * @property array $_expr_per_tier - read-only array with coeficents to each level of complexity
- * @property float $result - final result of the calculation, if 0 it does not exists
- * @property float $lvlstart - initial student's
- * @property float $tier - complexity level of the project
- * @property float $finalmark - project's final mark achived by the student
+ * @property float $result         - final result of the calculation, if 0 it does not exists
+ * @property float $lvlstart       - initial student's
+ * @property float $tier           - complexity level of the project
+ * @property float $finalmark      - project's final mark achived by the student
  */
-
 class Calculator extends Model
 {
     static private $_expr_per_lvl = [
@@ -50,8 +48,9 @@ class Calculator extends Model
         255564.2572599762,
         291413.9287045184,
         332152.19170968,
-       -1
+        -1,
     ];
+
     static private $_expr_per_tier = [
         2.2,
         8.8330,
@@ -60,15 +59,18 @@ class Calculator extends Model
         56.10,
         79.2,
         93.50,
-        132
+        132,
     ];
+
     private $lvl_max;
 
     public $result;
-    public $lvlstart;
-    public $tier;
-    public $finalmark;
 
+    public $lvlstart;
+
+    public $tier;
+
+    public $finalmark;
 
     function __construct()
     {
@@ -86,7 +88,7 @@ class Calculator extends Model
         return [
             [['lvlstart', 'finalmark'], 'required'],
             ['lvlstart', 'number', 'min' => 0, 'max' => $this->lvl_max],
-            ['finalmark', 'number', 'min' => 50, 'max' => 125]
+            ['finalmark', 'number', 'min' => 50, 'max' => 125],
         ];
     }
 
@@ -103,7 +105,7 @@ class Calculator extends Model
 
     public function getTier()
     {
-        return [ 'T0', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7' ];
+        return ['T0', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
     }
 
     public function resetToDefault()
@@ -120,13 +122,10 @@ class Calculator extends Model
         return $this->lvlstart;
     }
 
-
-
     /**
-    * Do all magic ie counts the particular lvl up value from parameters.
-    *
-    * @return float lvl up value for given args
-    */
+     * Do all magic ie counts the particular lvl up value from parameters.
+     * @return float lvl up value for given args
+     */
     public function getMark()
     {
         // $tier_exps = array("0" => 2.2);
@@ -143,14 +142,13 @@ class Calculator extends Model
         $eplvl = self::$_expr_per_lvl;
 
         $expr_raising = self::$_expr_per_tier[$this->tier] * $this->finalmark
-        + $eplvl[$lvlstart_int]
-        + ($eplvl[$lvlstart_int + 1] - $eplvl[$lvlstart_int]) * $fract_part;
+                        + $eplvl[$lvlstart_int]
+                        + ($eplvl[$lvlstart_int + 1] - $eplvl[$lvlstart_int]) * $fract_part;
 
-        for($i = 0; $i < $this->lvl_max; $i++)
-        {
+        for ($i = 0; $i < $this->lvl_max; $i++) {
             if ($eplvl[$i] > $expr_raising) {
                 $i--;
-                break ;
+                break;
             }
         }
 
@@ -163,6 +161,7 @@ class Calculator extends Model
         }
 
         $this->result = round($res, 2);
+
         return $this->result;
     }
 }

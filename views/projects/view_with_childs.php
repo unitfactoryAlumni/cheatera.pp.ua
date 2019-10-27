@@ -1,7 +1,7 @@
 <?php
 
-use kartik\tabs\TabsX;
 use yii\helpers\Html;
+use kartik\tabs\TabsX;
 
 /* @var $this yii\web\View */
 /* @var array $breadcrumbs */
@@ -30,29 +30,42 @@ $this->registerJs("
 <div class="projects-view">
     <h1><?= Html::encode(ucfirst(strtok($this->title, '::'))) ?></h1>
 
-<?php
-    $subProjects = $this->render('_sub', ['action' => $action, 'searchModel' => $searchModelSubProject, 'dataProvider' => $dataProviderSubProject, 'pageName' => $pageName, 'subPage' => $subPage, 'months' => $months, 'years' => $years]);
-    $marks = $this->render('_marks', ['action' => $action, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider, 'pageName' => $pageName, 'months' => $months, 'years' => $years]);
+    <?php
+    $subProjects =
+        $this->render('_sub', ['action' => $action,
+            'searchModel' => $searchModelSubProject,
+            'dataProvider' => $dataProviderSubProject,
+            'pageName' => $pageName,
+            'subPage' => $subPage,
+            'months' => $months,
+            'years' => $years]);
+    $marks =
+        $this->render('_marks', ['action' => $action,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'pageName' => $pageName,
+            'months' => $months,
+            'years' => $years]);
 
     $tmp = Yii::$app->session->get('username');
 
     $items = [
         [
-            'label'   => '<i class="glyphicon glyphicon-list"></i> ' . Yii::t('app', 'Sub Project'),
+            'label' => '<i class="glyphicon glyphicon-list"></i> ' . Yii::t('app', 'Sub Project'),
             'content' => $subProjects,
-            'active'  => true
+            'active' => true,
         ],
         [
-            'label'   => '<i class="glyphicon glyphicon-check"></i> ' . Yii::t('app', 'Marks'),
+            'label' => '<i class="glyphicon glyphicon-check"></i> ' . Yii::t('app', 'Marks'),
             'content' => $marks,
         ],
     ];
 
     echo TabsX::widget([
-        'items'=>$items,
-        'position'=>TabsX::POS_ABOVE,
-        'encodeLabels'=>false
+        'items' => $items,
+        'position' => TabsX::POS_ABOVE,
+        'encodeLabels' => false,
     ]);
-?>
+    ?>
 
 </div>

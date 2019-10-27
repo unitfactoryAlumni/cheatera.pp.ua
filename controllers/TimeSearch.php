@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
 use app\models\TimeInCluster;
+use yii\data\ActiveDataProvider;
 
 /**
  * TimeSearch represents the model behind the search form of `app\models\TimeInCluster`.
@@ -12,7 +12,9 @@ use app\models\TimeInCluster;
 class TimeSearch extends TimeInCluster
 {
     public $login;
+
     public $dateStart = null;
+
     public $dateEnd = null;
 
     public function __construct($login, array $configs = [])
@@ -33,13 +35,13 @@ class TimeSearch extends TimeInCluster
         ];
     }
     /**
-    SELECT *,
-    SUBSTRING_INDEX(begin_at, ' ', 1) as begin_at_,
-    TIMEDIFF (end_at, begin_at) as how
-    FROM `locations`
-    WHERE end_at > 0 AND xlogin = "apakhomo"
-    ORDER BY `begin_at_`  ASC
-    */
+     * SELECT *,
+     * SUBSTRING_INDEX(begin_at, ' ', 1) as begin_at_,
+     * TIMEDIFF (end_at, begin_at) as how
+     * FROM `locations`
+     * WHERE end_at > 0 AND xlogin = "apakhomo"
+     * ORDER BY `begin_at_`  ASC
+     */
     /**
      * {@inheritdoc}
      */
@@ -79,8 +81,8 @@ class TimeSearch extends TimeInCluster
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                    'id' => SORT_DESC
-                ]
+                    'id' => SORT_DESC,
+                ],
             ],
             'pagination' => [
                 'pageSize' => -1,

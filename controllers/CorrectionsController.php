@@ -3,8 +3,6 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\CorrectionLog;
-use app\controllers\CorrectionsSearch;
 
 /**
  * CorrectionLogController implements the CRUD actions for CorrectionLog model.

@@ -3,18 +3,20 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\widgets\Alert;
 use yii\helpers\Html;
+use app\widgets\Alert;
 use yii\bootstrap\Nav;
+use app\assets\AppAsset;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
 use app\helpers\ThemesHelper;
 
 raoul2000\bootswatch\BootswatchAsset::$theme = ThemesHelper::getCurrent();
 AppAsset::register($this);
-$this->registerJsFile('@web/js/site.js', ['depends' => [yii\web\JqueryAsset::className()], 'position' => \yii\web\View::POS_END]);
-$this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css' : '.min.css'), ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);
+$this->registerJsFile('@web/js/site.js', ['depends' => [yii\web\JqueryAsset::className()],
+    'position' => \yii\web\View::POS_END]);
+$this->registerCssFile('@web/css/site' . (YII_ENV_DEV ? '.css'
+        : '.min.css'), ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);
 if (ThemesHelper::isDark()) {
     $this->registerCssFile('@web/css/fix-dark-theme.css');
 }
@@ -40,7 +42,11 @@ if (ThemesHelper::isDark()) {
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122178531-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-122178531-1');
@@ -55,139 +61,140 @@ if (ThemesHelper::isDark()) {
 
 </style>
 <body>
-    <?php $this->beginBody() ?>
+<?php $this->beginBody() ?>
 
-    <div class="wrap">
-        <?php
-            NavBar::begin([
-                'brandLabel' => Yii::$app->name,
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-default navbar-fixed-top',
-                ],
-            ]);
-                $menu = [
-                    'options' => ['class' => 'navbar-nav navbar-right'],
-                    'encodeLabels' => false,
+<div class="wrap">
+    <?php
+    NavBar::begin([
+        'brandLabel' => Yii::$app->name,
+        'brandUrl' => Yii::$app->homeUrl,
+        'options' => [
+            'class' => 'navbar-default navbar-fixed-top',
+        ],
+    ]);
+    $menu = [
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'encodeLabels' => false,
+        'items' => [
+            'Misc' => YII_ENV_DEV
+                ? [
+                    'label' => Yii::$app->getRequest()->getUserIP(),
                     'items' => [
-                        'Misc' => YII_ENV_DEV
-                            ? [
-                                'label' => Yii::$app->getRequest()->getUserIP(),
-                                'items' => [
-                                    ['label' => 'Debug', 'url' => ['/debug']],
-                                    '<li class="divider"></li>',
-                                    ['label' => 'Gii Model', 'url' => ['/gii/model']],
-                                    ['label' => 'Gii CRUD', 'url' => ['/gii/crud']],
-                                    ['label' => 'Gii Controller', 'url' => ['/gii/controller']],
-                                ]
-                            ]
-                            : [
-                                'label' => Yii::t('app', 'Add issue'),
-                                'url' => 'https://github.com/cheatera-pp-ua/cheatera.pp.ua/issues/new/choose'
-                            ],
-                        'Update' => [
-                            'label' => Yii::t('app', 'Update log'),
-                            'items' => \app\helpers\ViewHelper::getLastUpdate(),
-                        ],
-                        'Links' => [
-                            'label' => 'Links',
-                            'items' => [
-                                ['label' => 'UNIT Portal', 'url' => 'https://unitportal.click/'],
-                                ['label' => 'Telegram Chat', 'url' => 'https://t.me/unit2k17'],
-                            ],
-                        ],
-                        'Students' => [
-                            'label' => Yii::t('app', 'Students'),
-                            'items' => [
-                                ['label' => Yii::t('app', 'Members'), 'url' => ['/students']],
-                                ['label' => Yii::t('app', 'Projects'), 'url' => ['/students/projects']],
-                                ['label' => Yii::t('app', 'Cheating'), 'url' => ['/students/cheating']],
-                            ],
-                        ],
-                        'Pools' => [
-                            'label' => Yii::t('app', 'Pools'),
-                            'items' => [
-                                ['label' => Yii::t('app', 'Members'), 'url' => ['/pools']],
-                                ['label' => Yii::t('app', 'Projects'), 'url' => ['/pools/projects']],
-                                ['label' => Yii::t('app', 'Cheating'), 'url' => ['/pools/cheating']],
-                            ],
-                        ],
-                        'Services' => [
-                            'label' => Yii::t('app', 'Services'),
-                            'items' => 
-                            YII_ENV_DEV
-                            || in_array(Yii::$app->getRequest()->getUserIP(), app\controllers\CamsController::$garantedIps)
-                                ? [
-                                    ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
-                                    ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
-                                    ['label' => Yii::t('app', 'Cams'), 'url' => ['/cams']],
-                                ]
-                                : [
-                                    ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
-                                    ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
-                                ]
-                        ],
-                        'Account' => Yii::$app->user->isGuest
-                            ? [
-                                'label' => Yii::t('app', 'Account'),
-                                'items' => [
-                                    ['label' => Yii::t('app', 'with 42'), 'url' => ['/auth?authclient=auth42']],
-                                    ['label' => Yii::t('app', 'with pass'), 'url' => ['/login']],
-                                ],
-                            ]
-                            : [
-                                'label' => (
-                                    isset(Yii::$app->session['profile'])
-                                        ? (Yii::$app->user->identity->username)
-                                        : (Yii::t('app', 'Account'))
-                                ),
-                                'items' => [
-                                    isset(Yii::$app->session['profile'])
-                                        ? ([
-                                            'label' => Yii::t('app', 'Profile'), 'url' => [Yii::$app->session['profile']]
-                                        ])
-                                        : '<li class="divider"></li>',
-                                        [
-                                            'label' => Yii::t('app', 'Friends'),
-                                            'url' => ['friend/index'],
-                                        ],
-                                        [
-                                            'label' => Yii::t('app', 'Logout'),
-                                            'url' => ['/site/logout'],
-                                            'linkOptions' => ['data-method' => 'post']
-                                        ],
-                                ],
-                            ]
+                        ['label' => 'Debug', 'url' => ['/debug']],
+                        '<li class="divider"></li>',
+                        ['label' => 'Gii Model', 'url' => ['/gii/model']],
+                        ['label' => 'Gii CRUD', 'url' => ['/gii/crud']],
+                        ['label' => 'Gii Controller', 'url' => ['/gii/controller']],
                     ],
-                ];
+                ]
+                : [
+                    'label' => Yii::t('app', 'Add issue'),
+                    'url' => 'https://github.com/cheatera-pp-ua/cheatera.pp.ua/issues/new/choose',
+                ],
+            'Update' => [
+                'label' => Yii::t('app', 'Update log'),
+                'items' => \app\helpers\ViewHelper::getLastUpdate(),
+            ],
+            'Links' => [
+                'label' => 'Links',
+                'items' => [
+                    ['label' => 'UNIT Portal', 'url' => 'https://unitportal.click/'],
+                    ['label' => 'Telegram Chat', 'url' => 'https://t.me/unit2k17'],
+                ],
+            ],
+            'Students' => [
+                'label' => Yii::t('app', 'Students'),
+                'items' => [
+                    ['label' => Yii::t('app', 'Members'), 'url' => ['/students']],
+                    ['label' => Yii::t('app', 'Projects'), 'url' => ['/students/projects']],
+                    ['label' => Yii::t('app', 'Cheating'), 'url' => ['/students/cheating']],
+                ],
+            ],
+            'Pools' => [
+                'label' => Yii::t('app', 'Pools'),
+                'items' => [
+                    ['label' => Yii::t('app', 'Members'), 'url' => ['/pools']],
+                    ['label' => Yii::t('app', 'Projects'), 'url' => ['/pools/projects']],
+                    ['label' => Yii::t('app', 'Cheating'), 'url' => ['/pools/cheating']],
+                ],
+            ],
+            'Services' => [
+                'label' => Yii::t('app', 'Services'),
+                'items' =>
+                    YII_ENV_DEV
+                    || in_array(Yii::$app->getRequest()->getUserIP(), app\controllers\CamsController::$garantedIps)
+                        ? [
+                        ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
+                        ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
+                        ['label' => Yii::t('app', 'Cams'), 'url' => ['/cams']],
+                    ]
+                        : [
+                        ['label' => Yii::t('app', 'Calculator'), 'url' => ['/calculator']],
+                        ['label' => Yii::t('app', 'Corrections'), 'url' => ['/corrections']],
+                    ],
+            ],
+            'Account' => Yii::$app->user->isGuest
+                ? [
+                    'label' => Yii::t('app', 'Account'),
+                    'items' => [
+                        ['label' => Yii::t('app', 'with 42'), 'url' => ['/auth?authclient=auth42']],
+                        ['label' => Yii::t('app', 'with pass'), 'url' => ['/login']],
+                    ],
+                ]
+                : [
+                    'label' => (
+                    isset(Yii::$app->session['profile'])
+                        ? (Yii::$app->user->identity->username)
+                        : (Yii::t('app', 'Account'))
+                    ),
+                    'items' => [
+                        isset(Yii::$app->session['profile'])
+                            ? ([
+                            'label' => Yii::t('app', 'Profile'),
+                            'url' => [Yii::$app->session['profile']],
+                        ])
+                            : '<li class="divider"></li>',
+                        [
+                            'label' => Yii::t('app', 'Friends'),
+                            'url' => ['friend/index'],
+                        ],
+                        [
+                            'label' => Yii::t('app', 'Logout'),
+                            'url' => ['/site/logout'],
+                            'linkOptions' => ['data-method' => 'post'],
+                        ],
+                    ],
+                ],
+        ],
+    ];
 
-                echo Nav::widget($menu);
-            NavBar::end();
-        ?>
+    echo Nav::widget($menu);
+    NavBar::end();
+    ?>
 
-        <div class="container">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
+    <div class="container">
+        <?= Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
 
-            <?= Alert::widget() ?>
-            <?= $content ?>
-        </div>
+        <?= Alert::widget() ?>
+        <?= $content ?>
     </div>
+</div>
 
-    
-    <footer class="footer">
-        <div class="container">
+
+<footer class="footer">
+    <div class="container">
             <span class="pull-left">
                 <?= \app\helpers\FlagsLang::widget() ?>
             </span>
 
-            <span class="pull-right">
+        <span class="pull-right">
                 <?= ThemesHelper::getThemesSwitcherHtml() ?>
             </span>
-        </div>
-    </footer>
-    <?php $this->endBody() ?>
+    </div>
+</footer>
+<?php $this->endBody() ?>
 
 </body>
 

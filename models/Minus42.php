@@ -6,17 +6,19 @@ use Yii;
 
 /**
  * This is the model class for table "m42".
- *
- * @property int $id
+ * @property int    $id
  * @property string $xlogin
- * @property int $puid
+ * @property int    $puid
  * @property string $updated_at
  */
 class Minus42 extends \yii\db\ActiveRecord
 {
     public $pool_year;
+
     public $pool_month;
+
     public $name;
+
     public $slug;
 
     /**

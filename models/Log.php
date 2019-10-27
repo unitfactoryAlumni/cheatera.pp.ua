@@ -2,12 +2,9 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "log".
- *
- * @property int $id
+ * @property int    $id
  * @property string $xlogin
  * @property string $auth_date
  * @property string $ip

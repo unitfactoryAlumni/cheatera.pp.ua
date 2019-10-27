@@ -27,7 +27,7 @@ class CamsController extends CommonController
             'isAccessGaranted' => $isAccessGaranted,
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Cams'),
-                'url' => 'cams'
+                'url' => 'cams',
             ],
         ]);
     }

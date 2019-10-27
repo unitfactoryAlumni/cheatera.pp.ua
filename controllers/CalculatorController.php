@@ -14,14 +14,15 @@ class CalculatorController extends CommonController
     /**
      * actionIndex
      *
-     * @param   Object  $model  calculator's model
+     * @param Object $model calculator's model
      *
      * @return  String          which sends to the View
      */
     public function actionIndex($model = null)
     {
         $title = Yii::t('app', 'Experience calculator');
-        $description = Yii::t('app', 'Want to know your level after project evaluation -- use our Experience calculator!');
+        $description =
+            Yii::t('app', 'Want to know your level after project evaluation -- use our Experience calculator!');
         $this->setMeta($title, $description);
 
         if ($model === null) {
@@ -35,7 +36,7 @@ class CalculatorController extends CommonController
             'model' => $model,
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Calculator'),
-                'url' => 'calculator'
+                'url' => 'calculator',
             ],
         ]);
     }
@@ -43,29 +44,32 @@ class CalculatorController extends CommonController
     /**
      * getMarkFromPost
      *
-     * @param   Object  $model  reference to Calculator's Model instance
-     * @param   Array   $post   $post request array
+     * @param Object $model reference to Calculator's Model instance
+     * @param Array  $post  $post request array
      */
     private function getMarkFromPost(&$model, $post)
     {
         if ($model && $post
-        && $model->load($post) && $model->validate() ) {
+            && $model->load($post)
+            && $model->validate()
+        ) {
             foreach ($model->getTier() as $k => $v) {
-                if ( array_key_exists($k, $post) ) {
+                if (array_key_exists($k, $post)) {
                     $tier = $model->tier = $k;
                 }
             }
-            if ( isset($tier)
-            && !is_nan($tier)
-            && $tier <= 7
-            && $tier >= 0 ) {
+            if (isset($tier)
+                && !is_nan($tier)
+                && $tier <= 7
+                && $tier >= 0
+            ) {
                 $model->lvlstart = $model->getMark();
             }
         }
     }
+
     /**
      * actionFormSubmission
-     *
      * @return  Float  to be set into the 'Result' field on the View
      */
     public function actionFormSubmission()

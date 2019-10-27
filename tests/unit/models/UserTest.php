@@ -19,7 +19,7 @@ class UserTest extends \Codeception\Test\Unit
         expect_that($user = User::findIdentityByAccessToken('100-token'));
         expect($user->username)->equals('admin');
 
-        expect_not(User::findIdentityByAccessToken('non-existing'));        
+        expect_not(User::findIdentityByAccessToken('non-existing'));
     }
 
     public function testFindUserByUsername()
@@ -38,7 +38,7 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($user->validateAuthKey('test102key'));
 
         expect_that($user->validatePassword('admin'));
-        expect_not($user->validatePassword('123456'));        
+        expect_not($user->validatePassword('123456'));
     }
 
 }

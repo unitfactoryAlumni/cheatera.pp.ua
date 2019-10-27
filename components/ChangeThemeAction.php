@@ -12,7 +12,7 @@ class ChangeThemeAction extends Action
     {
         if (ThemesHelper::isDefault()) {
             ThemesHelper::setDark();
-        } else if (ThemesHelper::isDark()) {
+        } elseif (ThemesHelper::isDark()) {
             ThemesHelper::setDefault();
         }
 

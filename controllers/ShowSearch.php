@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
 use app\models\Show;
+use yii\data\ActiveDataProvider;
 
 /**
  * ShowSearch represents the model behind the search form of `app\models\Show`.
@@ -35,19 +35,19 @@ class ShowSearch extends Show
     /**
      * Creates data provider instance with search query applied
      *
-     * @param array $params
+     * @param array  $params
      * @param string $course
+     *
      * @return ActiveDataProvider
      */
     public function search($params, $course)
     {
-
         $query = Show::find()
             ->select([
                 'xlogins.*',
-                'cursus_users.*'
+                'cursus_users.*',
             ])
-            ->innerJoin('cursus_users','cursus_users.xlogin = xlogins.login')
+            ->innerJoin('cursus_users', 'cursus_users.xlogin = xlogins.login')
             ->where([
                 'xlogins.visible' => 1,
                 'cursus_users.name' => $course,
@@ -66,7 +66,7 @@ class ShowSearch extends Show
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-//            $query->where('0=1');
+            //            $query->where('0=1');
             return $dataProvider;
         }
 
@@ -78,6 +78,7 @@ class ShowSearch extends Show
             ->andFilterWhere(['like', 'pool_year', $this->pool_year])
             ->andFilterWhere(['like', 'location', $this->location])
             ->andFilterWhere(['like', 'lastloc', $this->lastloc]);
+
         return $dataProvider;
     }
 
@@ -135,8 +136,8 @@ class ShowSearch extends Show
                 'hours' => [
                     'asc' => ['hours' => SORT_ASC],
                     'desc' => ['hours' => SORT_DESC],
-                ]
-            ]
+                ],
+            ],
         ];
     }
 

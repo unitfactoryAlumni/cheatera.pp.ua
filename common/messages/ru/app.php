@@ -76,7 +76,7 @@ return [
     'false' => 'Нет',
 
     // models/ProjectsAll
-    'Xlogin' =>  'Логин',
+    'Xlogin' => 'Логин',
     'Final Mark' => 'Финальная оценка',
     'Retry' => 'Попыток',
     'Status' => 'Статус',

@@ -6,10 +6,9 @@ use Yii;
 
 /**
  * This is the model class for table "correction_history".
- *
- * @property int $id
+ * @property int    $id
  * @property string $xlogin
- * @property int $corrections
+ * @property int    $corrections
  * @property double $level
  * @property string $date
  */

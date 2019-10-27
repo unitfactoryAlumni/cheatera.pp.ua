@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
 use app\models\ProjectsAll;
+use yii\data\ActiveDataProvider;
 
 /**
  * ProjectsAllSearch represents the model behind the search form of `app\models\ProjectsAll`.
@@ -14,6 +14,7 @@ class ProjectsAllSearch extends ProjectsAll
     protected $course;
 
     protected $projectSlug;
+
     protected $team = null;
 
     public function __construct($searchCourse, $searchSlug, $team)
@@ -32,7 +33,8 @@ class ProjectsAllSearch extends ProjectsAll
     public function rules()
     {
         return [
-            [['id', 'current_team_id', 'cursus_ids', 'final_mark', 'puid', 'occurrence', 'project_id', 'parent_id'], 'integer'],
+            [['id', 'current_team_id', 'cursus_ids', 'final_mark', 'puid', 'occurrence', 'project_id', 'parent_id'],
+                'integer'],
             [['xlogin', 'name', 'slug', 'status', 'validated', 'pool_year', 'pool_month'], 'safe'],
         ];
     }
@@ -57,7 +59,7 @@ class ProjectsAllSearch extends ProjectsAll
     {
         $where = [
             'cursus_ids' => $this->course,
-            'slug' => $this->projectSlug
+            'slug' => $this->projectSlug,
         ];
         if ($this->team) {
             $where['current_team_id'] = $this->team;
@@ -67,7 +69,7 @@ class ProjectsAllSearch extends ProjectsAll
                 'projects_users.*',
                 'xlogins.*',
             ])
-            ->innerJoin('xlogins','projects_users.xlogin = xlogins.login')
+            ->innerJoin('xlogins', 'projects_users.xlogin = xlogins.login')
             ->where($where);
 
         // add conditions that should always apply here
@@ -77,7 +79,7 @@ class ProjectsAllSearch extends ProjectsAll
             'pagination' => [
                 'pageSize' => 42,
             ],
-            'sort'=> ['defaultOrder' => [
+            'sort' => ['defaultOrder' => [
                 'final_mark' => SORT_DESC,
                 'xlogin' => SORT_ASC,
             ]],

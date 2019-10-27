@@ -6,10 +6,9 @@ use Yii;
 
 /**
  * This is the model class for table "cursus_users".
- *
- * @property int $id
+ * @property int    $id
  * @property string $xlogin
- * @property int $cursus_id
+ * @property int    $cursus_id
  * @property string $begin_at
  * @property string $created_at
  * @property string $name
@@ -17,9 +16,9 @@ use Yii;
  * @property string $end_at
  * @property string $grade
  * @property string $has_coalition
- * @property int $cursus_users_id
+ * @property int    $cursus_users_id
  * @property double $level
- * @property int $xid
+ * @property int    $xid
  */
 class Curses extends \yii\db\ActiveRecord
 {

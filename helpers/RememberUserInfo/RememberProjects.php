@@ -16,7 +16,7 @@ class RememberProjects extends RememberHelper
 
         $this->ARcollection = $this->model::find()
             ->where(['xlogin' => $this->xlogin])
-        ->all();
+            ->all();
     }
 
     /**
@@ -31,10 +31,10 @@ class RememberProjects extends RememberHelper
             }
             unset($project['marked']);
             unset($project['marked_at']);
-            self::swapKeysInArr($project, [ 'id' => 'puid', 'validated?' => 'validated' ]);
+            self::swapKeysInArr($project, ['id' => 'puid', 'validated?' => 'validated']);
             self::setTrueFalse($project['validated']);
             self::mergeChildArrByKey($project, 'project');
-            self::swapKeysInArr($project, [ 'id' => 'project_id' ]);
+            self::swapKeysInArr($project, ['id' => 'project_id']);
             self::setNULLtoZero($project);
 
             $this->saveChangesToDB($project);

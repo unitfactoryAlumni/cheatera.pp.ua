@@ -10,13 +10,21 @@ use Yii;
 abstract class RememberHelper
 {
     protected $response;
+
     protected $xlogin;
+
     protected $xid;
+
     protected $idcol = 'id';
+
     protected $responseSubset;
+
     protected $model;
+
     protected $ARcollection;
+
     protected $bulkInsertArray = [];
+
     protected $bulkUpdateArray = [];
 
     /**
@@ -33,7 +41,9 @@ abstract class RememberHelper
 
     /**
      * __construct - method will done all work children of the class created for
+     *
      * @param array $response - .json given from 42 RESTfull API converted to php array
+     *
      * @see app\helpers\RememberUserInfo\RememberUserInfo
      */
     public function __construct(&$response)
@@ -49,9 +59,10 @@ abstract class RememberHelper
 
     /**
      * isArraysIdentical
-     * @param  array $a1
-     * @param  array $a2
-     * @param  array $arrayKeysToCompare
+     *
+     * @param array $a1
+     * @param array $a2
+     * @param array $arrayKeysToCompare
      */
     public static function isArraysIdentical($a1, $a2, $arrayKeysToCompare)
     {
@@ -60,12 +71,14 @@ abstract class RememberHelper
                 return false;
             }
         }
+
         return true;
     }
 
     /**
      * setTrueFalse
-     * @param  bool reference $varToSetTrueFalse
+     *
+     * @param bool reference $varToSetTrueFalse
      */
     public static function setTrueFalse(&$varToSetTrueFalse)
     {
@@ -74,7 +87,8 @@ abstract class RememberHelper
 
     /**
      * setNULLtoZero
-     * @param  array reference $arrToSetZeros
+     *
+     * @param array reference $arrToSetZeros
      */
     public static function setNULLtoZero(&$arrToSetZeros)
     {
@@ -85,19 +99,21 @@ abstract class RememberHelper
 
     /**
      * dateToSqlFormat
-     * @param  string $date
+     *
+     * @param string $date
      */
     public static function dateToSqlFormat(&$date)
     {
         if ($date) {
-            $date = date('Y-m-d H:i:s', strtotime( $date ));
+            $date = date('Y-m-d H:i:s', strtotime($date));
         }
     }
 
     /**
      * swapKeysInArr
-     * @param  array reference $arrToChangeKeys
-     * @param  array $keys
+     *
+     * @param array reference $arrToChangeKeys
+     * @param array $keys
      */
     public static function swapKeysInArr(&$arrToChangeKeys, $keys)
     {
@@ -109,8 +125,9 @@ abstract class RememberHelper
 
     /**
      * mergeChildArrByKey
-     * @param  array $arr
-     * @param  mixed $key - $arr's valid key
+     *
+     * @param array $arr
+     * @param mixed $key - $arr's valid key
      */
     public static function mergeChildArrByKey(&$arr, $key)
     {
@@ -120,10 +137,11 @@ abstract class RememberHelper
         unset($arr[$key]);
     }
 
-
     /**
      * findARbyId
-     * @param  array $id
+     *
+     * @param array $id
+     *
      * @return mixed|bool
      */
     protected function findARbyId($id)
@@ -136,7 +154,6 @@ abstract class RememberHelper
 
         return false;
     }
-
 
     /**
      * batchInsert
@@ -201,7 +218,8 @@ abstract class RememberHelper
 
     /**
      * saveChangesToDB
-     * @param  array $arrToPutIntoDb
+     *
+     * @param array $arrToPutIntoDb
      */
     protected function saveChangesToDB($arrToPutIntoDb)
     {

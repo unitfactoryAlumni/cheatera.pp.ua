@@ -16,7 +16,7 @@ class RememberAchievements extends RememberHelper
 
         $this->ARcollection = $this->model::find()
             ->where(['xlogin' => $this->xlogin])
-        ->all();
+            ->all();
     }
 
     /**
@@ -28,7 +28,7 @@ class RememberAchievements extends RememberHelper
             $achievement['xlogin'] = $this->xlogin;
             self::setTrueFalse($achievement['visible']);
             $achievement['nbr_of_success'] = $achievement['nbr_of_success'] ?? 'None';
-            self::swapKeysInArr($achievement, [ 'id' => 'aid' ]);
+            self::swapKeysInArr($achievement, ['id' => 'aid']);
             $achievement['description'] = htmlentities($achievement['description']);
             $achievement['visible'] = $achievement['visible'] ?? 'True';
 

@@ -6,7 +6,6 @@ use Yii;
 
 /**
  * This is the model class for table "cams".
- *
  * @property string $area_name
  * @property string $cam_address
  */

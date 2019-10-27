@@ -6,8 +6,7 @@ use Yii;
 
 /**
  * This is the model class for table "pools".
- *
- * @property int $id
+ * @property int    $id
  * @property string $year
  * @property string $month
  * @property string $begin_at

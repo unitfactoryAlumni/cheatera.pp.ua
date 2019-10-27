@@ -6,8 +6,7 @@ use Yii;
 
 /**
  * This is the model class for table "updated_db".
- *
- * @property int $id
+ * @property int    $id
  * @property string $subject
  * @property string $updated_at
  */

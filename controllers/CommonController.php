@@ -18,9 +18,9 @@ class CommonController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@']
-                    ]
-                ]
+                        'roles' => ['@'],
+                    ],
+                ],
             ],
         ];
     }
@@ -29,7 +29,8 @@ class CommonController extends Controller
      * @param null $title
      * @param null $description
      */
-    protected function setMeta($title = null, $description = null) {
+    protected function setMeta($title = null, $description = null)
+    {
         $this->view->title = $title;
         $this->view->registerMetaTag(['name' => 'description', 'content' => "$description"]);
     }

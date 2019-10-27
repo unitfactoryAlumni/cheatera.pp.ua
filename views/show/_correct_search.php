@@ -15,11 +15,11 @@ use kartik\date\DatePicker;
         'action' => [$action],
         'method' => 'get',
         'options' => [
-            'data-pjax' => 1
+            'data-pjax' => 1,
         ],
     ]); ?>
 
-    <?= $form->field($model, 'dateStart')->label(Yii::t('app', 'dateStart'))->widget(DatePicker::className(),[
+    <?= $form->field($model, 'dateStart')->label(Yii::t('app', 'dateStart'))->widget(DatePicker::className(), [
         'type' => DatePicker::TYPE_INPUT,
         'removeButton' => ['icon' => 'trash'],
         'pickerButton' => false,
@@ -27,9 +27,9 @@ use kartik\date\DatePicker;
             'format' => 'yyyy-mm-dd',
             'autoclose' => true,
             'todayHighlight' => true,
-        ]
+        ],
     ]) ?>
-    <?= $form->field($model, 'dateEnd')->label(Yii::t('app', 'dateEnd'))->widget(DatePicker::className(),[
+    <?= $form->field($model, 'dateEnd')->label(Yii::t('app', 'dateEnd'))->widget(DatePicker::className(), [
         'type' => DatePicker::TYPE_INPUT,
         'removeButton' => ['icon' => 'trash'],
         'pickerButton' => false,
@@ -37,7 +37,7 @@ use kartik\date\DatePicker;
             'format' => 'yyyy-mm-dd',
             'autoclose' => true,
             'todayHighlight' => true,
-        ]
+        ],
     ]) ?>
 
     <div class="form-group">

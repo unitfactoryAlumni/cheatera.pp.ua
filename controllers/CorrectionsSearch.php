@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
 use app\models\CorrectionLog;
+use yii\data\ActiveDataProvider;
 
 /**
  * CorrectionLogSearch represents the model behind the search form of `app\models\CorrectionLog`.
@@ -12,7 +12,9 @@ use app\models\CorrectionLog;
 class CorrectionsSearch extends CorrectionLog
 {
     public $dateStart = null;
+
     public $dateEnd = null;
+
     /**
      * {@inheritdoc}
      */
@@ -56,8 +58,8 @@ class CorrectionsSearch extends CorrectionLog
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                 'date' => SORT_DESC
-                ]
+                    'date' => SORT_DESC,
+                ],
             ],
             'pagination' => [
                 'pageSize' => -1,
