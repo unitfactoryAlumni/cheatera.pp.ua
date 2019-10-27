@@ -2,50 +2,35 @@ FROM php:7.2-apache
 
 WORKDIR /var/www/html
 
-# Install required packages and PHP modules
-RUN apt-get update 
-RUN apt-get upgrade -y
-RUN apt-get -y install --fix-missing apt-utils build-essential git curl libcurl3 libcurl3-dev zip vim
+# Install essential packages
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get -y install --fix-missing apt-utils build-essential git curl zip vim wget sendmail
 
-# Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Other PHP7 Extensions
-RUN apt-get -y install libmcrypt-dev
-
-RUN apt-get -y install libsqlite3-dev libsqlite3-0 mysql-client
-RUN docker-php-ext-install pdo_mysql 
-RUN docker-php-ext-install pdo_sqlite
-RUN docker-php-ext-install mysqli
-
-RUN docker-php-ext-install curl
-RUN docker-php-ext-install tokenizer
-RUN docker-php-ext-install json
-
-RUN apt-get -y install zlib1g-dev
-RUN docker-php-ext-install zip
-
-RUN apt-get -y install libicu-dev
-RUN apt-get -y install sendmail
-RUN docker-php-ext-install -j$(nproc) intl
-
-RUN docker-php-ext-install mbstring
-
-RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ 
-RUN docker-php-ext-install -j$(nproc) gd
-
-RUN apt-get -y install wget 
+# Install PHP7 Extensions and vital libs
+RUN apt-get -y install libmcrypt-dev libsqlite3-dev libsqlite3-0 zlib1g-dev libicu-dev \
+    libfreetype6-dev libjpeg62-turbo-dev libpng-dev libcurl4-gnutls-dev \
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install pdo_sqlite \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-install curl \
+    && docker-php-ext-install tokenizer \
+    && docker-php-ext-install json \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install mbstring \
+    && docker-php-ext-install -j$(nproc) intl \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd
 
 # Install phpunit
-RUN wget https://phar.phpunit.de/phpunit-6.0.phar && \
-    chmod +x phpunit-6.0.phar && \
-    mv phpunit-6.0.phar /usr/local/bin/phpunit
+RUN wget https://phar.phpunit.de/phpunit-6.0.phar \
+    && chmod +x phpunit-6.0.phar \
+    && mv phpunit-6.0.phar /usr/local/bin/phpunit
 
 # Install codecept
-RUN wget http://codeception.com/codecept.phar && \
-    chmod +x codecept.phar && \
-    mv codecept.phar /usr/local/bin/codecept
+RUN wget http://codeception.com/codecept.phar \
+    && chmod +x codecept.phar \
+    && mv codecept.phar /usr/local/bin/codecept
 
 RUN a2enmod rewrite
 
@@ -56,9 +41,10 @@ RUN usermod -u 1000 www-data
 COPY . /var/www/html
 RUN mkdir -p /var/www/html/web/assets
 
-# Init composer
-RUN composer self-update
-RUN composer install --no-plugins --no-scripts
+# Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    && composer self-update
+    && composer install --no-plugins --no-scripts
 
 # Setup xdebug
 RUN pecl install redis xdebug-2.6.0 \
