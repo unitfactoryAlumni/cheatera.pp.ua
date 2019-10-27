@@ -42,8 +42,8 @@ COPY . /var/www/html
 RUN mkdir -p /var/www/html/web/assets
 
 # Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-    && composer self-update
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && composer self-update \
     && composer install --no-plugins --no-scripts
 
 # Setup xdebug
