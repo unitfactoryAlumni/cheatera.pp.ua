@@ -1,12 +1,18 @@
-version: '3.4'
+version: '3'
 
 services:
   web:
-    build: ./
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - USER=${USER}
+    environment:
+      - USER=${USER}
     ports:
-      - '${WEB_PORT:-8888}:80'
+      - ${WEB_PORT:-8888}:80
     expose:
-      - '9000'
+      - 9000
     volumes:
       - ./:/var/www/html/
     links:
@@ -14,10 +20,10 @@ services:
 
   mysql:
     image: mysql:5.7
-    container_name: 'yii2-mysql'
-    restart: 'always'
+    container_name: yii2-mysql
+    restart: always
     ports:
-      - '${DB_PORT:-3306}:3306'
+      - ${DB_PORT:-3306}:3306
     environment:
       MYSQL_DATABASE: ${DB_NAME:-yii2}
       MYSQL_USER: ${DB_USERNAME:-yii2}
@@ -28,13 +34,13 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: 'yii2-phpmyadmin'
+    container_name: yii2-phpmyadmin
     links:
       - mysql
     environment:
       PMA_HOST: mysql
-      PMA_PORT: '${DB_PORT:-3306}:3306'
+      PMA_PORT: ${DB_PORT:-3306}:3306
     ports:
-      - '${PHPMA_PORT:-8080}:80'
+      - ${PHPMA_PORT:-8080}:80
     volumes:
       - /sessions
