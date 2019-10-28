@@ -34,6 +34,23 @@ RUN wget http://codeception.com/codecept.phar \
     && chmod +x codecept.phar \
     && mv codecept.phar /usr/local/bin/codecept
 
+<<<<<<< HEAD
+=======
+RUN a2enmod rewrite
+
+# Fix write permissions with shared folders
+RUN usermod -u 1000 www-data
+
+# Copy the working dir to the image's web root
+COPY . /var/www/html
+RUN mkdir -p /var/www/html/web/assets
+
+# Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && composer self-update \
+    && composer install --no-plugins --no-scripts
+
+>>>>>>> 78fa6c9d3f54258426e32536586d0e1ee40b2342
 # Setup xdebug
 RUN pecl install redis xdebug-2.6.0 \
     && docker-php-ext-enable xdebug \
