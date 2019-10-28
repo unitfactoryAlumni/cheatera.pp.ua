@@ -2,6 +2,8 @@ FROM php:7.2-apache
 
 WORKDIR /var/www/html
 
+ARG USER
+
 # Install essential packages
 RUN apt-get update \
     && apt-get upgrade -y \
@@ -32,6 +34,8 @@ RUN wget http://codeception.com/codecept.phar \
     && chmod +x codecept.phar \
     && mv codecept.phar /usr/local/bin/codecept
 
+<<<<<<< HEAD
+=======
 RUN a2enmod rewrite
 
 # Fix write permissions with shared folders
@@ -46,6 +50,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && composer self-update \
     && composer install --no-plugins --no-scripts
 
+>>>>>>> 78fa6c9d3f54258426e32536586d0e1ee40b2342
 # Setup xdebug
 RUN pecl install redis xdebug-2.6.0 \
     && docker-php-ext-enable xdebug \
@@ -55,5 +60,10 @@ RUN pecl install redis xdebug-2.6.0 \
     && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_port=9999" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_host=192.168.99.1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# Fix write permissions with shared folders
+RUN a2enmod rewrite
+RUN usermod -u 1000 www-data
+RUN useradd -G www-data -m ${USER}
 
 RUN echo "memory_limit=-1" >> /usr/local/etc/php/php.ini
