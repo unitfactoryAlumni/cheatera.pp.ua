@@ -3,8 +3,8 @@
 namespace app\helpers\RememberUserInfo;
 
 use Yii;
-use app\controllers\LocationsSearch;
 use app\helpers\LogTimeHelper;
+use app\controllers\LocationsSearch;
 
 class RememberUser extends RememberHelper
 {
@@ -19,8 +19,8 @@ class RememberUser extends RememberHelper
         $this->idcol = 'xid';
 
         $this->ARcollection = $this->model::find()
-            ->where([ 'login' => $this->responseSubset['login'] ])
-        ->all();
+            ->where(['login' => $this->responseSubset['login']])
+            ->all();
     }
 
     /**
@@ -48,7 +48,7 @@ class RememberUser extends RememberHelper
         // $this->responseSubset['lastloc'] = $lastloc->begin_at;
         $this->responseSubset['location'] = $user->location ?? $lastloc->host;
 
-        self::swapKeysInArr($this->responseSubset, [ 'id' => 'xid', 'staff?' => 'staff' ]);
+        self::swapKeysInArr($this->responseSubset, ['id' => 'xid', 'staff?' => 'staff']);
         self::setTrueFalse($this->responseSubset['staff']);
 
         $this->saveChangesToDB($this->responseSubset);

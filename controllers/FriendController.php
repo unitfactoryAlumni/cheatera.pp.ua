@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Friend;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 
 /**
@@ -70,13 +69,16 @@ class FriendController extends CommonController
         if ($model->save()) {
             return $this->goBack();
         }
+
         return $this->redirect(['error']);
     }
 
     /**
      * Deletes an existing Friend model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws \Throwable
      * @throws \yii\db\StaleObjectException
@@ -88,9 +90,12 @@ class FriendController extends CommonController
             $friend->status = 0;
             $friend->save();
         }
-        if (Friend::find()->where(['mylogin' => Yii::$app->user->identity->username, 'xlogin' => $id])->one()->delete() !== null) {
+        if (Friend::find()->where(['mylogin' => Yii::$app->user->identity->username, 'xlogin' => $id])->one()->delete()
+            !== null
+        ) {
             return $this->goBack();
         }
+
         return $this->redirect(['friend/index']);
     }
 }

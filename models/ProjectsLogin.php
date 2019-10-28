@@ -6,7 +6,6 @@ use Yii;
 
 /**
  * This is the model class for table "projects_users".
- *
  */
 class ProjectsLogin extends \yii\db\ActiveRecord
 {
@@ -24,7 +23,8 @@ class ProjectsLogin extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['current_team_id', 'cursus_ids', 'final_mark', 'puid', 'occurrence', 'project_id', 'parent_id'], 'integer'],
+            [['current_team_id', 'cursus_ids', 'final_mark', 'puid', 'occurrence', 'project_id', 'parent_id'],
+                'integer'],
             [['xlogin'], 'string', 'max' => 12],
             [['name', 'slug'], 'string', 'max' => 255],
             [['status', 'validated'], 'string', 'max' => 25],

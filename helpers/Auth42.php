@@ -5,10 +5,10 @@ namespace app\helpers;
 // use RememberUserInfo\RememberUserInfo;
 
 use Yii;
-use yii\authclient\InvalidResponseException;
-use yii\authclient\OAuth2;
 use yii\helpers\Url;
+use yii\authclient\OAuth2;
 use yii\web\HttpException;
+use yii\authclient\InvalidResponseException;
 
 class Auth42 extends OAuth2
 {
@@ -20,7 +20,6 @@ class Auth42 extends OAuth2
 
     /**
      * Initializes authenticated user attributes.
-     * 
      * @return array auth user attributes.
      */
     protected function initUserAttributes()
@@ -49,9 +48,9 @@ class Auth42 extends OAuth2
     }
 
     /**
-     * @param $token
+     * @param       $token
      * @param array $params
-     * 
+     *
      * @return mixed
      * @throws \yii\authclient\InvalidResponseException
      */
@@ -90,21 +89,23 @@ class Auth42 extends OAuth2
         $profileLink = '/pools/';
         if (isset($response['cursus_users'])) {
             if (count($response['cursus_users']) > 1
-            && isset($response['login'])) {
+                && isset($response['login'])
+            ) {
                 $profileLink = Url::to('/students/' . $response['login']);
-            } else if (isset($response['login'])) {
+            } elseif (isset($response['login'])) {
                 $profileLink .= $response['login'];
             }
         } else {
             $profileLink = '';
         }
         Yii::$app->session['profile'] = $profileLink;
+
         return $response;
     }
 
     /**
-     * @param $authCode
-     * @param $state
+     * @param       $authCode
+     * @param       $state
      * @param array $params
      *
      * @return \yii\authclient\OAuthToken

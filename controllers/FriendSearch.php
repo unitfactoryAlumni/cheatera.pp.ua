@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
 use app\models\Friend;
+use yii\data\ActiveDataProvider;
 
 /**
  * FriendSearch represents the model behind the search form of `app\models\Friend`.
@@ -13,12 +13,13 @@ use app\models\Friend;
 class FriendSearch extends Friend
 {
     public $who;
+
     public $friendStatus;
 
     /**
      * FriendSearch constructor.
      *
-     * @param $login
+     * @param     $login
      * @param int $status
      */
     public function __construct($login, $status = 1)
@@ -57,12 +58,12 @@ class FriendSearch extends Friend
      */
     public function search($params, $reverse = false)
     {
-        if($reverse === true) {
+        if ($reverse === true) {
             $query = Friend::find()
                 ->select([
                     'friends.*',
                     'xlogins.*',
-                    'cursus_users.level'
+                    'cursus_users.level',
                 ])
                 ->innerJoin('xlogins', 'xlogins.login = friends.mylogin')
                 ->innerJoin('cursus_users', 'cursus_users.xlogin = friends.mylogin')
@@ -73,7 +74,7 @@ class FriendSearch extends Friend
                 ->select([
                     'friends.*',
                     'xlogins.*',
-                    'cursus_users.level'
+                    'cursus_users.level',
                 ])
                 ->innerJoin('xlogins', 'xlogins.login = friends.xlogin')
                 ->innerJoin('cursus_users', 'cursus_users.xlogin = friends.xlogin')
@@ -109,6 +110,7 @@ class FriendSearch extends Friend
             ->andFilterWhere(['like', 'xlogin', $this->xlogin]);
 
         $dataProvider->models = $this->onlineSort($dataProvider->models);
+
         return $dataProvider;
     }
 
@@ -116,6 +118,7 @@ class FriendSearch extends Friend
      * Move online friends up
      *
      * @param $models
+     *
      * @return array
      */
     private function onlineSort($models)
@@ -126,9 +129,10 @@ class FriendSearch extends Friend
                 array_unshift($new, $model);
                 unset($models[$key]);
             } else {
-                $new[] =  $model;
+                $new[] = $model;
             }
         }
+
         return $new;
     }
 }

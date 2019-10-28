@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use yii\helpers\Url;
 use app\models\Log;
+use yii\helpers\Url;
 use app\models\User;
 use yii\web\Response;
 use app\helpers\Auth42;
-use yii\filters\AccessControl;
+use app\models\LoginForm;
 use yii\web\HttpException;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\filters\AccessControl;
 
 class SiteController extends CommonController
 {
@@ -60,7 +60,6 @@ class SiteController extends CommonController
 
     /**
      * Page after 42 auth.
-     *
      * @return string
      * @throws HttpException
      * @throws \yii\base\ExitException
@@ -100,7 +99,6 @@ class SiteController extends CommonController
 
     /**
      * Displays homepage.
-     *
      * @return string
      */
     public function actionIndex()
@@ -108,12 +106,12 @@ class SiteController extends CommonController
         $title = Yii::t('app', 'Cheatera of UNIT Factory');
         $description = Yii::t('app', 'Cheatera - private social network for students of UNIT Factory');
         $this->setMeta($title, $description);
+
         return $this->render('index');
     }
 
     /**
      * Login action.
-     *
      * @return Response|string
      */
     public function actionLogin()
@@ -130,6 +128,7 @@ class SiteController extends CommonController
             return $this->goBack();
         }
         $model->password = '';
+
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -137,7 +136,6 @@ class SiteController extends CommonController
 
     /**
      * Logout action.
-     *
      * @return Response
      */
     public function actionLogout()
@@ -149,7 +147,6 @@ class SiteController extends CommonController
 
     /**
      * Displays contact page.
-     *
      * @return Response|string
      */
     public function actionContact()
@@ -160,6 +157,7 @@ class SiteController extends CommonController
 
             return $this->refresh();
         }
+
         return $this->render('contact', [
             'model' => $model,
         ]);
@@ -167,7 +165,6 @@ class SiteController extends CommonController
 
     /**
      * Displays about page.
-     *
      * @return string
      */
     public function actionAbout()

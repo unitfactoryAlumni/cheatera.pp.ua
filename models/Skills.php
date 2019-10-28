@@ -6,11 +6,10 @@ use Yii;
 
 /**
  * This is the model class for table "skills".
- *
- * @property int $id
+ * @property int    $id
  * @property string $xlogin
- * @property int $cursus_id
- * @property int $skills_id
+ * @property int    $cursus_id
+ * @property int    $skills_id
  * @property double $skills_level
  * @property string $skills_name
  */

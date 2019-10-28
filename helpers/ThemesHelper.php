@@ -3,8 +3,9 @@
 namespace app\helpers;
 
 use Yii;
-// use yii\web\Cookie;
 use yii\helpers\Html;
+
+// use yii\web\Cookie;
 
 /**
  * ThemesHelper
@@ -13,7 +14,7 @@ class ThemesHelper
 {
     public const ACTION_NAME = 'change-theme';
     public const NAME = 'theme';
-    
+
     static private $themes = [
         'cerulean' => 'Cerulean',
         'cosmo' => 'Cosmo',
@@ -33,11 +34,10 @@ class ThemesHelper
         'superhero' => 'Superhero',
         'united' => 'United',
         'yeti' => 'Yeti',
-        
+
         'default' => 'cosmo',
         'dark' => 'superhero',
     ];
-
 
     private static function setCookie($value)
     {
@@ -53,7 +53,6 @@ class ThemesHelper
     /**
      * checkThemeCookie - get cookies Object for all the class
      * sets, if necessary, static::NAME cookie to static::$themes['default'] value.
-     *
      * @return  Object      Cookies Object
      */
     private static function checkThemeCookie()
@@ -70,6 +69,7 @@ class ThemesHelper
 
         if (!isset($_COOKIE[static::NAME])) {
             ThemesHelper::setDefault();
+
             return static::$themes['default'];
         }
 
@@ -79,16 +79,15 @@ class ThemesHelper
     /**
      * getThemesSwitchetHtml - get html code for theme switcher to input to any place on site
      *
-     * @param   Object  $theme  Initialized ThemeHelper, themself, Object
+     * @param Object $theme Initialized ThemeHelper, themself, Object
      *
      * @return  String          Generated Html for current ThemeHelper Object
      */
     public static function getThemesSwitcherHtml()
     {
-        return Html::a( Yii::t('app', (static::isDefault() ? 'Set Dark Theme' : 'Set Light Theme'))
-        , '/' . static::ACTION_NAME );
+        return Html::a(Yii::t('app', (static::isDefault() ? 'Set Dark Theme' : 'Set Light Theme'))
+            , '/' . static::ACTION_NAME);
     }
-
 
     public static function getCurrent()
     {
@@ -117,12 +116,12 @@ class ThemesHelper
 
     public static function setDark()
     {
-        static::setCookie( static::$themes['dark'] );
+        static::setCookie(static::$themes['dark']);
     }
 
     public static function setDefault()
     {
-        static::setCookie( static::$themes['default'] );
+        static::setCookie(static::$themes['default']);
     }
 
 }

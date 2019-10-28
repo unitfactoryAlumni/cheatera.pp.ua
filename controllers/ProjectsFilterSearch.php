@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
 use app\models\ProjectsAll;
+use yii\data\ActiveDataProvider;
 
 /**
  * ProjectsFilterSearch represents the model behind the search form of `app\models\ProjectsAll`.
@@ -12,7 +12,9 @@ use app\models\ProjectsAll;
 class ProjectsFilterSearch extends ProjectsAll
 {
     public $parent = null;
+
     public $course = null;
+
     public $childs = null;
 
     public function __construct(array $configs = [])
@@ -30,6 +32,7 @@ class ProjectsFilterSearch extends ProjectsAll
         }
         parent::__construct($configs);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -84,8 +87,7 @@ class ProjectsFilterSearch extends ProjectsAll
             ])
             ->innerJoin('xlogins', 'xlogins.login = projects_users.xlogin')
             ->where($where)
-            ->addGroupBy('projects_users.name')
-        ;
+            ->addGroupBy('projects_users.name');
 
         // add conditions that should always apply here
         $this->load($params);
@@ -112,9 +114,9 @@ class ProjectsFilterSearch extends ProjectsAll
         }
 
         $query->andFilterWhere(['like', 'name', $this->name]);
+
         return $dataProvider;
     }
-
 
     private function getSort()
     {
@@ -165,7 +167,7 @@ class ProjectsFilterSearch extends ProjectsAll
                     'asc' => ['cg' => SORT_ASC],
                     'desc' => ['cg' => SORT_DESC],
                 ],
-            ]
+            ],
         ];
     }
 }

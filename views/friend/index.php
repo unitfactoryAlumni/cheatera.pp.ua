@@ -1,8 +1,8 @@
 <?php
 
-use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use kartik\tabs\TabsX;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\controllers\FriendSearch */
@@ -20,38 +20,45 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php
 
-    $friends = $this->render('view', ['searchModel' => $searchModel, 'dataProvider' => $dataProvider, 'tab' => 'friends']);
-    $income = $this->render('view', ['searchModel' => $searchModelIncome, 'dataProvider' => $dataProviderIncome, 'tab' => 'income']);
-    $outgoing = $this->render('view', ['searchModel' => $searchModelOutgoing, 'dataProvider' => $dataProviderOutgoing, 'tab' => 'outgoing']);
+    $friends =
+        $this->render('view', ['searchModel' => $searchModel, 'dataProvider' => $dataProvider, 'tab' => 'friends']);
+    $income =
+        $this->render('view', ['searchModel' => $searchModelIncome,
+            'dataProvider' => $dataProviderIncome,
+            'tab' => 'income']);
+    $outgoing =
+        $this->render('view', ['searchModel' => $searchModelOutgoing,
+            'dataProvider' => $dataProviderOutgoing,
+            'tab' => 'outgoing']);
 
     $tmp = Yii::$app->session->get('username');
 
     $items = [
         [
-            'label'   => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'Friends'),
+            'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'Friends'),
             'content' => $friends,
-            'active'  => true
+            'active' => true,
         ],
         [
-            'label'   => '<i class="glyphicon glyphicon-import"></i> ' . Yii::t('app', 'Income'),
+            'label' => '<i class="glyphicon glyphicon-import"></i> ' . Yii::t('app', 'Income'),
             'content' => $income,
         ],
         [
-            'label'   => '<i class="glyphicon glyphicon-export"></i> ' . Yii::t('app', 'Outgoing'),
+            'label' => '<i class="glyphicon glyphicon-export"></i> ' . Yii::t('app', 'Outgoing'),
             'content' => $outgoing,
         ],
     ];
 
     echo TabsX::widget([
-        'items'=>$items,
-        'position'=>TabsX::POS_ABOVE,
-        'encodeLabels'=>false
+        'items' => $items,
+        'position' => TabsX::POS_ABOVE,
+        'encodeLabels' => false,
     ]);
 
     Modal::begin([
-        'header' => '<h2 class="modal-title">' . Yii::t('app','Are you sure about this?') . '</h2>',
-        'id'     => 'modal-delete',
-        'footer' => Html::a(Yii::t('app', 'Delete'), '', ['class' => 'btn btn-danger', 'data-method' => 'post', ]),
+        'header' => '<h2 class="modal-title">' . Yii::t('app', 'Are you sure about this?') . '</h2>',
+        'id' => 'modal-delete',
+        'footer' => Html::a(Yii::t('app', 'Delete'), '', ['class' => 'btn btn-danger', 'data-method' => 'post',]),
     ]);
     Modal::end();
     $this->registerJs("$(function() {

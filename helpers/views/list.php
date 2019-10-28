@@ -1,3 +1,3 @@
-    <?php foreach ($array_lang as $lang) {
-        echo $lang;
-    }
+<?php foreach ($array_lang as $lang) {
+    echo $lang;
+}

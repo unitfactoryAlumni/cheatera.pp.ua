@@ -5,13 +5,13 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
-    'name'=>'cheatera.pp.ua',
+    'name' => 'cheatera.pp.ua',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'sourceLanguage' => 'en', // использовать в качестве ключей переводов
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'modules' => [
         'languages' => [

@@ -1,7 +1,7 @@
 <?php
 
-use yii\widgets\ListView;
 use yii\bootstrap\Modal;
+use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -52,18 +52,21 @@ if (!$isAccessGaranted) {
         'summary' => false,
         'itemView' => function ($model, $key, $index, $widget) use ($isAccessGaranted) {
             if ($isAccessGaranted || $model->accessible_outside_unit) {
-                return $this->render('_camimg', ['model' => $model, 'key' => $key, 'index' => $index, 'widget' => $widget]);
+                return $this->render('_camimg', ['model' => $model,
+                    'key' => $key,
+                    'index' => $index,
+                    'widget' => $widget]);
             }
         },
     ]); ?>
 </div>
 
 <?php
-    Modal::begin([
-        'header' => '<h2 id="modalHeader"></h2>',
-        'id'     => 'modal-view-full-image',
-        'size'   => Modal::SIZE_LARGE,
-    ]);
-        echo '<div id="modalContent"></div>';
-    Modal::end();
+Modal::begin([
+    'header' => '<h2 id="modalHeader"></h2>',
+    'id' => 'modal-view-full-image',
+    'size' => Modal::SIZE_LARGE,
+]);
+echo '<div id="modalContent"></div>';
+Modal::end();
 ?>

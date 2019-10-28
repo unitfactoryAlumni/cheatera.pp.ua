@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
 use app\models\Correct;
+use yii\data\ActiveDataProvider;
 
 /**
  * CorrectSearch represents the model behind the search form of `app\models\Correct`.
@@ -12,6 +12,7 @@ use app\models\Correct;
 class CorrectSearch extends Correct
 {
     public $dateStart = null;
+
     public $dateEnd = null;
 
     public function __construct($login, array $configs = [])
@@ -19,6 +20,7 @@ class CorrectSearch extends Correct
         $this->xlogin = $login;
         parent::__construct($configs);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -63,8 +65,8 @@ class CorrectSearch extends Correct
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                    'date' => SORT_DESC
-                ]
+                    'date' => SORT_DESC,
+                ],
             ],
             'pagination' => [
                 'pageSize' => -1,

@@ -15,8 +15,8 @@ class RememberCurses extends RememberHelper
         $this->idcol = 'cursus_users_id';
 
         $this->ARcollection = $this->model::find()
-            ->where([ 'xlogin' => $this->xlogin ])
-        ->all();
+            ->where(['xlogin' => $this->xlogin])
+            ->all();
     }
 
     /**
@@ -31,7 +31,7 @@ class RememberCurses extends RememberHelper
             self::dateToSqlFormat($curs['begin_at']);
             self::dateToSqlFormat($curs['created_at']);
             self::dateToSqlFormat($curs['end_at']);
-            self::swapKeysInArr($curs, [ 'id' => 'cursus_users_id' ]);
+            self::swapKeysInArr($curs, ['id' => 'cursus_users_id']);
             $curs['xlogin'] = $this->xlogin;
             $curs['xid'] = $this->xid;
             self::setTrueFalse($curs['has_coalition']);

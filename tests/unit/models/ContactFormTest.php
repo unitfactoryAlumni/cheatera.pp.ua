@@ -5,6 +5,7 @@ namespace tests\models;
 class ContactFormTest extends \Codeception\Test\Unit
 {
     private $model;
+
     /**
      * @var \UnitTester
      */

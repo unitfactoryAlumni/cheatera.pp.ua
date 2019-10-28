@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\ProjectsAll;
 use yii\base\Model;
+use app\models\ProjectsAll;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -15,6 +15,7 @@ class Minus42Search extends ProjectsAll
 
     /**
      * Minus42Search constructor.
+     *
      * @param $searchCourse
      */
     public function __construct($searchCourse)
@@ -29,7 +30,8 @@ class Minus42Search extends ProjectsAll
     public function rules()
     {
         return [
-            [['id', 'current_team_id', 'cursus_ids', 'final_mark', 'puid', 'occurrence', 'project_id', 'parent_id'], 'integer'],
+            [['id', 'current_team_id', 'cursus_ids', 'final_mark', 'puid', 'occurrence', 'project_id', 'parent_id'],
+                'integer'],
             [['xlogin', 'name', 'slug', 'status', 'validated', 'pool_year', 'pool_month'], 'safe'],
         ];
     }
@@ -57,10 +59,9 @@ class Minus42Search extends ProjectsAll
                 'projects_users.*',
                 'xlogins.*',
             ])
-            ->innerJoin('xlogins','projects_users.xlogin = xlogins.login')
+            ->innerJoin('xlogins', 'projects_users.xlogin = xlogins.login')
             ->andWhere('final_mark < 0')
-            ->andWhere("projects_users.cursus_ids = $this->course")
-        ;
+            ->andWhere("projects_users.cursus_ids = $this->course");
 
         // add conditions that should always apply here
 
@@ -94,7 +95,6 @@ class Minus42Search extends ProjectsAll
 
         return $dataProvider;
     }
-
 
     private function getSort()
     {
@@ -140,8 +140,8 @@ class Minus42Search extends ProjectsAll
                 'xlogin' => [
                     'asc' => ['xlogin' => SORT_ASC],
                     'desc' => ['xlogin' => SORT_DESC],
-                ]
-            ]
+                ],
+            ],
         ];
     }
 

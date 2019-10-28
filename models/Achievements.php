@@ -6,11 +6,10 @@ use Yii;
 
 /**
  * This is the model class for table "achievements".
- *
- * @property int $id
+ * @property int    $id
  * @property string $xlogin
  * @property string $description
- * @property int $aid
+ * @property int    $aid
  * @property string $image
  * @property string $kind
  * @property string $name

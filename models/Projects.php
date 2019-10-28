@@ -6,7 +6,6 @@ use Yii;
 
 /**
  * This is the model class for table "projects_cache".
- *
  * @property int $id
  * @property string $name
  * @property string $slug
@@ -22,7 +21,7 @@ use Yii;
  */
 class Projects extends \yii\db\ActiveRecord
 {
-//    protected $course;
+    //    protected $course;
 
     /**
      * {@inheritdoc}
@@ -38,10 +37,12 @@ class Projects extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'slug', 'avgFinalMark', 'validated', 'finished', 'failed', 'wfc', 'inprogress', 'sag', 'cg'], 'required'],
+            [['name', 'slug', 'avgFinalMark', 'validated', 'finished', 'failed', 'wfc', 'inprogress', 'sag', 'cg'],
+                'required'],
             [['slug'], 'string'],
             [['avgFinalMark'], 'number'],
-            [['validated', 'finished', 'failed', 'wfc', 'inprogress', 'sag', 'cg', 'project_id', 'parent_id', 'course'], 'integer'],
+            [['validated', 'finished', 'failed', 'wfc', 'inprogress', 'sag', 'cg', 'project_id', 'parent_id', 'course'],
+                'integer'],
             [['name', 'course'], 'string', 'max' => 255],
         ];
     }

@@ -15,8 +15,8 @@ class RememberSkills extends RememberHelper
         $this->idcol = 'skills_id';
 
         $this->ARcollection = $this->model::find()
-            ->where([ 'xlogin' => $this->xlogin ])
-        ->all();
+            ->where(['xlogin' => $this->xlogin])
+            ->all();
     }
 
     /**
@@ -28,7 +28,7 @@ class RememberSkills extends RememberHelper
             foreach ($cursus['skills'] as &$skill) {
                 $skill['xlogin'] = $this->xlogin;
                 $skill['cursus_id'] = $cursus['cursus_id'];
-                self::swapKeysInArr($skill, [ 'id' => 'skills_id', 'name' => 'skills_name', 'level' => 'skills_level' ]);
+                self::swapKeysInArr($skill, ['id' => 'skills_id', 'name' => 'skills_name', 'level' => 'skills_level']);
                 $skill['skills_name'] = htmlentities($skill['skills_name']);
 
                 self::saveChangesToDB($skill);

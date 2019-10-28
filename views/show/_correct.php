@@ -1,7 +1,7 @@
 <?php
 
-use dosamigos\chartjs\ChartJs;
 use yii\widgets\Pjax;
+use dosamigos\chartjs\ChartJs;
 
 /* @var $this yii\web\View */
 /* @var $searchModelCorrections app\controllers\CorrectSearch */
@@ -13,7 +13,7 @@ use yii\widgets\Pjax;
     <h3><?= Yii::t('app', 'Correction Logs') ?></h3>
 
 
-    <?php Pjax::begin(['timeout' => 10000 ]); ?>
+    <?php Pjax::begin(['timeout' => 10000]); ?>
     <?= $this->render('_correct_search', ['model' => $searchModelCorrections, 'action' => $action]);
 
     $labels = [];
@@ -39,22 +39,22 @@ use yii\widgets\Pjax;
                     'pointHoverBorderColor' => "rgba(255,99,132,1)",
                     'data' => $data,
                     'lineTension' => '0.1',
-                ]
-            ]
+                ],
+            ],
         ],
-        'options'=> [
+        'options' => [
             'height' => '100%',
-            'responsive'=> true,
-            'tooltips'=> [
-                'mode'=> 'index',
-                'intersect'=> false,
+            'responsive' => true,
+            'tooltips' => [
+                'mode' => 'index',
+                'intersect' => false,
             ],
-            'hover'=> [
-                'mode'=> 'nearest',
-                'intersect'=> true
+            'hover' => [
+                'mode' => 'nearest',
+                'intersect' => true,
             ],
-        ]
-    ]);?>
+        ],
+    ]); ?>
 
     <?php Pjax::end(); ?>
 

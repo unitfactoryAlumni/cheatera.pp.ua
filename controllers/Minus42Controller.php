@@ -3,10 +3,6 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Minus42;
-use app\controllers\Minus42Search;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 
 /**
  * Minus42Controller implements the CRUD actions for Minus42 model.
@@ -20,7 +16,7 @@ class Minus42Controller extends CommonController
     public function actionStudents()
     {
         $title = Yii::t('app', 'Cheating students members at UNIT Factory');
-        $description = Yii::t('app','Full information about cheating from student members at UNIT Factory');
+        $description = Yii::t('app', 'Full information about cheating from student members at UNIT Factory');
         $this->setMeta($title, $description);
         $searchModel = new Minus42StudentsSearch();
 
@@ -32,7 +28,7 @@ class Minus42Controller extends CommonController
             'subPage' => 'students',
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Students'),
-                'url' => 'show/students'
+                'url' => 'show/students',
             ],
         ]);
     }
@@ -44,7 +40,7 @@ class Minus42Controller extends CommonController
     public function actionPools()
     {
         $title = Yii::t('app', 'Cheating pools members at UNIT Factory');
-        $description = Yii::t('app','Full information about cheating from pool members at UNIT Factory');
+        $description = Yii::t('app', 'Full information about cheating from pool members at UNIT Factory');
         $this->setMeta($title, $description);
         $searchModel = new Minus42Search(4);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -55,7 +51,7 @@ class Minus42Controller extends CommonController
             'subPage' => 'pools',
             'breadcrumbs' => [
                 'name' => Yii::t('app', 'Pools'),
-                'url' => 'show/pools'
+                'url' => 'show/pools',
             ],
         ]);
     }

@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
 use app\models\Minus42;
+use yii\data\ActiveDataProvider;
 
 /**
  * Minus42StudentsSearch represents the model behind the search form of `app\models\Minus42`.
@@ -47,10 +47,9 @@ class Minus42StudentsSearch extends Minus42
                 'projects_users.name',
                 'projects_users.slug',
             ])
-            ->innerJoin('projects_users','projects_users.project_id = m42.puid')
-            ->innerJoin('xlogins','m42.xlogin = xlogins.login')
-            ->andWhere('m42.xlogin = projects_users.xlogin and projects_users.cursus_ids=1')
-        ;
+            ->innerJoin('projects_users', 'projects_users.project_id = m42.puid')
+            ->innerJoin('xlogins', 'm42.xlogin = xlogins.login')
+            ->andWhere('m42.xlogin = projects_users.xlogin and projects_users.cursus_ids=1');
 
         // add conditions that should always apply here
 
@@ -78,9 +77,9 @@ class Minus42StudentsSearch extends Minus42
         ]);
 
         $query->andFilterWhere(['like', 'xlogins.login', $this->xlogin])
-         ->andFilterWhere(['like', 'name', $this->name])
-         ->andFilterWhere(['like', 'pool_year', $this->pool_year])
-         ->andFilterWhere(['like', 'pool_month', $this->pool_month]);
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'pool_year', $this->pool_year])
+            ->andFilterWhere(['like', 'pool_month', $this->pool_month]);
 
         return $dataProvider;
     }
@@ -117,8 +116,8 @@ class Minus42StudentsSearch extends Minus42
                 'name' => [
                     'asc' => ['name' => SORT_ASC],
                     'desc' => ['name' => SORT_DESC],
-                ]
-            ]
+                ],
+            ],
         ];
     }
 }

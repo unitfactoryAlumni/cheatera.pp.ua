@@ -6,7 +6,6 @@ use Yii;
 
 /**
  * This is the model class for table "xlogins".
- *
  * @property int $id
  * @property int $correction_point
  * @property string $displayname
@@ -60,7 +59,9 @@ class Show extends \yii\db\ActiveRecord
             [['kick', 'lastloc'], 'required'],
             [['lastloc'], 'safe'],
             [['hours', 'lasthours'], 'number'],
-            [['displayname', 'email', 'first_name', 'last_name', 'location', 'login', 'phone', 'pool_month', 'staff'], 'string', 'max' => 255],
+            [['displayname', 'email', 'first_name', 'last_name', 'location', 'login', 'phone', 'pool_month', 'staff'],
+                'string',
+                'max' => 255],
         ];
     }
 
@@ -94,7 +95,7 @@ class Show extends \yii\db\ActiveRecord
             'visible' => Yii::t('app', 'Visible'),
             'level' => Yii::t('app', 'Level'),
             'link' => Yii::t('app', ''),
-            'grade' => Yii::t('app', 'grade')
+            'grade' => Yii::t('app', 'grade'),
         ];
     }
 }

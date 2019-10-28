@@ -31,6 +31,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      * Finds user by username
      *
      * @param string $xlogin
+     *
      * @return static|null
      */
     public static function findByUsername($xlogin)

@@ -6,9 +6,8 @@ use Yii;
 
 /**
  * This is the model class for table "correction_log".
- *
- * @property int $id
- * @property int $count
+ * @property int    $id
+ * @property int    $count
  * @property string $date
  */
 class CorrectionLog extends \yii\db\ActiveRecord

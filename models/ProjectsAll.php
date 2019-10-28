@@ -6,7 +6,6 @@ use Yii;
 
 /**
  * This is the model class for table "projects_users".
- *
  * @property int $id
  * @property string $xlogin
  * @property int $current_team_id
@@ -26,19 +25,27 @@ use Yii;
 class ProjectsAll extends \yii\db\ActiveRecord
 {
     public $pool_year;
+
     public $pool_month;
 
     public $fmark;
+
     public $finished;
+
     public $failed;
+
     public $wfc;
+
     public $inprogress;
+
     public $sag;
+
     public $cg;
 
     public $location;
 
     public $lastloc;
+
     /**
      * {@inheritdoc}
      */
@@ -53,7 +60,8 @@ class ProjectsAll extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['current_team_id', 'cursus_ids', 'final_mark', 'puid', 'occurrence', 'project_id', 'parent_id'], 'integer'],
+            [['current_team_id', 'cursus_ids', 'final_mark', 'puid', 'occurrence', 'project_id', 'parent_id'],
+                'integer'],
             [['xlogin'], 'string', 'max' => 12],
             [['name', 'slug'], 'string', 'max' => 255],
             [['status', 'validated'], 'string', 'max' => 25],
