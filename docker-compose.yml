@@ -33,7 +33,7 @@ services:
       - mysql
     environment:
       PMA_HOST: mysql
-      PMA_PORT: 3306
+      PMA_PORT: '${DB_PORT:-3306}:3306'
     ports:
       - '${PHPMA_PORT:-8080}:80'
     volumes:
