@@ -103,7 +103,7 @@ class Calculator extends Model
 
     public function getTier()
     {
-        return [ 'T0', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7' ];
+        return ['25XP(T0)', '100XP(T1)', '225XP(T2)', '375XP(T3)', '600Xp(T4)', '800XP(T5)', '1000XP(T6)', '1500XP(T7)'];
     }
 
     public function resetToDefault()
